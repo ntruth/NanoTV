@@ -1,0 +1,54 @@
+name: Nano
+options:
+  bundleIdPrefix: app.nano.media
+  deploymentTarget:
+    macOS: "14.0"
+    tvOS: "17.0"
+  xcodeVersion: "15.2"
+  generateEmptyDirectories: true
+
+packages:
+  NanoKit:
+    path: Packages/NanoKit
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    INFOPLIST_KEY_NSAppTransportSecurity_NSAllowsArbitraryLoads: YES
+    INFOPLIST_KEY_NSLocalNetworkUsageDescription: "Nano 需要局域网权限以发现本地 NAS、连接小雅服务并开启 Apple TV 扫码快传助手。"
+
+targets:
+  Nano-macOS:
+    type: application
+    platform: macOS
+    sources:
+      - path: App/Shared
+    entitlements:
+      path: App/macOS/Nano.entitlements
+    settings:
+      base:
+        PRODUCT_NAME: Nano
+        PRODUCT_BUNDLE_IDENTIFIER: app.nano.media.macos
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Nano
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.entertainment
+    dependencies:
+      - package: NanoKit
+        product: NanoUI
+
+  Nano-tvOS:
+    type: application
+    platform: tvOS
+    sources:
+      - path: App/Shared
+    entitlements:
+      path: App/tvOS/NanoTV.entitlements
+    settings:
+      base:
+        PRODUCT_NAME: Nano
+        PRODUCT_BUNDLE_IDENTIFIER: app.nano.media.tvos
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Nano
+    dependencies:
+      - package: NanoKit
+        product: NanoUI
