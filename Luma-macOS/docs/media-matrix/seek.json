@@ -1,0 +1,180 @@
+{
+  "cases": {
+    "04_h264_ac3_51.mkv": {
+      "exit": 0,
+      "seconds": 0.57,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "ac3",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/seek_04_h264_ac3_51/live.m3u8",
+        "segments": 3,
+        "duration": 6.0,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 62,
+        "first_segment_video_packets": 50
+      },
+      "avplayer": {
+        "itemStatus": "readyToPlay",
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:ac-3:enabled=true"
+        ],
+        "playedRate": 1,
+        "playedSeconds": 1.417435125
+      }
+    },
+    "05_h264_eac3_51.mkv": {
+      "exit": 0,
+      "seconds": 0.52,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "eac3",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/seek_05_h264_eac3_51/live.m3u8",
+        "segments": 3,
+        "duration": 6.0,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 62,
+        "first_segment_video_packets": 50
+      },
+      "avplayer": {
+        "itemStatus": "readyToPlay",
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:ec-3:enabled=true"
+        ],
+        "playedRate": 1,
+        "playedSeconds": 1.414422858
+      }
+    },
+    "06_h264_dts_51.mkv": {
+      "exit": 0,
+      "seconds": 3.98,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "ac3",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/seek_06_h264_dts_51/live.m3u8",
+        "segments": 3,
+        "duration": 6.0,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 63,
+        "first_segment_video_packets": 50
+      },
+      "avplayer": {
+        "itemStatus": "readyToPlay",
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:ac-3:enabled=true"
+        ],
+        "playedRate": 1,
+        "playedSeconds": 1.367947471
+      }
+    },
+    "16_h264_aac51_ac351.mkv": {
+      "exit": 0,
+      "seconds": 0.48,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [
+          "live_0.m3u8",
+          "live_eng-1.m3u8",
+          "live_jpn-2.m3u8"
+        ],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "aac",
+            "channels": 6,
+            "language": "eng"
+          },
+          {
+            "type": "audio",
+            "codec": "ac3",
+            "channels": 6,
+            "language": "jpn"
+          }
+        ],
+        "master_exists": true,
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/seek_16_h264_aac51_ac351/master.m3u8",
+        "audio_renditions": 2,
+        "segments": 3,
+        "duration": 6.0,
+        "first_segment_seconds": 2.0,
+        "variant": "master",
+        "first_segment_audio_packets": 94,
+        "first_segment_audio_codec": "aac",
+        "first_segment_video_packets": 50
+      },
+      "avplayer": {
+        "itemStatus": "readyToPlay",
+        "audioOptions": [
+          "English",
+          "Japanese"
+        ],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:aac:enabled=true"
+        ],
+        "playedRate": 1,
+        "playedSeconds": 1.453440277
+      }
+    }
+  }
+}

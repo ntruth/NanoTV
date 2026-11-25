@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>拾光屋 · 图标方案</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: #050609;
+    color: #eef1f8;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+  .bg span { position: absolute; border-radius: 50%; filter: blur(120px); }
+  .bg .b1 { width: 660px; height: 660px; left: -180px; top: -220px; background: #6a4dff; opacity: .45; }
+  .bg .b2 { width: 560px; height: 560px; right: -160px; top: 100px; background: #00c2a8; opacity: .30; }
+  .bg .b3 { width: 640px; height: 640px; left: 34%; bottom: -300px; background: #ff5f8f; opacity: .22; }
+
+  .wrap { position: relative; z-index: 1; max-width: 1260px; margin: 0 auto; padding: 76px 32px 110px; }
+
+  header .brandline { display: flex; align-items: center; gap: 14px; }
+  header .brandline svg { border-radius: 20px; filter: drop-shadow(0 10px 24px rgba(0,0,0,.55)); }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .34em; text-transform: uppercase;
+    color: rgba(233,236,245,.45); font-weight: 600;
+  }
+  h1 { font-size: 46px; line-height: 1.1; letter-spacing: -.025em; margin: 20px 0 0; font-weight: 700; }
+  .grad {
+    background: linear-gradient(96deg, #ffc46b, #ff8f7a 24%, #ff7ac7 48%, #a88cff 72%, #5ed9ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lead { max-width: 700px; margin: 20px 0 0; font-size: 15px; line-height: 1.8; color: rgba(233,236,245,.62); }
+
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; }
+  .principle {
+    padding: 18px 20px; border-radius: 18px;
+    background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.075);
+  }
+  .principle b { display: block; font-size: 13px; margin-bottom: 6px; letter-spacing: .02em; }
+  .principle span { font-size: 12px; line-height: 1.7; color: rgba(233,236,245,.55); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(520px, 1fr)); gap: 26px; margin-top: 54px; }
+
+  .section-head { margin-top: 88px; }
+  .section-title { font-size: 32px; margin: 12px 0 0; letter-spacing: -.025em; font-weight: 700; }
+  .section-lead { margin: 12px 0 0; max-width: 640px; font-size: 13.5px; line-height: 1.8; color: rgba(233,236,245,.55); }
+  .section-head + .grid { margin-top: 32px; }
+
+  .card {
+    position: relative; display: grid; grid-template-columns: 200px 1fr; gap: 26px;
+    padding: 26px; border-radius: 28px;
+    background: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.022) 55%, rgba(255,255,255,.035));
+    border: 1px solid rgba(255,255,255,.085);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .28s, box-shadow .28s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,.2);
+    box-shadow: 0 30px 70px -34px rgba(0,0,0,.95);
+  }
+  .icon-main {
+    display: block; width: 200px; height: 200px; border-radius: 46px;
+    filter: drop-shadow(0 20px 34px rgba(0,0,0,.55));
+  }
+  .meta { min-width: 0; }
+  .titlerow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .num { font-variant-numeric: tabular-nums; font-size: 12px; font-weight: 700; color: rgba(233,236,245,.32); letter-spacing: .08em; }
+  h2 { font-size: 17.5px; margin: 0; letter-spacing: -.01em; font-weight: 650; }
+  .badge {
+    font-size: 10.5px; padding: 3px 9px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.14); color: rgba(233,236,245,.6); white-space: nowrap;
+  }
+  .desc { margin: 12px 0 0; font-size: 12.5px; line-height: 1.78; color: rgba(233,236,245,.6); }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+  .tags i {
+    font-style: normal; font-size: 10px; letter-spacing: .04em;
+    padding: 3px 8px; border-radius: 6px;
+    background: rgba(255,255,255,.055); color: rgba(233,236,245,.52);
+  }
+  .sizes { display: flex; align-items: flex-end; gap: 18px; margin-top: 20px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,.09); }
+  .sizes figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .sizes svg { display: block; border-radius: 22%; }
+  .sizes figcaption { font-size: 9.5px; letter-spacing: .08em; color: rgba(233,236,245,.3); font-variant-numeric: tabular-nums; }
+
+  .lockup {
+    margin-top: 30px; padding: 40px 44px; border-radius: 32px;
+    background: linear-gradient(150deg, rgba(255,255,255,.075), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.09);
+    display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+  }
+  .lockup svg { filter: drop-shadow(0 16px 30px rgba(0,0,0,.55)); border-radius: 22px; }
+  .lockup-name { font-size: 42px; font-weight: 700; letter-spacing: .06em; line-height: 1.1; }
+  .lockup-sub { margin-top: 8px; font-size: 10.5px; letter-spacing: .38em; color: rgba(233,236,245,.38); }
+  .lockup p { margin: 14px 0 0; font-size: 13px; color: rgba(233,236,245,.55); letter-spacing: .04em; }
+
+  footer { margin-top: 44px; font-size: 12px; line-height: 1.9; color: rgba(233,236,245,.38); }
+  footer b { color: rgba(233,236,245,.62); font-weight: 600; }
+
+  @media (max-width: 1120px) {
+    .grid { grid-template-columns: 1fr; }
+    .principles { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 620px) {
+    .card { grid-template-columns: 1fr; }
+    .icon-main { width: 168px; height: 168px; }
+    h1 { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="clip-squircle">
+      <rect x="62" y="62" width="900" height="900" rx="212" ry="212" />
+    </clipPath>
+
+    <linearGradient id="g-base" x1="512" y1="980" x2="512" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#070810" />
+      <stop offset=".58" stop-color="#111423" />
+      <stop offset="1" stop-color="#1e2338" />
+    </linearGradient>
+
+    <radialGradient id="g-teal" cx="706" cy="324" r="640" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2ee6cc" stop-opacity=".42" />
+      <stop offset=".46" stop-color="#6e5af7" stop-opacity=".26" />
+      <stop offset="1" stop-color="#fa61ad" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="g-coral" cx="268" cy="738" r="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffaa5a" stop-opacity=".30" />
+      <stop offset="1" stop-color="#ff5a82" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="g-sheen" x1="120" y1="920" x2="720" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset=".5" stop-color="#ffffff" stop-opacity=".055" />
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+
+    <radialGradient id="g-vignette" cx="512" cy="512" r="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000000" stop-opacity="0" />
+      <stop offset=".62" stop-color="#000000" stop-opacity="0" />
+      <stop offset="1" stop-color="#000000" stop-opacity=".38" />
+    </radialGradient>
+
+    <filter id="f-blur18" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" />
+    </filter>
+    <filter id="f-blur24" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="24" />
+    </filter>
+    <filter id="f-blur40" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="40" />
+    </filter>
+    <filter id="f-blur60" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="60" />
+    </filter>
+
+    <!-- 方案 01 光屋·窗 -->
+    <linearGradient id="c1-house" x1="512" y1="236" x2="512" y2="826" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#232941" />
+      <stop offset="1" stop-color="#090b13" />
+    </linearGradient>
+    <linearGradient id="c1-p1" x1="350" y1="534" x2="505" y2="649" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd08a" /><stop offset="1" stop-color="#ff8f7a" />
+    </linearGradient>
+    <linearGradient id="c1-p2" x1="519" y1="534" x2="674" y2="649" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff8fb8" /><stop offset="1" stop-color="#b48cff" />
+    </linearGradient>
+    <linearGradient id="c1-p3" x1="350" y1="663" x2="505" y2="778" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8bf8cc" /><stop offset="1" stop-color="#5fd8ff" />
+    </linearGradient>
+    <linearGradient id="c1-p4" x1="519" y1="663" x2="674" y2="778" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5ed0ff" /><stop offset="1" stop-color="#9b8cff" />
+    </linearGradient>
+
+    <!-- 方案 02 棱镜屋脊 -->
+    <g id="c2-wedges">
+      <path d="M512 512 L512 262 A250 250 0 0 1 637 295.5 Z" fill="#4fe3ff" />
+      <path d="M512 512 L637 295.5 A250 250 0 0 1 728.5 387 Z" fill="#56a9ff" />
+      <path d="M512 512 L728.5 387 A250 250 0 0 1 762 512 Z" fill="#6f86ff" />
+      <path d="M512 512 L762 512 A250 250 0 0 1 728.5 637 Z" fill="#9779ff" />
+      <path d="M512 512 L728.5 637 A250 250 0 0 1 637 728.5 Z" fill="#c97bff" />
+      <path d="M512 512 L637 728.5 A250 250 0 0 1 512 762 Z" fill="#f97cc4" />
+      <path d="M512 512 L512 762 A250 250 0 0 1 387 728.5 Z" fill="#ff8b86" />
+      <path d="M512 512 L387 728.5 A250 250 0 0 1 295.5 637 Z" fill="#ffb76b" />
+      <path d="M512 512 L295.5 637 A250 250 0 0 1 262 512 Z" fill="#c8f57e" />
+      <path d="M512 512 L262 512 A250 250 0 0 1 295.5 387 Z" fill="#7df0c4" />
+      <path d="M512 512 L295.5 387 A250 250 0 0 1 387 295.5 Z" fill="#4fe3d6" />
+      <path d="M512 512 L387 295.5 A250 250 0 0 1 512 262 Z" fill="#4fe3ff" />
+    </g>
+    <linearGradient id="c2-hole" x1="512" y1="352" x2="512" y2="660" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1a1f31" /><stop offset="1" stop-color="#05060b" />
+    </linearGradient>
+    <linearGradient id="c2-window" x1="512" y1="522" x2="512" y2="598" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe3ad" /><stop offset="1" stop-color="#ff8a5c" />
+    </linearGradient>
+
+    <!-- 方案 03 棱镜成屋 -->
+    <g id="c3-beams">
+      <path d="M512 306 L306 750 L382 750 Z" fill="url(#c3-b1)" />
+      <path d="M512 306 L390 750 L466 750 Z" fill="url(#c3-b2)" />
+      <path d="M512 306 L474 750 L550 750 Z" fill="url(#c3-b3)" />
+      <path d="M512 306 L558 750 L634 750 Z" fill="url(#c3-b4)" />
+      <path d="M512 306 L642 750 L718 750 Z" fill="url(#c3-b5)" />
+    </g>
+    <linearGradient id="c3-b1" x1="0" y1="306" x2="0" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd08a" stop-opacity=".95" /><stop offset="1" stop-color="#ffd08a" stop-opacity=".10" />
+    </linearGradient>
+    <linearGradient id="c3-b2" x1="0" y1="306" x2="0" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff8f7a" stop-opacity=".95" /><stop offset="1" stop-color="#ff8f7a" stop-opacity=".10" />
+    </linearGradient>
+    <linearGradient id="c3-b3" x1="0" y1="306" x2="0" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff7ac7" stop-opacity=".95" /><stop offset="1" stop-color="#ff7ac7" stop-opacity=".10" />
+    </linearGradient>
+    <linearGradient id="c3-b4" x1="0" y1="306" x2="0" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a88cff" stop-opacity=".95" /><stop offset="1" stop-color="#a88cff" stop-opacity=".10" />
+    </linearGradient>
+    <linearGradient id="c3-b5" x1="0" y1="306" x2="0" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5ed9ff" stop-opacity=".95" /><stop offset="1" stop-color="#5ed9ff" stop-opacity=".10" />
+    </linearGradient>
+
+    <!-- 方案 04 负形光屋 -->
+    <linearGradient id="c4-disc" x1="260" y1="220" x2="770" y2="810" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd27a" />
+      <stop offset=".24" stop-color="#ff8f7a" />
+      <stop offset=".48" stop-color="#ff7ac7" />
+      <stop offset=".74" stop-color="#a88cff" />
+      <stop offset="1" stop-color="#5ed9ff" />
+    </linearGradient>
+    <mask id="c4-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024">
+      <rect x="0" y="0" width="1024" height="1024" fill="#ffffff" />
+      <path d="M512 246 L822 500 L766 500 L766 818 L258 818 L258 500 L202 500 Z" fill="#000000" />
+    </mask>
+
+    <!-- 方案 05 极简光屋 -->
+    <linearGradient id="c5-bg" x1="512" y1="980" x2="512" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07080d" /><stop offset=".6" stop-color="#0e1322" /><stop offset="1" stop-color="#161d30" />
+    </linearGradient>
+    <radialGradient id="c5-warm" cx="512" cy="792" r="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb26e" stop-opacity=".38" />
+      <stop offset=".5" stop-color="#ff785a" stop-opacity=".12" />
+      <stop offset="1" stop-color="#ff5a50" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="c5-house" x1="512" y1="246" x2="512" y2="828" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" /><stop offset="1" stop-color="#dde4f5" />
+    </linearGradient>
+    <linearGradient id="c5-door" x1="512" y1="660" x2="512" y2="828" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe2a8" /><stop offset="1" stop-color="#ff8a5c" />
+    </linearGradient>
+    <linearGradient id="c5-roof" x1="178" y1="504" x2="846" y2="246" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc46b" />
+      <stop offset=".35" stop-color="#ff7ac7" />
+      <stop offset=".7" stop-color="#a88cff" />
+      <stop offset="1" stop-color="#5ed9ff" />
+    </linearGradient>
+
+    <!-- 方案 06 光尘入怀 -->
+    <radialGradient id="c6-bloom" cx="512" cy="512" r="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd6a0" stop-opacity=".24" />
+      <stop offset=".55" stop-color="#ff8f7a" stop-opacity=".10" />
+      <stop offset="1" stop-color="#ff7ac7" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="c6-core" cx="512" cy="486" r="132" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset=".34" stop-color="#ffe3b0" />
+      <stop offset=".66" stop-color="#ff9670" />
+      <stop offset=".88" stop-color="#ff6f9f" stop-opacity=".92" />
+      <stop offset="1" stop-color="#c97bff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="c6-ring" x1="336" y1="336" x2="688" y2="688" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc46b" />
+      <stop offset=".28" stop-color="#ff8f7a" />
+      <stop offset=".52" stop-color="#ff7ac7" />
+      <stop offset=".76" stop-color="#a88cff" />
+      <stop offset="1" stop-color="#5ed9ff" />
+    </linearGradient>
+    <linearGradient id="c6-arc" x1="200" y1="200" x2="824" y2="824" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5ed9ff" />
+      <stop offset=".5" stop-color="#a88cff" />
+      <stop offset="1" stop-color="#ff7ac7" />
+    </linearGradient>
+
+    <!-- 方案 07 取景拾光 -->
+    <radialGradient id="c7-halo" cx="512" cy="512" r="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb46b" stop-opacity=".32" />
+      <stop offset="1" stop-color="#ff7ac7" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="c7-core" cx="512" cy="486" r="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset=".36" stop-color="#ffe0ae" />
+      <stop offset=".7" stop-color="#ff8f7a" />
+      <stop offset="1" stop-color="#ff6f9f" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- 方案 08 星芒拾光 -->
+    <linearGradient id="c8-star" x1="170" y1="170" x2="860" y2="860" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc46b" />
+      <stop offset=".26" stop-color="#ff8f7a" />
+      <stop offset=".5" stop-color="#ff7ac7" />
+      <stop offset=".74" stop-color="#a88cff" />
+      <stop offset="1" stop-color="#5ed9ff" />
+    </linearGradient>
+    <radialGradient id="c8-bloom" cx="512" cy="512" r="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd08a" stop-opacity=".26" />
+      <stop offset=".5" stop-color="#ff7ac7" stop-opacity=".10" />
+      <stop offset="1" stop-color="#a88cff" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- 方案 09 光瀑收束 -->
+    <linearGradient id="c9-b1" x1="0" y1="40" x2="0" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc46b" stop-opacity=".55" /><stop offset="1" stop-color="#ffc46b" stop-opacity=".95" />
+    </linearGradient>
+    <linearGradient id="c9-b2" x1="0" y1="40" x2="0" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff8f7a" stop-opacity=".55" /><stop offset="1" stop-color="#ff8f7a" stop-opacity=".95" />
+    </linearGradient>
+    <linearGradient id="c9-b3" x1="0" y1="40" x2="0" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff7ac7" stop-opacity=".55" /><stop offset="1" stop-color="#ff7ac7" stop-opacity=".95" />
+    </linearGradient>
+    <linearGradient id="c9-b4" x1="0" y1="40" x2="0" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a88cff" stop-opacity=".55" /><stop offset="1" stop-color="#a88cff" stop-opacity=".95" />
+    </linearGradient>
+    <linearGradient id="c9-b5" x1="0" y1="40" x2="0" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5ed9ff" stop-opacity=".55" /><stop offset="1" stop-color="#5ed9ff" stop-opacity=".95" />
+    </linearGradient>
+    <radialGradient id="c9-core" cx="512" cy="738" r="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset=".3" stop-color="#fff1cf" />
+      <stop offset=".62" stop-color="#ffb46b" />
+      <stop offset="1" stop-color="#ff7ac7" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="c9-halo" cx="512" cy="738" r="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd08a" stop-opacity=".35" />
+      <stop offset="1" stop-color="#ff8f7a" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- 方案 10 光滴涟漪 -->
+    <linearGradient id="c10-drop" x1="512" y1="236" x2="512" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset=".34" stop-color="#ffe0ae" />
+      <stop offset=".68" stop-color="#ff9d6e" />
+      <stop offset="1" stop-color="#ff7ac7" />
+    </linearGradient>
+    <linearGradient id="c10-ripple" x1="212" y1="690" x2="812" y2="690" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5ed9ff" />
+      <stop offset=".5" stop-color="#a88cff" />
+      <stop offset="1" stop-color="#ff7ac7" />
+    </linearGradient>
+    <radialGradient id="c10-impact" cx="512" cy="694" r="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe3b0" stop-opacity=".55" />
+      <stop offset=".5" stop-color="#ff9d6e" stop-opacity=".22" />
+      <stop offset="1" stop-color="#ff7ac7" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- ============ 01 光屋·窗 ============ -->
+  <symbol id="ic-window" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#g-base)" />
+      <rect width="1024" height="1024" fill="url(#g-teal)" />
+      <rect width="1024" height="1024" fill="url(#g-coral)" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+
+      <path d="M512 236 L832 500 L776 500 L776 826 L248 826 L248 500 L192 500 Z"
+            fill="url(#c1-house)" stroke="#ffffff" stroke-opacity=".18" stroke-width="3" stroke-linejoin="round" />
+
+      <g filter="url(#f-blur40)" opacity=".9">
+        <rect x="350" y="534" width="155" height="115" rx="16" fill="url(#c1-p1)" />
+        <rect x="519" y="534" width="155" height="115" rx="16" fill="url(#c1-p2)" />
+        <rect x="350" y="663" width="155" height="115" rx="16" fill="url(#c1-p3)" />
+        <rect x="519" y="663" width="155" height="115" rx="16" fill="url(#c1-p4)" />
+      </g>
+      <g>
+        <rect x="350" y="534" width="155" height="115" rx="16" fill="url(#c1-p1)" />
+        <rect x="519" y="534" width="155" height="115" rx="16" fill="url(#c1-p2)" />
+        <rect x="350" y="663" width="155" height="115" rx="16" fill="url(#c1-p3)" />
+        <rect x="519" y="663" width="155" height="115" rx="16" fill="url(#c1-p4)" />
+      </g>
+      <rect x="336" y="520" width="352" height="272" rx="24" fill="none"
+            stroke="#ffffff" stroke-opacity=".22" stroke-width="3" />
+      <ellipse cx="512" cy="804" rx="168" ry="26" fill="#ffbe7d" opacity=".20" filter="url(#f-blur24)" />
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- ============ 02 棱镜屋脊 ============ -->
+  <symbol id="ic-prismhouse" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#g-base)" />
+      <rect width="1024" height="1024" fill="url(#g-teal)" />
+      <rect width="1024" height="1024" fill="url(#g-coral)" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+
+      <circle cx="512" cy="512" r="430" fill="#ffffff" opacity=".05" filter="url(#f-blur60)" />
+      <use href="#c2-wedges" opacity=".95" />
+      <use href="#c2-wedges" filter="url(#f-blur18)" opacity=".8" />
+
+      <circle cx="512" cy="512" r="300" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="30" />
+      <circle cx="512" cy="512" r="272" fill="none" stroke="#ffffff" stroke-opacity=".50" stroke-width="2.6" />
+      <circle cx="512" cy="512" r="318" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="1.4" />
+      <path d="M240 385 A300 300 0 0 1 385 240" fill="none" stroke="#ffffff" stroke-opacity=".62"
+            stroke-width="5" stroke-linecap="round" />
+
+      <path d="M512 352 L652 464 L612 464 L612 660 L412 660 L412 464 L372 464 Z"
+            fill="url(#c2-hole)" stroke="#ffffff" stroke-opacity=".30" stroke-width="3" stroke-linejoin="round" />
+      <rect x="468" y="512" width="88" height="96" rx="12" fill="#ffb46b" opacity=".55" filter="url(#f-blur24)" />
+      <rect x="478" y="522" width="68" height="76" rx="9" fill="url(#c2-window)" />
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- ============ 03 棱镜成屋 ============ -->
+  <symbol id="ic-beam" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#g-base)" />
+      <rect width="1024" height="1024" fill="url(#g-teal)" opacity=".8" />
+      <rect width="1024" height="1024" fill="url(#g-coral)" opacity=".8" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+
+      <path d="M512 300 L784 508 L724 508 L724 760 L300 760 L300 508 L240 508 Z"
+            fill="#0a0c14" opacity=".80" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+
+      <use href="#c3-beams" filter="url(#f-blur24)" opacity=".55" />
+      <use href="#c3-beams" />
+
+      <ellipse cx="512" cy="748" rx="196" ry="26" fill="#ffd9a8" opacity=".30" filter="url(#f-blur24)" />
+
+      <path d="M240 508 L512 300 L784 508 M300 508 L300 760 L724 760 L724 508"
+            fill="none" stroke="#ffffff" stroke-opacity=".55" stroke-width="9"
+            stroke-linecap="round" stroke-linejoin="round" />
+
+      <path d="M474 62 L550 62 L512 306 Z" fill="#ffffff" opacity=".18" />
+      <path d="M474 62 L550 62 L512 306 Z" fill="#ffffff" opacity=".35" filter="url(#f-blur18)" />
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- ============ 04 负形光屋 ============ -->
+  <symbol id="ic-negative" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#g-base)" />
+      <rect width="1024" height="1024" fill="url(#g-teal)" opacity=".7" />
+      <rect width="1024" height="1024" fill="url(#g-coral)" opacity=".7" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+
+      <circle cx="512" cy="512" r="330" fill="url(#c4-disc)" opacity=".55" filter="url(#f-blur60)" />
+
+      <g mask="url(#c4-mask)">
+        <circle cx="512" cy="512" r="338" fill="url(#c4-disc)" />
+      </g>
+      <circle cx="512" cy="512" r="338" fill="none" stroke="#ffffff" stroke-opacity=".20" stroke-width="2" />
+
+      <path d="M512 246 L822 500 L766 500 L766 818 L258 818 L258 500 L202 500 Z"
+            fill="none" stroke="#ffffff" stroke-opacity=".30" stroke-width="12" filter="url(#f-blur18)" />
+      <path d="M512 246 L822 500 L766 500 L766 818 L258 818 L258 500 L202 500 Z"
+            fill="none" stroke="#ffffff" stroke-opacity=".30" stroke-width="3" stroke-linejoin="round" />
+
+      <rect x="460" y="562" width="104" height="108" rx="14" fill="#ffb46b" opacity=".55" filter="url(#f-blur24)" />
+      <rect x="468" y="570" width="88" height="96" rx="11" fill="url(#c2-window)" />
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- ============ 05 极简光屋 ============ -->
+  <symbol id="ic-minimal" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#c5-bg)" />
+      <rect width="1024" height="1024" fill="url(#c5-warm)" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+
+      <path d="M512 246 L846 504 L788 504 L788 828 L236 828 L236 504 L178 504 Z"
+            fill="url(#c5-house)" stroke="url(#c5-house)" stroke-width="16"
+            stroke-linejoin="round" stroke-linecap="round" />
+
+      <path d="M458 828 L458 706 A54 54 0 0 1 566 706 L566 828 Z"
+            fill="#ffb46b" opacity=".6" filter="url(#f-blur24)" />
+      <path d="M458 828 L458 706 A54 54 0 0 1 566 706 L566 828 Z" fill="url(#c5-door)" />
+
+      <path d="M178 504 L512 246 L846 504" fill="none" stroke="url(#c5-roof)"
+            stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".95" />
+      <path d="M178 504 L512 246 L846 504" fill="none" stroke="url(#c5-roof)"
+            stroke-width="22" stroke-linecap="round" stroke-linejoin="round" opacity=".30" filter="url(#f-blur18)" />
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" opacity=".7" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- ============ 06 光尘入怀 ============ -->
+  <symbol id="ic-dust" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#g-base)" />
+      <rect width="1024" height="1024" fill="url(#g-teal)" />
+      <rect width="1024" height="1024" fill="url(#g-coral)" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+
+      <circle cx="512" cy="512" r="360" fill="url(#c6-bloom)" />
+
+      <circle cx="512" cy="512" r="336" fill="none" stroke="url(#c6-arc)" stroke-width="2.4"
+              stroke-dasharray="150 300" transform="rotate(24 512 512)" opacity=".45" />
+      <circle cx="512" cy="512" r="264" fill="none" stroke="url(#c6-arc)" stroke-width="2.2"
+              stroke-dasharray="110 260" transform="rotate(-40 512 512)" opacity=".38" />
+      <circle cx="512" cy="512" r="196" fill="none" stroke="url(#c6-arc)" stroke-width="2"
+              stroke-dasharray="70 200" transform="rotate(96 512 512)" opacity=".32" />
+
+      <g>
+        <circle cx="840.9" cy="501.9" r="6.8" fill="#ffc46b" opacity="0.48" />
+        <circle cx="799.6" cy="680.5" r="4.7" fill="#ff8f7a" opacity="0.69" />
+        <circle cx="702.2" cy="787.4" r="4.7" fill="#ff7ac7" opacity="0.49" />
+        <circle cx="516.5" cy="854.5" r="4.9" fill="#a88cff" opacity="0.55" />
+        <circle cx="332.9" cy="806.8" r="6.5" fill="#5ed9ff" opacity="0.64" />
+        <circle cx="216.3" cy="651.4" r="7.5" fill="#7df7bf" opacity="0.59" />
+        <circle cx="184.3" cy="532.4" r="5.6" fill="#ffc46b" opacity="0.83" />
+        <circle cx="210.7" cy="359.7" r="6.7" fill="#ff8f7a" opacity="0.63" />
+        <circle cx="350.7" cy="227.2" r="4.7" fill="#ff7ac7" opacity="0.55" />
+        <circle cx="522.5" cy="177.6" r="5.6" fill="#a88cff" opacity="0.73" />
+        <circle cx="675.6" cy="223.1" r="7.3" fill="#5ed9ff" opacity="0.78" />
+        <circle cx="796.4" cy="330.4" r="6.3" fill="#7df7bf" opacity="0.86" />
+        <circle cx="758.1" cy="588.6" r="9.9" fill="#ffc46b" opacity="0.51" />
+        <circle cx="668.3" cy="728.6" r="6.6" fill="#ff8f7a" opacity="0.68" />
+        <circle cx="510.2" cy="777.4" r="9.1" fill="#ff7ac7" opacity="0.72" />
+        <circle cx="317.8" cy="682.3" r="8.8" fill="#a88cff" opacity="0.73" />
+        <circle cx="251.6" cy="531.1" r="9.4" fill="#5ed9ff" opacity="0.89" />
+        <circle cx="294.0" cy="360.8" r="6.2" fill="#7df7bf" opacity="0.78" />
+        <circle cx="448.4" cy="247.7" r="9.3" fill="#ffc46b" opacity="0.58" />
+        <circle cx="619.3" cy="269.3" r="6.1" fill="#ff8f7a" opacity="0.67" />
+        <circle cx="735.9" cy="391.3" r="6.2" fill="#ff7ac7" opacity="0.81" />
+        <circle cx="683.2" cy="596.6" r="9.0" fill="#a88cff" opacity="0.86" />
+        <circle cx="555.1" cy="702.2" r="9.7" fill="#5ed9ff" opacity="0.87" />
+        <circle cx="365.6" cy="653.1" r="8.4" fill="#7df7bf" opacity="0.65" />
+        <circle cx="308.6" cy="501.8" r="11.8" fill="#ffc46b" opacity="0.52" />
+        <circle cx="395.9" cy="360.8" r="8.2" fill="#ff8f7a" opacity="0.68" />
+        <circle cx="571.2" cy="330.1" r="7.0" fill="#ff7ac7" opacity="0.65" />
+        <circle cx="694.0" cy="435.7" r="11.8" fill="#a88cff" opacity="0.77" />
+      </g>
+
+      <circle cx="512" cy="512" r="252" fill="#ffb46b" opacity=".30" filter="url(#f-blur40)" />
+      <circle cx="512" cy="512" r="176" fill="none" stroke="url(#c6-ring)" stroke-width="4" opacity=".6" />
+      <circle cx="512" cy="512" r="112" fill="url(#c6-core)" />
+      <circle cx="512" cy="500" r="44" fill="#ffffff" opacity=".85" filter="url(#f-blur18)" />
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- ============ 07 取景拾光 ============ -->
+  <symbol id="ic-frame" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#g-base)" />
+      <rect width="1024" height="1024" fill="url(#g-teal)" opacity=".85" />
+      <rect width="1024" height="1024" fill="url(#g-coral)" opacity=".8" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+
+      <circle cx="512" cy="512" r="250" fill="url(#c7-halo)" />
+      <circle cx="512" cy="512" r="128" fill="#ff9d6e" opacity=".35" filter="url(#f-blur40)" />
+      <circle cx="512" cy="512" r="158" fill="none" stroke="url(#c6-ring)" stroke-width="3" opacity=".7" />
+      <circle cx="512" cy="512" r="118" fill="url(#c7-core)" />
+      <circle cx="512" cy="500" r="40" fill="#ffffff" opacity=".85" filter="url(#f-blur18)" />
+
+      <g fill="none" stroke="#ffffff" stroke-opacity=".55" stroke-width="26"
+         stroke-linecap="round" stroke-linejoin="round">
+        <path d="M190 336 V190 H336" />
+        <path d="M834 336 V190 H688" />
+        <path d="M190 688 V834 H336" />
+        <path d="M834 688 V834 H688" />
+      </g>
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- ============ 08 星芒拾光 ============ -->
+  <symbol id="ic-spark" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#g-base)" />
+      <rect width="1024" height="1024" fill="url(#g-teal)" opacity=".75" />
+      <rect width="1024" height="1024" fill="url(#g-coral)" opacity=".7" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+      <circle cx="512" cy="512" r="380" fill="url(#c8-bloom)" />
+
+      <path d="M512 150 C 546 386, 638 478, 874 512 C 638 546, 546 638, 512 874 C 478 638, 386 546, 150 512 C 386 478, 478 386, 512 150 Z"
+            fill="#ffb46b" opacity=".55" filter="url(#f-blur60)" />
+      <path d="M512 150 C 546 386, 638 478, 874 512 C 638 546, 546 638, 512 874 C 478 638, 386 546, 150 512 C 386 478, 478 386, 512 150 Z"
+            fill="url(#c8-star)" />
+      <path d="M512 150 C 546 386, 638 478, 874 512 C 638 546, 546 638, 512 874 C 478 638, 386 546, 150 512 C 386 478, 478 386, 512 150 Z"
+            fill="#ffffff" opacity=".28" filter="url(#f-blur18)" />
+      <path d="M512 262 C 536 414, 600 478, 752 502 C 600 526, 536 590, 512 742 C 488 590, 424 526, 272 502 C 424 478, 488 414, 512 262 Z"
+            fill="#ffffff" opacity=".9" />
+
+      <path d="M512 150 C 546 386, 638 478, 874 512 C 638 546, 546 638, 512 874 C 478 638, 386 546, 150 512 C 386 478, 478 386, 512 150 Z"
+            transform="translate(752 744) scale(0.22) translate(-512 -512)"
+            fill="#ffffff" opacity=".72" />
+      <path d="M512 150 C 546 386, 638 478, 874 512 C 638 546, 546 638, 512 874 C 478 638, 386 546, 150 512 C 386 478, 478 386, 512 150 Z"
+            transform="translate(292 762) scale(0.13) translate(-512 -512)"
+            fill="#ffd08a" opacity=".7" />
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- ============ 09 光瀑收束 ============ -->
+  <symbol id="ic-funnel" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#g-base)" />
+      <rect width="1024" height="1024" fill="url(#g-teal)" opacity=".7" />
+      <rect width="1024" height="1024" fill="url(#g-coral)" opacity=".7" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+
+      <path d="M512 726 L40 40 L236 40 Z" fill="url(#c9-b1)" />
+      <path d="M512 726 L236 40 L432 40 Z" fill="url(#c9-b2)" />
+      <path d="M512 726 L432 40 L592 40 Z" fill="url(#c9-b3)" />
+      <path d="M512 726 L592 40 L788 40 Z" fill="url(#c9-b4)" />
+      <path d="M512 726 L788 40 L984 40 Z" fill="url(#c9-b5)" />
+
+      <path d="M512 726 L40 40 L236 40 Z" fill="#ffffff" opacity=".10" filter="url(#f-blur24)" />
+      <path d="M512 726 L788 40 L984 40 Z" fill="#ffffff" opacity=".10" filter="url(#f-blur24)" />
+
+      <circle cx="512" cy="738" r="300" fill="url(#c9-halo)" />
+      <circle cx="512" cy="738" r="150" fill="none" stroke="url(#c6-ring)" stroke-width="4" opacity=".55" />
+      <circle cx="512" cy="738" r="104" fill="url(#c9-core)" />
+      <circle cx="512" cy="726" r="40" fill="#ffffff" opacity=".9" filter="url(#f-blur18)" />
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- ============ 10 光滴涟漪 ============ -->
+  <symbol id="ic-drop" viewBox="0 0 1024 1024">
+    <g clip-path="url(#clip-squircle)">
+      <rect width="1024" height="1024" fill="url(#g-base)" />
+      <rect width="1024" height="1024" fill="url(#g-teal)" opacity=".6" />
+      <rect width="1024" height="1024" fill="url(#g-coral)" opacity=".6" />
+      <rect width="1024" height="1024" fill="url(#g-sheen)" />
+
+      <path d="M512 86 L534 232 L490 232 Z" fill="#ffffff" opacity=".20" />
+
+      <path d="M512 232 C 566 316, 606 366, 606 424 A 94 94 0 0 1 418 424 C 418 366 458 316 512 232 Z"
+            fill="#ffb46b" opacity=".55" filter="url(#f-blur40)" />
+      <path d="M512 232 C 566 316, 606 366, 606 424 A 94 94 0 0 1 418 424 C 418 366 458 316 512 232 Z"
+            fill="url(#c10-drop)" stroke="#ffffff" stroke-opacity=".28" stroke-width="2" />
+      <ellipse cx="484" cy="398" rx="24" ry="34" fill="#ffffff" opacity=".55" filter="url(#f-blur18)" />
+
+      <path d="M506 520 L518 520 L522 636 L502 636 Z" fill="#ffffff" opacity=".22" />
+
+      <ellipse cx="512" cy="694" rx="210" ry="62" fill="url(#c10-impact)" />
+      <ellipse cx="512" cy="700" rx="300" ry="80" fill="none" stroke="url(#c10-ripple)" stroke-width="3" opacity=".26" />
+      <ellipse cx="512" cy="694" rx="212" ry="54" fill="none" stroke="url(#c10-ripple)" stroke-width="3.5" opacity=".46" />
+      <ellipse cx="512" cy="688" rx="130" ry="33" fill="none" stroke="url(#c10-ripple)" stroke-width="4" opacity=".72" />
+      <ellipse cx="512" cy="686" rx="54" ry="14" fill="#ffe3b0" opacity=".45" filter="url(#f-blur18)" />
+
+      <rect width="1024" height="1024" fill="url(#g-vignette)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none"
+          stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <header>
+    <div class="brandline">
+      <svg width="72" height="72" viewBox="0 0 1024 1024"><use href="#ic-window" /></svg>
+      <div class="eyebrow">Icon Exploration · ShiGuangWu</div>
+    </div>
+    <h1>拾光屋 · <span class="grad">图标再设计</span></h1>
+    <p class="lead">
+      现有图标是「棱镜光圈」：好看，但只讲了「光」，没讲「收进哪里」。既然产品叫拾光屋，
+      图标就要补上一个容器——屋。下面 5 个方向都保留原有极光底色与品牌光谱，只在「屋」的表达上做不同取舍。
+    </p>
+  </header>
+
+  <section class="principles">
+    <div class="principle">
+      <b>屋：给光一个容器</b>
+      <span>屋形轮廓比纯光孔更有归属感，一眼读出「收藏、归置、回家」。</span>
+    </div>
+    <div class="principle">
+      <b>光：只在开口处出现</b>
+      <span>品牌光谱不铺满，只从窗、门、光孔里透出来，暗处才有「拾」的动作感。</span>
+    </div>
+    <div class="principle">
+      <b>拾：窗格复用照片网格</b>
+      <span>2×2 窗格与主界面的照片网格同构，小尺寸下也读得出「相册」。</span>
+    </div>
+  </section>
+
+  <main class="grid">
+    <!-- 01 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-window" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">01</span>
+          <h2>光屋·窗</h2>
+          <span class="badge">语义直给</span>
+        </div>
+        <p class="desc">
+          屋形剪影里嵌一扇四格发光窗。窗格借用照片网格的语言，四束品牌色就是「拾回来的光」。
+          轮廓完整、结构对称，缩到 16pt 仍能读出「发光的房子」。
+        </p>
+        <div class="tags"><i>屋形剪影</i><i>四格窗</i><i>小尺寸稳定</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-window" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-window" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-window" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-prismhouse" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">02</span>
+          <h2>棱镜屋脊</h2>
+          <span class="badge">延续 DNA</span>
+        </div>
+        <p class="desc">
+          完全保留现有的彩虹棱镜环、金属镜圈与极光底，只把中央六边形光孔换成「屋顶 + 屋身」的光孔，
+          屋里点一盏灯。老用户无感迁移，改动量最小的一条路。
+        </p>
+        <div class="tags"><i>棱镜环</i><i>屋形光孔</i><i>改版成本最低</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-prismhouse" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-prismhouse" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-prismhouse" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-beam" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">03</span>
+          <h2>棱镜成屋</h2>
+          <span class="badge">概念叙事</span>
+        </div>
+        <p class="desc">
+          屋顶本身就是棱镜：一束白光从屋脊进入，被拆成五束光谱洒进屋内地板。
+          屋是容器，光是内容，最贴合「拾光屋」这三个字的字面意思。
+        </p>
+        <div class="tags"><i>棱镜屋顶</i><i>光谱入屋</i><i>线条感</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-beam" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-beam" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-beam" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-negative" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">04</span>
+          <h2>负形光屋</h2>
+          <span class="badge">最强识别</span>
+        </div>
+        <p class="desc">
+          反着来：一团光谱圆盘里挖出一间屋。远看是一枚光斑，近看是一间被光包围、窗里亮着灯的小屋。
+          色彩最饱满，在 Dock 一排图标里最容易跳出来。
+        </p>
+        <div class="tags"><i>负形</i><i>光谱圆盘</i><i>Dock 高识别</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-negative" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-negative" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-negative" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-minimal" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">05</span>
+          <h2>极简光屋</h2>
+          <span class="badge">克制高级</span>
+        </div>
+        <p class="desc">
+          一间纯白小屋，只有门里透出暖光，屋脊一道品牌色边光。彩色退到边缘，主体靠形状和材质说话，
+          更接近 macOS 新一代图标的克制语言。
+        </p>
+        <div class="tags"><i>白色主体</i><i>暖光门洞</i><i>屋脊边光</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-minimal" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-minimal" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-minimal" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <section class="section-head">
+    <div class="eyebrow">Pure Shiguang · 06 — 10</div>
+    <h2 class="section-title">纯粹「拾光」</h2>
+    <p class="section-lead">不借用房子，只讲「拾」这个动作本身：把散落的光拾起来、框住、聚拢、接住。</p>
+  </section>
+
+  <main class="grid">
+    <!-- 06 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-dust" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">06</span>
+          <h2>光尘入怀</h2>
+          <span class="badge">动作直白</span>
+        </div>
+        <p class="desc">
+          四周散落的光尘沿螺旋一点点向内收拢，最后聚成一颗发光的核。没有屋、没有窗，
+          只有「拾」的过程：把零散的光，收进一处。
+        </p>
+        <div class="tags"><i>光尘</i><i>螺旋收拢</i><i>发光核心</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-dust" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-dust" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-dust" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-frame" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">07</span>
+          <h2>取景拾光</h2>
+          <span class="badge">相册语义</span>
+        </div>
+        <p class="desc">
+          四角取景框把一团光框在中间——拾，就是把它选中、留下。几何最干净，
+          与相册、裁剪、收藏的心理模型直接对应。
+        </p>
+        <div class="tags"><i>取景框</i><i>选中</i><i>几何极简</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-frame" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-frame" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-frame" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-spark" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">08</span>
+          <h2>星芒拾光</h2>
+          <span class="badge">最易缩读</span>
+        </div>
+        <p class="desc">
+          四角星芒由光谱渐变构成，暖到冷一次走完。形状极简、开口明确，
+          16pt 时几乎不损失信息，是最稳的一枚「光的符号」。
+        </p>
+        <div class="tags"><i>四角星芒</i><i>光谱渐变</i><i>小尺寸最优</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-spark" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-spark" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-spark" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-funnel" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">09</span>
+          <h2>光瀑收束</h2>
+          <span class="badge">张力最强</span>
+        </div>
+        <p class="desc">
+          五束光谱从顶部倾泻而下，在底部收成一个亮点。不是散开，而是「聚起来」，
+          方向感最强，在大图与发布会场景里最抓眼。
+        </p>
+        <div class="tags"><i>五束光</i><i>向心收束</i><i>强方向感</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-funnel" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-funnel" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-funnel" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10 -->
+    <article class="card">
+      <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#ic-drop" /></svg>
+      <div class="meta">
+        <div class="titlerow">
+          <span class="num">10</span>
+          <h2>光滴涟漪</h2>
+          <span class="badge">最抒情</span>
+        </div>
+        <p class="desc">
+          一滴光落下来，在水面荡开三圈光谱涟漪。拾光变成「接住」——安静、有回响，
+          适合讲记忆与时间的产品叙事。
+        </p>
+        <div class="tags"><i>光滴</i><i>涟漪</i><i>记忆意象</i></div>
+        <div class="sizes">
+          <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#ic-drop" /></svg><figcaption>128</figcaption></figure>
+          <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#ic-drop" /></svg><figcaption>64</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#ic-drop" /></svg><figcaption>32</figcaption></figure>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <section class="lockup">
+    <svg width="104" height="104" viewBox="0 0 1024 1024"><use href="#ic-window" /></svg>
+    <div>
+      <div class="lockup-name grad">拾光屋</div>
+      <div class="lockup-sub">SHIGUANGWU · LUMA</div>
+      <p>把散落的光，收进一间屋。</p>
+    </div>
+  </section>
+
+  <footer>
+    <b>建议：</b>主图标取 01「光屋·窗」——语义最直接、16pt 仍可读、与照片网格同构；若要尽量少动老用户认知，取 02「棱镜屋脊」做渐进改版。<br />
+    <b>若名字仍是「拾光」：</b>纯光方向里 06「光尘入怀」最能讲清「拾」的动作，08「星芒拾光」最扛缩小；09 适合发布会大图，10 适合品牌叙事。<br />
+    <b>落地：</b>选定方向后同步更新 Tools/make_icon.swift 生成 1024 PNG 与 AppIcon.icns，并替换首屏 logo 与 website/assets 下的图标。
+  </footer>
+</div>
+</body>
+</html>

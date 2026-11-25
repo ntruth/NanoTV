@@ -1,0 +1,2786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>拾光 2.0 · 网络电视竞品与体验研究报告</title>
+<style>
+  :root{
+    --bg:#f7f6f3; --panel:#fffdfa; --panel-2:#f1eee8;
+    --ink:#191a1f; --ink-2:#4c4d55; --ink-3:#82838c;
+    --line:rgba(25,26,31,.10); --line-2:rgba(25,26,31,.18);
+    --navy:#141b33; --navy-2:#232c4a;
+    --signal:#d93a46; --signal-soft:#fbe7e8;
+    --wave:#177f9c; --wave-soft:#e2f1f5;
+    --gold:#a9761f; --gold-soft:#f6ecd8;
+    --green:#2b7a55; --green-soft:#e3f1e9;
+    --serif:"Songti SC","Noto Serif SC","Source Han Serif SC",Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    --mono:"SF Mono",ui-monospace,Menlo,monospace;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);font:15px/1.78 var(--sans);
+    background:
+      radial-gradient(1100px 520px at 8% -8%, #fff 0%, transparent 55%),
+      radial-gradient(900px 460px at 100% 0%, #eef2f8 0%, transparent 50%),
+      var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px 90px}
+  ::selection{background:#f4e3c4}
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    margin-top:34px;border-radius:22px;padding:42px 44px 34px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#0e1428 0%,#18224a 52%,#233a6b 100%);
+    color:#fff;box-shadow:0 26px 60px -32px rgba(18,26,54,.55);
+  }
+  header.hero::after{
+    content:"";position:absolute;right:-140px;top:-160px;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(77,214,250,.20),transparent 62%);
+  }
+  header.hero::before{
+    content:"";position:absolute;left:-120px;bottom:-200px;width:460px;height:460px;border-radius:50%;
+    background:radial-gradient(circle,rgba(217,58,70,.22),transparent 62%);
+  }
+  .eyebrow{position:relative;display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8fd8ee;font-weight:700;margin-bottom:16px}
+  .eyebrow::before{content:"";width:28px;height:1px;background:#8fd8ee}
+  h1{position:relative;font-family:var(--serif);font-size:clamp(30px,4vw,46px);line-height:1.2;margin:0 0 14px;letter-spacing:.01em}
+  h1 em{font-style:normal;color:#ffd889}
+  .lede{position:relative;margin:0;max-width:840px;color:#d7ddee;font-size:15.5px}
+  .meta{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .meta span{font-size:11.5px;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);color:#e8ecf8}
+
+  /* ---------- TOC ---------- */
+  nav.toc{position:sticky;top:0;z-index:30;margin:22px 0 0;background:rgba(247,246,243,.88);backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  nav.toc .inner{max-width:1180px;margin:0 auto;padding:9px 28px;display:flex;gap:2px;overflow-x:auto}
+  nav.toc a{flex:0 0 auto;font-size:12px;color:var(--ink-2);text-decoration:none;padding:6px 10px;border-radius:8px;white-space:nowrap}
+  nav.toc a:hover{background:rgba(20,27,51,.07);color:var(--ink)}
+
+  /* ---------- 排版 ---------- */
+  section{padding:52px 0 6px;scroll-margin-top:58px}
+  .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+  h2{font-family:var(--serif);font-size:clamp(24px,2.8vw,33px);line-height:1.28;margin:6px 0 10px;font-weight:700}
+  h2 .num{color:var(--signal);font-family:var(--sans);font-size:13px;letter-spacing:.1em;vertical-align:3px;margin-right:10px}
+  h3{font-size:18px;margin:36px 0 10px;font-weight:650;letter-spacing:.005em}
+  h4{font-size:14.5px;margin:20px 0 7px;font-weight:650}
+  p{margin:0 0 12px;color:var(--ink-2)}
+  ul,ol{margin:0 0 14px;padding-left:22px;color:var(--ink-2)}
+  li{margin:4px 0}
+  strong{color:var(--ink);font-weight:650}
+  code{font-family:var(--mono);font-size:12.2px;background:#eceaf4;border-radius:5px;padding:1px 5px;color:#3a3a55}
+  .sub{font-size:13px;color:var(--ink-3)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px}
+  .sec-note{font-size:12.5px;color:var(--ink-3);max-width:330px;text-align:right;padding-bottom:12px}
+
+  /* ---------- 卡片 ---------- */
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:0 1px 0 #fff inset}
+  .grid{display:grid;gap:14px}
+  .grid > *{min-width:0}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  @media(max-width:940px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:660px){.g2,.g3,.g4{grid-template-columns:1fr}.sec-note{display:none}}
+
+  .kv{display:grid;grid-template-columns:88px 1fr;gap:8px 14px;font-size:13.5px}
+  .kv dt{color:var(--ink-3);font-size:12px;padding-top:2px}
+  .kv dd{margin:0;color:var(--ink-2)}
+
+  .callout{background:linear-gradient(180deg,#f2f7fb,#eef3fa);border:1px solid #d8e5f1;border-radius:12px;padding:15px 17px;font-size:13.5px;color:#23395c;overflow-wrap:anywhere}
+  .callout b{color:#12233f}
+  .warn{background:var(--signal-soft);border:1px solid #f3cdd0;border-radius:12px;padding:15px 17px;font-size:13.5px;color:#7a2730}
+  .okbox{background:var(--green-soft);border:1px solid #cae5d6;border-radius:12px;padding:15px 17px;font-size:13.5px;color:#1d553d}
+
+  /* ---------- 标签 ---------- */
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:1px}
+  .p0{background:var(--signal-soft);color:#a5262f}
+  .p1{background:var(--gold-soft);color:#8a5d10}
+  .p2{background:var(--wave-soft);color:#14657c}
+  .tag{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:6px;background:var(--panel-2);color:var(--ink-3);border:1px solid var(--line)}
+  .tag.a{background:var(--green-soft);color:#1d6848;border-color:#cde6d9}
+  .tag.b{background:var(--gold-soft);color:#8a5d10;border-color:#eddfc2}
+  .tag.c{background:#eeeef4;color:#565a76;border-color:#dcdce7}
+
+  /* ---------- 表格 ---------- */
+  .tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+  th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:#f0f1f7;font-size:11.5px;font-weight:650;color:#3c4054;white-space:nowrap;position:sticky;top:0;z-index:2}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:#fbfaf7}
+  c{display:inline-block;min-width:18px;text-align:center;border-radius:5px;padding:1px 5px;font-size:11px;font-weight:700;font-style:normal}
+  td c{min-width:20px}
+  .y{background:var(--green-soft);color:#1d6848}
+  .m{background:var(--gold-soft);color:#8a5d10}
+  .n{background:#f2eef1;color:#8d7c86}
+  .matrix td:first-child,.matrix th:first-child{position:sticky;left:0;background:var(--panel);z-index:1;min-width:168px}
+  .matrix th:first-child{background:#f0f1f7;z-index:3}
+  .matrix tbody tr:hover td:first-child{background:#fbfaf7}
+  .matrix td,.matrix th{padding:8px 10px;font-size:12.4px}
+
+  /* ---------- 截图 ---------- */
+  figure{margin:18px 0 6px}
+  .shot{background:#0e1220;border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(10,14,28,.7)}
+  .shot img{display:block;width:100%;height:auto}
+  figcaption{font-size:11.5px;color:var(--ink-3);margin-top:8px;line-height:1.6}
+  figcaption b{color:var(--ink-2);font-weight:600}
+  .shots{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 8px;max-width:100%}
+  .shots figure{flex:0 0 auto;margin:0;width:300px;max-width:100%}
+  .shots .shot img{height:520px;width:auto;max-width:100%;object-fit:contain;margin:0 auto}
+  @media(max-width:660px){.shots .shot img{height:420px}}
+  .shot.wide img{max-height:640px;object-fit:contain;background:#0b0f1c}
+  .shotrow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.shotrow{grid-template-columns:1fr}}
+
+  /* ---------- 产品头 ---------- */
+  .prod{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:10px 0 2px}
+  .prod h3{margin:0;font-size:20px}
+  .prod .role{font-size:12px;color:var(--ink-3)}
+
+  /* ---------- 线框图 ---------- */
+  .wf{background:linear-gradient(160deg,#0f1526,#151d33);border:1px solid #26304c;border-radius:12px;padding:12px;color:#dfe5f3;font-size:10px;line-height:1.45;overflow:hidden}
+  .wf .lbl{color:#8fa0c4;font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+  .wf-row{display:flex;gap:8px}
+  .wf-col{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:7px}
+  .wf-item{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:5px;color:#c9d2e6}
+  .wf-item.on{background:rgba(77,214,250,.14);color:#9be6fa}
+  .wf-item .dot{width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,.16);flex:0 0 auto}
+  .wf-item .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-item .no{font-family:var(--mono);font-size:9px;color:#8fa0c4;min-width:14px}
+  .wf-item .s{font-size:7.5px;color:#8296bd}
+  .wf-now{font-size:8.5px;color:#8fa0c4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-bar{height:2px;border-radius:2px;background:rgba(255,255,255,.14);margin-top:3px;overflow:hidden}
+  .wf-bar i{display:block;height:100%;background:#4dd6fa}
+  .wf-preview{background:linear-gradient(135deg,#22304f,#0d1424);border-radius:6px;min-height:96px;position:relative;display:flex;align-items:center;justify-content:center;color:#5f7095;font-size:9px}
+  .wf-grid{display:grid;grid-template-columns:132px repeat(4,1fr);gap:2px}
+  .wf-grid.mini{grid-template-columns:48px repeat(3,1fr)}
+  .wf-cell .no{margin-right:4px;color:#8296bd;font-family:var(--mono);font-size:8px}
+  .wf-cell{background:rgba(255,255,255,.055);border-radius:3px;padding:3px 5px;font-size:8.5px;color:#c6cfe4;min-height:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .wf-cell.head{background:transparent;color:#8296bd;font-family:var(--mono);font-size:8px;display:flex;align-items:center}
+  .wf-cell.ch{background:rgba(255,255,255,.09);display:flex;align-items:center;gap:4px;font-size:8.5px;color:#dbe3f5}
+  .wf-cell.on{background:rgba(77,214,250,.20);color:#b6efff}
+  .wf-cell.hot{background:rgba(217,58,70,.30);color:#ffd3d7}
+  .wf-cell.gold{background:rgba(255,216,137,.20);color:#ffe6b0}
+  .wf-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:9.5px;color:#8fa0c4}
+  .wf-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:0px}
+  .wf-osd{position:relative}
+  .wf-osd .top{display:flex;gap:10px;align-items:flex-start;background:linear-gradient(90deg,rgba(8,12,24,.92),rgba(8,12,24,.55) 62%,transparent);border-radius:8px;padding:10px 12px}
+  .wf-osd .ch-no{font-family:var(--mono);font-size:26px;line-height:1;color:#fff;font-weight:600}
+  .wf-osd .ch-logo{width:46px;height:30px;border-radius:4px;background:#fff;color:#111;font-size:8px;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .wf-osd .meta{display:flex;flex-direction:column;gap:2px}
+  .wf-osd .pg{font-size:13px;color:#fff;font-weight:650}
+  .wf-osd .time{font-size:9px;color:#9fb0d0;font-family:var(--mono)}
+  .wf-osd .badges{display:flex;gap:4px;margin-top:2px}
+  .wf-osd .badges span{font-size:8px;border:1px solid rgba(255,255,255,.28);border-radius:3px;padding:0 4px;color:#dfe7f7}
+  .wf-osd .nxt{font-size:9px;color:#9fb0d0;margin-top:3px}
+  .wf-osd .clock{margin-left:auto;font-family:var(--mono);font-size:10px;color:#c9d5ec}
+  .wf-osd .bottom{margin-top:64px;background:linear-gradient(0deg,rgba(8,12,24,.94),rgba(8,12,24,.45) 70%,transparent);border-radius:8px;padding:10px 12px}
+  .wf-recent{display:flex;gap:6px;margin-bottom:8px}
+  .wf-recent div{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);border-radius:5px;padding:5px 6px;font-size:8px;color:#b9c5dd}
+  .wf-recent div b{display:block;color:#fff;font-family:var(--mono);font-size:10px;margin-bottom:1px}
+  .wf-ctrl{display:flex;gap:8px;align-items:center;color:#a9b7d2;font-size:9px}
+  .wf-ctrl .k{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:4px;background:rgba(255,255,255,.09);font-size:8px;color:#dfe7f7;padding:0 4px}
+  .wf-note{font-size:9.5px;color:#8296bd;margin-top:6px}
+  .wf-tile{background:linear-gradient(150deg,#1b2747,#0d1424);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:6px;min-height:96px}
+  .wf-tile .row{display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#a9b7d2}
+  .wf-tile .lg{height:36px;display:flex;align-items:center;justify-content:center;color:#6e80a6;font-size:8px}
+  .wf-tile .name{font-size:10px;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-tile .line{font-size:8px;color:#8fa0c4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-tile .pill{font-size:7.5px;padding:1px 4px}
+  .wf-tile.hover{outline:1px solid rgba(77,214,250,.6);box-shadow:0 0 0 3px rgba(77,214,250,.10)}
+  .wf-tabs{display:flex;gap:4px;margin-bottom:8px}
+  .wf-tabs span{font-size:8.5px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.07);color:#a9b7d2}
+  .wf-tabs span.on{background:#4dd6fa;color:#08101f;font-weight:700}
+  .wf-hero{height:78px;border-radius:7px;background:linear-gradient(120deg,#2b3f6b,#121a2e);display:flex;align-items:flex-end;padding:8px;font-size:11px;color:#fff;font-weight:650}
+  .wf-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:5px}
+  .wf-cards div{height:34px;border-radius:4px;background:rgba(255,255,255,.08);font-size:8px;color:#b9c5dd;padding:3px}
+
+  /* ---------- 09 界面方案线框 ---------- */
+  .wf-app{display:grid;grid-template-columns:172px 1fr;gap:8px}
+  .wf-side{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:7px;display:flex;flex-direction:column;gap:1px}
+  .wf-side .grp{font-size:7.5px;color:#8296bd;letter-spacing:.08em;padding:5px 6px 2px}
+  .wf-main{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .wf-topbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:6px 8px}
+  .wf-brand{font-size:9px;color:#dfe5f3;font-weight:650}
+  .wf-tabset{display:flex;gap:3px;margin-left:auto}
+  .wf-tabset span{font-size:7.5px;padding:3px 7px;border-radius:999px;color:#a9b7d2;background:rgba(255,255,255,.06);white-space:nowrap}
+  .wf-tabset span.on{background:#4dd6fa;color:#08101f;font-weight:700}
+  .wf-pagehead{display:flex;align-items:center;gap:8px;padding:2px 2px 0}
+  .wf-h1{font-size:12px;color:#fff;font-weight:650}
+  .wf-sub{font-size:8px;color:#8fa0c4}
+  .wf-search{margin-left:auto;font-size:8px;color:#8fa0c4;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:2px 8px;white-space:nowrap}
+  .wf-chips{display:flex;gap:4px;flex-wrap:wrap}
+  .wf-chips span{font-size:8px;padding:2px 7px;border-radius:999px;background:rgba(255,255,255,.07);color:#b9c5dd;white-space:nowrap}
+  .wf-chips span.on{background:rgba(77,214,250,.18);color:#9be6fa;border:1px solid rgba(77,214,250,.35)}
+  .wf-wall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  .wf-poster{background:linear-gradient(150deg,#1b2747,#0d1424);border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:5px;display:flex;flex-direction:column;gap:3px;min-width:0}
+  .wf-poster .ph{height:32px;border-radius:4px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:8px;color:#9fb0d0;position:relative}
+  .wf-poster .no{position:absolute;left:3px;top:2px;font-family:var(--mono);font-size:7px;color:#8fa0c4}
+  .wf-poster .q{position:absolute;right:3px;top:2px;font-size:6.5px;background:rgba(77,214,250,.85);color:#08101f;border-radius:3px;padding:0 3px;font-weight:700}
+  .wf-poster .nm{font-size:8.5px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-poster .pg{font-size:7px;color:#8fa0c4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-listrows{display:flex;flex-direction:column;gap:2px}
+  .wf-listrow{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:4px;background:rgba(255,255,255,.035);font-size:8px;color:#c6cfe4}
+  .wf-listrow.on{background:rgba(77,214,250,.14);color:#b6efff}
+  .wf-listrow .n{font-family:var(--mono);color:#8fa0c4;min-width:18px}
+  .wf-listrow .g{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-listrow .s{font-size:7px;color:#8fa0c4;white-space:nowrap}
+  .wf-signalgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+  .wf-sig{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;overflow:hidden;min-width:0}
+  .wf-sig .frame{height:54px;background:linear-gradient(135deg,#24344f,#0b111d);position:relative;display:flex;align-items:center;justify-content:center;color:#6e80a6;font-size:7px}
+  .wf-sig .frame .dot{position:absolute;right:4px;top:4px;width:5px;height:5px;border-radius:50%;background:#34c759}
+  .wf-sig .frame .dot.warn{background:#ff9f0a}
+  .wf-sig .frame .dot.bad{background:#ff453a}
+  .wf-sig .body{padding:4px 5px;display:flex;flex-direction:column;gap:2px}
+  .wf-sig .t{font-size:8px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-sig .m{font-size:6.8px;color:#8fa0c4;font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-player{position:relative;border-radius:10px;overflow:hidden;background:radial-gradient(120% 90% at 50% 30%,#2a3c60,#070b14 70%);min-height:340px;border:1px solid rgba(255,255,255,.09);display:flex;flex-direction:column}
+  .wf-screenlabel{margin:auto;color:#5f7095;font-size:8px;letter-spacing:.25em}
+  .wf-ptop{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;background:linear-gradient(180deg,rgba(5,8,16,.86),transparent)}
+  .wf-pnum{font-family:var(--mono);font-size:26px;line-height:1;color:#fff;font-weight:600}
+  .wf-plogo{width:42px;height:26px;border-radius:4px;background:#fff;color:#111;font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .wf-pmeta{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .wf-pmeta .name{font-size:11px;color:#fff;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-pmeta .prog{font-size:9px;color:#dfe5f3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-pmeta .line{font-size:7.5px;color:#9fb0d0;font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-pbadges{display:flex;gap:3px;margin-top:2px}
+  .wf-pbadges span{font-size:6.5px;border:1px solid rgba(255,255,255,.25);border-radius:3px;padding:0 3px;color:#dfe7f7}
+  .wf-prail{margin-left:auto;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+  .wf-prail b{font-size:7px;color:#a9b7d2;font-weight:500;white-space:nowrap}
+  .wf-pbottom{margin-top:auto;padding:8px 10px 9px;background:linear-gradient(0deg,rgba(5,8,16,.92),transparent)}
+  .wf-pstrip{display:flex;gap:4px;margin-bottom:6px}
+  .wf-pcard{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);border-radius:4px;padding:3px 4px;font-size:6.5px;color:#b9c5dd;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wf-pcard.on{background:rgba(77,214,250,.18);border-color:rgba(77,214,250,.6);color:#d6f7ff}
+  .wf-pcard b{display:block;font-family:var(--mono);font-size:8px;color:#fff;margin-bottom:1px}
+  .wf-pctrl{display:flex;gap:6px;align-items:center;font-size:7px;color:#a9b7d2;flex-wrap:wrap}
+  .wf-pctrl .k{min-width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,.09);color:#dfe7f7;display:inline-flex;align-items:center;justify-content:center;padding:0 3px;font-size:6.5px}
+  .wf-drawer{position:absolute;right:8px;top:84px;bottom:8px;width:340px;max-width:42%;background:rgba(10,15,28,.94);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px;display:flex;flex-direction:column;gap:3px}
+  .wf-drawer .dh{display:flex;justify-content:space-between;font-size:8px;color:#fff;margin-bottom:2px}
+  .wf-drawer .drow{display:flex;gap:5px;font-size:7px;color:#b9c5dd;padding:3px 4px;border-radius:3px}
+  .wf-drawer .drow.on{background:rgba(77,214,250,.16);color:#b6efff}
+  .wf-drawer .drow .t{font-family:var(--mono);color:#8fa0c4;min-width:34px}
+  .wf-toast{position:absolute;left:50%;top:96px;transform:translateX(-50%);background:rgba(10,15,28,.92);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:4px 10px;font-size:7.5px;color:#dfe7f7;white-space:nowrap}
+  .wf-fail{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64%;background:rgba(10,15,28,.96);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:10px;text-align:center}
+  .wf-fail .h{font-size:10px;color:#fff;font-weight:650;margin-bottom:3px}
+  .wf-fail .p{font-size:7.5px;color:#a9b7d2;margin-bottom:6px;line-height:1.5}
+  .wf-fail .btns{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}
+  .wf-fail .btns span{font-size:7px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.1);color:#dfe7f7}
+  .wf-fail .btns span.pri{background:#4dd6fa;color:#08101f;font-weight:700}
+  @media(max-width:760px){.wf-app{grid-template-columns:1fr}.wf-app .wf-side{display:none}.wf-wall,.wf-signalgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+  /* 浅色线框：同一结构，换成语义色 */
+  .wf.light{background:linear-gradient(160deg,#fbfcff,#f1f4fa);border-color:#e1e5ef;color:#1c2030}
+  .wf.light .lbl{color:#7a7f8c}
+  .wf.light .wf-side,.wf.light .wf-topbar,.wf.light .wf-col{background:#fff;border-color:#e6e9f1}
+  .wf.light .wf-item{color:#3c4252}
+  .wf.light .wf-item.on{background:rgba(47,109,246,.10);color:#1d3f9e}
+  .wf.light .wf-item .dot{background:#dfe3ec}
+  .wf.light .wf-item .s{color:#8a8f9c}
+  .wf.light .wf-brand{color:#141824}
+  .wf.light .wf-tabset span{background:#eef0f6;color:#5b6172}
+  .wf.light .wf-tabset span.on{background:#2f6df6;color:#fff}
+  .wf.light .wf-h1{color:#141824}
+  .wf.light .wf-sub{color:#5B6172}
+  .wf.light .wf-search{border-color:#dfe3ec;color:#5B6172}
+  .wf.light .wf-chips span{background:#eef0f6;color:#4c5264}
+  .wf.light .wf-chips span.on{background:rgba(47,109,246,.12);color:#1d4ed8;border:1px solid rgba(47,109,246,.35)}
+  .wf.light .wf-poster{background:#fff;border-color:#e6e9f1;box-shadow:0 1px 2px rgba(20,24,36,.05)}
+  .wf.light .wf-poster .ph{background:linear-gradient(150deg,#eef2f9,#e3e8f2);color:#5b6172}
+  .wf.light .wf-poster .no{color:#8a8f9c}
+  .wf.light .wf-poster .q{background:#2f6df6;color:#fff}
+  .wf.light .wf-poster .nm{color:#1c2030}
+  .wf.light .wf-poster .pg{color:#5B6172}
+  .wf.light .wf-listrow{background:#f1f3f8;color:#3c4252}
+  .wf.light .wf-listrow.on{background:rgba(47,109,246,.12);color:#1d3f9e}
+  .wf.light .wf-listrow .n{color:#5B6172}
+  .wf.light .wf-listrow .s{color:#5B6172}
+  .wf.light .wf-sig{background:#fff;border-color:#e6e9f1}
+  .wf.light .wf-sig .frame{background:linear-gradient(135deg,#e8edf7,#dde4f0);color:#6b7280}
+  .wf.light .wf-sig .t{color:#1c2030}
+  .wf.light .wf-sig .m{color:#5B6172}
+  .wf.light .wf-cell{background:#eef1f7;color:#3c4252}
+  .wf.light .wf-cell.head{background:transparent;color:#5B6172}
+  .wf.light .wf-cell.ch{background:#e3e8f2;color:#1c2030}
+  .wf.light .wf-cell.on{background:rgba(47,109,246,.16);color:#1d3f9e}
+  .wf.light .wf-cell.hot{background:rgba(217,45,58,.14);color:#a5262f}
+  .wf.light .wf-cell.gold{background:rgba(169,118,31,.16);color:#7a5310}
+  .wf.light .wf-legend,.wf.light .wf-note{color:#5B6172}
+  .wf.light .wf-tile{background:#fff;border-color:#e6e9f1}
+
+  /* 时移「时间河」 */
+  .time-river{margin-top:10px;border-top:1px solid rgba(255,255,255,.10);background:linear-gradient(180deg,rgba(8,12,24,.45),rgba(8,12,24,.94));padding:9px 12px 10px}
+  .tr-head{display:flex;align-items:center;gap:8px;font-size:7.5px;color:#a9b7d2;margin-bottom:6px}
+  .tr-head b{font-size:9px;color:#fff;font-weight:650}
+  .tr-head .lag{color:#ffb26b;font-family:var(--mono)}
+  .tr-head .ret{margin-left:auto;font-size:7px;padding:2px 8px;border-radius:999px;background:rgba(217,58,70,.20);border:1px solid rgba(255,90,99,.55);color:#ffc2c6;white-space:nowrap}
+  .tr-frames{display:flex;gap:4px;margin-bottom:5px}
+  .tr-frame{flex:1;height:30px;border-radius:3px;background:linear-gradient(135deg,#2a3a57,#0c1220);border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden;color:#7f90b4;font-size:6px;display:flex;align-items:flex-end;padding:2px 3px}
+  .tr-frame.on{border-color:rgba(77,214,250,.75);box-shadow:0 0 0 2px rgba(77,214,250,.14)}
+  .tr-frame.past{opacity:.55;filter:saturate(.6)}
+  .tr-rail{position:relative;height:8px;border-radius:4px;background:rgba(255,255,255,.08);margin-top:30px}
+  .tr-rail .past{position:absolute;left:0;width:62%;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,rgba(255,216,137,.10),rgba(255,216,137,.38))}
+  .tr-rail .tr-gap{position:absolute;left:62%;right:0;top:0;bottom:0;border-radius:0 4px 4px 0;background:repeating-linear-gradient(90deg,rgba(217,58,70,.28) 0 3px,transparent 3px 7px)}
+  .tr-rail .now{position:absolute;right:0;top:-3px;bottom:-3px;width:2px;background:#ff5a63;box-shadow:0 0 8px rgba(255,90,99,.7)}
+  .tr-shuttle{position:absolute;left:62%;top:-8px;width:2px;height:20px;background:#4dd6fa;box-shadow:0 0 8px rgba(77,214,250,.7);transform:translateX(-50%)}
+  .tr-shuttle i{position:absolute;left:50%;top:-5px;width:7px;height:7px;background:#4dd6fa;transform:translateX(-50%) rotate(45deg);border-radius:1px}
+  .tr-shuttle b{position:absolute;left:50%;top:-17px;transform:translateX(-50%);font-family:var(--mono);font-size:6.5px;color:#b6efff;white-space:nowrap}
+  .tr-scale{display:flex;justify-content:space-between;margin-top:4px;font-family:var(--mono);font-size:6.5px;color:#8296bd}
+  .tr-note{font-size:6.5px;color:#8296bd;margin-top:4px}
+  @keyframes trGap{from{background-position:0 0}to{background-position:8px 0}}
+  @keyframes trNow{0%,100%{opacity:.6}50%{opacity:1}}
+  @keyframes trShuttle{0%,100%{box-shadow:0 0 6px rgba(77,214,250,.5)}50%{box-shadow:0 0 14px rgba(77,214,250,.95)}}
+  @keyframes portalSpin{to{transform:rotate(360deg)}}
+  @keyframes vaultSpin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+  .tr-rail .tr-gap{animation:trGap 1.1s linear infinite}
+  .tr-rail .now{animation:trNow 1.6s ease-in-out infinite}
+  .tr-shuttle{animation:trShuttle 2s ease-in-out infinite}
+  .tportal::after{animation:portalSpin 18s linear infinite}
+
+  /* 回看「七日隧道」 */
+  .tunnel{position:relative;height:200px;border-radius:9px;overflow:hidden;background:radial-gradient(70% 120% at 78% 50%,rgba(77,214,250,.16),transparent 62%),#0a101c;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:flex-end;padding:14px 70px 14px 16px}
+  .tday{position:relative;flex:0 0 92px;height:150px;margin-left:-14px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(160deg,#1b2744,#0b111d);box-shadow:0 18px 30px -20px #000;padding:10px 9px;color:#cfd8ec;transform:perspective(700px) rotateY(-22deg);opacity:.34;display:flex;flex-direction:column}
+  .tday.d1{margin-left:0;opacity:.34}
+  .tday.d2{opacity:.5}
+  .tday.d3{opacity:.68}
+  .tday.near{flex:0 0 132px;height:164px;opacity:1;transform:perspective(700px) rotateY(0) scale(1.02);border-color:rgba(77,214,250,.7);box-shadow:0 0 0 2px rgba(77,214,250,.18),0 24px 50px -24px rgba(77,214,250,.5);margin-left:-6px}
+  .tday .dw{font-size:8px;color:#8fa0c4}
+  .tday .dd{font-size:22px;font-family:var(--mono);color:#fff;margin-top:2px}
+  .tday .dm{font-size:7px;color:#8fa0c4;margin-top:2px}
+  .tday .dp{margin-top:auto;font-size:7px;color:#8fa0c4}
+  .tday.near .dw{color:#9be6fa}
+  .tday.near .dd{color:#fff}
+  .tportal{position:absolute;right:42px;top:50%;width:188px;height:188px;border-radius:50%;border:1px solid rgba(77,214,250,.35);transform:translateY(-50%);box-shadow:0 0 40px rgba(77,214,250,.18) inset;pointer-events:none}
+  .tportal::after{content:"";position:absolute;inset:12px;border-radius:50%;border:1px dashed rgba(77,214,250,.25)}
+  .tunnel-list{display:flex;flex-direction:column;gap:3px;margin-top:6px}
+  .time-coord{display:flex;gap:6px;align-items:center;font-size:7px;color:#8fa0c4;margin-bottom:6px;flex-wrap:wrap}
+  .time-coord b{color:#dfe5f3;font-weight:600}
+  .time-coord .arr{color:#5f7095}
+  .time-capsule{display:flex;gap:6px;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:5px;padding:4px 6px;font-size:7.5px;color:#c6cfe4}
+  .time-capsule.on{background:rgba(255,216,137,.10);border-color:rgba(255,216,137,.35)}
+  .time-capsule .t{font-family:var(--mono);color:#8fa0c4;min-width:32px}
+  .time-capsule .g{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .time-capsule .r{font-size:6.5px;color:#0a101c;background:#ffd889;border-radius:3px;padding:1px 4px;font-weight:700}
+  @media (prefers-reduced-motion: reduce){
+    .tr-rail .tr-gap,.tr-rail .now,.tr-shuttle,.tportal::after{animation:none}
+  }
+
+  /* 9.12 高级拟物：时间仪器 */
+  .material-board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:12px 0 4px}
+  .mat{height:96px;border-radius:11px;border:1px solid rgba(255,255,255,.13);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:9px;color:#f2e6cf;font-size:9px;letter-spacing:.08em;box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 14px 28px -20px #000}
+  .mat::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.10),transparent 40%,rgba(0,0,0,.28));pointer-events:none}
+  .mat span{position:relative;z-index:1;text-shadow:0 1px 2px rgba(0,0,0,.55)}
+  .mat.brass{background:linear-gradient(135deg,#3a2a16,#c9a46a 42%,#f4dfb4 52%,#8a6234 78%,#3a2a16)}
+  .mat.glass{background:linear-gradient(135deg,rgba(46,60,84,.95),rgba(8,12,18,.96));backdrop-filter:blur(4px)}
+  .mat.obsidian{background:linear-gradient(135deg,#161b24,#04060a)}
+  .mat.film{background:repeating-linear-gradient(90deg,#1a2029 0 7px,#090c12 7px 14px)}
+  .mat.light{background:radial-gradient(circle at 30% 18%,#ffe0b0,#c46a32 38%,#2a120a 78%)}
+  @media(max-width:760px){.material-board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+  .concept-board{position:relative;background:#05070b;border:1px solid rgba(201,164,106,.24);border-radius:18px;padding:18px;box-shadow:0 44px 90px -54px #000,inset 0 1px 0 rgba(255,255,255,.08);overflow:hidden;margin:14px 0 8px}
+  .concept-board::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 18% 0%,rgba(255,184,107,.10),transparent 58%),radial-gradient(50% 50% at 92% 100%,rgba(143,216,238,.08),transparent 60%);pointer-events:none}
+  .concept-board::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.04) .5px,transparent .6px);background-size:3px 3px;opacity:.22;mix-blend-mode:overlay;pointer-events:none}
+  .cb-stage{position:relative;z-index:1;border-radius:14px;background:linear-gradient(180deg,#0d121c,#070a0f);border:1px solid rgba(201,164,106,.16);padding:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 24px 54px -34px #000;overflow:hidden}
+  .cb-top{display:flex;gap:12px;align-items:flex-start}
+  .cb-num{font-family:var(--serif);font-size:42px;line-height:1;background:linear-gradient(180deg,#fff8e8,#c9a46a 55%,#7a5528);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 10px rgba(255,210,150,.25))}
+  .cb-logo{width:58px;height:34px;border-radius:5px;background:linear-gradient(180deg,#fff,#e6dfd0);color:#111;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(0,0,0,.55),inset 0 1px 0 #fff}
+  .cb-meta{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .cb-name{font-family:var(--serif);font-size:16px;color:#f4e9d4;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cb-live{color:#ffd889;font-size:9px;letter-spacing:.08em}
+  .cb-prog{font-size:10px;color:#cfc2a8}
+  .cb-line{font-family:var(--mono);font-size:8px;color:#8f8168;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cb-line i{color:#5e5545;font-style:normal;margin:0 4px}
+  .cb-right{margin-left:auto;display:flex;align-items:center;gap:6px}
+  .cb-return{display:inline-flex;align-items:center;gap:6px;font-size:9px;color:#ffd7b0;background:linear-gradient(180deg,rgba(90,40,30,.92),rgba(40,16,14,.92));border:1px solid rgba(255,120,90,.35);border-radius:999px;padding:4px 10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 4px 14px rgba(0,0,0,.4);white-space:nowrap}
+  .cb-return i{width:6px;height:6px;border-radius:50%;background:#ff3b47;box-shadow:0 0 10px #ff3b47}
+  .cb-key{font-family:var(--mono);font-size:8px;color:#8f8168;border:1px solid rgba(201,164,106,.25);border-radius:4px;padding:2px 5px}
+  .cb-screen{position:relative;height:150px;margin:12px 0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:radial-gradient(90% 130% at 72% 12%,rgba(80,120,180,.30),transparent 58%),linear-gradient(155deg,#121a2a,#06080d);overflow:hidden;display:flex;align-items:center;justify-content:center;color:#5e6d8a;font-size:8px;letter-spacing:.2em}
+  .cb-screen::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,220,170,.06) 45%,transparent 58%)}
+  .cb-screen::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 50% 50%,transparent 40%,rgba(0,0,0,.55))}
+  .cb-screen span{position:relative;z-index:1}
+  .cb-console{position:relative;border-top:1px solid rgba(201,164,106,.22);padding-top:12px}
+  .cb-head{display:flex;align-items:flex-end;gap:10px;margin-bottom:10px}
+  .cb-title{font-family:var(--serif);font-size:17px;color:#f4e9d4;letter-spacing:.06em}
+  .cb-sub{font-size:7px;color:#7f7258;letter-spacing:.22em;text-transform:uppercase;margin-top:1px}
+  .cb-gauge{margin-left:auto;display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9px;color:#ffb86b}
+  .cb-gauge span{font-size:7px;letter-spacing:.16em;color:#8f8168}
+  .cb-gauge b{font-weight:500}
+  .cb-gauge i{width:46px;height:4px;border-radius:2px;background:linear-gradient(90deg,#ffb86b,#ff3b47);box-shadow:0 0 12px rgba(255,59,71,.35)}
+  .filmstrip{position:relative;padding:13px 8px;border-radius:9px;background:#04060a;border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 3px 14px #000,0 16px 30px -24px #000;transform:perspective(1000px) rotateX(2deg)}
+  .filmstrip::before,.filmstrip::after{content:"";position:absolute;left:8px;right:8px;height:6px;background-image:radial-gradient(circle at 5px 3px,#2a3140 0 2.6px,transparent 2.8px);background-size:14px 6px;background-repeat:repeat-x}
+  .filmstrip::before{top:3px}
+  .filmstrip::after{bottom:3px}
+  .film-frames{display:flex;gap:5px}
+  .film-frame{flex:1;height:62px;border-radius:3px;background:linear-gradient(150deg,#2a3a54,#0a0e16);border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 0 0 1px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:4px 5px;font-family:var(--mono);font-size:7px;color:#98a8c4}
+  .film-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.10),transparent 28%,rgba(0,0,0,.38));pointer-events:none}
+  .film-frame.past{filter:saturate(.55);opacity:.75}
+  .film-frame.on{border-color:rgba(143,216,238,.8);box-shadow:0 0 0 1px rgba(143,216,238,.25),0 0 20px rgba(143,216,238,.18)}
+  .film-frame.live{border-color:rgba(255,59,71,.55);color:#ffb3b8}
+  .premium-rail{position:relative;height:16px;margin-top:32px;border-radius:8px;background:linear-gradient(180deg,#1a202b,#080b11);box-shadow:inset 0 2px 6px #000,0 1px 0 rgba(255,255,255,.05)}
+  .premium-rail .amber{position:absolute;left:0;width:62%;top:2px;bottom:2px;border-radius:6px;background:linear-gradient(90deg,rgba(255,184,107,.08),rgba(255,184,107,.58));box-shadow:0 0 16px rgba(255,184,107,.30)}
+  .premium-rail .lag{position:absolute;left:62%;right:0;top:2px;bottom:2px;border-radius:0 6px 6px 0;background:repeating-linear-gradient(90deg,rgba(255,59,71,.40) 0 4px,transparent 4px 9px);animation:trGap 1.1s linear infinite}
+  .premium-rail .live{position:absolute;right:0;top:-4px;bottom:-4px;width:2px;background:#ff3b47;box-shadow:0 0 10px #ff3b47,0 0 26px rgba(255,59,71,.55);animation:trNow 1.6s ease-in-out infinite}
+  .shuttle{position:absolute;left:62%;top:-15px;width:30px;height:40px;transform:translateX(-50%);border-radius:6px;background:linear-gradient(90deg,#4a3119,#e8c684 30%,#b07f42 58%,#4a3119);border:1px solid rgba(255,230,180,.35);box-shadow:0 7px 18px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.55);animation:trShuttle 2.4s ease-in-out infinite}
+  .shuttle::before{content:"";position:absolute;inset:6px 7px;border-radius:3px;background:repeating-linear-gradient(90deg,rgba(0,0,0,.25) 0 1px,transparent 1px 3px);opacity:.55}
+  .shuttle::after{content:"";position:absolute;left:50%;bottom:-9px;width:2px;height:12px;background:#8fd8ee;box-shadow:0 0 10px #8fd8ee;transform:translateX(-50%)}
+  .shuttle-label{position:absolute;left:62%;top:-30px;transform:translateX(-50%);font-family:var(--mono);font-size:8px;color:#bdefff;text-shadow:0 0 10px rgba(143,216,238,.6);white-space:nowrap}
+  .cb-scale{display:flex;justify-content:space-between;margin-top:8px;font-family:var(--mono);font-size:7px;letter-spacing:.08em;color:#7f7258}
+
+  .vault-stage{position:relative;height:390px;border-radius:14px;overflow:hidden;background:radial-gradient(60% 80% at 70% 42%,rgba(255,184,107,.10),transparent 62%),radial-gradient(50% 60% at 18% 18%,rgba(143,216,238,.08),transparent 60%),#05070b;border:1px solid rgba(201,164,106,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 -60px 120px rgba(0,0,0,.7)}
+  .vault-shaft{position:absolute;inset:-30%;background:linear-gradient(105deg,transparent 28%,rgba(255,205,150,.10) 38%,transparent 50%),linear-gradient(75deg,transparent 58%,rgba(143,216,238,.07) 70%,transparent 82%);filter:blur(8px)}
+  .vault-ring{position:absolute;left:58%;top:55%;width:340px;height:340px;transform:translate(-50%,-50%);border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(201,164,106,.55) 0deg .7deg,transparent .7deg 6deg);-webkit-mask:radial-gradient(circle,transparent 57%,#000 58% 62%,transparent 63%);mask:radial-gradient(circle,transparent 57%,#000 58% 62%,transparent 63%);opacity:.7;animation:vaultSpin 28s linear infinite}
+  .vault-arch{position:absolute;left:50%;top:55%;width:230px;height:300px;transform:translate(-50%,-50%) scale(var(--s,1));border-radius:50% 50% 8px 8px / 34% 34% 0 0;border:1px solid rgba(201,164,106,.32);background:linear-gradient(180deg,rgba(30,38,54,.90),rgba(7,10,15,.95));box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -40px 70px rgba(0,0,0,.65),0 30px 60px -30px #000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:.28;z-index:1}
+  .vault-arch.a1{left:36%;top:48%;--s:.56;opacity:.24;z-index:1}
+  .vault-arch.a2{left:42%;top:50%;--s:.70;opacity:.40;z-index:2}
+  .vault-arch.a3{left:48%;top:52%;--s:.85;opacity:.62;z-index:3}
+  .vault-arch.near{left:58%;top:55%;--s:1;opacity:1;z-index:4;border-color:rgba(201,164,106,.60);background:linear-gradient(180deg,rgba(44,52,66,.94),rgba(9,12,17,.98));box-shadow:inset 0 1px 0 rgba(255,255,255,.20),inset 0 -50px 80px rgba(0,0,0,.60),0 0 70px rgba(255,184,107,.12),0 40px 80px -40px #000}
+  .va-day{font-size:9px;letter-spacing:.18em;color:#a99572;text-transform:uppercase}
+  .va-date{font-family:var(--serif);font-size:58px;line-height:1;background:linear-gradient(180deg,#fff6e3,#d8b77f 55%,#8a6234);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px rgba(255,210,150,.2))}
+  .va-sub{font-size:8px;color:#8f8168}
+  .vault-arch.near .va-day{color:#d8b77f}
+  .vault-arch.near .va-date{font-size:70px}
+  .vault-arch.near .va-sub{color:#c9b18a}
+  .vault-plaque{position:absolute;left:16px;top:14px;z-index:6;display:flex;gap:8px;align-items:center;font-family:var(--mono);font-size:8px;color:#c9b18a;background:rgba(12,16,24,.72);border:1px solid rgba(201,164,106,.22);border-radius:6px;padding:5px 8px;backdrop-filter:blur(8px)}
+  .vault-plaque i{color:#6b5c45;font-style:normal}
+  .vault-list{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+  .vault-capsule{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:9px;background:linear-gradient(180deg,rgba(24,31,44,.88),rgba(8,11,17,.92));border:1px solid rgba(201,164,106,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+  .vault-capsule.on{border-color:rgba(255,184,107,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 0 20px rgba(255,184,107,.06)}
+  .vc-thumb{width:46px;height:27px;border-radius:3px;background:linear-gradient(135deg,#2b3a54,#0a0e16);border:1px solid rgba(255,255,255,.10);flex:0 0 auto}
+  .vc-time{font-family:var(--mono);font-size:9px;color:#c9a46a;min-width:34px}
+  .vc-title{flex:1;min-width:0;font-size:10px;color:#e8dcc4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vc-dur{font-size:8px;color:#8f8168}
+  .vc-seal{font-size:8px;font-weight:700;color:#1a1206;background:linear-gradient(180deg,#f0d49a,#c9a46a);border-radius:3px;padding:2px 6px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+  @media(max-width:760px){
+    .concept-board{padding:12px}
+    .cb-num{font-size:32px}
+    .cb-screen{height:110px}
+    .vault-stage{height:340px}
+    .vault-arch{width:180px;height:240px}
+    .vault-arch.near .va-date{font-size:56px}
+    .vault-ring{width:300px;height:300px}
+  }
+  @media(max-width:480px){
+    .vault-arch.near{left:52%}
+    .vault-ring{left:52%;width:260px;height:260px}
+    .vault-arch.a1{left:30%}
+    .vault-arch.a2{left:36%}
+    .vault-arch.a3{left:44%}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .premium-rail .lag,.premium-rail .live,.shuttle,.vault-ring{animation:none}
+  }
+
+  /* ---------- 对比块 ---------- */
+  .versus{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:700px){.versus{grid-template-columns:1fr}}
+  .versus .bad,.versus .good{border-radius:12px;padding:14px 16px;font-size:13px;border:1px solid}
+  .versus .bad{background:#fbf1f2;border-color:#f0d3d6}
+  .versus .good{background:#eef7f2;border-color:#cfe6d9}
+  .versus h5{margin:0 0 6px;font-size:12.5px;letter-spacing:.02em}
+  .versus .bad h5{color:#a5262f}
+  .versus .good h5{color:#1d6848}
+
+  /* ---------- 其它 ---------- */
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0 0 14px}
+  .steps li{counter-increment:s;position:relative;padding-left:34px;margin:9px 0;color:var(--ink-2);font-size:13.5px}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;font-family:var(--mono)}
+  .gap{border-left:3px solid var(--line-2);padding:2px 0 2px 16px;margin:22px 0}
+  .gap.p0{border-left-color:var(--signal)}
+  .gap.p1{border-left-color:#c99a3e}
+  .gap.p2{border-left-color:#5aa7bd}
+  .gap h4{margin:0 0 6px;font-size:15.5px}
+  .gap .why{font-size:13px;color:var(--ink-2)}
+  .spec{display:grid;grid-template-columns:96px 1fr;gap:6px 14px;font-size:13px;margin-top:10px}
+  .spec dt{color:var(--ink-3);font-size:11.5px;letter-spacing:.03em;padding-top:2px}
+  .spec dd{margin:0;color:var(--ink-2)}
+  .road{display:grid;gap:14px}
+  .road .item{display:grid;grid-template-columns:132px 1fr;gap:18px;padding:16px 0;border-bottom:1px dashed var(--line-2)}
+  .road .item:last-child{border-bottom:none}
+  .road .stage{font-family:var(--mono);font-size:11px;color:var(--signal);letter-spacing:.06em;line-height:1.7}
+  .road .stage b{display:block;font-family:var(--serif);font-size:15px;color:var(--ink);letter-spacing:0}
+  .road .body{font-size:13.3px;color:var(--ink-2)}
+  .road .body b{color:var(--ink)}
+  .road .accept{font-size:12px;color:var(--green);margin-top:6px}
+  .src{font-size:12px;color:var(--ink-3)}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-3);text-align:center;line-height:1.8}
+  .toc-note{font-size:12px;color:var(--ink-3)}
+  hr.soft{border:none;border-top:1px dashed var(--line-2);margin:34px 0}
+  .lead{font-size:15.2px;color:var(--ink-2);max-width:860px}
+  .small{font-size:12.3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Competitive &amp; UX Research · IPTV</div>
+  <h1>拾光 2.0 · 网络电视<br><em>竞品与体验研究报告</em></h1>
+  <p class="lede">把 14 个网络电视 / 直播产品拆到「信息架构、首屏任务、EPG、播放 OSD、失败恢复、源管理、视觉语言」七个层面，回答三个问题：用户为什么留在一个直播产品里、我们现在的骨架差在哪、接下来按什么顺序补。</p>
+  <div class="meta">
+    <span>2026-11-23</span>
+    <span>22 个产品 · 13 个产品 23 张界面图</span>
+    <span>桌面端 / 电视端 / 手机端 / 运营商盒子</span>
+    <span>附：五 Tab / 播放器 / 时间概念</span>
+    <span>2026-11-23 更新：三个硬缺口已落地</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="inner">
+    <a href="#s0">阅读指南</a>
+    <a href="#s1">01 市场地图</a>
+    <a href="#s2">02 我们的基线</a>
+    <a href="#s3">03 产品深读</a>
+    <a href="#s3b">03+ 国内样本</a>
+    <a href="#s4">04 设计专题</a>
+    <a href="#s5">05 任务走查</a>
+    <a href="#s6">06 能力矩阵</a>
+    <a href="#s7">07 差距与规格</a>
+    <a href="#s8">08 路线图</a>
+    <a href="#s9">09 界面方案</a>
+    <a href="#s10">10 附录</a>
+  </div>
+</nav>
+
+<!-- ================= 00 ================= -->
+<section id="s0">
+  <div class="kicker">Read me first</div>
+  <h2><span class="num">00</span>阅读指南</h2>
+  <p class="lead">这份报告不是功能勾选表，而是一份「界面证据 + 交互拆解 + 落地规格」的研究。所有判断都尽量落在可见的界面元素或可验证的代码行为上。</p>
+
+  <div class="grid g3" style="margin-top:20px">
+    <div class="panel">
+      <h4 style="margin-top:0">四个研究问题</h4>
+      <ol class="small" style="margin-bottom:0">
+        <li>直播产品的首屏到底应该先解决什么？</li>
+        <li>EPG（节目单）在界面里以什么形态出现才不碍事？</li>
+        <li>一条流挂掉时，产品如何让用户「无感」？</li>
+        <li>源管理要做到多深，普通用户才不会被劝退？</li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">证据等级</h4>
+      <dl class="kv" style="grid-template-columns:52px 1fr">
+        <dt><span class="tag a">A</span></dt><dd>官方商店 / 官网原始截图，可直接观察布局与视觉。</dd>
+        <dt><span class="tag b">B</span></dt><dd>公开评测截图，版本较旧，用于观察结构而非像素。</dd>
+        <dt><span class="tag c">C</span></dt><dd>无可靠截图，按公开资料做结构还原，已明确标注。</dd>
+      </dl>
+      <p class="src" style="margin:8px 0 0">标 C 的部分不声称是真实截图。</p>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">样本与局限</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>Android TV 商店在本机网络不可达，TiviMate / OTT Navigator / Perfect Player 使用公开评测图或结构还原。</li>
+        <li>国内 TV 应用没有可访问的官方商店详情页，火星 / 小薇 / 央视频 TV 使用下载站公开截图（B），HDP / 星火 / 咪咕 TV 使用公开资料做结构还原（C）。</li>
+        <li>界面随版本变化，本报告关注结构、层级、信息密度，不做像素级还原。</li>
+        <li>截图仅用于内部竞品研究，来源逐张标注。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>结论先行</h3>
+  <div class="grid g3">
+    <div class="callout"><b>1. 我们的骨架不弱，弱在「直播语义」。</b><br>多源、去重、检测队列、中文分组已经比通用播放器完整；研究时频道卡片只回答「这是什么台」。现在卡片、OSD 与节目单都补上了「现在在播什么、接下来是什么」。</div>
+    <div class="callout"><b>2. 直播产品的体验分水岭是「失败之后」。</b><br>TiviMate / Smarters / OTT Navigator 都把同频道多条线路作为默认能力；研究时我们只保留一条最优线路，源一挂就是死路。现在已改为 1 主 + 3 备、失败自动顺延。</div>
+    <div class="callout"><b>3. 首页不是越像电视越好，而是越少切换越好。</b><br>竞品的共同做法是把「分组、频道、节目」压进同一个视野。研究时我们的海报墙适合浏览但缺少扫台密度；现在已有海报墙 / 紧凑列表双密度，搜索同时匹配节目名。</div>
+  </div>
+
+  <div class="okbox" style="margin-top:14px">
+    <b>2026-11-23 更新：</b>上面三条是研究时的结论，现在已按第 09 节的方案落地。节目单（XMLTV / Now &amp; Next / 时间轴 / 时间环）、多线路与失败自动顺延、收藏 / 最近 / 频道号 / 播放器频道带、回看与时间河、七日隧道、信号截帧与 24 小时可用率、创意功能池 9 项都已进入实际代码；能力矩阵第 06 节与实现状态第 9.14 节按当前实现标注。仍然没做的集中在<b>生态（Xtream 账号、后台定时巡检与告警推送）</b>与<b>客厅增强（录制、家长锁、投屏）</b>。
+  </div>
+</section>
+
+<!-- ================= 01 ================= -->
+<section id="s1">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Landscape</div>
+      <h2><span class="num">01</span>市场地图：四种形态，四种用户预期</h2>
+    </div>
+    <div class="sec-note">形态决定信息架构，信息架构决定我们该抄哪一部分。</div>
+  </div>
+
+  <div class="tw" style="margin-top:18px">
+    <table>
+      <thead>
+        <tr><th>形态</th><th>代表产品</th><th>主场景</th><th>用户预期</th><th>变现</th><th>核心壁垒</th><th>对我们的意义</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>客厅专业播放器</b></td>
+          <td>TiviMate、OTT Navigator、Perfect Player、GSE</td>
+          <td>Android TV / 盒子，遥控器</td>
+          <td>换台快、节目单准、失败能自愈</td>
+          <td>买断 / 年费解锁</td>
+          <td>EPG 与遥控器交互的细节积累</td>
+          <td>EPG、Now/Next、备用线路的主要参照</td>
+        </tr>
+        <tr>
+          <td><b>内容门户型播放器</b></td>
+          <td>IPTV Smarters、IPTVX、iPlayTV</td>
+          <td>手机 / 平板 / Apple TV</td>
+          <td>一个账号看直播 + 点播，能投屏</td>
+          <td>订阅 / 账号分发</td>
+          <td>账号接入门槛低、内容统一搜索</td>
+          <td>统一搜索、收藏与「最近」的入口设计</td>
+        </tr>
+        <tr>
+          <td><b>媒体服务器 Live TV</b></td>
+          <td>Channels DVR、Plex、Jellyfin、Kodi PVR</td>
+          <td>家庭服务器 + 多端</td>
+          <td>录制、回看、多用户、跨设备续看</td>
+          <td>订阅 / 开源</td>
+          <td>服务端 EPG、录制与转码</td>
+          <td>Guide 网格、节目为中心的内容组织</td>
+        </tr>
+        <tr>
+          <td><b>国内直播 / 运营商</b></td>
+          <td>电视家（已停服）、电信 / 移动 / 联通机顶盒</td>
+          <td>客厅电视，老人小孩</td>
+          <td>频道号直达、上下换台、7 天回看</td>
+          <td>宽带捆绑 / 广告</td>
+          <td>合规源、回看与 EPG 的稳定性</td>
+          <td>宫格 + 数字键 + 多线路无感切换</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="panel">
+      <h4 style="margin-top:0">一个关键分野：内容优先 vs 频道优先</h4>
+      <p class="small" style="margin-bottom:8px"><b>内容优先</b>（Smarters / IPTVX / Plex）：首屏是海报、剧集、推荐，直播只是其中一个 tab。用户先想「看什么」，再想「哪个台」。</p>
+      <p class="small" style="margin-bottom:0"><b>频道优先</b>（TiviMate / 运营商盒子）：首屏就是台列表或节目单。用户先想「看哪个台」，节目是附属信息。</p>
+      <p class="small" style="margin-top:10px;margin-bottom:0">我们是<b>频道优先 + 媒体库统一</b>的组合。这条路线更接近 TiviMate / iPlayTV，而不是 Smarters。因此 EPG 与换台效率的优先级高于推荐流。</p>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">我们不该抄的三件事</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>广告式门户</b>：大色块 + 运营位会稀释「工具感」，与拾光的本地媒体库气质冲突。</li>
+        <li><b>无限可配置</b>：OTT Navigator 的设置密度是给自建源玩家的，普通用户会被劝退。</li>
+        <li><b>自建录制服务</b>：存储、版权、长任务治理成本远高于收益，至少不是现在。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 ================= -->
+<section id="s2">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Baseline</div>
+      <h2><span class="num">02</span>我们的基线：代码里到底有什么</h2>
+    </div>
+    <div class="sec-note">这一节不是自夸，是把已有能力钉死，避免把「已做过」误判成差距。</div>
+  </div>
+
+  <h3>2.1 数据管线：从 M3U 到一张频道卡</h3>
+  <p class="src" style="margin:0 0 10px">基线快照：本节记录的是补 EPG / 备用线路<b>之前</b>的代码状态，用于说明差距从哪里来；当前实现与能力状态见 <a href="#s9">9.13 / 9.14</a>。</p>
+  <p>一条 M3U 进来后，经历四步：解析属性、清洗台名、按频道去重择优、按源缓存并合并排序。关键实现集中在 <a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/LumaContentCore/IPTV/M3U.swift">M3U.swift</a> 与 <a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Store/IPTVBrowserModel.swift">IPTVBrowserModel.swift</a>。</p>
+
+  <div class="grid g2">
+    <div class="panel">
+      <h4 style="margin-top:0">去重与选线评分</h4>
+      <p class="small">去重键优先用 <code>tvg-id</code>（截断 <code>@</code> 后的画质后缀），否则用清洗后的台名。同一频道只保留分数最高的一条：</p>
+      <div class="tw" style="border:none">
+        <table style="min-width:0">
+          <thead><tr><th>因子</th><th>分值</th><th>意图</th></tr></thead>
+          <tbody>
+            <tr><td>画质 1080 / 720 / 2160</td><td>+ 数字本身</td><td>画质优先</td></tr>
+            <tr><td>HTTPS</td><td>+10</td><td>减少明文与混合内容问题</td></tr>
+            <tr><td>HLS（.m3u8）</td><td>+6</td><td>直播容错与自适应更好</td></tr>
+            <tr><td><code>[Not 24/7]</code></td><td>−3</td><td>非全天候流不稳定</td></tr>
+            <tr><td><code>[Geo-blocked]</code></td><td>−4</td><td>大概率播不了</td></tr>
+            <tr><td>分组为 <code>undefined</code></td><td>−1</td><td>源质量差的信号</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src" style="margin:8px 0 0">副作用（当时）：评分只用于「挑一条」，其余候选被直接丢弃 —— 这正是后来补备用线路的起点。现在候选线路会作为 <code>alternateStreamURLs</code> 一起入库。</p>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">缓存、刷新与检测</h4>
+      <ul class="small">
+        <li>频道按源缓存（<code>channelCache</code>），启停源会即时重建合并列表。</li>
+        <li>刷新时对所有启用源并发拉取，逐个回填健康度（延迟 / 频道数 / 错误）。</li>
+        <li>连接检测是<b>串行队列</b>，登记为 <code>.connectivity</code> 任务，进入统一任务中心；一次只测一个，避免同时打多个站点。</li>
+        <li>首次启动默认开启，内置 11 个地区源；内置源可停用、不可删除，支持「恢复默认」。</li>
+        <li>导入自定义源时会先真正拉一次，解析出频道才保存。</li>
+      </ul>
+      <p class="src" style="margin:8px 0 0">当时的缺口：没有 EPG、没有定时巡检、没有源优先级、没有「上次可用线路」记忆。其中 EPG 与线路记忆已在 2.0 补齐；巡检仍是「进入信号页时补旧结果」的低频策略。</p>
+    </div>
+  </div>
+
+  <h3>2.2 界面结构：三页 + 侧边栏 + 工具栏胶囊</h3>
+  <p class="src" style="margin:0 0 10px">下图是补齐前的三页结构；现在是「直播 / 节目单 / 回看 / 信号 / 源库」五 Tab，见 9.2。</p>
+  <div class="wf" style="margin-top:12px">
+    <div class="lbl">拾光 2.0 · 网络电视现状（结构还原）</div>
+    <div class="wf-row">
+      <div class="wf-col" style="flex:0 0 150px">
+        <div class="wf-item on"><span class="dot" style="background:#4dd6fa"></span><span class="nm">全部频道</span></div>
+        <div class="wf-item"><span class="dot" style="background:#d93a46"></span><span class="nm">大陆 · 央视与卫视</span></div>
+        <div class="wf-item"><span class="dot"></span><span class="nm">香港</span></div>
+        <div class="wf-item"><span class="dot"></span><span class="nm">台湾</span></div>
+        <div class="wf-item"><span class="dot"></span><span class="nm">美国 / 日本 / 韩国…</span></div>
+        <div class="wf-item"><span class="nm" style="color:#8fa0c4">＋ 导入电视源</span></div>
+      </div>
+      <div class="wf-col" style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="color:#ff5a63;font-size:8px">● 直播</span>
+            <span style="font-size:12px;color:#fff;font-weight:600">大陆 · 央视与卫视</span>
+            <span style="font-size:8px;color:#8fa0c4">系统默认 · 大陆</span>
+          </div>
+          <span style="font-size:8px;color:#8fa0c4">更新于 2 分钟前 · 刷新</span>
+        </div>
+        <div class="wf-tabs"><span class="on">全部</span><span>央视</span><span>卫视</span><span>新闻</span><span>体育</span><span>电影</span><span>少儿</span></div>
+        <div class="wf-row">
+          <div class="wf-tile" style="flex:1"><div class="row"><span>● LIVE</span><span>1080p</span></div><div class="lg">CCTV-1</div><div class="name">CCTV-1 综合</div><div class="line">央视 · 大陆</div></div>
+          <div class="wf-tile hover" style="flex:1"><div class="row"><span>● LIVE</span><span>1080p</span></div><div class="lg">CCTV-5</div><div class="name">CCTV-5 体育</div><div class="line">央视 · 大陆</div></div>
+          <div class="wf-tile" style="flex:1"><div class="row"><span>● LIVE</span><span>720p</span></div><div class="lg">湖南卫视</div><div class="name">湖南卫视</div><div class="line">卫视 · 大陆</div></div>
+          <div class="wf-tile" style="flex:1"><div class="row"><span>● LIVE</span><span>1080p</span></div><div class="lg">凤凰中文</div><div class="name">凤凰卫视中文台</div><div class="line">综合 · 香港</div></div>
+        </div>
+        <div class="wf-note">频道卡只承载：台标 / 台名 / 分组 · 地区 / 画质 / LIVE。没有节目、没有频道号、没有收藏。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid g3" style="margin-top:16px">
+    <div class="panel">
+      <h4 style="margin-top:0">已有优势</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>开箱即用：11 个地区源，无需用户找源</li>
+        <li>中文分组与台名，按固定语义排序</li>
+        <li>画质 / 协议择优，台标三级缓存</li>
+        <li>检测串行队列 + 任务中心，可停止</li>
+        <li>关闭态、空态、错误态齐全</li>
+        <li>播放复用现有播放器，带 Referer / UA</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">隐藏的技术债</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><code>TVChannel</code> 当初只有单条 <code>streamURL</code>，没有候选线路结构（已在 9.14 补上 <code>alternateStreamURLs</code>）</li>
+        <li>播放被包装成 <code>PhotoItem</code> 进入通用查看器，播放器不知道「这是一个频道」（已在 9.14 通过 <code>tvPlaybackChannel</code> 补上频道语义）</li>
+        <li>清单一次性加载，无 TTL、无增量更新</li>
+        <li>频道排序固定为「分组 rank → 台名」，用户不可干预</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">视觉语言 token</h4>
+      <dl class="kv" style="grid-template-columns:64px 1fr">
+        <dt>信号红</dt><dd><code>#FF4D57</code> 直播点、错误强调</dd>
+        <dt>电波青</dt><dd><code>#4DD6FA</code> 选中、悬停、1080p</dd>
+        <dt>金</dt><dd><code>#FACC66</code> 4K / 2160p 点缀</dd>
+        <dt>底色</dt><dd>深墨蓝渐变 <code>#0B0D16 → #131826</code></dd>
+        <dt>卡片</dt><dd>白色 4.5%–7.5% 叠加 + 0.7px 描边</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:16px">
+    <b>基线判断：</b>我们解决的是「能不能把台组织起来并播出去」，竞品解决的是「用户在看直播时每一秒要做什么」。这两件事之间，差的是 EPG、换线、收藏/最近这三层「直播语义」。
+  </div>
+</section>
+
+<!-- ================= 03 ================= -->
+<section id="s3">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Product deep dives</div>
+      <h2><span class="num">03</span>产品深读：11 组样本的界面证据</h2>
+    </div>
+    <div class="sec-note">先看首页，再看播放页，最后看「出问题时」的界面。</div>
+  </div>
+
+  <!-- TiviMate -->
+  <div class="prod"><h3>TiviMate</h3><span class="role">Android TV 标杆 · 遥控器交互的参考答案</span><span class="tag b">证据 B</span></div>
+  <p>如果只看一个产品来定「客厅直播」的标准，就是 TiviMate。它的三层结构非常清楚：<b>分组 → 频道 → 节目</b>，任何一层都不把用户踢出当前上下文。</p>
+
+  <div class="shotrow">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/tivimate-osd.jpg" alt="TiviMate 播放页 OSD"></div>
+      <figcaption><b>播放页 OSD。</b>顶部节目条 + 最近频道 + 底部控制条，同屏解决「我在看什么 / 还能看什么 / 怎么操作」。<span class="src">来源：TroyPoint 公开评测（2019 版）。</span></figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/tivimate-epg.jpg" alt="TiviMate 全屏 EPG"></div>
+      <figcaption><b>全屏 EPG。</b>左侧频道号 + 台标，顶部 30 分钟刻度，当前节目块带进度；一屏约 10 行，密度服务于「扫」。<span class="src">来源：同上。</span></figcaption>
+    </figure>
+  </div>
+
+  <figure style="max-width:780px">
+    <div class="shot"><img loading="lazy" src="iptv-report-assets/tivimate-menu.jpg" alt="TiviMate 分组上下文菜单"></div>
+    <figcaption><b>分组上下文菜单。</b>在同一张 EPG 上直接管理分组：指定 EPG 频道、管理 / 隐藏分组、频道排序、调整位置。<span class="src">来源：TroyPoint 公开评测（2019 版）。</span></figcaption>
+  </figure>
+
+  <div class="grid g2" style="margin-top:6px">
+    <div class="panel">
+      <h4 style="margin-top:0">播放页拆解（截图 1）</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>频道号是主身份</b>：左上角大号数字「1」，比台名更早被看到。</li>
+        <li><b>节目条七件套</b>：台标、台名、节目名、起止时间、进度、技术徽标（HD / 60FPS / STEREO）、Next。</li>
+        <li><b>最近频道横排</b>：5 个卡片 + 一个「TV guide」入口；卡片带频道号、当前节目、进度条。</li>
+        <li><b>控制条只放高频</b>：上一个台 / 下一个台 / 画面比例 / 信息 / 收藏 / 录制 / 设置。</li>
+        <li><b>OSD 不遮住画面中心</b>：信息贴顶、控制贴底，中间留空。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">EPG 与分组管理（截图 2、3）</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>时间轴固定 30 分钟一列，视窗约 2 小时；节目块内最多两行标题。</li>
+        <li>当前时段用高亮块 + 进度表达，过期节目变暗。</li>
+        <li>长按分组会弹出上下文菜单：<b>恢复组名、指定 EPG 频道、使用外部播放器、管理分组、隐藏分组、频道排序、调整位置</b>。</li>
+        <li>「频道排序 / 调整位置」说明：对重度用户，<b>可编辑的频道秩序</b>比自动排序更重要。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid g3" style="margin-top:14px">
+    <div class="okbox"><b>可借鉴</b><br>① 顶部节目条七件套；② 最近频道横排；③ 分组级上下文菜单（隐藏 / 排序 / 指定 EPG）。</div>
+    <div class="panel"><h4 style="margin-top:0">不适用</h4><p class="small" style="margin:0">遥控器焦点模型不能照搬到桌面：鼠标悬停、右键菜单、⌘F 搜索要替代方向键与长按 OK。</p></div>
+    <div class="panel"><h4 style="margin-top:0">短板</h4><p class="small" style="margin:0">仅 Android；高级能力付费；不做本地媒体库，和拾光的「照片 + 影院 + 电视」统一叙事不同。</p></div>
+  </div>
+
+  <hr class="soft">
+
+  <!-- Smarters -->
+  <div class="prod"><h3>IPTV Smarters</h3><span class="role">账号门户型 · 直播 / 电影 / 剧集三合一</span><span class="tag a">证据 A</span></div>
+  <p>Smarters 的核心不是「电视」，而是「一个账号下的内容门户」。它的首屏先给内容，直播只是内容类型之一。这解释了为什么它看起来不像电视产品，却拥有大量普通用户。</p>
+
+  <div class="shots">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/smarters-portal.jpg" alt="IPTV Smarters 内容门户首页"></div>
+      <figcaption><b>首页。</b>顶栏只有播放列表名 + 筛选 / 搜索 / 投屏；大图轮播 + Play / My List + Continue to Watch。<span class="src">来源：App Store 官方截图。</span></figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/smarters-live.jpg" alt="IPTV Smarters 直播频道页"></div>
+      <figcaption><b>Live Channels。</b>搜索框常驻，频道以海报卡呈现（含 KGO 810 NEWS 这类广播台），下方是 TV Drama 分区。<span class="src">来源：App Store 官方截图。</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="grid g2" style="margin-top:8px">
+    <div class="panel">
+      <h4 style="margin-top:0">设计要点</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>统一搜索</b>：搜索入口在顶栏，跨直播 / 电影 / 剧集，不需要先选类型。</li>
+        <li><b>投屏是首屏能力</b>：右上角 cast 图标，符合手机用户「找到就投到电视」的路径。</li>
+        <li><b>继续观看</b>：点播的续看被放在首屏第二屏位置，直播不参与。</li>
+        <li><b>直播也能海报化</b>：频道卡用台标 + 节目图，而不是纯文字列表。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">对我们的启发</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>「搜索」应该是电视模块的全局能力，而不是只在频道页内过滤。</li>
+        <li>收藏 / 最近可以共用一套「内容货架」组件，直播和点播只是数据源不同。</li>
+        <li>但不要学它的门户广告感：我们的第一屏仍应是「台」，不是运营位。</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="soft">
+
+  <!-- GSE -->
+  <div class="prod"><h3>GSE Smart IPTV</h3><span class="role">源管理最完整 · 排障型播放器</span><span class="tag a">证据 A</span></div>
+  <p>GSE 是这批产品里「导入方式」和「播放器可调项」最完整的。它把源管理放在侧边抽屉的第一屏，说明在它的用户心智里，<b>源就是产品本身</b>。</p>
+
+  <div class="shots">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/gse-sources.jpg" alt="GSE 源管理抽屉"></div>
+      <figcaption><b>源抽屉。</b>录制、收藏、复制粘贴、FTP / HTTP 上传、Web Tools、远程播放列表、单流播放、Xtream API 并列。<span class="src">来源：App Store 官方截图（GSE Smart IPTV Pro）。</span></figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/gse-player.jpg" alt="GSE 播放器 OSD"></div>
+      <figcaption><b>播放 OSD。</b>左侧 Video / Audio / Subtitle 竖排页签，硬件解码开关、循环流、音轨、频道号输入、EPG、Now/Next。<span class="src">来源：同上。</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="grid g3" style="margin-top:8px">
+    <div class="panel"><h4 style="margin-top:0">五种导入入口</h4><p class="small" style="margin:0">URL、复制粘贴文本、FTP 上传、HTTP 上传、远程播放列表 / Xtream API。列表卡上直接标 <code>M3U</code> / <code>JSON</code> 格式徽标。</p></div>
+    <div class="okbox"><h4 style="margin-top:0">最值得抄</h4><p class="small" style="margin:0">① 「播放单条流」入口；② 硬件解码 / 循环流开关；③ 源格式徽标与「Type: M3U」的透明表达。</p></div>
+    <div class="panel"><h4 style="margin-top:0">短板</h4><p class="small" style="margin:0">视觉陈旧、层级偏深；播放器 OSD 信息过载，普通用户不知道「Deinterlace」是什么。</p></div>
+  </div>
+
+  <hr class="soft">
+
+  <!-- OTT + Perfect -->
+  <div class="prod"><h3>OTT Navigator</h3><span class="role">重度用户向 · 可配置性天花板</span><span class="tag c">证据 C</span></div>
+  <p>公开资料一致指向同一个画像：多源合并、精细 EPG 映射、时移 / 回看、频道号、脚本化更新、多窗口。界面信息密度极高，设置项按「工程师思维」组织。<b>本节为结构还原，不含截图。</b></p>
+  <div class="grid g2">
+    <div class="panel">
+      <h4 style="margin-top:0">它的设计取向</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>把「源」当数据库：每个源可独立映射 EPG、独立排序、独立隐藏分组。</li>
+        <li>把「更新」当运维：支持定式更新与批量维护，而不是单次刷新。</li>
+        <li>把「播放」当可调管线：解码、缓冲、音轨、画面比例全暴露。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">我们只借三样</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>每源 EPG 地址与频道映射（这是 EPG 能否可用的关键）。</li>
+        <li>分组排序 / 隐藏 / 置顶的用户可编辑秩序。</li>
+        <li>定时巡检 + 失败退避的运维思路。</li>
+      </ul>
+      <p class="src" style="margin:8px 0 0">不借：多层设置树、脚本、过多播放参数。</p>
+    </div>
+  </div>
+
+  <div class="prod" style="margin-top:26px"><h3>Perfect Player</h3><span class="role">轻量经典 · 低性能设备优先</span><span class="tag c">证据 C</span></div>
+  <p>极简列表 + 半透明节目条 + 收藏 + 简单录制。多年少更新，但它的取舍仍然有效：<b>当性能有限时，先砍动效和图层，不砍 EPG。</b></p>
+  <div class="callout">对我们的意义：如果未来要照顾低配设备或远程串流，应该提供「精简模式」——去掉径向渐变、台标阴影与悬停缩放，保留台名、节目条、频道号与换台。</div>
+
+  <hr class="soft">
+
+  <!-- IPTVX + iPlayTV -->
+  <div class="prod"><h3>IPTVX</h3><span class="role">Apple 生态内容中心 · 直播是内容类型之一</span><span class="tag a">证据 A</span></div>
+  <div class="shots">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/iptvx-home.jpg" alt="IPTVX 首页"></div>
+      <figcaption><b>首页。</b>顶部 For You / Movies / Shows / TV Live / TV 横向页签；英雄图 + Play；Favorites / Most rated 货架；海报角标 RECENT。<span class="src">来源：App Store 官方截图。</span></figcaption>
+    </figure>
+  </div>
+  <div class="grid g2" style="margin-top:8px">
+    <div class="panel"><h4 style="margin-top:0">界面观察</h4><ul class="small" style="margin-bottom:0"><li>直播与点播共享同一套「海报 + 货架」语言，降低学习成本。</li><li>「RECENT」角标把最近行为直接嵌进内容卡，而不是单独的最近列表。</li><li>顶部页签是内容类型，不是功能模块——用户按「想看什么」导航。</li></ul></div>
+    <div class="panel"><h4 style="margin-top:0">可迁移的一条</h4><p class="small" style="margin:0">「最近」不一定要做成侧边栏分组，也可以作为频道卡上的一个角标 / 一个自动置顶的虚拟组。桌面端更适合前者。</p></div>
+  </div>
+
+  <div class="prod" style="margin-top:26px"><h3>iPlayTV</h3><span class="role">极简四入口 · Guide 作为一级页面</span><span class="tag a">证据 A</span></div>
+  <div class="shots">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/iplaytv-library.jpg" alt="iPlayTV Library 页"></div>
+      <figcaption><b>Library。</b>只有四个入口：Channels / Movies / TV Shows / Guide；底部 Library / Favorites / Settings 三 tab。<span class="src">来源：App Store 官方截图（2022）。</span></figcaption>
+    </figure>
+  </div>
+  <div class="callout" style="margin-top:2px"><b>这是最接近我们该做的「减法」：</b>频道 + 节目单 + 收藏三件事，足以支撑一个直播产品。电影 / 剧集我们已经有影院模块，不需要塞进电视里。</div>
+
+  <hr class="soft">
+
+  <!-- 通用播放器 -->
+  <div class="prod"><h3>VLC / IINA</h3><span class="role">通用播放器 · 排障与兜底</span><span class="tag a">证据 A</span></div>
+  <div class="shotrow">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/iina.jpg" alt="IINA 播放器"></div>
+      <figcaption><b>IINA。</b>悬浮胶囊控制条，画面不被永久占用；macOS 原生质感，快捷键优先。<span class="src">来源：iina.io 官网。</span></figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/vlc.jpg" alt="VLC 播放器"></div>
+      <figcaption><b>VLC 2.2。</b>菜单栏 + 媒体信息面板，编码 / 协议全透明。<span class="src">来源：VideoLAN 官方截图（2016，版本较旧）。</span></figcaption>
+    </figure>
+  </div>
+  <div class="grid g2" style="margin-top:8px">
+    <div class="okbox"><h4 style="margin-top:0">要保留的能力</h4><p class="small" style="margin:0">「粘贴一个地址就能播」的快捷入口；流信息面板（协议、容器、编码、码率、缓冲）；以及一个「换到系统播放器 / IINA / VLC」的兜底出口。</p></div>
+    <div class="panel"><h4 style="margin-top:0">不要学</h4><p class="small" style="margin:0">通用播放器没有源管理、EPG、收藏与频道语义。它们的价值是「最后一道保险」，不是产品方向。</p></div>
+  </div>
+
+  <hr class="soft">
+
+  <!-- Channels / Jellyfin -->
+  <div class="prod"><h3>Channels DVR</h3><span class="role">tvOS Guide 的最佳样本 · 节目为中心的客厅设计</span><span class="tag a">证据 A</span></div>
+  <figure>
+    <div class="shot wide"><img loading="lazy" src="iptv-report-assets/channels-guide.jpg" alt="Channels DVR tvOS 节目单"></div>
+    <figcaption><b>Guide（tvOS）。</b>左侧图标栏 → 频道筛选栏（All / HD / SD / Favorites / Movies / Sports / Drama / News / Kids）→ 时间轴网格；顶部是当前节目的「详情带」。<span class="src">来源：getchannels.com 官方截图。</span></figcaption>
+  </figure>
+
+  <div class="grid g2" style="margin-top:8px">
+    <div class="panel">
+      <h4 style="margin-top:0">值得逐条拆的 Guide 结构</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>三层横向空间</b>：全局导航（图标）/ 频道范围（文字）/ 节目网格，互不抢占。</li>
+        <li><b>顶部详情带</b>：节目缩略图 + 标题 + 季集信息 + 标签（Season Premiere / NEW / HD / Dolby Digital / CC / TV-PG）+ 简介 + 当前时间与播放头。</li>
+        <li><b>时间轴</b>：8:00–10:00 PM 的 30 分钟刻度；当前时间有明确的竖向播放头。</li>
+        <li><b>节目块</b>：用颜色区分状态 / 类型，块内文字截断加省略号；收藏用星标，不额外占一行。</li>
+        <li><b>频道列</b>：台标 + 频道号（506 / 511 / 508…），台名可省略。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">第二条证据：多画面</h4>
+      <p class="small">Channels 的多画面是「为体育而生」的 4 宫格：无控制条、画面贴边、每格右上角保留台标水印。它说明多画面不是简单平铺，而是<b>把切换成本降到零</b>。</p>
+      <div class="shot" style="margin-top:10px"><img loading="lazy" src="iptv-report-assets/channels-multiview.jpg" alt="Channels 多画面"></div>
+      <p class="src" style="margin:6px 0 0">来源：getchannels.com 官方截图。我们列为 P2。</p>
+    </div>
+  </div>
+
+  <div class="prod" style="margin-top:26px"><h3>Jellyfin Live TV</h3><span class="role">开源媒体服务器 · 可对照实现的 Guide / 录制 / 多用户</span><span class="tag a">证据 A</span></div>
+  <div class="shotrow">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/jellyfin-home.jpg" alt="Jellyfin 首页"></div>
+      <figcaption><b>首页。</b>My Media / Continue Watching / Latest Movies；顶栏是 Home / Favorites + 投屏 / 搜索 / 用户。直播被收在媒体库体系内。<span class="src">来源：jellyfin.org 官方截图（10.8）。</span></figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/jellyfin-playback.jpg" alt="Jellyfin 播放页"></div>
+      <figcaption><b>播放页。</b>Web 播放器的控制层与字幕 / 音轨 / 画质设置；与 Guide、录制共享同一套后台。<span class="src">来源：同上。</span></figcaption>
+    </figure>
+  </div>
+  <p class="small" style="margin-top:4px">Jellyfin 的价值不在视觉，而在<b>能力清单可验证</b>：M3U tuner + XMLTV、服务端 EPG、录制、多用户、转码。它证明了「EPG 与录制是服务器能力，不是播放器 UI 能力」——这也是我们不应该自建录制服务的原因。</p>
+
+  <hr class="soft">
+
+  <!-- 国内 -->
+  <div class="prod"><h3>电视家 / 运营商 IPTV 机顶盒</h3><span class="role">国内用户预期 · 宫格 + 数字键 + 回看</span><span class="tag c">证据 C</span></div>
+  <div class="grid g2">
+    <div class="panel">
+      <h4 style="margin-top:0">国内直播的三个默认预期</h4>
+      <ol class="small" style="margin-bottom:0">
+        <li><b>上下换台</b>：不需要回到列表，遥控器上下就是换台；宫格用于「找台」。</li>
+        <li><b>多线路无感切换</b>：一个台挂了自动换镜像，最多提示「已切换线路 2/5」。</li>
+        <li><b>7 天回看</b>：错过就看回看，EPG 里过去的节目必须可点。</li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">风险与不可复制项</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>电视家因合规与版权问题停服（2023 年底），说明「聚合央视 / 卫视」不是可持续的产品叙事。</li>
+        <li>运营商盒子的回看 / EPG 准确率来自专网与牌照，我们无法复制。</li>
+        <li>可复制的是<b>交互预期</b>：频道号、上下换台、线路顺延、过去节目可点。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03+ 国内 ================= -->
+<section id="s3b">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">China market</div>
+      <h2><span class="num">03+</span>国内电视直播：另一套交互语法</h2>
+    </div>
+    <div class="sec-note">海外产品解决「内容发现」，国内产品解决「换台效率」。这两套语法必须分开读。</div>
+  </div>
+
+  <p class="lead">国内电视端直播软件的共性非常强：<b>打开即播、上下换台、数字键直达、长按收藏、侧边节目单</b>。它们不追求海报墙和推荐流，而是把「遥控器盲操作」做到极致。这一节补上 9 个国内样本，其中 4 个有真实界面截图。</p>
+
+  <div class="tw" style="margin-top:16px">
+    <table style="min-width:880px">
+      <thead><tr><th>产品</th><th>形态</th><th>频道组织</th><th>交互特征</th><th>变现 / 风险</th><th>对我们的价值</th></tr></thead>
+      <tbody>
+        <tr><td><b>火星直播</b></td><td>第三方聚合 · TV</td><td>左侧分类 + 编号频道列表</td><td>数字键、长按收藏、竖排节目单、分享码</td><td>VIP + 广告；源合规风险</td><td>编号秩序、列表内 Now、节目单入口</td></tr>
+        <tr><td><b>小薇直播</b></td><td>第三方聚合 · TV</td><td>分类 / 频道 / 节目单三栏</td><td>上下换台、数字键、多线路、手机遥控</td><td>广告 / 会员；源合规风险</td><td>边看边选台、单频道时间表</td></tr>
+        <tr><td><b>我的电视 my-tv</b></td><td>开源 · Android TV</td><td>底部频道带 + 分组</td><td>数字选台、换台反转、多线路、EPG 回看、自定义源</td><td>免费开源；依赖用户源</td><td>底部频道带、技术状态、设置语言</td></tr>
+        <tr><td><b>HDP 直播</b></td><td>老牌第三方 · TV</td><td>分类 + 频道列表</td><td>数字键、上下换台、多线路</td><td>广告；源合规风险</td><td>低门槛、遥控器优先</td></tr>
+        <tr><td><b>星火电视 / 星火直播</b></td><td>第三方 · TV + 手机</td><td>分类 + 频道 + 赛事</td><td>直播 + 体育赛事、分享码、多线路</td><td>会员 + 广告；合规风险</td><td>赛事入口与「即将开始」</td></tr>
+        <tr><td><b>电视家</b>（已停服）</td><td>历史第三方 · TV</td><td>宫格 + 频道号</td><td>上下换台、7 天回看、多线路</td><td>2023 年底停服</td><td>国内用户预期的来源</td></tr>
+        <tr><td><b>央视频 TV</b></td><td>官方 · TV</td><td>内容门户 + 赛事 / 直播</td><td>遥控器、预约、官方内容</td><td>免费 + 会员</td><td>官方「活动 / 赛事」组织方式</td></tr>
+        <tr><td><b>咪咕视频 TV</b></td><td>官方 · TV / 手机</td><td>体育 / 影视门户 + 直播</td><td>体育赛事优先、多屏、投屏</td><td>会员</td><td>体育直播的场景设计</td></tr>
+        <tr><td><b>运营商 IPTV</b></td><td>专网机顶盒</td><td>频道号 + 宫格 + EPG</td><td>数字键直达、7 天回看、时移</td><td>宽带捆绑</td><td>最成熟的回看 / EPG 体验</td></tr>
+        <tr><td><b>秒看电视 / 云海电视等</b></td><td>同类聚合 · TV</td><td>宫格 + 节目单</td><td>轻量、少广告（宣传）</td><td>源合规风险</td><td>「轻量派」的减法参照</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>火星直播：把「频道号」做成产品的骨架</h3>
+  <p>火星直播的界面几乎没有装饰：左侧分类、中间编号列表、右侧留白播放。它的聪明之处在于，把「第几个台、现在播什么、怎么收藏」全部压进同一列。</p>
+
+  <div class="shotrow">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/mars-channels.jpg" alt="火星直播频道列表"></div>
+      <figcaption><b>频道列表。</b>左侧分类栏，频道以 <code>[0001]</code> 编号 + 台名 + 当前节目呈现；正在播的台用橙色播放指示；右缘竖排「节目单」。<span class="src">来源：乐游网公开截图（2024）。</span></figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/mars-sidebar.jpg" alt="火星直播收藏空态"></div>
+      <figcaption><b>收藏空态。</b>星形图标 + 「你还没有收藏频道哦，频道长按即可收藏」——用一个空态把手势教会。<span class="src">来源：同上。</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="grid g2" style="margin-top:4px">
+    <div class="panel">
+      <h4 style="margin-top:0">界面拆解</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>编号是主秩序</b>：<code>[0001]</code> 到 <code>[0009]</code> 连续编号，用户可以用数字键盲跳。</li>
+        <li><b>列表就是 EPG 摘要</b>：每个台名下面直接跟当前节目（如「南洋女儿情第2集」「正点财经」），不需要进入节目单。</li>
+        <li><b>当前台有播放指示</b>：橙色竖条，扫一眼就知道在播哪个。</li>
+        <li><b>节目单是侧边 tab</b>：竖排「节目单」贴着右缘，点开才展开，不占常态空间。</li>
+        <li><b>分享码频道</b>：把「别人的源」做成一个可传播的入口，这是国内聚合产品的增长手法。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">与拾光的关系（已补齐）</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>频道号已经在卡片、节目单与 OSD 里，列表也显示 Now / Next。</li>
+        <li>侧边栏有「收藏 / 最近」两个虚拟分组，分组 chip 承担分类浏览。</li>
+        <li>频道卡 / 列表行支持右键收藏，星标常驻。</li>
+        <li>播放页已有底部频道带，↑↓ 直接换台，不用退出播放。</li>
+        <li>仍未做的是「分享码」这种依赖第三方源的传播机制。</li>
+      </ul>
+      <p class="src" style="margin:8px 0 0">取舍：不学「分享码」这种依赖第三方源的机制，只学编号、Now、侧边节目单。</p>
+    </div>
+  </div>
+
+  <h3>小薇直播：三栏 OSD，边看边选</h3>
+  <p>小薇把「频道选择」和「节目单」直接叠在直播画面上：左分类、中频道、右节目单。用户不需要离开画面，就能完成「换台 + 看接下来播什么」。</p>
+
+  <div class="shotrow">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/xiaowei-osd.jpg" alt="小薇直播三栏 OSD"></div>
+      <figcaption><b>三栏 OSD。</b>左侧分类、中间频道（台名 + 当前节目）、右侧入口；选中项蓝色描边 + 箭头，顶部还有「手机遥控」二维码。<span class="src">来源：逗游网公开截图（2025）。</span></figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/xiaowei-epg.jpg" alt="小薇直播单频道节目单"></div>
+      <figcaption><b>单频道节目单。</b>时间在左、节目在右，逐行排列；「直播」与「4K」用徽标标注，当前时段高亮。<span class="src">来源：同上。</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="grid g2" style="margin-top:4px">
+    <div class="panel">
+      <h4 style="margin-top:0">交互逻辑</h4>
+      <ol class="small" style="margin-bottom:0">
+        <li>播放中呼出 OSD：画面左侧浮出分类栏，不切页。</li>
+        <li>上下移动：在同一分类内换台，画面保持播放（或快速预览）。</li>
+        <li>向右：进入该频道的节目单，纵向看今天的时间表。</li>
+        <li>确认：回到直播 / 选中节目（若支持回看）。</li>
+        <li>返回：逐层收起节目单 → 频道栏 → OSD → 退出。</li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">对我们的启发</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>OSD 三栏</b>是桌面端也能用的结构：左分组、中频道、右节目单，宽度约 720px，覆盖画面左侧 60%。</li>
+        <li><b>单频道时间表</b>比全屏网格更适合「我就想看这个台接下来播什么」。</li>
+        <li><b>手机遥控二维码</b>提示：桌面端可以用「手机扫码输入频道号 / 投屏」，但我们优先级低。</li>
+        <li>「直播 / 4K」徽标直接放在节目行，比放在频道卡更贴近决策。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>我的电视 my-tv：底部频道带 + 技术状态</h3>
+  <p>my-tv 是开源 Android TV 直播里完成度很高的一个。它没有做「门户」，而是把电视端最需要的三件事做扎实：底部频道带、Now/Next、可选的技术状态。</p>
+
+  <div class="shotrow">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/mytv-panel.jpg" alt="my-tv 频道面板"></div>
+      <figcaption><b>频道面板。</b>左上台名 + 频道序号 + 源类型，下面是「正在播放 / 稍后播放 / 分辨率 / 网速」；底部是按分组横排的频道带。<span class="src">来源：GitHub 项目官方截图。</span></figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/mytv-settings.jpg" alt="my-tv 设置页"></div>
+      <figcaption><b>设置页。</b>左侧八项导航，右侧是行为化开关：数字选台、换台反转、直播源精简、缓存 24 小时、自定义源。<span class="src">来源：同上。</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="grid g3" style="margin-top:4px">
+    <div class="panel">
+      <h4 style="margin-top:0">值得抄的三点</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>底部频道带</b>：分组标题 + 横向卡片，当前频道反白，换台不用离开画面。</li>
+        <li><b>技术状态可见</b>：分辨率、网速、源类型（IPV4）让自建源用户知道「为什么卡」。</li>
+        <li><b>行为化命名</b>：「换台反转」比「方向键映射」好懂一百倍。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">设置项清单</h4>
+      <p class="small" style="margin:0">关于 / 应用 / 直播源 / 节目单 / 界面 / 收藏 / 更新 / 调试；直播源内包含数字选台、换台反转、精简、缓存时间、自定义地址、清除缓存。</p>
+    </div>
+    <div class="okbox">
+      <h4 style="margin-top:0">与拾光的映射</h4>
+      <p class="small" style="margin:0">底部频道带 → 我们播放器缺的那一层；数字选台 → 键盘数字；换台反转 → ↑↓ 方向可配置；缓存时间 → 我们目前只有一次性加载。</p>
+    </div>
+  </div>
+
+  <h3>央视频 TV：官方产品的「内容门户」路线</h3>
+  <p>央视频 TV 是这批样本里唯一的官方大屏产品。它没有做「频道优先」，而是把直播藏进内容体系里：电视剧、电影、新闻、综艺是主入口，直播靠赛事和活动拉动。</p>
+
+  <div class="shotrow">
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/cctv-tv-home.jpg" alt="央视频 TV 首页"></div>
+      <figcaption><b>首页。</b>顶部搜索 / 登录 / 会员，频道分类横向排列，下面是推荐位与内容卡片；直播不是首屏主任务。<span class="src">来源：华军软件园公开截图。</span></figcaption>
+    </figure>
+    <figure>
+      <div class="shot"><img loading="lazy" src="iptv-report-assets/cctv-tv-events.jpg" alt="央视频 TV 赛事页"></div>
+      <figcaption><b>赛事页。</b>左侧赛程列表（时间 + 对阵 + 未开始），右侧推荐与集锦；用「即将开始」组织直播。<span class="src">来源：同上。</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="grid g2" style="margin-top:4px">
+    <div class="panel">
+      <h4 style="margin-top:0">官方产品的逻辑</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>版权内容优先：用户先选「看什么」，直播只是内容形态之一。</li>
+        <li>赛事 / 活动是直播的主要入口，赛程表比频道表更重要。</li>
+        <li>预约与部分回看由官方版权支撑，不依赖第三方源。</li>
+        <li>商业模型决定界面：会员、广告位、内容推荐都在首屏。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">我们不学什么</h4>
+      <p class="small" style="margin-bottom:0">拾光的电视模块是「频道优先 + 本地媒体库」，不应该把首屏让给运营位。可借的只有「赛事 / 节目预约」这一个能力，且放在 P2。</p>
+    </div>
+  </div>
+
+  <h3>HDP / 星火 / 电视家 / 运营商：没有截图，但规律清楚</h3>
+  <div class="grid g4">
+    <div class="panel"><h4 style="margin-top:0">HDP 直播</h4><p class="small" style="margin:0">老牌第三方，遥控器优先：数字键、上下换台、多线路。它证明「操作简单」比「功能多」更能留住客厅用户。</p></div>
+    <div class="panel"><h4 style="margin-top:0">星火电视</h4><p class="small" style="margin:0">直播 + 体育赛事并重，官网首屏就是赛程与「即将开始」。赛事是它区别于纯频道聚合的抓手。</p></div>
+    <div class="panel"><h4 style="margin-top:0">电视家（历史）</h4><p class="small" style="margin:0">宫格 + 频道号 + 7 天回看 + 多线路，塑造了国内用户对「电视直播」的全部预期；2023 年底停服。</p></div>
+    <div class="panel"><h4 style="margin-top:0">运营商 IPTV</h4><p class="small" style="margin:0">频道号直达、EPG 准确、7 天回看 / 时移稳定。它是最成熟的形态，但依赖专网与牌照，无法复制。</p></div>
+  </div>
+
+  <h3>八条交互语法：电视端怎么做，桌面端怎么转译</h3>
+  <div class="tw">
+    <table style="min-width:820px">
+      <thead><tr><th>动作</th><th>国内电视端常见惯例</th><th>拾光现状</th><th>桌面端转译</th></tr></thead>
+      <tbody>
+        <tr><td>启动</td><td>直接续播上次频道</td><td>进入频道墙</td><td>可选「恢复上次频道」，默认仍进列表</td></tr>
+        <tr><td>上下键</td><td>换台，画面不离开</td><td>无</td><td>↑↓ 换台 + 底部频道带</td></tr>
+        <tr><td>数字键</td><td>频道号直达</td><td>无</td><td>输入数字 → 频道号浮层 → 回车跳转</td></tr>
+        <tr><td>单击 / OK</td><td>呼出频道列表，不切页</td><td>打开播放器</td><td>播放中单击呼出 OSD / 频道带</td></tr>
+        <tr><td>左右键</td><td>切换线路或音量</td><td>无</td><td>←→ 切换线路，音量交给系统</td></tr>
+        <tr><td>长按 / 菜单</td><td>收藏、节目单、设置</td><td>无</td><td>右键菜单：收藏 / 线路 / 节目单</td></tr>
+        <tr><td>返回</td><td>OSD → 列表 → 退出，逐层</td><td>Esc 直接关闭</td><td>Esc 逐层：节目单 → 频道带 → 关闭</td></tr>
+        <tr><td>节目单</td><td>侧边抽屉或单频道时间表</td><td>无</td><td>侧栏 320px 时间表 + 全屏 Guide 双形态</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid g3" style="margin-top:14px">
+    <div class="callout"><b>规律一：频道条常驻。</b>国内产品不做「最近频道」小卡，而是整条分组频道带。因为它同时承担「换台」和「知道旁边有什么台」。</div>
+    <div class="callout"><b>规律二：编号 + 数字键。</b>编号不是装饰，是肌肉记忆。没有编号，老用户会觉得「这不是电视」。</div>
+    <div class="callout"><b>规律三：节目单是选台的一部分。</b>它不是一个独立功能页，而是频道列表向右展开的下一层。</div>
+  </div>
+
+  <div class="warn" style="margin-top:16px">
+    <b>合规提示：</b>火星、小薇、HDP、星火、电视家等第三方聚合产品，普遍依赖未授权直播源，且多次因版权与合规问题下架或停服。本报告只分析它们的<b>交互结构与界面组织</b>，不复制其源获取方式、分享码机制或广告 / 会员体系。拾光应继续使用公开 M3U 与用户自备源。
+  </div>
+</section>
+
+<!-- ================= 04 ================= -->
+<section id="s4">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Design patterns</div>
+      <h2><span class="num">04</span>设计专题：七个必须做对的界面</h2>
+    </div>
+    <div class="sec-note">这一节把截图中的共性抽成可执行的设计规范。</div>
+  </div>
+
+  <h3>4.1 首页的四种范式，我们选哪一种</h3>
+  <div class="grid g4">
+    <div class="wf">
+      <div class="lbl">A · 三栏遥控器型</div>
+      <div class="wf-row">
+        <div class="wf-col" style="flex:0 0 38%"><div class="wf-item on"><span class="nm">全部</span></div><div class="wf-item"><span class="nm">央视</span></div><div class="wf-item"><span class="nm">卫视</span></div><div class="wf-item"><span class="nm">体育</span></div></div>
+        <div class="wf-col" style="flex:1"><div class="wf-item on"><span class="no">1</span><span class="nm">CCTV-1</span></div><div class="wf-item"><span class="no">5</span><span class="nm">CCTV-5</span></div><div class="wf-item"><span class="no">13</span><span class="nm">新闻</span></div><div class="wf-item"><span class="no">20</span><span class="nm">湖南卫视</span></div></div>
+      </div>
+      <div class="wf-preview" style="margin-top:6px">预览 + 当前节目</div>
+      <div class="wf-note">TiviMate：换台不离开列表</div>
+    </div>
+    <div class="wf">
+      <div class="lbl">B · 内容门户型</div>
+      <div class="wf-tabs"><span class="on">直播</span><span>电影</span><span>剧集</span></div>
+      <div class="wf-hero">运营位 / 英雄图</div>
+      <div class="wf-cards"><div>频道</div><div>频道</div><div>频道</div><div>频道</div></div>
+      <div class="wf-note">Smarters：先内容后频道</div>
+    </div>
+    <div class="wf">
+      <div class="lbl">C · Guide 优先型</div>
+      <div class="wf-grid mini">
+        <div class="wf-cell head"></div><div class="wf-cell head">8:00</div><div class="wf-cell head">8:30</div><div class="wf-cell head">9:00</div>
+        <div class="wf-cell ch">CCTV-1</div><div class="wf-cell hot">新闻联播</div><div class="wf-cell">焦点访谈</div><div class="wf-cell on">电视剧</div>
+        <div class="wf-cell ch">CCTV-5</div><div class="wf-cell">体育新闻</div><div class="wf-cell hot">比赛</div><div class="wf-cell">赛后</div>
+        <div class="wf-cell ch">湖南卫视</div><div class="wf-cell">综艺</div><div class="wf-cell on">电视剧</div><div class="wf-cell">晚会</div>
+      </div>
+      <div class="wf-note">Channels：节目即入口</div>
+    </div>
+    <div class="wf">
+      <div class="lbl">D · 极简列表型</div>
+      <div class="wf-item" style="justify-content:space-between"><span class="nm">Channels</span><span style="color:#8fa0c4">›</span></div>
+      <div class="wf-item" style="justify-content:space-between"><span class="nm">Guide</span><span style="color:#8fa0c4">›</span></div>
+      <div class="wf-item" style="justify-content:space-between"><span class="nm">Favorites</span><span style="color:#8fa0c4">›</span></div>
+      <div class="wf-item" style="justify-content:space-between"><span class="nm">Settings</span><span style="color:#8fa0c4">›</span></div>
+      <div class="wf-note">iPlayTV：四个入口讲完</div>
+    </div>
+  </div>
+
+  <div class="tw" style="margin-top:14px">
+    <table>
+      <thead><tr><th>范式</th><th>首屏任务</th><th>信息密度</th><th>适合</th><th>我们的取舍</th></tr></thead>
+      <tbody>
+        <tr><td>A 三栏</td><td>换台 / 找台</td><td>中</td><td>遥控器、常看固定几个台</td><td><b>主范式</b>，但用鼠标悬停 + 右键菜单替代焦点</td></tr>
+        <tr><td>B 门户</td><td>发现内容</td><td>低</td><td>手机、订阅型账号</td><td>只借「统一搜索」，不做运营位</td></tr>
+        <tr><td>C Guide</td><td>按时间找节目</td><td>高</td><td>体育 / 新闻 / 追节目</td><td><b>第二视图</b>：频道页内切换「海报墙 / 节目单」</td></tr>
+        <tr><td>D 极简</td><td>快速进入</td><td>低</td><td>轻度用户</td><td>借「收藏 / 最近」两个虚拟分组</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.2 频道浏览：宫格、列表与 EPG 的分工</h3>
+  <div class="grid g3">
+    <div class="panel"><h4 style="margin-top:0">宫格（我们已有）</h4><p class="small" style="margin:0">一屏 6–9 个，靠台标识别，适合「逛」和「认台」。问题是密度低，200 个台要滚很久；且当前卡片没有节目信息。</p></div>
+    <div class="panel"><h4 style="margin-top:0">列表（该补）</h4><p class="small" style="margin:0">一屏 14–18 行，频道号 + 台标 + 台名 + Now/Next + 收藏星标。适合「扫」和「数字键跳转」，也是电视端的默认形态。</p></div>
+    <div class="panel"><h4 style="margin-top:0">EPG（该补）</h4><p class="small" style="margin:0">一屏 8–12 行，按时间横读。适合「今晚有什么」，不适合找台。三者不是替代关系，是三个任务。</p></div>
+  </div>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div class="panel">
+      <h4 style="margin-top:0">台标与徽标的四条规范</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>台标安全区</b>：容器 16:9，台标最大占宽 62%，高度不超过 46%，四周留白 ≥12%。</li>
+        <li><b>失败占位必须体面</b>：我们已有天线图标占位，保留；不要显示破图。</li>
+        <li><b>徽标不超过三类</b>：LIVE、画质、收藏/最近；再多就变成噪声。</li>
+        <li><b>颜色即语义</b>：红=直播/正在播，青=可交互/1080p，金=4K，灰=不可用/无 EPG。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">频道号为什么重要</h4>
+      <p class="small">TiviMate 把频道号做成 OSD 里最大的字符；运营商盒子直接用数字键换台。频道号是<b>肌肉记忆的入口</b>，尤其对固定看几个台的用户。桌面端可以用「输入数字 → 浮层跳转」实现，不需要遥控器。</p>
+      <p class="src" style="margin:0">建议：频道号默认按「源内顺序」生成，允许用户改；与收藏一起持久化。<br><b>落地：</b>频道号已按源内顺序生成，贯穿卡片 / 节目单 / OSD，数字键可直达；手动改号尚未开放。</p>
+    </div>
+  </div>
+
+  <h3>4.3 EPG：不是一个页面，是三层能力</h3>
+  <div class="grid g3">
+    <div class="panel">
+      <h4 style="margin-top:0">① 数据层</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>来源：XMLTV（<code>epg.xml</code>）与 Xtream EPG。</li>
+        <li>自动发现：M3U 头部的 <code>x-tvg-url</code> / <code>url-tvg</code>。</li>
+        <li>字段：频道键、开始、结束、标题、副标题 / 集数、分类、简介、图标。</li>
+        <li>时区统一到本地时区，容忍源端缺失时区。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">② 映射层</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>首选 <code>tvg-id</code> 精确匹配。</li>
+        <li>回退：归一化台名（去空格、全半角、去「高清/HD」后缀）。</li>
+        <li>再回退：手动映射（每源一份「频道 ↔ EPG 频道」表）。</li>
+        <li>映射失败不报错，只显示「暂无节目单」。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">③ 视图层</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>频道卡：Now/Next + 进度条。</li>
+        <li>列表：Now/Next 两行。</li>
+        <li>Guide：2 小时横向网格 + 当前时间线。</li>
+        <li>播放 OSD：顶部节目条 + 下一档。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wf" style="margin-top:14px">
+    <div class="lbl">建议的 Guide 视图（桌面 · 结构还原）</div>
+    <div style="display:flex;gap:8px;margin-bottom:6px">
+      <div style="flex:0 0 132px;font-size:8.5px;color:#8296bd">频道</div>
+      <div style="flex:1;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:#8296bd"><span>20:00</span><span>20:30</span><span>21:00</span><span>21:30</span><span>22:00</span></div>
+    </div>
+    <div class="wf-grid">
+      <div class="wf-cell ch"><span class="no">1</span> CCTV-1</div>
+      <div class="wf-cell hot">新闻联播</div><div class="wf-cell">焦点访谈</div><div class="wf-cell on">电视剧 · 第 12 集</div><div class="wf-cell">晚间新闻</div>
+      <div class="wf-cell ch"><span class="no">5</span> CCTV-5</div>
+      <div class="wf-cell">体育新闻</div><div class="wf-cell hot">足球直播</div><div class="wf-cell gold">赛后集锦</div><div class="wf-cell">体育世界</div>
+      <div class="wf-cell ch"><span class="no">20</span> 湖南卫视</div>
+      <div class="wf-cell">综艺</div><div class="wf-cell">综艺</div><div class="wf-cell on">电视剧</div><div class="wf-cell">晚会</div>
+      <div class="wf-cell ch"><span class="no">33</span> 凤凰中文</div>
+      <div class="wf-cell">时事直通车</div><div class="wf-cell">锵锵</div><div class="wf-cell on">纪录片</div><div class="wf-cell">风云对话</div>
+    </div>
+    <div class="wf-legend">
+      <span><i style="background:rgba(217,58,70,.6)"></i>正在播</span>
+      <span><i style="background:rgba(77,214,250,.55)"></i>可选 / 回看</span>
+      <span><i style="background:rgba(255,216,137,.55)"></i>4K / 特别节目</span>
+      <span><i style="background:rgba(255,255,255,.15)"></i>无 EPG</span>
+    </div>
+    <div class="wf-note">规格：行高 44px；频道列 180px；30 分钟列约 120px；视窗 2 小时；当前时间竖线；块内两行截断；悬停出简介浮层。</div>
+  </div>
+
+  <div class="callout" style="margin-top:14px">
+    <b>EPG 的空态比 EPG 本身更重要。</b>大量公开源没有 EPG。错误做法是留一片空白网格；正确做法是降级成「只有频道 + 台标的列表」，并在页头用一行小字说明「该源未提供节目单，可在源设置里指定 EPG 地址」。
+    <br><b>落地：</b>数据层、映射层（自动）、视图层都已实现；「手动映射表」仍未做，映射失败会走空态文案而不是空白网格。
+  </div>
+
+  <h3>4.4 播放页 OSD：三种哲学，选「信息型 + 桌面化」</h3>
+  <div class="grid g3">
+    <div class="panel"><h4 style="margin-top:0">信息型（TiviMate）</h4><p class="small" style="margin:0">顶部节目条 + 最近频道。回答「看什么、接下来什么、还能看什么」。信息密度最高，最像电视。</p></div>
+    <div class="panel"><h4 style="margin-top:0">调试型（GSE）</h4><p class="small" style="margin:0">解码、循环流、音轨、字幕全部暴露。适合排障，不适合日常。</p></div>
+    <div class="panel"><h4 style="margin-top:0">极简型（IINA）</h4><p class="small" style="margin:0">一条悬浮胶囊，画面优先。适合桌面通用播放，但缺少频道语义。</p></div>
+  </div>
+
+  <div class="wf wf-osd" style="margin-top:14px">
+    <div class="lbl">建议的直播 OSD（结构还原）</div>
+    <div class="top">
+      <div class="ch-no">5</div>
+      <div class="ch-logo">CCTV-5</div>
+      <div class="meta">
+        <div class="pg">体育新闻</div>
+        <div class="time">20:00 – 20:30 · 已播 18 分钟</div>
+        <div class="badges"><span>LIVE</span><span>HD</span><span>1080p</span><span>HLS</span></div>
+        <div class="nxt">接下来 20:30 · 足球直播</div>
+      </div>
+      <div class="clock">20:18</div>
+    </div>
+    <div class="bottom">
+      <div class="wf-recent">
+        <div><b>1</b>CCTV-1</div><div><b>5</b>CCTV-5</div><div><b>13</b>新闻</div><div><b>20</b>湖南卫视</div>
+        <div style="background:rgba(77,214,250,.16);color:#b6efff"><b>▤</b>节目单</div>
+      </div>
+      <div class="wf-ctrl">
+        <span class="k">▲</span><span class="k">▼</span> 换台
+        <span class="k">◀</span><span class="k">▶</span> 上一台 / 下一台
+        <span class="k">123</span> 频道号
+        <span class="k">⇄</span> 线路 2/5
+        <span class="k">★</span> 收藏
+        <span class="k">EPG</span> 节目单
+      </div>
+    </div>
+    <div class="wf-note">规格：OSD 4 秒无操作自动隐藏；鼠标移动 / 按键唤醒；换台时保留 2.5 秒；不遮画面中心；键盘 ↑↓ 换台，数字键唤起频道号输入。国内样本进一步证明：底部应是「分组频道带」，最近频道作为第一个分组，而不是独立小块。</div>
+  </div>
+
+  <h3>4.5 失败与换线：竞品的「隐形体验」</h3>
+  <p>直播流的失败是常态，不是异常。竞品的差异不在「会不会失败」，而在<b>失败后用户是否察觉</b>。下面是需要覆盖的错误分类与对应动作：</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>失败类型</th><th>表现</th><th>建议动作</th><th>用户可见反馈</th></tr></thead>
+      <tbody>
+        <tr><td>DNS / 连接超时</td><td>长时间转圈或立即失败</td><td>8 秒起播超时后切下一条</td><td>「线路 1 超时，正在切换」</td></tr>
+        <tr><td>HTTP 403 / 401</td><td>有响应但拒绝</td><td>立即切下一条（不要重试同一条）</td><td>角标「线路 1/5 不可用」</td></tr>
+        <tr><td>HTTP 404 / 分片 404</td><td>HLS 播放几秒后中断</td><td>判为线路失效，切下一条并标记</td><td>「播放中断，已切换线路」</td></tr>
+        <tr><td>解码失败 / 不支持的编码</td><td>黑屏、卡住、只有声音</td><td>先尝试系统播放器，再切线路</td><td>「编码不兼容，已切换播放内核」</td></tr>
+        <tr><td>Referer / UA 校验</td><td>403 或直接断开</td><td>带源内请求头重试一次</td><td>提示「该源需要请求头」，可编辑</td></tr>
+        <tr><td>地理封锁</td><td>403 / 空流</td><td>切下一条；全失败则明确说明</td><td>「该源在当前网络不可用」</td></tr>
+        <tr><td>流正常结束</td><td>播放停止但无错误</td><td>直播场景自动重连当前线路</td><td>「直播已断开，正在重连」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="versus">
+    <div class="bad"><h5>反例：静默切换</h5><p style="margin:0">不告知就换线，用户可能从 1080p 掉到 480p，或从 A 源换到 B 源，画质与台标不一致，产生「这产品不稳定」的印象。</p></div>
+    <div class="good"><h5>正例：一次轻提示 + 可回退</h5><p style="margin:0">顶部一条 3 秒提示「线路 1 失败，已切换到线路 2」，OSD 内保留「线路 2/5」可点，点开可手动选回或锁定当前线路。</p></div>
+  </div>
+  <p class="src" style="margin-top:8px"><b>落地：</b>超时 / 403 / 装片失败已按「切下一条 + Toast + OSD 线路面板」实现；解码失败会先回系统播放器；直播断开由转封装自动重连。地理封锁与请求头错误在全失败卡片里逐条说明原因。</p>
+
+  <h3>4.6 源管理：入口要多，界面要少</h3>
+  <div class="grid g2">
+    <div class="panel">
+      <h4 style="margin-top:0">导入入口的优先级</h4>
+      <ol class="small">
+        <li><b>M3U 地址</b>（我们已有）：最高频，放第一。</li>
+        <li><b>粘贴文本</b>：用户从群里复制一堆 <code>#EXTM3U</code>，比让他存文件再上传顺。</li>
+        <li><b>Xtream 账号</b>：host + 用户名 + 密码，海外 / 自建源的主流形式。</li>
+        <li><b>二维码 / 局域网</b>：手机扫码把源推给桌面端，适合电视与手机协同。</li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">每个源应该有的属性</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>名称、地区、启用状态（已有）</li>
+        <li><b>EPG 地址</b>（新增，可留空自动发现）</li>
+        <li><b>User-Agent / Referer</b>（新增，高级折叠）</li>
+        <li><b>更新策略</b>：手动 / 每 6 小时 / 每天</li>
+        <li><b>源优先级</b>：同频道多源时的排序依据</li>
+      </ul>
+      <p class="src" style="margin:6px 0 0"><b>落地：</b>EPG 地址、User-Agent / Referer 已实现；更新策略与手动源优先级未做。</p>
+    </div>
+  </div>
+
+  <div class="wf" style="margin-top:12px">
+    <div class="lbl">建议的导入向导（三选一）</div>
+    <div class="wf-tabs" style="margin-bottom:8px"><span class="on">M3U 地址</span><span>Xtream 账号</span><span>粘贴文本</span></div>
+    <div class="wf-row">
+      <div class="wf-col" style="flex:1">
+        <div style="font-size:9px;color:#8fa0c4;margin-bottom:3px">名称</div>
+        <div style="background:rgba(255,255,255,.07);border-radius:4px;padding:5px 7px;font-size:9px;color:#dfe5f3">我的央视源</div>
+        <div style="font-size:9px;color:#8fa0c4;margin:7px 0 3px">M3U 地址</div>
+        <div style="background:rgba(255,255,255,.07);border-radius:4px;padding:5px 7px;font-size:9px;color:#dfe5f3">https://example.com/list.m3u</div>
+        <div style="font-size:9px;color:#8296bd;margin-top:8px">▸ 高级：EPG 地址 / UA / Referer / 地区</div>
+      </div>
+      <div class="wf-col" style="flex:0 0 42%">
+        <div style="font-size:9px;color:#8fa0c4">验证结果</div>
+        <div style="font-size:10px;color:#9be6fa;margin-top:4px">✓ 可解析 · 128 个频道 · 2.4 s</div>
+        <div style="font-size:9px;color:#8fa0c4;margin-top:6px">识别到 6 个分组：央视 / 卫视 / 新闻 / 体育 / 电影 / 少儿</div>
+        <div style="margin-top:10px;display:flex;gap:6px"><span style="font-size:8.5px;padding:3px 9px;border-radius:4px;background:#4dd6fa;color:#08101f;font-weight:700">保存并进入</span><span style="font-size:8.5px;padding:3px 9px;border-radius:4px;background:rgba(255,255,255,.08);color:#c6cfe4">取消</span></div>
+      </div>
+    </div>
+    <div class="wf-note">验证前置（我们已有）要保留，并把「频道数 / 分组数 / 耗时」显示出来，让用户知道保存后得到什么。</div>
+  </div>
+
+  <h3>4.7 状态、任务与告警：三层信息，不要混在一起</h3>
+  <div class="grid g3">
+    <div class="panel"><h4 style="margin-top:0">单源健康</h4><p class="small" style="margin:0">延迟、频道数、上次检测、错误原因。我们已有，缺「下次检测时间」与「连续失败次数」。</p></div>
+    <div class="panel"><h4 style="margin-top:0">任务队列</h4><p class="small" style="margin:0">串行检测 + 统一任务中心是优势。建议在侧边栏源行上显示一个 3px 进度条或脉冲点，而不是只靠状态页。</p></div>
+    <div class="panel"><h4 style="margin-top:0">全局告警</h4><p class="small" style="margin:0">源失效超过 24 小时才升级为「角标 + 一行建议」，避免每次失败都打扰。文案要给出下一步：「打开状态页」「更换地址」「停用该源」。</p></div>
+  </div>
+
+  <h3>4.8 空态与首启：我们已经领先，别浪费</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>状态</th><th>我们现状</th><th>竞品常见做法</th><th>建议</th></tr></thead>
+      <tbody>
+        <tr><td>模块关闭</td><td>已有说明 + 开启按钮</td><td>多数无此态</td><td>保留，补一句「开启后不会自动播放」</td></tr>
+        <tr><td>无源</td><td>导入 + 恢复默认</td><td>只给导入</td><td>保留「恢复内置源」，这是我们的差异点</td></tr>
+        <tr><td>源无频道</td><td>提示去检测</td><td>多为一句话</td><td>补「去检测」按钮，直接跳到该源</td></tr>
+        <tr><td>搜索无结果</td><td>已有文案</td><td>普遍较好</td><td>补「清除筛选」快捷动作</td></tr>
+        <tr><td>加载失败</td><td>错误组件 + 重试</td><td>普遍较差</td><td>补错误分类文案（超时 / 403 / 解析失败）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.9 视觉语言对照</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>产品</th><th>底色</th><th>主色 / 强调</th><th>卡片与材质</th><th>信息密度</th><th>气质</th></tr></thead>
+      <tbody>
+        <tr><td>TiviMate</td><td>近黑 / 半透明</td><td>白 + 节目高亮</td><td>无卡片，直接贴画面</td><td>高</td><td>工具、克制</td></tr>
+        <tr><td>Smarters</td><td>深灰 + 蓝紫</td><td>品牌蓝</td><td>大圆角海报、轮播</td><td>低</td><td>门户、商业化</td></tr>
+        <tr><td>Channels</td><td>深紫黑</td><td>紫 / 红 / 橄榄</td><td>网格 + 顶部详情带</td><td>高</td><td>客厅、节目为中心</td></tr>
+        <tr><td>Jellyfin</td><td>纯黑</td><td>蓝紫</td><td>横向货架</td><td>中</td><td>媒体库、中性</td></tr>
+        <tr><td>IINA</td><td>跟随画面</td><td>系统灰</td><td>悬浮胶囊</td><td>极低</td><td>桌面、轻</td></tr>
+        <tr><td><b>拾光 2.0</b></td><td>深墨蓝渐变</td><td>信号红 / 电波青 / 金</td><td>16:9 信号面板 + 细描边</td><td>中</td><td>深夜直播、有品牌感</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src" style="margin-top:8px">我们的视觉是这批产品里辨识度最高的之一。问题不在「好不好看」，而在「信息承载不足」：同样的卡片，竞品多塞了 Now/Next、频道号、收藏与线路状态。</p>
+</section>
+
+<!-- ================= 05 ================= -->
+<section id="s5">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Task walkthrough</div>
+      <h2><span class="num">05</span>任务级走查：五个动作，谁更省一步</h2>
+    </div>
+    <div class="sec-note">按公开界面结构与截图做路径推演，不是可用性测试，不承诺精确秒数。</div>
+  </div>
+
+  <div class="tw" style="margin-top:18px">
+    <table style="min-width:980px">
+      <thead>
+        <tr><th>任务</th><th>拾光 2.0</th><th>TiviMate</th><th>Smarters</th><th>GSE</th><th>Channels</th><th>Jellyfin</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>首次接入，看到第一个台</b></td>
+          <td>打开即用 → 选源 → 点台。<span class="tag a">2 步</span></td>
+          <td>装 App → 加列表 → 等解析 → 选台。<span class="tag c">4–5 步</span></td>
+          <td>登录 / 加账号 → 选 Live → 选台。<span class="tag c">4 步</span></td>
+          <td>加列表 → 选列表 → 选台。<span class="tag c">3–4 步</span></td>
+          <td>服务器 + tuner + EPG 配置 → 客户端选台。<span class="tag c">重</span></td>
+          <td>服务端配置 tuner → 客户端选台。<span class="tag c">重</span></td>
+        </tr>
+        <tr>
+          <td><b>找到想看的台</b></td>
+          <td>分组 chip + 搜索 + 列表密度；频道号 / 数字键直达。<span class="tag a">快</span></td>
+          <td>分组 → 列表 / 数字键直达。<span class="tag a">快</span></td>
+          <td>搜索 / 海报浏览。<span class="tag b">中</span></td>
+          <td>分组 + 收藏 + 最近。<span class="tag b">中</span></td>
+          <td>频道筛选栏 + 数字键。<span class="tag a">快</span></td>
+          <td>Guide / 频道列表。<span class="tag b">中</span></td>
+        </tr>
+        <tr>
+          <td><b>确认「现在播什么」</b></td>
+          <td>频道卡 / OSD / 节目单都有 Now &amp; Next；节目单支持时间轴与时间环。<span class="tag a">完整</span></td>
+          <td>节目条 + EPG + Next。<span class="tag a">完整</span></td>
+          <td>EPG 依赖源，界面有节目。<span class="tag b">中</span></td>
+          <td>播放页有 Now/Next。<span class="tag a">完整</span></td>
+          <td>Guide 为第一视图。<span class="tag a">完整</span></td>
+          <td>Guide + 节目详情。<span class="tag a">完整</span></td>
+        </tr>
+        <tr>
+          <td><b>播放失败后继续看</b></td>
+          <td>403 / 超时自动顺延下一条线路；Toast 提示 + OSD 线路面板可手动锁定；全失败出诊断卡片。<span class="tag a">自愈</span></td>
+          <td>自动切线路 / 手动选线。<span class="tag a">自愈</span></td>
+          <td>自动重试 / 换线路（依版本）。<span class="tag b">中</span></td>
+          <td>可切换播放器与线路。<span class="tag b">中</span></td>
+          <td>服务端 tuner 重试。<span class="tag b">中</span></td>
+          <td>转码 / 重试，直播弱。<span class="tag c">弱</span></td>
+        </tr>
+        <tr>
+          <td><b>管理或更换源</b></td>
+          <td>源页：启停 / 重命名 / 删除 / 检测 / 恢复。<span class="tag a">清晰</span></td>
+          <td>设置内多列表管理。<span class="tag b">中</span></td>
+          <td>账号管理，偏简单。<span class="tag b">中</span></td>
+          <td>五种导入 + 远程列表。<span class="tag a">全</span></td>
+          <td>服务端设置，客户端不管理。<span class="tag c">重</span></td>
+          <td>服务端 tuner 管理。<span class="tag c">重</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div class="okbox"><b>我们赢在哪：</b>开箱即用与源管理清晰度。没有任何一个开源 / 通用产品能像我们这样「打开就有 11 个地区的中文频道」。</div>
+    <div class="warn"><b>研究时的短板：</b>任务 3（现在播什么）与任务 4（播不了了怎么办）当时完全缺位；现在两项都已补齐。剩下的主路径差距是「打开即播 / 续播上次频道」。</div>
+  </div>
+
+  <h3>换成国内电视端的尺子</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>任务</th><th>火星直播</th><th>小薇直播</th><th>我的电视</th><th>拾光 2.0</th></tr></thead>
+      <tbody>
+        <tr><td>看到第一个台</td><td>打开即播</td><td>打开即播</td><td>打开即播 / 上次频道</td><td>进入频道墙再点台（未做续播）</td></tr>
+        <tr><td>找到想看的台</td><td>编号 + 数字键 + 分类</td><td>数字键 + 上下换台</td><td>数字选台 + 底部频道带</td><td>分组 chip + 搜索 + 数字键 + 列表密度</td></tr>
+        <tr><td>知道现在播什么</td><td>列表内 Now</td><td>三栏 OSD + 时间表</td><td>Now / Next + 分辨率 / 网速</td><td>Now / Next + 节目单抽屉 + 时间环</td></tr>
+        <tr><td>播放失败</td><td>多线路切换</td><td>多线路切换</td><td>多线路 + 线路选择</td><td>多线路自动顺延 + OSD 线路面板</td></tr>
+        <tr><td>管理源</td><td>自定义频道 / 分享码</td><td>自定义源</td><td>自定义源 / 缓存设置</td><td>源页完整（更强）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src" style="margin-top:8px">结论：国内产品的「源管理」普遍弱于我们；主路径上，我们的换台与节目单已经追平，唯一仍短的一步是「打开即播 / 续播上次频道」。拾光下一步补的是这一步，不是再加设置项。</p>
+</section>
+
+<!-- ================= 06 ================= -->
+<section id="s6">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Capability matrix</div>
+      <h2><span class="num">06</span>能力矩阵（25 项）</h2>
+    </div>
+    <div class="sec-note"><c class="y">●</c> 原生　<c class="m">◐</c> 部分 / 需插件或后端　<c class="n">○</c> 无<br>拾光 2.0 列已按 2026-11-23 当前代码标注，逐项证据见 <a href="#s9">9.14</a>。</div>
+  </div>
+
+  <div class="tw" style="margin-top:16px">
+    <table class="matrix" style="min-width:1080px">
+      <thead>
+        <tr>
+          <th>能力</th><th>拾光 2.0</th><th>TiviMate</th><th>Smarters</th><th>GSE</th><th>OTT Nav.</th><th>Channels</th><th>Jellyfin</th><th>VLC / IINA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>默认开箱接入（免配置）</td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>M3U 多源导入</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td></tr>
+        <tr><td>Xtream Codes 账号</td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>导入前校验</td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>每源启停 / 重命名 / 删除</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>连接检测 / 健康度</td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>检测任务队列</td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>画质去重 / 最优线路</td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>备用线路 / 失败自动切换</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>手动切换线路</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>EPG 节目单（XMLTV）</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>每源独立 EPG 映射</td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>Now / Next 节目条</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>收藏</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>最近观看</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td></tr>
+        <tr><td>频道号 / 数字键跳转</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>列表 / 宫格双视图</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>频道排序 / 屏蔽</td><td><c class="n">○</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>定时巡检 / 失效告警</td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>回看 / 时移</td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>录制</td><td><c class="n">○</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td></tr>
+        <tr><td>多画面</td><td><c class="m">◐</c></td><td><c class="n">○</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>家长锁</td><td><c class="n">○</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>与本地媒体库统一</td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>桌面端体验</td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src" style="margin-top:8px">◐ 表示部分支持、需插件 / 后端 / 特定版本或特定源能力；本表用于方向判断，不替代逐版本核对。<b>拾光 2.0 本次由 ○ 转 ● / ◐ 的 12 项：</b>备用线路与失败自动切换、手动切换线路、XMLTV 节目单、Now / Next、收藏、最近、频道号与数字键、列表 / 宫格双视图、回看 / 时移、定时巡检、多画面。其中<b>回看</b>按源能力开放（公共源实测 3–4 天），<b>时移</b>窗口取决于转封装 / 源站缓冲；<b>每源 EPG 映射</b>目前是自动匹配（tvg-id → 台名归一化），没有手动映射表；<b>定时巡检</b>是进入信号页时补旧结果，不是后台定时任务。仍为 ○ 的：Xtream Codes、频道排序 / 屏蔽、录制、家长锁。</p>
+
+  <h3 style="margin-top:34px">国内电视端专项矩阵（12 项）</h3>
+  <p class="lead" style="font-size:13.5px">国内产品的差异不在「有没有」，而在「默认路径有多短」。这张表只看客厅场景的硬指标，并把拾光放在同一把尺子上。</p>
+  <div class="tw" style="margin-top:12px">
+    <table class="matrix" style="min-width:900px">
+      <thead>
+        <tr><th>能力 / 习惯</th><th>拾光 2.0</th><th>火星直播</th><th>小薇直播</th><th>我的电视</th><th>HDP</th><th>星火</th><th>央视频 TV</th><th>运营商 IPTV</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>打开即播 / 续播上次频道</td><td><c class="n">○</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td></tr>
+        <tr><td>上下键换台</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="y">●</c></td></tr>
+        <tr><td>数字键 / 频道号直达</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="y">●</c></td></tr>
+        <tr><td>常驻频道条（分组横排）</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td><td><c class="y">●</c></td></tr>
+        <tr><td>列表 / OSD 内 Now / Next</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td></tr>
+        <tr><td>单频道节目单（时间表）</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td></tr>
+        <tr><td>时间轴 EPG 网格</td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td></tr>
+        <tr><td>收藏（含长按 / 右键）</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="m">◐</c></td></tr>
+        <tr><td>多线路切换 / 失败顺延</td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>7 天回看 / 时移</td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td></tr>
+        <tr><td>自定义源 / 导入</td><td><c class="y">●</c></td><td><c class="m">◐</c></td><td><c class="m">◐</c></td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="m">◐</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td></tr>
+        <tr><td>源健康 / 定时巡检</td><td><c class="y">●</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="n">○</c></td><td><c class="y">●</c></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src" style="margin-top:8px">国内第三方产品的 EPG / 回看普遍依赖源能力，表中按「产品界面是否提供入口」判断，不代表所有频道可用。「央视频 TV」按官方版权能力判断。<b>拾光 2.0 列已按当前实现标注：</b>上下键换台、数字键直达、播放器底部频道带、OSD 内 Now / Next、单频道节目单抽屉、时间轴网格、收藏（右键 / 星标）、多线路与失败顺延均已实现；<b>回看</b>实测 3–4 天、<b>时移</b>受转封装 / 源站缓冲窗口限制，因此记 ◐；<b>巡检</b>在进入信号页时触发并保留 24 小时可用率采样，不是后台定时任务；<b>打开即播 / 续播上次频道</b>仍未做。</p>
+</section>
+
+<!-- ================= 07 ================= -->
+<section id="s7">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Gaps &amp; specs</div>
+      <h2><span class="num">07</span>差距与落地规格</h2>
+    </div>
+    <div class="sec-note">每条 P0 都给到「问题证据 → 目标 → 界面规格 → 验收」，可以直接进开发。</div>
+  </div>
+
+  <div class="gap p0">
+    <h4><span class="pill p0">P0</span> 备用线路与播放失败自愈 <span class="tag a">已实现</span></h4>
+    <p class="small" style="margin:2px 0 4px"><b>现状：</b>每个频道保留 1 主 + 3 备（地址与 UA / Referer 一起入库）；403 / 超时 / 装片失败自动切下一条并 Toast「线路 1 失败，已切换到线路 2/3」；OSD 线路面板可手动锁定；全部失败才出居中卡片。</p>
+    <p class="why"><b>证据：</b>我们自己保留多条候选后又丢弃，只留评分最高的一条（<code>bestChannels</code>）；<code>TVChannel</code> 只有一个 <code>streamURL</code>。而 TiviMate / Smarters / OTT Navigator 都把同频道多线路当默认能力，国内直播产品更是标配。</p>
+    <dl class="spec">
+      <dt>数据结构</dt><dd><code>TVChannel</code> 从单流改为 <code>streams: [TVChannelStream]</code>（url、headers、画质、HLS、score），按 score 降序；同时记录 <code>lastGoodStreamID</code>。</dd>
+      <dt>播放策略</dt><dd>起播超时 8s → 下一条；403 / 404 / 解码失败 → 立即下一条；全失败 → 展示「该频道 N 条线路均不可用」并给出「重试 / 换源」。</dd>
+      <dt>用户反馈</dt><dd>OSD 顶部 3 秒轻提示「线路 1 失败，已切换到线路 2」；OSD 内保留「线路 2/5」入口，可手动锁定。</dd>
+      <dt>记忆</dt><dd>记住每个频道上次成功的线路，下次优先；若连续失败两次则回退到评分排序。</dd>
+      <dt>验收</dt><dd>手工把首选线路改成 403 地址，播放应在 10 秒内自动起播第二条；提示可见且不打断画面；手动切回后本次会话保持。</dd>
+    </dl>
+  </div>
+
+  <div class="gap p0">
+    <h4><span class="pill p0">P0</span> EPG：节目单、Now/Next 与 Guide 视图 <span class="tag a">已实现</span></h4>
+    <p class="small" style="margin:2px 0 4px"><b>现状：</b>M3U 头部 <code>url-tvg</code> / <code>x-tvg-url</code> 自动读，也可在源库手填；XMLTV 按地址缓存 6 小时；频道卡、OSD、节目单抽屉都有 Now / Next；「节目回看」支持时间轴 / 传送门 / 时间环三种视图，日期只保留前天 / 昨天 / 今天 / 明天；预约走系统通知。</p>
+    <p class="why"><b>证据：</b>频道页只显示台名与分组；竞品全部把 EPG 当作直播首页的核心信息。没有 EPG，「找台」只能靠记忆，直播退化成「能播几个台」。</p>
+    <dl class="spec">
+      <dt>数据</dt><dd>每个源可选 EPG 地址（留空则读 M3U 的 <code>x-tvg-url</code>）；解析 XMLTV，落库 <code>EPGProgram(channelKey, start, end, title, subtitle, category, desc)</code>。</dd>
+      <dt>映射</dt><dd><code>tvg-id</code> 精确 → 台名归一化 → 手动映射表；失败只降级，不阻断频道加载。</dd>
+      <dt>视图 1</dt><dd>频道卡底部两行：Now 标题 + 时间/进度；无 EPG 时显示「暂无节目单」而不是留白。</dd>
+      <dt>视图 2</dt><dd>频道页新增「海报墙 / 节目单」切换；Guide 行高 44、频道列 180、2 小时视窗、当前时间线、块内两行截断。</dd>
+      <dt>视图 3</dt><dd>播放 OSD 顶部节目条：台标、频道号、台名、Now、起止、进度、Next。</dd>
+      <dt>验收</dt><dd>导入一个带 XMLTV 的源，30 秒内频道卡出现 Now/Next；切到 Guide 能看到当前时间线；断网后仍展示上次缓存。</dd>
+    </dl>
+  </div>
+
+  <div class="gap p0">
+    <h4><span class="pill p0">P0</span> 收藏、最近、频道号与播放器频道带 <span class="tag a">已实现</span></h4>
+    <p class="small" style="margin:2px 0 4px"><b>现状：</b>侧边栏有收藏 / 最近两个虚拟分组；频道卡与列表行右键可收藏；频道号自动生成并贯穿卡片、节目单与 OSD；数字键 1.5 秒缓冲直达；播放页底部频道带 ↑↓ 换台，悬停 400ms 出静音预览。</p>
+    <p class="why"><b>证据：</b>频道列表按「分组 rank → 台名」固定排序，用户无法把常看的几个台固定在上方；TiviMate 的 OSD 第一屏就是「最近频道」，火星直播用编号 + 当前节目撑起整列，my-tv 用底部频道带完成换台。国内用户对「打开即播、上下换台、数字键直达」有肌肉记忆。</p>
+    <dl class="spec">
+      <dt>收藏</dt><dd>频道级布尔收藏；侧边栏新增「收藏」虚拟组置顶；频道卡右上角星标；右键 / 长按可切换。</dd>
+      <dt>最近</dt><dd>本地记录最近 20 个频道（含时间），侧边栏「最近」虚拟组；直播不写播放进度。</dd>
+      <dt>频道号</dt><dd>默认按源内顺序生成，可编辑；键盘输入数字弹出频道号浮层，回车跳转；OSD 显示大号数字。</dd>
+      <dt>频道带</dt><dd>播放页底部横向频道带：分组标题 + 台标 + 台名 + Now；当前频道反白；↑↓ 直接换台，不退出播放。</dd>
+      <dt>换台反转</dt><dd>设置项「↑ 上一个台 / ↓ 下一个台」可反转，沿用 my-tv 的行为化命名。</dd>
+      <dt>排序</dt><dd>收藏 → 最近 → 用户置顶 → 分组 → 台名；提供「手动排序」入口（拖拽）。</dd>
+      <dt>验收</dt><dd>收藏 3 个台后侧边栏出现「收藏(3)」；重启应用仍保留；输入 20 回车能直接起播；播放中 ↑↓ 换台且底部频道带同步高亮。</dd>
+    </dl>
+  </div>
+
+  <div class="gap p1">
+    <h4><span class="pill p1">P1</span> 列表视图与密度切换 <span class="tag a">已实现</span></h4>
+    <p class="why">海报墙与紧凑列表两种密度已放在同一页切换；列表行含频道号、台标、台名、Now / Next 与收藏星标，搜索同时匹配频道名与节目名。</p>
+  </div>
+
+  <div class="gap p1">
+    <h4><span class="pill p1">P1</span> 源定时巡检与失效告警 <span class="tag b">部分实现</span></h4>
+    <p class="why">已做「进入信号页时低频巡检」：收藏频道优先探，其余补 6 小时前的旧结果，并保留 24 小时可用率采样（每小时一个点，最多 48 点）。还没有后台定时任务与主动告警推送；失败动作目前是重试 / 换线 / 查看信号页。</p>
+  </div>
+
+  <div class="gap p1">
+    <h4><span class="pill p1">P1</span> Xtream Codes 与粘贴文本导入 <span class="tag c">未做</span></h4>
+    <p class="why">海外 / 自建源大量以 host + 用户名 + 密码提供。导入向导改为三段式：M3U 地址 / Xtream 账号 / 粘贴文本；保存前同样做一次真实拉取校验，并展示频道数与分组数。Xtream 需拉取 Live 分类与频道列表，VOD 暂不进入电视模块。</p>
+  </div>
+
+  <div class="gap p1">
+    <h4><span class="pill p1">P1</span> 每源 EPG 映射与频道整理 <span class="tag b">部分实现</span></h4>
+    <p class="why">每源可填独立 EPG 地址，映射走「tvg-id 精确 → 台名归一化」自动匹配；还没有手动映射表，也没有分组隐藏 / 置顶 / 拖拽排序。</p>
+  </div>
+
+  <div class="gap p2">
+    <h4><span class="pill p2">P2</span> 回看 / 时移 <span class="tag a">已实现</span></h4>
+    <p class="why">回看只在源声明 catch-up 模板时开放：EPG 中过去的节目可点，播放地址按模板拼接（支持 <code>${start}</code> / <code>${utc}</code> / <code>${(b)…}</code> 与全局默认模板）。不自建录制服务。时移用转封装滑动窗口兜住直播，并把「画面停在…直播已经走到…」做成时间河；窗口长度取决于源站缓冲，界面按真实可 seek 区间缩放。</p>
+  </div>
+  <div class="gap p2">
+    <h4><span class="pill p2">P2</span> 录制、多画面、家长锁、投屏 <span class="tag b">部分实现</span></h4>
+    <p class="why">多画面已做 2×2 静音预览（点击切声音、双击放大），本质是预览帧而非四路同时解码；另外有「最近 30 秒」片段录制（ffmpeg 落盘到「影片 / 拾光电视片段」）。真正的定时录制、家长锁与投屏仍未做，涉及存储治理、版权与家庭场景，放在客厅增强阶段。</p>
+  </div>
+  <div class="gap p2">
+    <h4><span class="pill p2">P2</span> 「粘贴一个流地址就能播」 <span class="tag c">未做</span></h4>
+    <p class="why">借 GSE 的 single stream 与 VLC 的兜底能力：提供一个临时播放入口，不落库、不进频道列表，用于验证源与排障。</p>
+  </div>
+</section>
+
+<!-- ================= 08 ================= -->
+<section id="s8">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Roadmap</div>
+      <h2><span class="num">08</span>路线图：先闭环，再节目单，最后生态</h2>
+    </div>
+    <div class="sec-note">每一步都有可验证的完成标准，不做「感觉做完了」。</div>
+  </div>
+
+  <div class="panel road" style="margin-top:16px">
+    <div class="item">
+      <div class="stage">阶段 1<b>可用性闭环</b><span class="tag a">已完成</span></div>
+      <div class="body">
+        <b>备用线路 + 收藏 / 最近 / 频道号 + 播放器频道带</b><br>
+        改动集中在频道模型与播放路径：<code>TVChannel</code> 保留候选线路；播放失败自动顺延并提示；侧边栏新增「收藏」「最近」两个虚拟分组；播放页新增底部频道带与 ↑↓ 换台；键盘数字唤起频道号跳转。
+        <div class="accept">验收：首选线路 403 时 10 秒内自动起播；收藏与最近重启不丢；数字键可跳台；播放中 ↑↓ 换台不退出。</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="stage">阶段 2<b>节目单</b><span class="tag a">已完成</span></div>
+      <div class="body">
+        <b>XMLTV 解析 + 映射 + 三种 EPG 视图</b><br>
+        每源可配 EPG 地址；频道卡出现 Now/Next；新增 Guide 视图与播放 OSD 节目条；无 EPG 时降级为纯频道列表并说明原因。
+        <div class="accept">验收：带 XMLTV 的源 30 秒内出现节目；Guide 时间线与当前节目一致；断网展示缓存。</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="stage">阶段 3<b>源生态</b><span class="tag b">部分完成</span></div>
+      <div class="body">
+        <b>Xtream + 粘贴导入 + 定时巡检 + 失效告警</b><br>
+        导入向导三段式；源属性补 EPG / UA / 更新策略；状态页显示「上次 / 下次检测」；失败源在侧边栏标红并给出一键处理。
+        <div class="accept">验收：Xtream 账号可导入并播放；模拟源失效后 6 小时内出现告警；告警动作可闭环。</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="stage">阶段 4<b>客厅增强</b><span class="tag b">部分完成</span></div>
+      <div class="body">
+        <b>列表密度、回看、多画面、家长锁、投屏</b><br>
+        按源能力逐步开放；录制单独评估；所有增强不得破坏「打开就能看」的默认路径。
+        <div class="accept">验收：新能力默认关闭或按需出现；关闭任一增强后核心路径仍可用。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn" style="margin-top:18px">
+    <b>不建议现在做的三件事：</b>① 自建录制 / 转码服务（成本与版权风险高）；② 把电影 / 剧集塞进电视模块（我们已有影院）；③ 模仿门户式运营位（会削弱工具感与本地媒体库的一致性）。
+  </div>
+</section>
+
+<!-- ================= 09 界面方案 ================= -->
+<section id="s9">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Product design</div>
+      <h2><span class="num">09</span>拾光 2.0 界面方案：五个 Tab 与一个播放窗口</h2>
+    </div>
+    <div class="sec-note">先保留已经做对的，再把「看直播」拆成五个可停留的页面，最后把播放窗口做成真正的电视。</div>
+  </div>
+
+  <p class="lead">这一节不再比较竞品，而是给出我们自己的设计。基线来自现有实现：深墨蓝的模块身份、16:9 信号卡、源管理与检测队列、统一的工具栏胶囊；扩展方向来自国内电视端的「频道带 + 数字键 + 节目单」和海外产品的「Guide + Now/Next + 备用线路」。</p>
+
+  <h3>9.1 现状审计：哪些必须保留</h3>
+  <div class="tw">
+    <table style="min-width:760px">
+      <thead><tr><th>现有实现</th><th>判断</th><th>处理</th></tr></thead>
+      <tbody>
+        <tr><td>窗口工具栏胶囊（频道 / 电视源 / 状态）</td><td><span class="tag a">保留模式</span></td><td>扩成五个 Tab，仍放在工具栏中区，与「网络存储」「影院」一致。</td></tr>
+        <tr><td>深墨蓝底 + 信号红 / 电波青 / 金</td><td><span class="tag b">保留概念</span></td><td>深色作为主视觉；浅色映射为同语义的浅底版本，颜色全部走主题 token，不硬编码。</td></tr>
+        <tr><td>TVHubView 强制 <code>.environment(\.colorScheme, .dark)</code></td><td><span class="tag a">已改造</span></td><td>已删除全局强制深色；只有播放 OSD 覆盖层保持深色，其余跟随系统外观。</td></tr>
+        <tr><td>16:9 频道卡（台标、LIVE、画质、悬停浮起）</td><td><span class="tag a">保留</span></td><td>作为「海报墙」视图，补频道号、Now/Next、收藏星标。</td></tr>
+        <tr><td>分组 chip + 搜索 + 频道计数</td><td><span class="tag a">保留</span></td><td>增加「只看收藏」，搜索扩展到节目名。</td></tr>
+        <tr><td>源行（开关 / 检测 / 频道 / 菜单 / 健康）</td><td><span class="tag a">保留</span></td><td>升级为「源库」，补 EPG 地址、更新策略、优先级。</td></tr>
+        <tr><td>状态页（任务队列 + 每源健康）</td><td><span class="tag b">拆分</span></td><td>队列与探测进「信号」，源健康进「源库」，不再单独占一页。</td></tr>
+        <tr><td>串行检测 + 统一任务中心</td><td><span class="tag a">保留</span></td><td>从「拉列表」升级为「拉列表 + 媒体探测 + 截帧」。</td></tr>
+        <tr><td>侧边栏源列表 + 拖拽排序</td><td><span class="tag a">保留</span></td><td>顶部加「收藏 / 最近」两个虚拟分组。</td></tr>
+        <tr><td>空态 / 关闭态 / 错误态</td><td><span class="tag a">保留</span></td><td>每个空态都补一个明确动作，不只给一句话。</td></tr>
+        <tr><td>播放复用查看器 + 悬浮控制条</td><td><span class="tag b">保留并加层</span></td><td>保留底层播放能力，叠加电视 OSD、频道带与线路切换。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div class="okbox"><b>做得好的三件事：</b>① 模块视觉有辨识度，不像通用播放器；② 源管理比国内第三方产品完整；③ 检测队列 + 任务中心是长期优势，应该被放大成「信号」能力。</div>
+    <div class="warn"><b>研究时最该停掉的三件事（现已改掉）：</b>① 频道卡只给台名 → 现在带 Now / Next 与进度；② 播放器把直播当点播 → 直播不走进度条与续播，改用时间河；③ 「状态」是死胡同页面 → 现在拆成信号 / 源库两个有动作的 Tab。</div>
+  </div>
+
+  <h3>9.2 新信息架构：五个 Tab</h3>
+  <div class="wf">
+    <div class="lbl">整窗结构（侧边栏 + 工具栏胶囊 + 直播页）</div>
+    <div class="wf-app">
+      <div class="wf-side">
+        <div class="grp">网络电视</div>
+        <div class="wf-item on"><span class="dot" style="background:#4dd6fa"></span><span class="nm">收藏</span><span class="s" style="margin-left:auto">6</span></div>
+        <div class="wf-item"><span class="dot"></span><span class="nm">最近</span><span class="s" style="margin-left:auto">12</span></div>
+        <div class="wf-item"><span class="dot"></span><span class="nm">全部频道</span><span class="s" style="margin-left:auto">1,284</span></div>
+        <div class="grp">电视源</div>
+        <div class="wf-item"><span class="dot" style="background:#d93a46"></span><span class="nm">大陆 · 央视与卫视</span></div>
+        <div class="wf-item"><span class="dot"></span><span class="nm">香港</span></div>
+        <div class="wf-item"><span class="dot"></span><span class="nm">台湾 · 美国 · 日本…</span></div>
+        <div class="wf-item"><span class="dot" style="background:#ff9f0a"></span><span class="nm">我的自建源</span></div>
+        <div class="wf-item"><span class="nm" style="color:#8fa0c4">＋ 导入电视源</span></div>
+      </div>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <span class="wf-brand">网络电视</span>
+          <div class="wf-tabset"><span class="on">直播</span><span>节目单</span><span>回看</span><span>信号</span><span>源库</span></div>
+        </div>
+        <div class="wf-pagehead">
+          <span style="color:#ff5a63;font-size:8px">● 直播</span>
+          <b class="wf-h1">大陆 · 央视与卫视</b>
+          <span class="wf-sub">更新于 2 分钟前</span>
+          <span class="wf-search">搜索频道 / 节目</span>
+        </div>
+        <div class="wf-chips"><span class="on">全部</span><span>收藏</span><span>央视</span><span>卫视</span><span>新闻</span><span>体育</span><span>电影</span><span>少儿</span><span style="margin-left:auto">海报墙 / 列表</span></div>
+        <div style="font-size:7.5px;color:#8fa0c4">收藏 · 6　最近 · 12</div>
+        <div class="wf-wall">
+          <div class="wf-poster"><div class="ph"><span class="no">01</span><span class="q">1080p</span>CCTV-1</div><div class="nm">CCTV-1 综合</div><div class="pg">新闻联播 · 19:00</div></div>
+          <div class="wf-poster"><div class="ph"><span class="no">05</span><span class="q">1080p</span>CCTV-5</div><div class="nm">CCTV-5 体育</div><div class="pg">足球直播 · 20:00</div></div>
+          <div class="wf-poster"><div class="ph"><span class="no">13</span><span class="q">720p</span>新闻</div><div class="nm">CCTV-13 新闻</div><div class="pg">晚间新闻 · 22:00</div></div>
+          <div class="wf-poster"><div class="ph"><span class="no">20</span><span class="q">1080p</span>湖南</div><div class="nm">湖南卫视</div><div class="pg">综艺 · 20:20</div></div>
+        </div>
+        <div style="font-size:7.5px;color:#8fa0c4">央视 · 18　卫视 · 42</div>
+        <div class="wf-wall">
+          <div class="wf-poster"><div class="ph"><span class="no">33</span>CCTV-6</div><div class="nm">CCTV-6 电影</div><div class="pg">电影 · 21:30</div></div>
+          <div class="wf-poster"><div class="ph"><span class="no">34</span>CCTV-8</div><div class="nm">CCTV-8 电视剧</div><div class="pg">剧集 · 20:30</div></div>
+          <div class="wf-poster"><div class="ph"><span class="no">35</span>纪实</div><div class="nm">CCTV-9 纪录</div><div class="pg">纪录片 · 21:00</div></div>
+          <div class="wf-poster"><div class="ph"><span class="no">36</span>少儿</div><div class="nm">CCTV-14 少儿</div><div class="pg">动画 · 19:30</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wf-note">五个 Tab 沿用「网络存储」的五段胶囊；侧边栏沿用源行与拖拽排序，只在顶部加收藏 / 最近。页面不再叠第二层控制栏。</div>
+  </div>
+
+  <div class="tw" style="margin-top:14px">
+    <table style="min-width:820px">
+      <thead><tr><th>Tab</th><th>回答的问题</th><th>首屏</th><th>主操作</th><th>空态</th></tr></thead>
+      <tbody>
+        <tr><td><b>直播</b></td><td>现在看哪个台？</td><td>收藏 / 最近 + 分组频道墙</td><td>点台即播、↑↓ 换台、右键菜单</td><td>「这个源还没有频道，去检测」＋按钮</td></tr>
+        <tr><td><b>节目回看</b></td><td>几点播什么？错过了怎么办？</td><td>时间轴 / 传送门 / 时间环 + 四天日期条</td><td>点节目看详情、回看、预约</td><td>「该源未提供 EPG，指定地址」</td></tr>
+        <tr><td><b>信号</b></td><td>为什么卡 / 哪条线最稳？</td><td>探测画面网格 + 健康摘要</td><td>探测全部、看详情、设默认线路</td><td>「还没有探测结果，先探测收藏频道」</td></tr>
+        <tr><td><b>源库</b></td><td>源从哪来、怎么维护？</td><td>源列表 + 健康摘要</td><td>导入、启停、检测、EPG / UA 配置</td><td>「导入第一个源 / 恢复内置源」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9.3 直播：把「扫台」做成两种密度 <span class="tag a">已实现</span></h3>
+  <p>直播页保留现有海报墙，但每张卡必须回答「第几台、在播什么、接下来什么」。再提供一个 14–18 行/屏的列表视图，给「快速扫台」和「数字键跳转」用。</p>
+  <div class="grid g2">
+    <div class="panel">
+      <h4 style="margin-top:0">频道卡（海报墙）</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>左上：频道号（等宽数字，10pt）；右上：画质徽标（金 / 青 / 灰）。</li>
+        <li>中间：台标，安全区 62% × 46%；悬停浮出播放圆钮。</li>
+        <li>底部两行：台名 12.5 semibold；Now + 时间 9.5；下方 2px 进度条。</li>
+        <li>右上角收藏星标只在悬停 / 已收藏时出现，避免噪声。</li>
+        <li>无 EPG 时第二行显示「暂无节目单」，不留空。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">列表行（扫台）</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>固定列：频道号 40px / 台标 32×20 / 台名 + 分组 / Now & Next / 进度 / 信号点 / 星标。</li>
+        <li>行高 44px；当前播放行左侧 2px 电波青；悬停整行 6% 白。</li>
+        <li>↑↓ 移动、Enter 播放、空格预览（P2），数字键直接跳频道号。</li>
+        <li>列表视图不显示径向渐变与阴影，保证 200 个台的滚动性能。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px"><b>关键决定：</b>海报墙是「浏览」，列表是「换台」。两者共用同一份数据与筛选条件，切换时保持滚动位置与选中项。</div>
+
+  <h4>按源筛选 <span class="tag a">已实现</span></h4>
+  <p>「全频直播」是跨源聚合视图，频道来自多个源、同名只留一份。现在顶部筛选行多了一枚「源」胶囊：<b>全部源 / 我的 IPTV / APTV 公开源…</b>，每一项带该源的频道数，选中后这一页只显示该源的频道（保留分组与排序），不改侧边栏焦点。从侧边栏进入某个源时这枚胶囊自动隐藏，避免两处源选择互相打架。</p>
+
+  <h4>加载期间的性能 <span class="tag a">已优化</span></h4>
+  <p>频道墙会给可见的卡片抓一帧实时画面，这股流量以前是「一个频道一次状态发布 + 一次整份历史落盘」：322 个频道意味着上千次整页重绘和上千次 JSON 编码，顶栏与侧边栏跟着抖。现在改成<b>按批写回</b>——每批探测只发布一次「探测中」和一次结果（状态 / 报告 / 采样各一次），采样历史合并成 0.8 秒一次落盘，任务条也只按批刷新；侧边栏每个源的分组按频道版本缓存，不再随探测状态重新分组；顶栏的「更新于 …」复用同一个 <code>RelativeDateTimeFormatter</code>，频道数也改成直接计数而不是为了一行字重新分组。</p>
+
+  <h4>今晚赛事与黄金时段：独立「今晚」页 <span class="tag a">已实现</span></h4>
+  <p>原先直播页上的「今晚赛事」「黄金时段」是两条横向货架，占地方又只能扫一眼。现在这两条货架从直播页移除，整体收进一个独立分页：窗口工具栏在「直播」后面多出<b>今晚</b>，页面里是两条长列表——赛事按「正在直播 / 稍后开赛」逐条列出，黄金时段按新闻 / 剧集 / 综艺 / 电影 / 纪实分组铺成网格，每张卡都标出频道号、台标、同播台数与入选理由。直播页因此回到纯粹的频道墙 + 筛选，不再被推荐挤占空间。</p>
+  <div class="tw">
+    <table style="min-width:760px">
+      <thead><tr><th>规则</th><th>做法</th></tr></thead>
+      <tbody>
+        <tr><td><b>赛事识别</b></td><td>标题关键词（足球 / 篮球 / 联赛 / 杯 / 决赛 / NBA / 世界杯 / 奥运 …），体育频道的整档节目也算；「体育新闻 / 赛事预告 / 精彩回顾」这类栏目排除。</td></tr>
+        <tr><td><b>同播合并</b></td><td>同名赛事在 30 分钟桶里只留一条，频道多时优先 CCTV-5 → 体育频道 → CCTV → 卫视；黄金时段按 5 分钟桶合并同播，卡片显示「N 台同播」。</td></tr>
+        <tr><td><b>评分</b></td><td>同播台数 ×6；新闻 &gt; 剧集 &gt; 综艺 &gt; 电影 &gt; 纪实；新闻联播 +40、决赛 +25、半决赛 +15、首播 +15、直播中 +20；频道权重加成；越接近 20:00 权重越高。</td></tr>
+        <tr><td><b>可以解释</b></td><td>每张卡把入选理由做成标签（N 台同播 / 决赛 / 首播 / 20:00 档 / 全国联播），页面底部还有完整的规则说明，右上角「推荐规则」弹层是同一份内容的紧凑版。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src" style="margin-top:8px">直播页不再保留赛事 / 黄金时段货架，两条货架与「今晚」页共用同一套规则实现（<code>TVTonightRules</code>），只有「今晚」页这一处入口。</p>
+
+  <h3>9.4 节目单：Guide 是第二视图，不是第六个模块 <span class="tag a">已实现</span></h3>
+  <div class="wf">
+    <div class="lbl">节目单 · 时间轴 + 节目详情带</div>
+    <div class="wf-row" style="justify-content:space-between;margin-bottom:6px">
+      <div class="wf-chips"><span class="on">今天</span><span>明天</span><span>周三</span><span>只看收藏</span></div>
+      <div class="wf-chips"><span>频道</span><span>节目</span><span style="border:1px solid rgba(255,255,255,.12)">搜索节目</span></div>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center;background:rgba(255,255,255,.04);border-radius:5px;padding:5px 7px;margin-bottom:5px">
+      <div style="width:34px;height:24px;border-radius:3px;background:rgba(255,255,255,.1)"></div>
+      <div style="min-width:0"><div style="font-size:9px;color:#fff;font-weight:600">足球直播 · 20:00 – 22:00</div><div style="font-size:7px;color:#8fa0c4">CCTV-5 体育 · 已播 18 分钟 · 接下来：赛后集锦</div></div>
+      <div class="wf-chips" style="margin-left:auto"><span>回看</span><span>预约</span><span>收藏频道</span></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:4px">
+      <div style="flex:0 0 132px;font-size:7.5px;color:#8296bd">频道</div>
+      <div style="flex:1;display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:#8296bd"><span>20:00</span><span>20:30</span><span>21:00</span><span>21:30</span><span>22:00</span></div>
+    </div>
+    <div class="wf-grid">
+      <div class="wf-cell ch"><span class="no">01</span>CCTV-1</div>
+      <div class="wf-cell on">新闻联播</div><div class="wf-cell">焦点访谈</div><div class="wf-cell">电视剧 · 第 12 集</div><div class="wf-cell">晚间新闻</div>
+      <div class="wf-cell ch"><span class="no">05</span>CCTV-5</div>
+      <div class="wf-cell" style="opacity:.45">体育新闻</div><div class="wf-cell hot">足球直播</div><div class="wf-cell gold">赛后集锦</div><div class="wf-cell">体育世界</div>
+      <div class="wf-cell ch"><span class="no">20</span>湖南卫视</div>
+      <div class="wf-cell" style="opacity:.45">综艺</div><div class="wf-cell" style="opacity:.45">综艺</div><div class="wf-cell on">电视剧</div><div class="wf-cell">晚会</div>
+      <div class="wf-cell ch"><span class="no">33</span>凤凰中文</div>
+      <div class="wf-cell">时事直通车</div><div class="wf-cell">锵锵</div><div class="wf-cell on">纪录片</div><div class="wf-cell">风云对话</div>
+    </div>
+    <div class="wf-legend">
+      <span><i style="background:rgba(217,58,70,.6)"></i>正在播</span>
+      <span><i style="background:rgba(77,214,250,.55)"></i>可回看 / 已播</span>
+      <span><i style="background:rgba(255,216,137,.55)"></i>4K / 特别节目</span>
+      <span><i style="background:rgba(255,255,255,.12)"></i>无 EPG</span>
+    </div>
+    <div class="wf-note">规格：频道列 180px；30 分钟列约 120px；视窗 2 小时；行高 44px；块内两行截断；当前时间竖线；点节目在顶部展开详情带，不跳页。</div>
+  </div>
+  <p class="small" style="margin-top:8px">节目单与「直播」共用筛选与选中项：在 Guide 里点频道列会高亮列表中的同一个台；点节目详情里的「回看」直接进回看播放，不切 Tab。</p>
+
+  <h3>9.5 回看：先判断「这个源能不能回看」 <span class="tag a">已实现</span></h3>
+  <div class="wf">
+    <div class="lbl">回看 · 7 天 + 单频道节目列表</div>
+    <div class="wf-row" style="justify-content:space-between;margin-bottom:6px">
+      <div class="wf-chips"><span class="on">今天</span><span>昨天</span><span>周一</span><span>周日</span><span>只看收藏</span></div>
+      <div class="wf-chips"><span style="border:1px solid rgba(255,255,255,.12)">搜索节目</span></div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-col" style="flex:0 0 34%">
+        <div style="font-size:7.5px;color:#8fa0c4;margin-bottom:3px">支持回看的频道 · 18</div>
+        <div class="wf-listrow on"><span class="n">05</span><span class="g">CCTV-5 体育</span><span class="s">回看</span></div>
+        <div class="wf-listrow"><span class="n">01</span><span class="g">CCTV-1 综合</span><span class="s">回看</span></div>
+        <div class="wf-listrow"><span class="n">20</span><span class="g">湖南卫视</span><span class="s">回看</span></div>
+        <div class="wf-listrow" style="opacity:.45"><span class="n">42</span><span class="g">CCTV-6 电影</span><span class="s">不支持</span></div>
+      </div>
+      <div class="wf-col" style="flex:1">
+        <div style="font-size:7.5px;color:#8fa0c4;margin-bottom:3px">CCTV-5 · 今天</div>
+        <div class="wf-listrow"><span class="n">18:00</span><span class="g">体育新闻</span><span class="s">30 分</span><span style="color:#4dd6fa">回看</span></div>
+        <div class="wf-listrow"><span class="n">18:30</span><span class="g">天下足球</span><span class="s">60 分</span><span style="color:#4dd6fa">回看</span></div>
+        <div class="wf-listrow on"><span class="n">20:00</span><span class="g">足球直播</span><span class="s">进行中</span><span style="color:#ff5a63">直播</span></div>
+        <div class="wf-listrow"><span class="n">22:00</span><span class="g">赛后集锦</span><span class="s">45 分</span><span style="color:#8fa0c4">未开始</span></div>
+      </div>
+    </div>
+    <div class="wf-note">回看入口只在源声明 catch-up 模板时出现；不支持的频道保留在列表里但置灰，点开说明「该源未声明回看」。日期最多 7 天，按源能力裁剪。</div>
+  </div>
+
+  <h3>9.6 信号：缩略图 + 探测画面，把「检测」变成可看的证据 <span class="tag a">已实现</span></h3>
+  <p>这是本次最值得新增的 Tab。现有「检测」只回答「列表能不能拉到」，用户仍然不知道「这个台实际画面怎么样、哪条线最稳」。信号页用真实截帧 + 媒体参数给出证据。</p>
+  <div class="wf">
+    <div class="lbl">信号 · 健康摘要 + 探测画面网格</div>
+    <div class="wf-row" style="margin-bottom:5px">
+      <div class="wf-chips"><span class="on">全部</span><span>异常 2</span><span>4K 6</span><span>收藏</span></div>
+      <div class="wf-chips" style="margin-left:auto"><span>上次 12:40</span><span style="background:#4dd6fa;color:#08101f;font-weight:700">探测全部</span></div>
+    </div>
+    <div class="wf-signalgrid">
+      <div class="wf-sig"><div class="frame"><span class="dot"></span>探测画面</div><div class="body"><div class="t">CCTV-5 体育</div><div class="m">1080p · 8.2 Mbps · 42 ms · 3 线路</div></div></div>
+      <div class="wf-sig"><div class="frame"><span class="dot"></span>探测画面</div><div class="body"><div class="t">CCTV-1 综合</div><div class="m">1080p · 6.4 Mbps · 38 ms · 2 线路</div></div></div>
+      <div class="wf-sig"><div class="frame"><span class="dot warn"></span>探测画面</div><div class="body"><div class="t">湖南卫视</div><div class="m">720p · 3.1 Mbps · 186 ms · 4 线路</div></div></div>
+      <div class="wf-sig"><div class="frame"><span class="dot"></span>探测画面</div><div class="body"><div class="t">CCTV-6 电影</div><div class="m">1080p · 7.8 Mbps · 55 ms · 2 线路</div></div></div>
+      <div class="wf-sig"><div class="frame"><span class="dot bad"></span>无法截帧</div><div class="body"><div class="t">凤凰中文</div><div class="m">403 · 全部线路失败</div></div></div>
+      <div class="wf-sig"><div class="frame"><span class="dot"></span>探测画面</div><div class="body"><div class="t">CCTV-13 新闻</div><div class="m">1080p · 5.9 Mbps · 47 ms · 3 线路</div></div></div>
+    </div>
+    <div class="wf-note">卡片按「异常优先 → 延迟升序」排序；前三名给「最稳」角标；悬停出现播放 / 详情 / 重新探测。</div>
+  </div>
+
+  <div class="grid g2" style="margin-top:12px">
+    <div class="panel">
+      <h4 style="margin-top:0">探测流水线（复用现有能力）</h4>
+      <ol class="small" style="margin-bottom:0">
+        <li>取出该频道的全部候选线路（不再只留一条）。</li>
+        <li>6 秒超时请求清单，记录 TTFB、状态码、跳转次数。</li>
+        <li>拉取前 2–4 秒分片，用 ffprobe 读分辨率、帧率、码率、编码、音频。</li>
+        <li>用 ffmpeg 在 1 秒处截 1 帧，写入台标同级缓存（channelID + lineID + 时间）。</li>
+        <li>并发上限 2，串行进统一任务中心；可取消、可看进度。</li>
+        <li>结果缓存 6 小时；手动「重新探测」立即覆盖。</li>
+        <li>失败也保留记录与原因，供信号卡展示与源库告警。</li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">详情页字段</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>大图：最近一次成功截帧；失败时显示台标 + 原因。</li>
+        <li>参数：TTFB、分辨率、帧率、码率、编码、音频、协议、缓冲。</li>
+        <li>线路表：每条线的画质 / 延迟 / 状态 / 最后成功时间，可「设为默认」。 </li>
+        <li>24 小时可用率小折线（每次巡检一个点）。</li>
+        <li>动作：播放、只播这条线、复制地址、重新探测、停用该线。</li>
+      </ul>
+      <p class="src" style="margin:8px 0 0">截帧不是占位图：失败就明确写「无法截帧」，不伪造画面。</p>
+    </div>
+  </div>
+
+  <h3>9.7 源库：把「源」当资产，而不是设置项 <span class="tag a">已实现</span></h3>
+  <div class="wf">
+    <div class="lbl">源库 · 摘要 + 源列表</div>
+    <div class="wf-row" style="margin-bottom:6px">
+      <div class="wf-col" style="flex:1"><div style="font-size:7px;color:#8fa0c4">已启用</div><div style="font-size:14px;color:#fff;font-family:var(--mono)">9 / 11</div></div>
+      <div class="wf-col" style="flex:1"><div style="font-size:7px;color:#8fa0c4">异常</div><div style="font-size:14px;color:#ff9f0a;font-family:var(--mono)">1</div></div>
+      <div class="wf-col" style="flex:1"><div style="font-size:7px;color:#8fa0c4">下次巡检</div><div style="font-size:14px;color:#fff;font-family:var(--mono)">02:00</div></div>
+      <div class="wf-col" style="flex:1.4;display:flex;align-items:center;justify-content:center;background:rgba(77,214,250,.16);color:#b6efff;font-size:8px">＋ 导入电视源</div>
+    </div>
+    <div class="wf-listrows">
+      <div class="wf-listrow"><span class="n">●</span><span class="g">大陆 · 央视与卫视　<code style="background:none;color:#8fa0c4">内置</code></span><span class="s">42 台 · 38 ms · 2 分钟前</span><span class="s">开</span><span class="s">检测</span></div>
+      <div class="wf-listrow"><span class="n">●</span><span class="g">香港</span><span class="s">18 台 · 92 ms · 5 分钟前</span><span class="s">开</span><span class="s">检测</span></div>
+      <div class="wf-listrow"><span class="n" style="color:#ff9f0a">●</span><span class="g">我的自建源</span><span class="s">403 · 上次成功 3 天前</span><span class="s">开</span><span class="s">修复</span></div>
+      <div class="wf-listrow" style="opacity:.6"><span class="n">○</span><span class="g">美国</span><span class="s">已停用</span><span class="s">关</span><span class="s">检测</span></div>
+    </div>
+    <div class="wf-note">源行右侧只保留三个高频动作：开关、检测、更多；EPG 地址、UA / Referer、更新策略、优先级收进「源设置」浮层。</div>
+  </div>
+
+  <h3>9.8 播放窗口：直播 OSD 是这次的重点 <span class="tag a">已实现</span></h3>
+  <p>现有播放器已经很强：悬浮可拖控制条、缩略图进度、章节、音轨字幕、画中画、截帧、全屏。研究时缺的是「频道语义」；现在已在同一播放层上叠好电视 OSD，并让直播真正走 <code>.live</code> 模式（不显示点播进度、不写续播）。</p>
+
+  <h4>状态 A · 直播 OSD（默认）</h4>
+  <div class="wf-player">
+    <div class="wf-ptop">
+      <div class="wf-pnum">05</div>
+      <div class="wf-plogo">CCTV-5</div>
+      <div class="wf-pmeta">
+        <div class="name">CCTV-5 体育 <span style="color:#ff5a63;font-size:8px">● LIVE</span></div>
+        <div class="prog">足球直播 · 20:00 – 22:00</div>
+        <div class="line">已播 18 分钟 · 线路 2/3 · 1080p · HLS</div>
+        <div class="wf-pbadges"><span>HD</span><span>50 FPS</span><span>立体声</span></div>
+      </div>
+      <div class="wf-prail"><b>20:18</b><b>节目单 E</b><b>线路 L</b><b>统计 I</b></div>
+    </div>
+    <div class="wf-screenlabel">画面</div>
+    <div class="wf-toast">线路 1 超时，已切换到线路 2</div>
+    <div class="wf-pbottom">
+      <div class="wf-pstrip">
+        <div class="wf-pcard"><b>01</b>新闻联播</div>
+        <div class="wf-pcard on"><b>05</b>足球直播</div>
+        <div class="wf-pcard"><b>13</b>晚间新闻</div>
+        <div class="wf-pcard"><b>20</b>综艺</div>
+        <div class="wf-pcard"><b>33</b>电影</div>
+        <div class="wf-pcard" style="flex:.6;text-align:center">节目单</div>
+      </div>
+      <div class="wf-pctrl">
+        <span class="k">↑</span><span class="k">↓</span> 换台
+        <span class="k">123</span> 频道号
+        <span class="k">◀</span><span class="k">▶</span> 切线路
+        <span class="k">★</span> 收藏
+        <span class="k">EPG</span> 节目单
+        <span class="k">ⓘ</span> 统计
+        <span class="k">PIP</span>
+        <span class="k">F</span> 全屏
+      </div>
+    </div>
+  </div>
+  <p class="src" style="margin-top:6px">OSD 4 秒无操作淡出；鼠标移动 / 按键唤醒；换台后保留 2.5 秒；顶部信息条与底部频道带都不遮画面中心。</p>
+
+  <h4>状态 A+ · 工具栏线路胶囊可直接换线</h4>
+  <p>播放窗口底部控制条右侧的读数胶囊（<code>线路 2/3 · HLS</code>）不再是静态文字：线路多于一条时，「线路 N/M」变成下拉菜单，逐条列出「线路 1 · HLS / 线路 2 · HTTP」，当前线路打勾，点选即换线并写入该频道的默认线路记忆。只有一条线路时保持纯读数，不出现无意义的下拉箭头。协议标签优先用换线时记录的元数据（<code>tvLineMetadata</code>），缺失时回落到频道当前协议，所以 HLS / HTTP 混排的源也不会标错。</p>
+  <p class="src" style="margin-top:-2px">这意味着「换线」不必先失败：用户看到画面卡顿或画质差，可以直接在控制条上切到另一条源，失败自动顺延仍作为兜底保留。</p>
+
+  <h4>状态 B · 节目单抽屉（边看边查）</h4>
+  <div class="wf-player">
+    <div class="wf-ptop">
+      <div class="wf-pnum">05</div>
+      <div class="wf-plogo">CCTV-5</div>
+      <div class="wf-pmeta"><div class="name">CCTV-5 体育</div><div class="prog">足球直播 · 20:00 – 22:00</div></div>
+      <div class="wf-prail"><b>节目单 E</b></div>
+    </div>
+    <div class="wf-screenlabel">画面保持播放</div>
+    <div class="wf-drawer">
+      <div class="dh"><span>CCTV-5 · 今天</span><span>×</span></div>
+      <div class="wf-chips" style="margin-bottom:2px"><span class="on">今天</span><span>昨天</span><span>周三</span></div>
+      <div class="drow"><span class="t">18:00</span><span>体育新闻</span><span style="margin-left:auto;color:#4dd6fa">回看</span></div>
+      <div class="drow"><span class="t">18:30</span><span>天下足球</span><span style="margin-left:auto;color:#4dd6fa">回看</span></div>
+      <div class="drow on"><span class="t">20:00</span><span>足球直播</span><span style="margin-left:auto;color:#ff5a63">直播</span></div>
+      <div class="drow"><span class="t">22:00</span><span>赛后集锦</span><span style="margin-left:auto;color:#8fa0c4">预约</span></div>
+      <div class="drow"><span class="t">22:45</span><span>体育世界</span><span style="margin-left:auto;color:#8fa0c4">预约</span></div>
+      <div style="margin-top:auto;font-size:7px;color:#8fa0c4">过去的节目可回看；未来节目可预约提醒。</div>
+    </div>
+  </div>
+  <p class="src" style="margin-top:6px">抽屉宽 340px（窄屏不超过画面 42%），只覆盖右侧；左侧画面继续播放。Esc 先收起抽屉，再隐藏 OSD，最后退出播放。</p>
+
+  <h4>状态 C · 失败与换线</h4>
+  <div class="wf-player" style="min-height:260px">
+    <div class="wf-ptop">
+      <div class="wf-pnum">05</div>
+      <div class="wf-pmeta"><div class="name">CCTV-5 体育</div><div class="prog">足球直播</div></div>
+    </div>
+    <div class="wf-screenlabel" style="opacity:.35">画面中断</div>
+    <div class="wf-fail">
+      <div class="h">这个频道暂时看不了</div>
+      <div class="p">3 条线路都失败了：线路 1 超时、线路 2 返回 403、线路 3 无响应。</div>
+      <div class="btns"><span class="pri">重试</span><span>换一条线路</span><span>打开信号页</span><span>复制流地址</span></div>
+    </div>
+  </div>
+  <p class="src" style="margin-top:6px">切换成功时只给顶部 3 秒轻提示，不打断画面；全部失败才升级为居中卡片，并明确列出每条线路的原因。</p>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div class="panel">
+      <h4 style="margin-top:0">控制清单</h4>
+      <div class="tw" style="border:none">
+        <table style="min-width:0">
+          <thead><tr><th>区域</th><th>控件</th><th>行为</th></tr></thead>
+          <tbody>
+            <tr><td>顶部</td><td>频道号 / 台标 / 台名 / Now / Next</td><td>信息展示，点击节目名展开详情</td></tr>
+            <tr><td>顶部右</td><td>节目单 / 线路 / 统计</td><td>抽屉、线路面板、参数叠加</td></tr>
+            <tr><td>底部</td><td>频道带</td><td>点击换台，悬停预览（P2）</td></tr>
+            <tr><td>底部控制</td><td>↑↓ / 数字 / 线路 / 收藏 / EPG / 统计 / PiP / 全屏</td><td>全部可键鼠操作</td></tr>
+            <tr><td>右键</td><td>收藏、切线路、复制地址、打开信号页</td><td>与频道卡菜单一致</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">键盘映射</h4>
+      <div class="tw" style="border:none">
+        <table style="min-width:0">
+          <thead><tr><th>按键</th><th>直播</th><th>回看</th></tr></thead>
+          <tbody>
+            <tr><td><code>↑ ↓</code></td><td>上 / 下一个频道</td><td>音量（或列表移动）</td></tr>
+            <tr><td><code>0–9</code></td><td>频道号输入（1.5 秒缓冲）</td><td>进度百分比跳转</td></tr>
+            <tr><td><code>← →</code></td><td>切换线路</td><td>后退 / 前进 10 秒</td></tr>
+            <tr><td><code>Space / K</code></td><td>提示「直播中」</td><td>播放 / 暂停</td></tr>
+            <tr><td><code>E</code></td><td>节目单抽屉</td><td>节目单抽屉</td></tr>
+            <tr><td><code>L</code></td><td>线路面板</td><td>线路面板</td></tr>
+            <tr><td><code>S</code></td><td>收藏频道</td><td>收藏频道</td></tr>
+            <tr><td><code>I</code></td><td>统计叠加</td><td>统计叠加</td></tr>
+            <tr><td><code>F</code> / <code>Esc</code></td><td>全屏 / 逐层退出</td><td>全屏 / 逐层退出</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px">
+    <b>播放层的实现要点：</b>现在 <code>VideoPlaybackStage</code> 在装片时把 <code>playbackSession.playbackMode</code> 固定成 <code>.vod</code>（<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/VideoPlayback.swift#L2808-L2809">VideoPlayback.swift</a>），所以直播仍会显示进度条与续播。电视入口应显式传 <code>.live</code>，由 <code>PlaybackCapabilities</code> 隐藏进度与续播、启用频道带；回看则继续走 VOD 能力，但加「回到直播」与节目边界。
+  </div>
+
+  <h3>9.9 创意功能池：先做「信号」，再做「AI 与多画面」 <span class="tag b">11 项中 9 项已实现</span></h3>
+  <div class="tw">
+    <table style="min-width:860px">
+      <thead><tr><th>功能</th><th>一句话描述</th><th>价值</th><th>成本</th><th>优先级</th></tr></thead>
+      <tbody>
+        <tr><td><b>信号雷达</b></td><td>按延迟 / 可用率给频道排序，给出「今晚最稳的 10 个台」。</td><td>直接降低「点了播不了」</td><td>低（复用探测）</td><td><span class="pill p0">P0</span></td></tr>
+        <tr><td><b>时间河 / 时间门</b></td><td>时移用双时间轴，回看用传送环换日；让时间的方向可被看见。</td><td>把「回看 / 时移」从按钮变成体验</td><td>中</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td><b>预切换预览</b></td><td>在频道带悬停 400ms，浮出静音小预览，确认再切换。</td><td>减少误切与等待</td><td>中（第二路解码）</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td><b>AI 节目摘要</b></td><td>用 EPG 简介生成 2 行中文摘要，外语频道自动翻译。</td><td>解决「这节目讲什么」</td><td>中（已有 AI 服务）</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td><b>赛事聚合</b></td><td>从 EPG 分类识别体育节目，生成「今晚球赛」货架与开赛提醒。</td><td>体育是直播最强场景</td><td>中</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td><b>截帧存相册</b></td><td>把当前画面连同频道 / 节目信息存进拾光图库。</td><td>复用现有截帧与图库</td><td>低</td><td><span class="pill p1">P1</span></td></tr>
+        <tr><td><b>睡眠定时</b></td><td>30 / 60 / 90 分钟渐隐停止，适合睡前新闻。</td><td>客厅刚需</td><td>低</td><td><span class="pill p2">P2</span></td></tr>
+        <tr><td><b>多画面</b></td><td>2×2 四个频道，点击放大，声音只跟一个。</td><td>体育 / 新闻场景</td><td>高（多解码）</td><td><span class="pill p2">P2</span></td></tr>
+        <tr><td><b>30 秒片段</b></td><td>从时移缓冲截取最近 30 秒，存为视频片段。</td><td>分享 / 回看高光</td><td>高（依赖时移）</td><td><span class="pill p2">P2</span></td></tr>
+        <tr><td><b>手机遥控 / 扫码导入</b></td><td>手机扫码输入频道号或把源推给桌面端。</td><td>手机与桌面协同</td><td>中</td><td><span class="pill p2">P2</span></td></tr>
+        <tr><td><b>观看年报</b></td><td>最常看的台、总时长、最稳的源。</td><td>趣味与留存</td><td>低</td><td><span class="pill p2">P2</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small" style="margin-top:10px"><b>实现状态：</b>表格前 9 行已落地（时间河与七日隧道合计一行）——信号雷达（可用率 + 延迟前十）、时间河（暂停直播展开）、七日隧道（回看按天选门）、预切换预览（悬停 400ms）、节目摘要（EPG 简介两行）、赛事聚合（今晚赛事货架 + 开赛提醒）、截帧保存、睡眠定时（30 / 60 / 90）、多画面（2×2 静音预览）、30 秒片段（ffmpeg 录制）。手机遥控 / 扫码导入与观看年报未做。节目摘要只用节目单简介，不接翻译、不编造内容。</p>
+
+  <h3>9.10 视觉与组件：沿用拾光的骨架，只换电视的语义 <span class="tag a">已实现</span></h3>
+  <div class="grid g2">
+    <div class="panel">
+      <h4 style="margin-top:0">Token</h4>
+      <dl class="kv" style="grid-template-columns:92px 1fr">
+        <dt>底色</dt><dd>深色 <code>#0B0D16 → #131826</code> + 环境光；浅色 <code>#F7F8FB → #FFFFFF</code>，详见 9.11。</dd>
+        <dt>面板</dt><dd><code>lumaGlassCard</code>，圆角 22；列表行圆角 8。</dd>
+        <dt>交互色</dt><dd><code>Color.accentColor</code>；暗底回退 <code>#4DD6FA</code>，浅底回退 <code>#2F6DF6</code>。</dd>
+        <dt>信号红</dt><dd>深色 <code>#FF4D57</code> / 浅色 <code>#D92D3A</code>，直播与错误强调。</dd>
+        <dt>可回看</dt><dd>深色 <code>#4DD6FA</code> / 浅色 <code>#0E7C99</code>，已播节目与信息态。</dd>
+        <dt>金</dt><dd>深色 <code>#FACC66</code> / 浅色 <code>#A9761F</code>，4K / HDR / 特别节目。</dd>
+        <dt>状态色</dt><dd>正常 <code>#34C759</code>、警告 <code>#FF9F0A</code>、失败 <code>#FF453A</code>；浅色用 <code>#248A3D</code> / <code>#B45309</code> / <code>#B42318</code>。</dd>
+        <dt>字号</dt><dd>台名 12.5、Now 9.5、元信息 10.5、频道号等宽 10–30。</dd>
+        <dt>间距</dt><dd>页边 22、卡片 14、行高 44、频道带卡 132×64。</dd>
+        <dt>动效</dt><dd>160–200ms easeOut；悬停浮起 1.5%；不做长动画。</dd>
+      </dl>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">组件清单</h4>
+      <div class="tw" style="border:none">
+        <table style="min-width:0">
+          <thead><tr><th>组件</th><th>尺寸 / 说明</th></tr></thead>
+          <tbody>
+            <tr><td><code>TVHubTabs</code></td><td>五段胶囊，高 24，字号 11.5，复用现有实现</td></tr>
+            <tr><td><code>ChannelTile</code></td><td>16:9，最小宽 240；台标安全区 62% × 46%</td></tr>
+            <tr><td><code>ChannelRow</code></td><td>高 44；号 40 / 台标 32×20 / Now/Next</td></tr>
+            <tr><td><code>GuideGrid</code></td><td>频道列 180；30 分钟列 120；行 44</td></tr>
+            <tr><td><code>SignalCard</code></td><td>16:9 截帧 + 三行参数；状态点</td></tr>
+            <tr><td><code>ChannelStrip</code></td><td>高 96；卡 132×64；当前反白</td></tr>
+            <tr><td><code>EPGDrawer</code></td><td>宽 340；行 44；Esc 逐层</td></tr>
+            <tr><td><code>LinePicker</code></td><td>浮层 320×auto；每条线一行</td></tr>
+            <tr><td><code>TVToast</code></td><td>顶部胶囊 360×36，3 秒</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3>9.11 浅色模式与系统设置：同一结构，两套语义 <span class="tag a">已实现</span></h3>
+  <p>电视模块原来被 <code>.environment(\.colorScheme, .dark)</code> 锁死成深色，切到系统浅色也不会变。现在已经改成：<b>页面、侧边栏、频道卡、节目单、信号卡全部跟随系统外观；只有播放 OSD 保留深色叠加</b>，因为底下是视频画面，深色叠加才保证可读。</p>
+
+  <div class="grid g2">
+    <div class="wf">
+      <div class="lbl">深色 · 直播</div>
+      <div class="wf-topbar"><span class="wf-brand">网络电视</span><div class="wf-tabset"><span class="on">直播</span><span>节目单</span><span>回看</span><span>信号</span><span>源库</span></div></div>
+      <div class="wf-chips" style="margin-top:5px"><span class="on">全部</span><span>收藏</span><span>央视</span><span>体育</span></div>
+      <div class="wf-wall" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:5px">
+        <div class="wf-poster"><div class="ph"><span class="no">01</span><span class="q">1080p</span>CCTV-1</div><div class="nm">CCTV-1 综合</div><div class="pg">新闻联播 · 19:00</div></div>
+        <div class="wf-poster"><div class="ph"><span class="no">05</span><span class="q">1080p</span>CCTV-5</div><div class="nm">CCTV-5 体育</div><div class="pg">足球直播 · 20:00</div></div>
+        <div class="wf-poster"><div class="ph"><span class="no">13</span>新闻</div><div class="nm">CCTV-13 新闻</div><div class="pg">晚间新闻 · 22:00</div></div>
+        <div class="wf-poster"><div class="ph"><span class="no">20</span>湖南</div><div class="nm">湖南卫视</div><div class="pg">综艺 · 20:20</div></div>
+      </div>
+      <div class="wf-listrows" style="margin-top:5px">
+        <div class="wf-listrow on"><span class="n">05</span><span class="g">CCTV-5 体育</span><span class="s">足球直播 · 已播 18 分</span></div>
+        <div class="wf-listrow"><span class="n">01</span><span class="g">CCTV-1 综合</span><span class="s">新闻联播 · 19:00</span></div>
+      </div>
+      <div class="wf-note">深色：白 4.5–7.5% 叠层 + 白 8% 描边；信号红 #FF4D57；交互跟随系统强调色。</div>
+    </div>
+    <div class="wf light">
+      <div class="lbl">浅色 · 直播（同一结构）</div>
+      <div class="wf-topbar"><span class="wf-brand">网络电视</span><div class="wf-tabset"><span class="on">直播</span><span>节目单</span><span>回看</span><span>信号</span><span>源库</span></div></div>
+      <div class="wf-chips" style="margin-top:5px"><span class="on">全部</span><span>收藏</span><span>央视</span><span>体育</span></div>
+      <div class="wf-wall" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:5px">
+        <div class="wf-poster"><div class="ph"><span class="no">01</span><span class="q">1080p</span>CCTV-1</div><div class="nm">CCTV-1 综合</div><div class="pg">新闻联播 · 19:00</div></div>
+        <div class="wf-poster"><div class="ph"><span class="no">05</span><span class="q">1080p</span>CCTV-5</div><div class="nm">CCTV-5 体育</div><div class="pg">足球直播 · 20:00</div></div>
+        <div class="wf-poster"><div class="ph"><span class="no">13</span>新闻</div><div class="nm">CCTV-13 新闻</div><div class="pg">晚间新闻 · 22:00</div></div>
+        <div class="wf-poster"><div class="ph"><span class="no">20</span>湖南</div><div class="nm">湖南卫视</div><div class="pg">综艺 · 20:20</div></div>
+      </div>
+      <div class="wf-listrows" style="margin-top:5px">
+        <div class="wf-listrow on"><span class="n">05</span><span class="g">CCTV-5 体育</span><span class="s">足球直播 · 已播 18 分</span></div>
+        <div class="wf-listrow"><span class="n">01</span><span class="g">CCTV-1 综合</span><span class="s">新闻联播 · 19:00</span></div>
+      </div>
+      <div class="wf-note">浅色：白卡片 + 黑 8% 描边；信号红 #D92D3A；台标加浅灰底板；交互仍跟随强调色。</div>
+    </div>
+  </div>
+  <p class="src" style="margin-top:8px">两张线框结构完全一致，只替换 token。浅色不是「把深色调亮」，而是重新给每类信息分配对比度。</p>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div class="panel">
+      <h4 style="margin-top:0">三个跟随</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>跟随系统外观</b>：<code>TVBrand</code> 的颜色已改为动态 <code>NSColor</code>，浅色 / 深色各自解析；页面无需重启即可切换。</li>
+        <li><b>跟随系统强调色</b>：Tab、选中行、焦点环、按钮继续用 <code>Color.accentColor</code>；LIVE 红、4K 金、状态色是语义色，不跟强调色变。</li>
+        <li><b>跟随辅助功能</b>：LIVE 呼吸与频道卡悬停浮起已接入 <code>accessibilityReduceMotion</code>；「提高对比度」的描边增强列为下一轮。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">一个例外：播放 OSD</h4>
+      <p class="small">播放 OSD 与时间仪器（时移 / 回看控制台）永远用深色实体质感，因为 OSD 底下是任意亮度的视频，而时间仪器是一台「放在页面里的设备」。浅色模式下变化的是<b>窗口标题栏、侧边栏、播放列表与页面 chrome</b>，不是 OSD 与仪器本体。</p>
+      <div class="wf light" style="margin-top:8px;padding:8px">
+        <div class="lbl">浅色窗口 + 深色 OSD</div>
+        <div class="wf-row" style="margin-top:5px">
+          <div class="wf-side" style="flex:0 0 86px;padding:5px">
+            <div class="wf-item on"><span class="nm">收藏</span></div>
+            <div class="wf-item"><span class="nm">最近</span></div>
+            <div class="wf-item"><span class="nm">央视</span></div>
+          </div>
+          <div class="wf-player" style="flex:1;min-height:170px">
+            <div class="wf-ptop" style="padding:7px 9px">
+              <div class="wf-pnum" style="font-size:18px">05</div>
+              <div class="wf-pmeta"><div class="name" style="font-size:9px">CCTV-5 体育</div><div class="prog" style="font-size:8px">足球直播</div></div>
+            </div>
+            <div class="wf-screenlabel">画面</div>
+            <div class="wf-pbottom" style="padding:6px 8px">
+              <div class="wf-pctrl"><span class="k">↑</span><span class="k">↓</span> 换台　<span class="k">EPG</span> 节目单　<span class="k">F</span> 全屏</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4>Token 对照（同一语义，两套值）</h4>
+  <div class="tw">
+    <table style="min-width:760px">
+      <thead><tr><th>语义</th><th>深色</th><th>浅色</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td>页面底</td><td><code>#0B0D16 → #131826</code></td><td><code>#F7F8FB → #FFFFFF</code></td><td>内容区背景</td></tr>
+        <tr><td>面板 / 卡片</td><td>白 4.5–7.5%</td><td><code>#FFFFFF</code> + 4% 阴影</td><td>频道卡、面板、浮层</td></tr>
+        <tr><td>描边</td><td>白 8%</td><td>黑 8%</td><td>卡片、分割线</td></tr>
+        <tr><td>主 / 次 / 三级文字</td><td>白 94% / 62% / 38%</td><td><code>#1C2030</code> / <code>#5B6172</code> / <code>#8A8F9C</code></td><td>台名、Now、元信息</td></tr>
+        <tr><td>交互 / 选中</td><td><code>Color.accentColor</code>（回退 <code>#4DD6FA</code>）</td><td><code>Color.accentColor</code>（回退 <code>#2F6DF6</code>）</td><td>Tab、选中行、焦点环</td></tr>
+        <tr><td>直播红</td><td><code>#FF4D57</code></td><td><code>#D92D3A</code></td><td>LIVE、正在播、错误强调</td></tr>
+        <tr><td>可回看</td><td><code>#4DD6FA</code></td><td><code>#0E7C99</code></td><td>已播节目、信息态</td></tr>
+        <tr><td>4K / 金</td><td><code>#FACC66</code></td><td><code>#A9761F</code></td><td>4K、HDR、特别节目</td></tr>
+        <tr><td>正常 / 警告 / 失败</td><td><code>#34C759</code> / <code>#FF9F0A</code> / <code>#FF453A</code></td><td><code>#248A3D</code> / <code>#B45309</code> / <code>#B42318</code></td><td>信号点、源状态</td></tr>
+        <tr><td>台标底板</td><td>白 6%</td><td><code>#F1F3F8</code></td><td>白色台标可见性</td></tr>
+        <tr><td>Guide 正在播 / 已播 / 未来</td><td>红 30% / 青 20% / 白 5.5%</td><td>红 14% / 蓝 12% / 灰 6%</td><td>节目块</td></tr>
+        <tr><td>焦点环</td><td>2px 青 + 6px 光晕</td><td>2px 强调色 + 4px 光晕</td><td>键盘 / 遥控焦点</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>代码审计：已改与保留</h4>
+  <div class="tw">
+    <table style="min-width:820px">
+      <thead><tr><th>现状</th><th>原问题</th><th>现在的实现</th></tr></thead>
+      <tbody>
+        <tr><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift#L11-L28">TVHubView.swift</a> 原来的 <code>.environment(\.colorScheme, .dark)</code></td><td>整个电视模块被锁死深色，系统浅色完全无效</td><td><b>已删除</b>；页面跟随系统外观，只有播放 OSD 保持深色</td></tr>
+        <tr><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVBrand.swift#L10-L102">TVBrand.swift</a> 写死 RGB 与深色渐变</td><td>无法响应外观切换，浅色下对比度不足</td><td><b>已改为动态 <code>NSColor</code></b>：signal / wave / gold / 背景 / 台标底板按外观解析</td></tr>
+        <tr><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift#L425-L436">TVChannelTile</a> 白 4.5–7.5% 叠层</td><td>浅色背景上几乎不可见</td><td><b>已改为</b> <code>TVBrand.surface / surfaceHover / stroke</code>，浅色下自动变成黑 4.5–7.5%</td></tr>
+        <tr><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift#L580-L592">qualityPill</a> 固定金 / 青</td><td>浅色下金 / 青与白底对比不足</td><td><b>已改为</b> <code>TVBrand.qualityStyle</code>，4K 金 / 1080 青在浅色模式用深色值</td></tr>
+        <tr><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVBrand.swift#L187-L222">TVLogoImage</a> 直接放在渐变上</td><td>白色台标在浅色背景会消失</td><td><b>已加台标底板</b> <code>TVBrand.logoPlate</code>（浅色 <code>#F1F3F8</code>）与细描边</td></tr>
+        <tr><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift#L962-L966">TVStatusView</a> 固定 green / orange</td><td>浅色下偏亮、对比不足</td><td><b>已改用</b> <code>TVBrand.success / warning / danger</code>；源行错误也统一为 danger</td></tr>
+        <tr><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVBrand.swift#L147-L184">TVLiveBadge</a> 与频道卡动效</td><td>呼吸与浮起不尊重「减少动态效果」</td><td><b>已接入</b> <code>accessibilityReduceMotion</code>：关闭呼吸与悬停浮起</td></tr>
+        <tr><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/VideoPlayback.swift#L2148-L2159">播放控制条</a> 深色玻璃</td><td>这是合理例外，但窗口 chrome 不应一起变黑</td><td><b>保留深色 OSD</b>；外层窗口、标题栏、侧边栏跟随系统</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="okbox" style="margin-top:14px">
+    <b>实现状态：</b>上述改造已完成，并通过 <code>swift build --target PhotosClone</code>。页面不再强制深色，播放 OSD 保持深色；「提高对比度」的描边增强列为下一轮。
+  </div>
+
+  <div class="okbox" style="margin-top:14px">
+    <b>验收：</b>① 系统切浅色 / 深色，电视页即时变化且无深色残块；② 改系统强调色，Tab / 选中 / 焦点跟随，LIVE 与 4K 不跟随；③ 开启「减少动态效果」，LIVE 呼吸点与悬停浮起停止；④（下一轮）开启「提高对比度」，描边与状态点加强；⑤ 白底台标在浅色下可见，主 / 次文字对比度 ≥ 4.5:1、三级元信息 ≥ 3:1；⑥ 播放 OSD 与时间仪器在两种外观下都保持深色，但窗口 chrome 跟随系统。
+  </div>
+
+  <h3>9.12 创意概念：时间河与时间门（回看） <span class="tag a">已实现</span></h3>
+  <p>时移和回看不是两个按钮，而是两种时间体验：<b>时移是「时间在走，你停住了」；回看是「你离开现在，进入过去」</b>。概念设计要把这两个字面意思变成可操作的界面，而不是给进度条换一层皮。</p>
+
+  <div class="grid g3">
+    <div class="callout"><b>方向一：时移 = 水平。</b>过去在左、现在在右；直播边缘永远在前进，用户能看到自己离现在有多远。</div>
+    <div class="callout"><b>方向二：回看 = 纵深。</b>日子一层层退向远处；选择某一天，就是穿过一层时间门。</div>
+    <div class="callout"><b>共同底线：</b>不炫技。动效 ≤ 320ms、尊重减少动态、键盘可完成全部操作、时间坐标始终可读。</div>
+  </div>
+
+  <h4>视觉方向：时间仪器，而不是深色线框</h4>
+  <p>把时移和回看当作一台精密的时间仪器来设计：<b>黑曜石机身、烟熏玻璃、拉丝黄铜、胶片、钨丝光</b>。高级感来自材质对比与光线，而不是更多颜色或更亮的霓虹。</p>
+  <p class="small">时间仪器是页面里的「实体设备」：无论浅色还是深色，它都保持黑曜石与黄铜；外层页面、侧边栏和标题栏仍然跟随系统外观。</p>
+
+  <div class="material-board">
+    <div class="mat brass"><span>拉丝黄铜 · 刻度 / 滑块 / 门框</span></div>
+    <div class="mat glass"><span>烟熏玻璃 · 面板 / 拱门</span></div>
+    <div class="mat obsidian"><span>黑曜石 · 机身 / 背景</span></div>
+    <div class="mat film"><span>胶片 · 时间条 / 帧格</span></div>
+    <div class="mat light"><span>钨丝光 · 唯一主光源</span></div>
+  </div>
+
+  <div class="grid g2" style="margin-top:12px">
+    <div class="panel">
+      <h4 style="margin-top:0">光与深度：一层主光，一层冷边</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>主光</b>：左上 35° 的暖光，像一盏钨丝灯；只照亮黄铜边缘与日期刻字。</li>
+        <li><b>冷边</b>：右侧一道低强度冷光，勾勒玻璃与卡片边缘，避免整块发黄。</li>
+        <li><b>尘埃</b>：极少量光尘，只在时间门与胶片附近出现，用来表现「空气」。</li>
+        <li><b>暗角</b>：四周压暗，把注意力收进时间河与时间门。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">克制的高级感</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>金属只用黄铜一种；红色只留给直播；青色只留给可操作的时间滑块。</li>
+        <li>字体：衬线体刻日期，等宽体读时间码，正文用系统字体；不混用第四种。</li>
+        <li>动效像机械：胶片输送、门环旋转、滑块阻尼；不做弹跳、发光爆炸。</li>
+        <li>拟物但不复古过头：没有木纹、皮革、铆钉堆砌；只有精密金属与玻璃。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4>概念 A · 时间河（时移）</h4>
+  <p>暂停直播后，底部不再是一条进度条，而是一条从过去流向现在的河：金色是被你看过的河段，红色斜纹是你与直播之间的时间差，最右侧的红线是仍在前进的直播。你停在河上，直播继续走，差距每秒变大。</p>
+
+  <div class="concept-board">
+    <div class="cb-stage">
+      <div class="cb-top">
+        <div class="cb-num">05</div>
+        <div class="cb-logo">CCTV-5</div>
+        <div class="cb-meta">
+          <div class="cb-name">CCTV-5 体育 <span class="cb-live">● 时移</span></div>
+          <div class="cb-prog">足球直播 · 20:00 – 22:00</div>
+          <div class="cb-line">画面 20:17:38 <i>·</i> 直播 20:18:20 <i>·</i> 落后 00:42</div>
+        </div>
+        <div class="cb-right"><span class="cb-return"><i></i>回到直播</span><span class="cb-key">L</span></div>
+      </div>
+      <div class="cb-screen"><span>画面停在 20:17:38 · 直播已经走到 20:18:20</span></div>
+      <div class="cb-console">
+        <div class="cb-head">
+          <div><div class="cb-title">时间河</div><div class="cb-sub">Temporal Transport</div></div>
+          <div class="cb-gauge"><span>LAG</span><b>00:42</b><i></i></div>
+        </div>
+        <div class="filmstrip">
+          <div class="film-frames">
+            <div class="film-frame past">-2:00</div>
+            <div class="film-frame past">-1:30</div>
+            <div class="film-frame past">-1:00</div>
+            <div class="film-frame on">-0:42</div>
+            <div class="film-frame live">NOW</div>
+          </div>
+        </div>
+        <div class="premium-rail">
+          <div class="amber"></div>
+          <div class="lag"></div>
+          <div class="live"></div>
+          <div class="shuttle"></div>
+          <div class="shuttle-label">-00:42</div>
+        </div>
+        <div class="cb-scale"><span>-30 MIN</span><span>-5 MIN</span><span>-30 SEC</span><span>NOW</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="src" style="margin-top:6px">材质：黑曜石底 + 烟熏玻璃 + 拉丝黄铜；光：左上一束钨丝暖光，右缘一道冷光。胶片条带齿孔、铜制滑块、红色激光直播边，都是可触摸的时间隐喻。</p>
+
+  <div class="grid g2" style="margin-top:12px">
+    <div class="panel">
+      <h4 style="margin-top:0">交互逻辑</h4>
+      <ol class="small" style="margin-bottom:0">
+        <li><b>暂停</b>：时间河从底部展开，直播边缘继续向右移动，红色斜纹开始变宽。</li>
+        <li><b>拖动</b>：1:1 跟随鼠标 / 手指；画面同步倒带，缩略图帧条更新。</li>
+        <li><b>滚轮 / ← →</b>：按 10 秒步进；长按加速到 2× / 4×，松开带惯性。</li>
+        <li><b>回到直播</b>：红色胶囊带一条「彗尾」，按 L / End 触发 240ms 回卷，金色河段收束成红线。</li>
+        <li><b>边界</b>：到达时移窗口（如 30 分钟）时橡皮筋回弹，并提示「已到该源可回退的最早位置」。</li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">为什么这样像「时间在动」</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>双时间轴</b>：你的位置 + 直播的位置，两条线同时存在；暂停后差距持续增大。</li>
+        <li><b>金色记忆</b>：越往回，画面越去饱和，缩略图越旧，像在河里往回走。</li>
+        <li><b>红色现在</b>：直播边缘始终有呼吸感，提醒你「现在还在发生」。</li>
+        <li><b>回卷动效</b>：回到直播时帧条加速、金色收束，像被水流推回现在。</li>
+        <li><b>无操作时</b>：时间河自动收成一条细线，只在角落保留「落后 00:42」。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4>概念 B · 时间门（回看） <span class="tag a">已实现 · 传送环版</span></h4>
+  <p>回看不是「往后拖进度条」，而是「去某一天」。早期稿把日子排成七层隧道；最终落地改用<b>竖立的传送环</b>：一枚向后倾斜 15° 的光环立在发光底座上，日期节点沿环分布，拖光环或点日期换日，环心显示所选日期、星期、节目数与频道数，点「穿越」时门向前一冲、白光外扩，节目列表从底部重新淡入。</p>
+  <p class="small" style="margin-top:-2px;color:var(--muted)">下面是隧道方向的早期概念稿，保留作对照；实现以传送环为准。</p>
+
+  <div class="concept-board">
+    <div class="vault-stage">
+      <div class="vault-shaft"></div>
+      <div class="vault-ring"></div>
+      <div class="vault-plaque"><span>现在 14:20</span><i>→</i><span>昨天 20:00</span><i>→</i><span>CCTV-5 体育</span></div>
+      <div class="vault-arch a1"><span class="va-day">4 天前</span><span class="va-date">20</span><span class="va-sub">周一 · 6 个回看</span></div>
+      <div class="vault-arch a2"><span class="va-day">前天</span><span class="va-date">21</span><span class="va-sub">周二 · 9 个回看</span></div>
+      <div class="vault-arch a3"><span class="va-day">昨天</span><span class="va-date">22</span><span class="va-sub">周三 · 12 个回看</span></div>
+      <div class="vault-arch near"><span class="va-day">今天</span><span class="va-date">23</span><span class="va-sub">周四 · 8 个回看</span></div>
+    </div>
+    <div class="vault-list">
+      <div class="vault-capsule"><span class="vc-thumb"></span><span class="vc-time">18:00</span><span class="vc-title">体育新闻</span><span class="vc-dur">30 分</span><span class="vc-seal">回看</span></div>
+      <div class="vault-capsule"><span class="vc-thumb"></span><span class="vc-time">18:30</span><span class="vc-title">天下足球</span><span class="vc-dur">60 分</span><span class="vc-seal">回看</span></div>
+      <div class="vault-capsule on"><span class="vc-thumb"></span><span class="vc-time">20:00</span><span class="vc-title">足球直播</span><span class="vc-dur">120 分</span><span class="vc-seal">回看</span></div>
+      <div class="vault-capsule"><span class="vc-thumb"></span><span class="vc-time">22:00</span><span class="vc-title">赛后集锦</span><span class="vc-dur">45 分</span><span class="vc-seal">回看</span></div>
+    </div>
+  </div>
+  <p class="src" style="margin-top:6px">材质：黑曜石长廊 + 磨砂玻璃拱门 + 黄铜门框；光：左上一束暖光穿过尘埃，右缘一道冷光勾边。日期是刻在门上的铜字，不是卡片上的文字。</p>
+
+  <div class="grid g2" style="margin-top:12px">
+    <div class="panel">
+      <h4 style="margin-top:0">交互逻辑</h4>
+      <ol class="small" style="margin-bottom:0">
+        <li><b>入口</b>：节目单里点过去的节目，或 OSD 里按 R；隧道直接定位到那一天、那个节目。</li>
+        <li><b>翻日子</b>：滚轮 / ↑↓ 在七天之间移动；越早的卡片越小、越暗，选中项亮起青色门环。</li>
+        <li><b>穿越</b>：Enter 后选中卡片放大并溶解为节目列表，320ms；减少动态时改为淡入。</li>
+        <li><b>回看播放</b>：琥珀色「回看 · 昨天 20:00」徽标；进度条带节目边界；右上角永远有「回到现在」。</li>
+        <li><b>节目结束</b>：浮出下一档节目卡；不自动跳直播，避免把用户从过去突然拽回现在。</li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">为什么这样像「穿越」</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>纵深</b>：日子不是一排 tab，而是有前后关系的层；越远越小，符合「回到过去」的直觉。</li>
+        <li><b>门环</b>：选中日子的青色圆环是「时间门」，穿过去才进入节目。</li>
+        <li><b>胶囊</b>：节目卡保留当时的台标 / 缩略图 / 原始播出时间，像从过去捞出的时间胶囊。</li>
+        <li><b>现在灯塔</b>：无论走多远，顶部都保留「现在 14:20」的红点，随时能回去。</li>
+        <li><b>不假装播放器</b>：回看页先解决「去哪一天、看哪个节目」，再进入播放。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4>两套时间体验的分工</h4>
+  <div class="tw">
+    <table style="min-width:760px">
+      <thead><tr><th>维度</th><th>时间河（时移）</th><th>七日隧道（回看）</th></tr></thead>
+      <tbody>
+        <tr><td>隐喻</td><td>河 / 倒带：你停在河上，直播继续流</td><td>隧道 / 时间门：你离开现在，进入某一天</td></tr>
+        <tr><td>方向</td><td>水平：过去 ←→ 现在</td><td>纵深：今天 → 昨天 → 前天</td></tr>
+        <tr><td>时间粒度</td><td>秒 / 分钟</td><td>天 / 节目</td></tr>
+        <tr><td>主交互</td><td>拖时间河、←→、滚轮、长按加速</td><td>滚轮翻日、↑↓ 选节目、Enter 穿越</td></tr>
+        <tr><td>回到现在</td><td>「回到直播」红色胶囊 + L</td><td>顶部「现在」灯塔 + 一键回到直播</td></tr>
+        <tr><td>适用</td><td>体育、新闻、刚才错过的 30 秒</td><td>追剧、昨天错过的整档节目</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>动效与可访问性</h4>
+  <div class="grid g2">
+    <div class="panel">
+      <h4 style="margin-top:0">动效规格</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li>时间河拖动：1:1 跟随，80ms 平滑；松手 240ms 惯性收尾。</li>
+        <li>回到直播：240ms 弹簧；金色河段收束、红色边缘闪一次。</li>
+        <li>日期穿越：320ms easeOut；卡片放大 → 溶解 → 节目列表淡入。</li>
+        <li>隧道层切换：200ms；只改透明度和缩放，不做大幅位移。</li>
+        <li>LIVE 呼吸：1.6s；减少动态时静态。</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">减少动态 / 无障碍</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><code>accessibilityReduceMotion</code>：取消惯性、粒子、3D 旋转；改为淡入淡出 + 数字标签。</li>
+        <li>键盘：←→ 时间河，↑↓ 节目，L 回直播，R 回看，Esc 逐层退出。</li>
+        <li>屏幕阅读器：播报「时移 -00:42，直播仍在继续」「昨天 20:00 足球直播，可回看」。</li>
+        <li>不能只靠颜色：时间河同时显示数字与刻度；不可回看的节目置灰并说明原因。</li>
+        <li>低配降级：时间河缩成细条 + 数字；隧道退化为横向七张日期卡。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px">
+    <b>落地提醒：</b>时移复用播放内核的 <code>retainedStartSeconds</code> 与 <code>seek</code>，直播边缘用独立时钟推进；回看依赖源的 catch-up 模板与 EPG，不能对不支持的源假装可用。概念稿不替代能力检测：<b>没有时移就明确说「该源不支持时移」，没有回看就置灰并给出换源建议</b>。
+  </div>
+
+  <p class="src" style="margin-top:8px"><span class="tag a">已落地</span> 时间河的交互、拟物与动效已按概念稿实现：暂停即展开，胶片带（齿孔 / 五个时间点 / 青色当前格 / 红色 NOW）、金色已看河段、红色斜纹时间差、右缘红色直播线、铜制滑块与青色指针、滑块上沿的落后读数牌，拖动即 seek，「回到直播」跳回边缘；回看走「时间门传送环」（拖光环 / 点日期换日、环心数据与穿越动效）。唯一差异是河的长度按真实可 seek 窗口缩放，不画不存在的 -30 分钟。</p>
+
+  <h4>落地：节目回看三视图与时间环 <span class="tag a">已实现</span></h4>
+  <p>「回看」和「节目单」不再分成两个一级页签：窗口工具栏收敛为<b>直播 / 节目回看 / 信号 / 源库</b>四页，「节目回看」页内再切三视图——<b>时间轴（默认）/ 传送门 / 时间环</b>。日期条与左侧频道选择三视图共用，换日子或换频道时三视图看到的是同一台、同一天。日期只保留四个有意义的日子：<b>前天 / 昨天 / 今天 / 明天</b>（更早的日期源站没有回看数据，更晚的也没有节目单），传送门的四个节点就分布在这一圈上——今天在正上方，明天在右、昨天在左、前天在下方。</p>
+
+  <div class="grid g3">
+    <div class="panel">
+      <h4 style="margin-top:0">时间轴</h4>
+      <p class="small" style="margin:0 0 6px">节目按<b>真实时长</b>铺开（不再每 30 分钟切一格），圆角色块 + 左侧细色条，同套调色板；状态分层：直播高亮带进度线、可回看挂小签、不可回看压暗、待播低饱和。</p>
+      <p class="small" style="margin:0">表头是刻度尺 + 整点网格线，当前时间是一条带光点的红色竖线；频道列加宽到 200pt；时间窗读数胶囊补上日期，例如「今天 11/24 | 10:00 – 12:00」。</p>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">传送门</h4>
+      <p class="small" style="margin:0 0 6px">竖立的传送环 + 发光底座，四个日期节点沿环分布（胶囊式白底 / 选中青色），拖环或点日期换日，环心显示所选日期、节目数与频道数。</p>
+      <p class="small" style="margin:0">浅色主题下换成暖白瓷面底座与淡紫雾，节点改为白底深字，黄铜与青色只留在描边上。</p>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">时间环</h4>
+      <p class="small" style="margin:0 0 6px">一整天卷成一圈：整圈一条<b>连续锥形渐变</b>色带，节目之间只留深色细缝，不再一档一块硬色；直播叠信号红柔光，不可回看的已播压暗，待播降饱和。</p>
+      <p class="small" style="margin:0">指针是一束从表带扫向中央的追光 + 一枚金色唱针，针头做成「放映镜头」；中央圆显示日期、<code>HH:mm</code>、频道号与台名、当前节目、时段与状态，并直接给出一个圆形播放键（播放直播 / 回看这档 / 预约提醒）。</p>
+    </div>
+  </div>
+
+  <p style="margin-top:10px">时间环的正中央只做展示和操作：<b>鼠标挪进中央信息圆不选段、指针也不转</b>——表带之外的区域不再响应拖动与悬停，所以播放 / 预约按钮不会被指针的拖动抢走事件；鼠标停在中央时，圆里保持上一次选中的那档节目。表盘仍只认表带这一圈（<code>RingDonut</code> 命中 + 半径判定双保险），中央圆外到表带之间的留白也不会误触。</p>
+  <p class="src" style="margin-top:-2px"><b>浅色主题：</b>表盘从黑曜石换成暖白瓷面（<code>0.99 → 0.885</code> 的竖向渐变），刻度与小时字改用 <code>Color.primary</code> 派生透明度，色带状态改用白色叠加而不是压黑，指针改成白镜筒 + 深金环；深色下仍是黑镜筒 + 金环 + 白灯芯。传送门同理。</p>
+
+  <p style="margin-top:10px"><b>回看舱（播放中的工具栏）：</b>回看播放时窗口工具栏的频道舱会切成回看语义——频道号与台标后显示正在回看的那一档与「昨天 20:04」；信息行下方单独一行是真正的播放进度：<code>已播 · 金色轨道 · 总时长</code>，整条 16pt 都是热区，悬停轨道加粗、播放头放大，点按或拖动即时定位、松手落位（复用播放页同一条 <code>VideoScrubber</code>），不再是舱底那条 1.5pt 只能看的细线。总时长优先取播放器解析出的真实片长，解析不出时用节目单时长兜底，不会再停在 <code>00:00</code>。直播仍保留绿点与 60 秒推进的节目进度细线。这样回看既知道「看的是哪一档、哪天几点」，也随时知道「还剩多久」，而且随时能拖。回看时 ← / → 直接快退 / 快进（步长跟设置里的「快进步长」一致），不再翻上一条 / 下一条；直播的 ← / → 仍用于切换线路。</p>
+  <p class="src" style="margin-top:-2px">工具栏的「播放选项」菜单也改成快照模式：它不再跟着播放器每 250ms 发布的时间重绘，展开「显示方式 / 画面比例」这类子菜单时不会被刷新收起，可以正常点选。</p>
+
+  <h3>9.13 落地拆分：先结构，再播放，再节目单与信号</h3>
+  <div class="tw">
+    <table style="min-width:840px">
+      <thead><tr><th>阶段</th><th>范围</th><th>代码落点</th><th>验收</th></tr></thead>
+      <tbody>
+        <tr><td><b>1 结构</b></td><td>五 Tab、收藏 / 最近、频道号、深浅色 token <span class="tag a">已实现</span></td><td><code>TVHubTab</code>、<code>IPTVBrowserModel</code>、<code>TVModels</code>、<code>SidebarView</code>、<code>TVBrand</code> 动态色</td><td>侧边栏出现收藏 / 最近；重启保持；五 Tab 可切换；系统外观切换无深色残块。</td></tr>
+        <tr><td><b>2 播放</b></td><td>直播 OSD、频道带、↑↓ 换台、数字键、节目单抽屉 <span class="tag a">已实现</span>；线路切换与失败自动顺延 <span class="tag a">已实现</span></td><td><code>VideoPlayback.swift</code>、新增 <code>TVPlaybackOverlay.swift</code></td><td>直播不显示进度条；↑↓ 换台；403 自动顺延并提示。</td></tr>
+        <tr><td><b>3 节目单</b></td><td>XMLTV、Guide（时间轴 / 时间环）、抽屉、Now/Next <span class="tag a">已实现</span></td><td><code>TVEPGService.swift</code>、<code>TVEPGModels.swift</code>、<code>TVHubView.swift</code></td><td>带 EPG 的源 30 秒出节目；Guide 时间线正确。</td></tr>
+        <tr><td><b>4 回看</b></td><td>catch-up 模板、7 天列表、回看播放 <span class="tag a">已实现</span></td><td><code>TVModels</code> catch-up 字段、<code>TVCatchupURL.swift</code>、<code>LibraryStore+TV.swift</code></td><td>支持的源可回看；不支持明确降级。</td></tr>
+        <tr><td><b>5 信号</b></td><td>截帧、TTFB / 码率 / 分辨率 / 延迟 / 线路数 <span class="tag a">已实现</span>；24 小时可用率采样与进入信号页巡检 <span class="tag a">已实现</span>；后台定时任务与告警推送 <span class="tag c">未做</span></td><td><code>TVPreviewCache.swift</code>、<code>IPTVBrowserModel.patrolStaleSignals</code>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift#L2303">TVHubView.swift</a> 信号页，复用 <code>SourceJobCenter</code></td><td>探测全部有进度；截帧可见；异常能给出原因。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid g3" style="margin-top:14px">
+    <div class="okbox"><b>保留：</b>深墨蓝身份、16:9 信号卡、源行、检测队列、任务中心、空态与内置源保护。</div>
+    <div class="callout"><b>新增：</b>五个 Tab、收藏 / 最近、频道号、频道带、节目单抽屉、回看、时间环、时间河、七日隧道、信号截帧、线路面板。</div>
+    <div class="warn"><b>克制：</b>不做门户运营位、不做无限设置树、不自建录制服务；创意功能按「信号 → AI → 多画面」顺序推进。</div>
+  </div>
+
+  <div class="callout" style="margin-top:16px">
+    <b>一句话方案：</b>把网络电视从「一个频道墙 + 两个管理页」升级成「直播 / 节目单 / 回看 / 信号 / 源库」五个可停留的页面；播放窗口则变成「顶部节目条 + 底部频道带 + 右侧节目单抽屉 + 自动换线」的电视 OSD。时移用「时间河」、回看用「七日隧道」，把时间的方向感做出来。整套界面跟随系统外观与强调色（浅色同样成立），只有播放 OSD 固定深色。这样既保留我们已经做对的骨架，也补上了国内用户最在意的换台与节目单。
+  </div>
+
+  <h3>9.14 实现状态：按现有框架落地的部分（2026-11-23）</h3>
+  <p>本轮没有改架构：仍然是「窗口工具栏分页 + SQLite / UserDefaults 持久化 + 复用查看器播放」，只把报告里的能力补进现有骨架。下面列出的代码位置就是现在的实际实现。</p>
+  <div class="tw">
+    <table style="min-width:860px">
+      <thead><tr><th>能力</th><th>用户能看到什么</th><th>实现位置</th></tr></thead>
+      <tbody>
+        <tr><td><b>五个 Tab</b></td><td>直播 / 今晚 / 节目回看 / 信号 / 源库；切换写进 SQLite，重启沿用。「回看」与「节目单」已合并成「节目回看」，页内再切时间轴 / 传送门 / 时间环；「今晚」把赛事与黄金时段展开成长页面。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift">TVHubView.swift</a>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Domain/TVModels.swift">TVModels.swift</a></td></tr>
+        <tr><td><b>收藏 / 最近</b></td><td>侧边栏两个虚拟分组；频道卡星标；播放器 S 键收藏；最近按打开顺序保留。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Sidebar/SidebarView.swift">SidebarView.swift</a>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Store/IPTVBrowserModel.swift">IPTVBrowserModel.swift</a></td></tr>
+        <tr><td><b>直播两种密度</b></td><td>海报墙每张卡显示 Now / 时间 / 2px 进度；列表密度固定列快速扫台；搜索同时匹配频道名与节目名。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift#L148">TVChannelsView</a>、<code>TVChannelTile</code> / <code>TVChannelRow</code>、<code>visibleChannels</code></td></tr>
+        <tr><td><b>全频直播 · 按源筛选</b></td><td>顶部「源」胶囊列出全部源与各源频道数；选中后这一页只看该源的频道，分组与排序不变；侧边栏已聚焦某个源时胶囊自动隐藏。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift">TVChannelsView.sourceFilterMenu</a></td></tr>
+        <tr><td><b>今晚页</b></td><td>独立分页：赛事按「正在直播 / 稍后开赛」长列表，黄金时段按新闻 / 剧集 / 综艺 / 电影 / 纪实分组；卡片带频道号、台标、同播台数与入选理由；页面底部与右上角弹层各有完整规则说明。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift">TVTonightView / TVTonightRules</a></td></tr>
+        <tr><td><b>节目单时间轴</b></td><td>前天 / 昨天 / 今天 / 明天四天；节目按真实时长铺开（圆角色块 + 左侧细色条），状态分层（直播高亮 + 进度线 / 可回看小签 / 不可回看压暗 / 待播低饱和）；刻度尺表头 + 整点网格 + 带光点的红色当前时间线；频道列 200pt；顶部时间窗胶囊同时给出日期「今天 11/24 | 10:00 – 12:00」，窗口可在 1–12 小时之间调。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift">TVGuideView</a></td></tr>
+        <tr><td><b>节目回看 · 时间环</b></td><td>一整天卷成一圈：整圈一条连续锥形渐变色带，节目之间只留深色细缝；直播叠信号红柔光、不可回看的已播压暗、待播降饱和、选中加白色内衬。指针由「追光 + 金色唱针 + 放映镜头针头」组成；中央圆随指针显示日期 / <code>HH:mm</code> / 频道号与台名 / 当前节目 / 时段与状态，并带圆形播放键（播放直播 · 回看这档 · 预约提醒）。<b>中央信息圆内不响应拖动与悬停</b>，所以指针不会转、按钮点得到；只有表带这一圈可转动。深色 / 浅色两套表盘材质。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVTimeRingStage.swift">TVTimeRingStage.swift</a></td></tr>
+        <tr><td><b>传送门 · 频道与节目栏</b></td><td>左侧频道栏（支持回看的排前面、不支持的置灰），右侧该频道当天节目；支持节目搜索；直播 / 可回看 / 已结束状态明确。与时间轴、时间环共用同一份选中频道与日期。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift">TVCatchupView</a></td></tr>
+        <tr><td><b>频道号</b></td><td>卡片、节目单、播放 OSD 都显示等宽频道号；数字键 1.5 秒缓冲直达。</td><td><code>channelNumber(for:)</code>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/VideoPlayback.swift#L1824-L1880">VideoPlayback.handleKey</a></td></tr>
+        <tr><td><b>EPG 节目单</b></td><td>M3U 的 <code>url-tvg</code> / <code>x-tvg-url</code> 自动读，也可在源库手填；内置源默认接入公共 XMLTV（jsDelivr 镜像，129 个频道 / 3.4 万条节目，覆盖央视、卫视、凤凰中文 / 资讯）；解析结果按地址落盘缓存 6 小时，清单 6 小时内直接用库里的副本，不重复拉取。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Services/TV/TVEPGService.swift">TVEPGService.swift</a>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Domain/TVModels.swift">TVPlaylist.defaultEPGURLString</a>、<code>IPTVBrowserModel.refreshIfNeeded</code></td></tr>
+        <tr><td><b>回看</b></td><td>支持逐条 <code>catchup-source</code>，也支持 <code>#EXTM3U</code> 头部的全局默认值（APTV 写法）；模板兼容 <code>${start}</code>、<code>${utc}</code> 与 <code>${(b)yyyyMMddHHmmss}</code>；<code>?playseek=</code> 查询串正确拼在原地址后。天数按 <code>catchup-days</code>，未声明时收敛到 3 天（实测公共源窗口 3–4 天），回看走 <code>.vod</code> 进度条。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/LumaContentCore/IPTV/M3U.swift">M3U.swift</a>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Services/TV/TVCatchupURL.swift">TVCatchupURL.swift</a>、<code>TVChannel.effectiveCatchUpDays</code></td></tr>
+        <tr><td><b>直播转封装</b></td><td>非 HLS 的直播源（http-flv / http-ts，或没有 <code>.m3u8</code> 后缀的直播地址）直接交给 ffmpeg 转成 fMP4 HLS，带 UA / Referer、断流自动重连、6 段滑动窗口；直播不落缓存、不查续播。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/VideoPlayback.swift">VideoPlayback.load 直播分支</a>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PlaybackCore/StreamPlanner.swift">StreamPlanner.arguments(isLive:)</a>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PlaybackCore/VideoStreamSession.swift">VideoStreamSession(isLive:)</a></td></tr>
+        <tr><td><b>节目预约</b></td><td>节目单里给待播节目「预约」，开播时系统通知提醒；再点一次取消。提醒由系统持久化，重启仍有效。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Services/TV/TVReminderCenter.swift">TVReminderCenter.swift</a>、<code>IPTVBrowserModel.toggleReminder</code></td></tr>
+        <tr><td><b>候选线路</b></td><td>同一频道最多保留 1 主 + 3 备；线路地址、UA / Referer 一起入库；信号详情可「设为默认 / 恢复自动」；播放 OSD 有线路面板可直接点选，← → 也能循环；播放工具栏的「线路 N/M」胶囊本身也是下拉菜单（逐条列协议、当前线路打勾），不必等失败就能换线。</td><td><code>M3UChannelCandidate.alternateEntries</code>、<code>TVChannel.alternateStreamURLs</code>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Services/TV/TVDatabase.swift">TVDatabase.alt_stream_urls</a>、<code>TVPlaybackOverlay.lineMenu</code>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/PhotoViewer.swift">PhotoViewer.readout</a></td></tr>
+        <tr><td><b>失败自动顺延</b></td><td>直播 403 / 超时 / 装片失败时自动切下一条线，Toast 报「线路 1 失败，已切换到线路 2/3」；每条线最多试一次，全部失败才出错误卡片；回看与点播不受影响。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Store/LibraryStore+TV.swift">advanceTVLineAfterFailure</a>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/VideoPlayback.swift">handlePlaybackFailure</a> / <code>handleStreamFailureChange</code></td></tr>
+        <tr><td><b>24 小时可用率</b></td><td>每次探测结果按小时落一份采样（保留 24 小时 / 最多 48 点），信号详情画成成功 / 失败小柱；打开信号页后台巡检收藏与 6 小时前的旧结果。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Store/IPTVBrowserModel.swift">recordProbePoint / availability / patrolStaleSignals</a>、<code>TVAvailabilityBar</code></td></tr>
+        <tr><td><b>信号</b></td><td>16:9 真实截帧 + 分辨率 / 码率 / 首帧延迟 / 线路数；异常 / 4K / 收藏筛选，异常优先、延迟最低三个给「最稳」；悬停进详情，可复制流地址。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Services/TV/TVPreviewCache.swift">TVPreviewCache.swift</a>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift#L2303">TVStatusView</a> / <code>TVSignalDetailView</code></td></tr>
+        <tr><td><b>源库摘要</b></td><td>已启用 / 异常 / 带 EPG / 可回看频道四项概览，直接对应下方源列表。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift#L1893">TVOverviewView</a></td></tr>
+        <tr><td><b>播放 OSD</b></td><td>顶部大号频道号 + 白底台标章 + 台名 + Now & Next + 画质 / 线路；时移时频道号转为金色衬线并出现红色「回到直播」；底部频道带（悬停 400ms 出静音预览）；右侧节目单抽屉 340px（窄屏不超过画面 42%）按天切换；E / S / L 回直播 / ↑↓ / ←→ 切线路 / 数字键全部可用。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/TVPlaybackOverlay.swift">TVPlaybackOverlay.swift</a>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/VideoPlayback.swift#L666-L690">VideoPlayback.tvOverlay</a></td></tr>
+        <tr><td><b>时间河（时移）</b></td><td>暂停直播即展开：画面 / 直播 / 落后三个读数，画面中央同步显示「画面停在…直播已经走到…」；胶片带上下两排齿孔，当前格用暂停时的真实截帧、越往前越暗越不饱和，NOW 格红色描边；金色已看河段 + 红色斜纹时间差 + 呼吸的右缘红线；拉丝铜滑块带青色指针，上沿挂落后读数牌。拖动即 seek；时移里 ← / → 按 10 秒步进，河上也有 ±10 秒按钮；「回到直播」先做 240ms 河段收束动画再跳回边缘，L / Esc 同样回到直播。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/TVPlaybackOverlay.swift">TVPlaybackOverlay.timeRiver / returnToLive</a>、<code>VideoPlayback.seekTimeshift</code></td></tr>
+        <tr><td><b>传送门（回看）</b></td><td>回看不是拖进度条，而是「去某一天」：竖立的传送环立在发光底座上，环上只有四个日期节点（前天 / 昨天 / 今天 / 明天）——今天在正上方，明天在右、昨天在左、前天在下方；拖环、点节点或用左右箭头换日，环心显示所选日期、星期、节目数与频道数；选中层有青色高亮与门框光，右侧节目列表随之淡入。深色 / 浅色两套材质。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift">TVCatchupView.portalRing / portalDayMarkers / portalCenter</a></td></tr>
+        <tr><td><b>失败与换线</b></td><td>全部线路失败才升级为居中卡片，顶部仍保留频道号 / 台标 / 节目名（去掉进度与按钮）；卡片标题「这个频道暂时看不了」，逐条列出「线路 1 超时、线路 2 返回 403、线路 3 无响应」，按钮为重试 / 换一条线路 / 打开信号页 / 复制流地址；成功换线只给顶部 Toast。</td><td><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/Viewer/VideoPlayback.swift">tvFailureCard</a>、<code>LibraryStore.tvLineFailureNotes</code>、<code>TVPlaybackOverlay.failureMode</code></td></tr>
+        <tr><td><b>创意功能池</b></td><td>信号雷达（可用率 + 延迟排前十）、预切换预览（频道带悬停 400ms 出静音画面）、节目摘要（EPG 简介两行）、今晚赛事货架 + 开赛提醒、截帧保存、睡眠定时（30/60/90 分钟渐隐停止）、多画面（2×2 静音预览，点击切声音、双击放大）、30 秒片段（ffmpeg 录制到「影片/拾光电视片段」）。</td><td><code>TVStatusView.radarStrip</code>、<code>channelChip</code>、<code>programSummary</code>、<code>tonightSports</code>、<a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Services/TV/TVClipRecorder.swift">TVClipRecorder</a>、<code>TVMultiviewSheet</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid g3" style="margin-top:14px">
+    <div class="okbox"><b>已验证：</b><code>swift build</code> 通过；<code>swift run LumaContentChecks</code> 全量断言通过。<b>实测可用数据：</b>EPG <code>cdn.jsdelivr.net/gh/fanmingming/live@main/e.xml</code> 返回 200（5.9MB，129 频道，节目覆盖 11-17 至 11-25）；回看源 <code>101.35.240.114:88</code> 的 <code>live.php?id=CCTV1&amp;playseek=…</code> 与 <code>phenix.php?id=fhzw&amp;playseek=…</code> 均 302 到 <code>#EXT-X-PLAYLIST-TYPE:VOD</code> 的 HLS，实测 11-21 至 11-23 可播。直播转封装用同一组参数实测 <code>live.php?id=CCTV1</code> 能持续产出 2 秒 fMP4 分片、6 段滑动窗口。</div>
+    <div class="callout"><b>外部限制：</b>回看窗口由源站决定（实测 3～4 天，超出返回空列表）；凤凰的 FLV 直播由本地转封装兜住，但该源站有时只推送几百 KB 就断开，属源站本身限制。时间河的长度取决于真实可 seek 窗口：转封装直播目前保留 6 段（约 12 秒），直连 HLS 取决于源站保留时长，界面按实际窗口缩放，不画不存在的 -30 分钟。</div>
+    <div class="warn"><b>下一阶段：</b>把转封装窗口做成可配置（例如 2 分钟时移）；手机遥控 / 扫码导入；观看年报；多画面支持 FLV 源（需先转封装成 HLS 再进四宫格）。</div>
+  </div>
+</section>
+
+<!-- ================= 10 附录 ================= -->
+<section id="s10">
+  <div class="sec-head">
+    <div>
+      <div class="kicker">Appendix</div>
+      <h2><span class="num">10</span>附录：术语、截图来源与参考</h2>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="panel">
+      <h4 style="margin-top:0">术语</h4>
+      <dl class="kv" style="grid-template-columns:92px 1fr">
+        <dt>EPG</dt><dd>Electronic Program Guide，节目单。</dd>
+        <dt>XMLTV</dt><dd>常见的节目单 XML 格式，用频道 ID 与时间块描述节目。</dd>
+        <dt>tvg-id</dt><dd>M3U 中频道的稳定标识，用于去重与 EPG 映射。</dd>
+        <dt>Xtream</dt><dd>以 host + 账号密码提供直播 / 点播的接口体系。</dd>
+        <dt>catch-up</dt><dd>回看：按模板回放过去若干天的节目。</dd>
+        <dt>timeshift</dt><dd>时移：在直播中暂停 / 回退。</dd>
+        <dt>OSD</dt><dd>播放器叠加层，承载节目信息与控制。</dd>
+        <dt>HLS</dt><dd>基于 HTTP 的分片直播协议（.m3u8）。</dd>
+      </dl>
+    </div>
+    <div class="panel">
+      <h4 style="margin-top:0">截图来源</h4>
+      <ul class="small" style="margin-bottom:0">
+        <li><b>TiviMate</b>：TroyPoint 公开评测截图（2019 版），证据 B。</li>
+        <li><b>Channels DVR</b>：getchannels.com 官方截图，证据 A。</li>
+        <li><b>Jellyfin</b>：jellyfin.org 官方 10.8 截图，证据 A。</li>
+        <li><b>IPTV Smarters</b>：App Store 官方截图（iOS），证据 A。</li>
+        <li><b>GSE Smart IPTV Pro</b>：App Store 官方截图，证据 A。</li>
+        <li><b>IPTVX</b>：App Store 官方截图，证据 A。</li>
+        <li><b>iPlayTV AIO</b>：App Store 官方截图（2022），证据 A。</li>
+        <li><b>IINA</b>：iina.io 官网截图，证据 A。</li>
+        <li><b>VLC</b>：VideoLAN 官方截图（2.2，2016），证据 A。</li>
+        <li><b>火星直播</b>：乐游网（962.net）公开截图（2024），证据 B。</li>
+        <li><b>小薇直播</b>：逗游网公开截图（2025），证据 B。</li>
+        <li><b>我的电视 my-tv</b>：GitHub 项目官方截图，证据 A。</li>
+        <li><b>央视频 TV</b>：华军软件园公开截图，证据 B。</li>
+        <li><b>HDP / 星火 / 咪咕 TV / 电视家 / 运营商盒子</b>：无可靠截图，结构还原或公开资料，证据 C。</li>
+        <li><b>OTT Navigator / Perfect Player / Kodi PVR / Plex</b>：无可靠截图，结构还原，证据 C。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <h4 style="margin-top:0">代码索引</h4>
+    <ul class="small" style="margin-bottom:0">
+      <li><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Domain/TVModels.swift">TVModels.swift</a>：地区、播放列表、频道、分页与中文分组。</li>
+      <li><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/LumaContentCore/IPTV/M3U.swift">M3U.swift</a>：解析、清洗、去重与选线评分。</li>
+      <li><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Store/IPTVBrowserModel.swift">IPTVBrowserModel.swift</a>：刷新、缓存、串行检测队列、持久化。</li>
+      <li><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVHubView.swift">TVHubView.swift</a>：频道墙、源管理、状态页。</li>
+      <li><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Store/LibraryStore+TV.swift">LibraryStore+TV.swift</a>：频道进入播放器的桥接。</li>
+      <li><a href="file:///Users/lijialong/Documents/gitlab/photos/Sources/PhotosClone/Features/TV/TVBrand.swift">TVBrand.swift</a>：色彩 token、LIVE 徽标、台标占位。</li>
+    </ul>
+  </div>
+
+  <div class="callout" style="margin-top:16px">
+    <b>一句话结论（2026-11-23）：</b>研究时指出的三个硬缺口——<b>节目单、备用线路、收藏 / 最近（含播放器频道带）</b>——已经全部落地，并在同一套骨架里补出了五个 Tab、双密度频道墙、时间轴 / 时间环、回看与时间河、七日隧道、信号截帧与 24 小时可用率。现在与竞品的差距不在「直播能不能用」，而在<b>生态深度</b>（Xtream、后台定时巡检与告警、每源手动 EPG 映射、频道整理）与<b>客厅增强</b>（定时录制、家长锁、投屏）。这些按第 08 节阶段 3 / 4 继续推进，不必推翻现有结构。
+  </div>
+</section>
+
+<footer>
+  拾光 2.0 · 网络电视竞品与体验研究报告 · 2026-11-23<br>
+  截图版权归各产品与来源网站所有，仅用于内部竞品研究；产品能力以各产品最新版本为准。
+</footer>
+
+</div>
+<script>
+  // 目录跳转时，上方懒加载图片会改变布局，这里在短时间内持续校正锚点。
+  (function () {
+    var anchorUntil = 0;
+    var offset = 58;
+
+    function settle() {
+      if (Date.now() > anchorUntil || !location.hash) return;
+      var target = document.querySelector(location.hash);
+      if (!target) return;
+      var top = target.getBoundingClientRect().top + window.scrollY - offset;
+      if (Math.abs(window.scrollY - top) > 6) window.scrollTo(0, top);
+    }
+
+    document.querySelectorAll('nav.toc a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        anchorUntil = Date.now() + 2600;
+        [80, 400, 900, 1500, 2100].forEach(function (delay) {
+          setTimeout(settle, delay);
+        });
+      });
+    });
+
+    document.querySelectorAll('img').forEach(function (img) {
+      img.addEventListener('load', settle);
+    });
+  })();
+</script>
+</body>
+</html>

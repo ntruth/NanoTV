@@ -1,0 +1,952 @@
+{
+  "cases": {
+    "01_h264_aac_stereo.mp4": {
+      "plan": {
+        "path": "native",
+        "mode": "native",
+        "reason": "AVPlayer 可直接打开，无需 ffmpeg",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false
+      }
+    },
+    "02_h264_aac_51.mp4": {
+      "plan": {
+        "path": "native",
+        "mode": "native",
+        "reason": "AVPlayer 可直接打开，无需 ffmpeg",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false
+      }
+    },
+    "03_h264_ac3_51.mp4": {
+      "plan": {
+        "path": "native",
+        "mode": "native",
+        "reason": "AVPlayer 可直接打开，无需 ffmpeg",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false
+      }
+    },
+    "04_h264_ac3_51.mkv": {
+      "plan": {
+        "path": "remux",
+        "mode": "remux",
+        "audio_copy": true,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": null,
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 0.99,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "ac3",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/04_h264_ac3_51_remux/live.m3u8",
+        "segments": 4,
+        "duration": 8.0,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 61,
+        "first_segment_video_packets": 50
+      },
+      "effective": "remux",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:ac-3:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.320698,
+        "presentationSize": "640x360"
+      }
+    },
+    "05_h264_eac3_51.mkv": {
+      "plan": {
+        "path": "remux",
+        "mode": "remux",
+        "audio_copy": true,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": null,
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 0.99,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "eac3",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/05_h264_eac3_51_remux/live.m3u8",
+        "segments": 4,
+        "duration": 8.0,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 61,
+        "first_segment_video_packets": 50
+      },
+      "effective": "remux",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:ec-3:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.377545541,
+        "presentationSize": "640x360"
+      }
+    },
+    "06_h264_dts_51.mkv": {
+      "plan": {
+        "path": "remux",
+        "mode": "remux",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": "ac3",
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 6.77,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "ac3",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/06_h264_dts_51_remux/live.m3u8",
+        "segments": 4,
+        "duration": 8.0,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 61,
+        "first_segment_video_packets": 50
+      },
+      "effective": "remux",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:ac-3:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.464728923,
+        "presentationSize": "640x360"
+      }
+    },
+    "07_hevc_mlp_51.mkv": {
+      "plan": {
+        "path": "remux",
+        "mode": "remux",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": "ac3",
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 2.64,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "hevc",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "ac3",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/07_hevc_mlp_51_remux/live.m3u8",
+        "segments": 1,
+        "duration": 8.0,
+        "first_segment_seconds": 8.0,
+        "variant": "media",
+        "first_segment_audio_packets": 250,
+        "first_segment_video_packets": 200
+      },
+      "effective": "remux",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:hvc1:enabled=true",
+          "soun:ac-3:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.43994513,
+        "presentationSize": "640x360"
+      }
+    },
+    "08_hevc10_hdr10_flac_51.mkv": {
+      "plan": {
+        "path": "remux",
+        "mode": "remux",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": "aac",
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 0.95,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "hevc",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "aac",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/08_hevc10_hdr10_flac_51_remux/live.m3u8",
+        "segments": 1,
+        "duration": 8.0,
+        "first_segment_seconds": 8.0,
+        "variant": "media",
+        "first_segment_audio_packets": 376,
+        "first_segment_video_packets": 200
+      },
+      "effective": "remux",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:hvc1:enabled=true",
+          "soun:aac:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.451521718,
+        "presentationSize": "640x360"
+      }
+    },
+    "09_hevc10_hdr10_ac3_51.mkv": {
+      "plan": {
+        "path": "remux",
+        "mode": "remux",
+        "audio_copy": true,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": null,
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 0.97,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "hevc",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "ac3",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/09_hevc10_hdr10_ac3_51_remux/live.m3u8",
+        "segments": 1,
+        "duration": 8.0,
+        "first_segment_seconds": 8.0,
+        "variant": "media",
+        "first_segment_audio_packets": 250,
+        "first_segment_video_packets": 200
+      },
+      "effective": "remux",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:hvc1:enabled=true",
+          "soun:ac-3:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.406526302,
+        "presentationSize": "640x360"
+      }
+    },
+    "10_av1_opus_51.mkv": {
+      "plan": {
+        "path": "transcode",
+        "mode": "transcode",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": "aac",
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 5.88,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "aac",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/10_av1_opus_51_transcode/live.m3u8",
+        "segments": 4,
+        "duration": 8.0,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 95,
+        "first_segment_video_packets": 50
+      },
+      "effective": "transcode",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:aac:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.457763138,
+        "presentationSize": "640x360"
+      }
+    },
+    "11_vp9_opus_51.webm": {
+      "plan": {
+        "path": "transcode",
+        "mode": "transcode",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": "aac",
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 6.57,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "aac",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/11_vp9_opus_51_transcode/live.m3u8",
+        "segments": 4,
+        "duration": 8.0,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 95,
+        "first_segment_video_packets": 50
+      },
+      "effective": "transcode",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:aac:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.440643935,
+        "presentationSize": "640x360"
+      }
+    },
+    "12_mpeg2_1080i_mp3.mkv": {
+      "plan": {
+        "path": "transcode",
+        "mode": "transcode",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": true,
+        "audio_encoder": "aac",
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 1.2,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "aac",
+            "channels": 2,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/12_mpeg2_1080i_mp3_transcode/live.m3u8",
+        "segments": 4,
+        "duration": 8.0,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 95,
+        "first_segment_video_packets": 50
+      },
+      "effective": "transcode",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:aac:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.521013871,
+        "presentationSize": "1920x1080"
+      }
+    },
+    "13_mpeg4_mp3.avi": {
+      "plan": {
+        "path": "transcode",
+        "mode": "transcode",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": "aac",
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 1.02,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "aac",
+            "channels": 2,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/13_mpeg4_mp3_transcode/live.m3u8",
+        "segments": 5,
+        "duration": 8.04,
+        "first_segment_seconds": 2.0,
+        "variant": "media",
+        "first_segment_audio_packets": 95,
+        "first_segment_video_packets": 50
+      },
+      "effective": "transcode",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:aac:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.463226415,
+        "presentationSize": "640x360"
+      }
+    },
+    "14_prores_pcm.mov": {
+      "plan": {
+        "path": "native",
+        "mode": "native",
+        "reason": "AVPlayer 可直接打开，无需 ffmpeg",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false
+      }
+    },
+    "15_h264_alac.mov": {
+      "plan": {
+        "path": "native",
+        "mode": "native",
+        "reason": "AVPlayer 可直接打开，无需 ffmpeg",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false
+      }
+    },
+    "16_h264_aac51_ac351.mkv": {
+      "plan": {
+        "path": "remux",
+        "mode": "remux",
+        "audio_copy": true,
+        "multi_audio": true,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": null,
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 0.78,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [
+          "live_0.m3u8",
+          "live_eng-1.m3u8",
+          "live_jpn-2.m3u8"
+        ],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "h264",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "aac",
+            "channels": 6,
+            "language": "eng"
+          },
+          {
+            "type": "audio",
+            "codec": "ac3",
+            "channels": 6,
+            "language": "jpn"
+          }
+        ],
+        "master_exists": true,
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/16_h264_aac51_ac351_remux/master.m3u8",
+        "audio_renditions": 2,
+        "segments": 4,
+        "duration": 8.0,
+        "first_segment_seconds": 2.0,
+        "variant": "master",
+        "first_segment_audio_packets": 94,
+        "first_segment_audio_codec": "aac",
+        "first_segment_video_packets": 50
+      },
+      "effective": "remux",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [
+          "English",
+          "Japanese"
+        ],
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:aac:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.408928856,
+        "presentationSize": "640x360"
+      },
+      "audioSwitch": {
+        "selectedAudio": "Japanese",
+        "itemStatus": "readyToPlay",
+        "playedRate": 1,
+        "playedSeconds": 1.422927374,
+        "itemTracks": [
+          "vide:avc1:enabled=true",
+          "soun:ac-3:enabled=true"
+        ],
+        "audioOptions": [
+          "English",
+          "Japanese"
+        ]
+      }
+    },
+    "17_h264_aac_stereo.ts": {
+      "plan": {
+        "path": "native",
+        "mode": "native",
+        "reason": "AVPlayer 可直接打开，无需 ffmpeg",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false
+      }
+    },
+    "18_hevc_aac_stereo.mp4": {
+      "plan": {
+        "path": "remux",
+        "mode": "remux",
+        "audio_copy": true,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": null,
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 0.87,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "hevc",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "aac",
+            "channels": 2,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/18_hevc_aac_stereo_remux/live.m3u8",
+        "segments": 1,
+        "duration": 8.0,
+        "first_segment_seconds": 8.0,
+        "variant": "media",
+        "first_segment_audio_packets": 376,
+        "first_segment_video_packets": 200
+      },
+      "effective": "remux",
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:hvc1:enabled=true",
+          "soun:aac:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.51898379,
+        "presentationSize": "640x360"
+      }
+    },
+    "19_hevc10_hdr10_4k60.mp4": {
+      "plan": {
+        "path": "remux",
+        "mode": "remux",
+        "audio_copy": true,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false,
+        "audio_encoder": null,
+        "reason": "MKV/AVI/WebM 容器或非原生视频编码，需 ffmpeg"
+      },
+      "exit": 0,
+      "seconds": 0.55,
+      "stderr": "",
+      "verify": {
+        "exists": true,
+        "variants": [],
+        "streams": [
+          {
+            "type": "video",
+            "codec": "hevc",
+            "channels": null,
+            "language": "und"
+          },
+          {
+            "type": "audio",
+            "codec": "aac",
+            "channels": 6,
+            "language": "und"
+          }
+        ],
+        "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/19_hevc10_hdr10_4k60_remux/live.m3u8",
+        "segments": 2,
+        "duration": 6.02,
+        "first_segment_seconds": 4.166667,
+        "variant": "media",
+        "first_segment_audio_packets": 194,
+        "first_segment_video_packets": 249
+      },
+      "effective": "remux",
+      "tonemap": {
+        "exit": 0,
+        "seconds": 7.13,
+        "stderr": "",
+        "verify": {
+          "exists": true,
+          "variants": [],
+          "streams": [
+            {
+              "type": "video",
+              "codec": "h264",
+              "channels": null,
+              "language": "und"
+            },
+            {
+              "type": "audio",
+              "codec": "aac",
+              "channels": 6,
+              "language": "und"
+            }
+          ],
+          "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/19_hevc10_hdr10_4k60_tonemap/live.m3u8",
+          "segments": 3,
+          "duration": 6.0,
+          "first_segment_seconds": 2.0,
+          "variant": "media",
+          "first_segment_audio_packets": 95,
+          "first_segment_video_packets": 120
+        },
+        "color": {
+          "primaries": "bt709",
+          "transfer": "bt709",
+          "matrix": "bt709",
+          "size": "2560x1440"
+        },
+        "avplayer": {
+          "isPlayable": true,
+          "itemStatus": "readyToPlay",
+          "itemError": null,
+          "audioOptions": [],
+          "itemTracks": [
+            "vide:avc1:enabled=true",
+            "soun:aac:enabled=true"
+          ],
+          "videoRange": null,
+          "tracks": [],
+          "playedRate": 1,
+          "playedSeconds": 1.425762505,
+          "presentationSize": "2560x1440"
+        }
+      },
+      "avplayer": {
+        "isPlayable": true,
+        "itemStatus": "readyToPlay",
+        "itemError": null,
+        "audioOptions": [],
+        "itemTracks": [
+          "vide:hvc1:enabled=true",
+          "soun:aac:enabled=true"
+        ],
+        "videoRange": null,
+        "tracks": [],
+        "playedRate": 1,
+        "playedSeconds": 1.412498777,
+        "presentationSize": "3840x2160"
+      }
+    },
+    "20_hevc_aac_stereo_hvc1.mp4": {
+      "plan": {
+        "path": "native",
+        "mode": "native",
+        "reason": "AVPlayer 可直接打开，无需 ffmpeg",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false
+      }
+    },
+    "21_hevc10_hdr10_hvc1.mp4": {
+      "plan": {
+        "path": "native",
+        "mode": "native",
+        "reason": "AVPlayer 可直接打开，无需 ffmpeg",
+        "audio_copy": false,
+        "multi_audio": false,
+        "tone_map": false,
+        "interlaced": false
+      },
+      "tonemap": {
+        "exit": 0,
+        "seconds": 2.29,
+        "stderr": "",
+        "verify": {
+          "exists": true,
+          "variants": [],
+          "streams": [
+            {
+              "type": "video",
+              "codec": "h264",
+              "channels": null,
+              "language": "und"
+            },
+            {
+              "type": "audio",
+              "codec": "aac",
+              "channels": 6,
+              "language": "und"
+            }
+          ],
+          "entry": "/Users/lijialong/Movies/LumaTestMedia/hls/21_hevc10_hdr10_hvc1_tonemap/live.m3u8",
+          "segments": 4,
+          "duration": 8.0,
+          "first_segment_seconds": 2.0,
+          "variant": "media",
+          "first_segment_audio_packets": 95,
+          "first_segment_video_packets": 50
+        },
+        "color": {
+          "primaries": "bt709",
+          "transfer": "bt709",
+          "matrix": "bt709",
+          "size": "1920x1080"
+        },
+        "avplayer": {
+          "isPlayable": true,
+          "itemStatus": "readyToPlay",
+          "itemError": null,
+          "audioOptions": [],
+          "itemTracks": [
+            "vide:avc1:enabled=true",
+            "soun:aac:enabled=true"
+          ],
+          "videoRange": null,
+          "tracks": [],
+          "playedRate": 1,
+          "playedSeconds": 1.391722027,
+          "presentationSize": "1920x1080"
+        }
+      }
+    }
+  }
+}

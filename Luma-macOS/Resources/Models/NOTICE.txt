@@ -1,0 +1,24 @@
+拾光 Luma 端侧图像识别模型说明
+
+1. SigLIP 2（图像 / 文本编码器）
+   来源：google/siglip2-base-patch16-256
+   转换：palmier-io/siglip2-base-coreml（Apache-2.0）
+   分发：https://hf-mirror.com/palmier-io/siglip2-base-coreml（备用 huggingface.co）
+   许可：Apache License 2.0
+   用途：图像打标、语义搜索、相似照片检索，全部在本机推理。
+   说明：两个编码器（约 350 MB）由用户在设置里按需下载，安装时在本机编译为 Core ML；
+         词表 tags.json、标签向量与分词器（约 9 MB）随 App 内置，不额外下载。
+
+2. YOLO11n（物体检测，COCO 80 类）
+   来源：Ultralytics YOLO11
+   转换：SharpAI/yolo11n-coreml-int8
+   许可：AGPL-3.0
+   用途：补充猫、狗、汽车、披萨等明确主体的标签。
+   注意：AGPL-3.0 对再分发有源码开放要求；如需商业分发，请替换为许可兼容的检测模型。
+
+3. GeoNames cities15000（境外地点兜底城市库，Places/world-cities.json）
+   来源：https://download.geonames.org/export/dump/（cities15000）
+   许可：Creative Commons Attribution 4.0（CC BY 4.0）
+   用途：系统逆地理编码对境外坐标返回空结果时，按最近城市补国家 / 城市级地名，全程离线。
+
+模型均随 App 本地加载，不上传任何照片或识别结果。

@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="拾光 Luma 是一款默认完全本地运行的 macOS 照片管理器：打开任意图库、系统「照片」与网络存储，用端侧智能检索、整理与重温，照片默认不必离开这台 Mac。">
+<title>拾光 Luma — 十年光影，一眼看见</title>
+<link rel="icon" type="image/png" href="assets/luma-icon-180.png">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-home">
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.35-7-9.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 7 3.5C19 15.65 12 20 12 20Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6-5.1 6-10a6 6 0 1 0-12 0c0 4.9 6 10 6 10Z"/><circle cx="12" cy="11" r="2.2"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="12" rx="3"/><path d="m15 10 5-3v10l-5-3"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="12.5" r="3.2"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 8 4.5-8 4.5-8-4.5L12 3Z"/><path d="m4 12 8 4.5 8-4.5"/><path d="m4 16.5 8 4.5 8-4.5"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.1 9.4 4.3 4.3 0 0 0 7 18Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 19 6v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="6" r="2.2"/><path d="M8 18h4a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h8M16 7h4M4 17h4M12 17h8"/><circle cx="14" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+</svg>
+
+<header class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="拾光 Luma 首页">
+      <img src="assets/luma-icon-180.png" alt="" width="24" height="24">
+      <span>拾光 <em>Luma</em></span>
+    </a>
+    <nav class="nav-links" aria-label="页面导航">
+      <a href="#sources">图库</a>
+      <a href="#features">功能</a>
+      <a href="#intelligence">智能</a>
+      <a href="#assistant">智能助手</a>
+      <a href="#compare">对比</a>
+      <a href="#privacy">隐私</a>
+      <a href="#specs">规格</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm" href="manual.html">使用手册</a>
+      <a class="btn btn-light btn-sm" href="#start">开始使用</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="navMobile">
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="nav-mobile" id="navMobile" aria-label="移动端导航">
+    <a href="#sources">图库来源</a>
+    <a href="#features">功能总览</a>
+    <a href="#display">显示形式</a>
+    <a href="#intelligence">端侧智能</a>
+    <a href="#assistant">智能助手</a>
+    <a href="#compare">与「照片」对比</a>
+    <a href="#privacy">隐私架构</a>
+    <a href="#specs">技术规格</a>
+    <a href="manual.html">使用手册</a>
+  </nav>
+
+  <div class="nav-progress" id="navProgress"></div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-aura" aria-hidden="true">
+    <span class="aura aura-1"></span>
+    <span class="aura aura-2"></span>
+    <span class="aura aura-3"></span>
+    <div class="hero-ring"></div>
+  </div>
+
+  <div class="wrap hero-copy">
+    <p class="eyebrow reveal">拾光 Luma · macOS 原生照片管理</p>
+    <h1 class="reveal">十年光影。<br><span class="grad">一眼，看见。</span></h1>
+    <p class="lede reveal">任意图库，系统「照片」，还有 NAS。<br class="br-desktop">端侧智能，默认留在本机。</p>
+    <div class="cta-row reveal">
+      <a class="btn btn-light btn-lg" href="https://github.com/houshanren/luma/releases/download/v2.0.0/Luma-2.0.0-macOS.zip">下载 macOS 版<span class="btn-arrow">→</span></a>
+      <a class="btn btn-ghost btn-lg" href="manual.html">阅读使用手册</a>
+      <a class="btn btn-ghost btn-lg" href="https://github.com/houshanren/luma" target="_blank" rel="noopener">源码</a>
+    </div>
+    <p class="hero-meta reveal">版本 2.0.0 · macOS 14 Sonoma 及以上 · 无账号 · 无第三方依赖</p>
+  </div>
+
+  <div class="hero-stage wrap reveal" id="heroStage">
+    <div class="stage-glow" aria-hidden="true"></div>
+
+    <div class="mock-window" id="tiltWindow">
+      <div class="window-bar">
+        <div class="traffic" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="window-title">拾光 — 我的图库</div>
+        <div class="window-tools" aria-hidden="true">
+          <span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span>
+        </div>
+      </div>
+
+      <div class="window-body">
+        <aside class="mock-side">
+          <div class="side-label">拾光</div>
+          <ul class="side-list">
+            <li class="active"><svg class="ico"><use href="#i-grid"/></svg>所有照片<span>12,842</span></li>
+            <li><svg class="ico"><use href="#i-heart"/></svg>个人收藏</li>
+            <li><svg class="ico"><use href="#i-pin"/></svg>地图</li>
+            <li><svg class="ico"><use href="#i-video"/></svg>视频<span>326</span></li>
+            <li><svg class="ico"><use href="#i-camera"/></svg>截屏</li>
+            <li><svg class="ico"><use href="#i-spark"/></svg>场景</li>
+          </ul>
+          <div class="side-label">相簿</div>
+          <ul class="side-list">
+            <li><svg class="ico"><use href="#i-folder"/></svg>所有相簿</li>
+            <li><svg class="ico"><use href="#i-folder"/></svg>杭州之行</li>
+            <li><svg class="ico"><use href="#i-folder"/></svg>家人</li>
+          </ul>
+          <div class="side-label">网络存储</div>
+          <ul class="side-list">
+            <li><svg class="ico"><use href="#i-cloud"/></svg>工作室 NAS</li>
+          </ul>
+        </aside>
+
+        <div class="mock-main">
+          <div class="mock-toolbar">
+            <div class="mock-back" aria-hidden="true">‹</div>
+            <div class="mock-seg" aria-hidden="true">
+              <span>年</span><span>月</span><span class="on">所有照片</span>
+            </div>
+            <div class="mock-search" aria-hidden="true">
+              <svg class="ico"><use href="#i-search"/></svg>
+              <span>去年 海边</span>
+            </div>
+            <div class="mock-tools" aria-hidden="true">
+              <span class="tool-dot"></span><span class="tool-dot"></span><span class="tool-dot"></span>
+            </div>
+          </div>
+
+          <div class="mock-canvas">
+            <div class="mock-year">2026</div>
+            <div class="mock-month"><strong>五月</strong><span>428 张照片</span></div>
+
+            <div class="mock-grid">
+              <figure class="shot s1"><span class="ph-tag">实况</span><figcaption>西湖 · 日落</figcaption></figure>
+              <figure class="shot s2"><span class="ph-tag ph-video">03:42</span><figcaption>海岸线</figcaption></figure>
+              <figure class="shot s3"><figcaption>山径</figcaption></figure>
+              <figure class="shot s4"><span class="ph-tag">收藏</span><figcaption>夜色</figcaption></figure>
+              <figure class="shot s5"><figcaption>猫</figcaption></figure>
+              <figure class="shot s6"><figcaption>早餐</figcaption></figure>
+              <figure class="shot s7"><figcaption>雪线</figcaption></figure>
+              <figure class="shot s8"><figcaption>沙丘</figcaption></figure>
+              <figure class="shot s9"><figcaption>花房</figcaption></figure>
+              <figure class="shot s10"><span class="ph-tag ph-video">01:08</span><figcaption>星野</figcaption></figure>
+              <figure class="shot s11"><figcaption>街角</figcaption></figure>
+              <figure class="shot s12"><figcaption>湖面</figcaption></figure>
+            </div>
+          </div>
+
+          <div class="mock-status">
+            <span>12,842 张照片、326 个视频</span>
+            <span class="mock-zoom" aria-hidden="true"><i></i><b></b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="float-chip chip-a" aria-hidden="true"><svg class="ico"><use href="#i-lock"/></svg>端侧分析 · 默认不上传</div>
+    <div class="float-chip chip-b" aria-hidden="true"><svg class="ico"><use href="#i-layers"/></svg>SQL 分页 · 600 张/页</div>
+    <div class="float-chip chip-c" aria-hidden="true"><svg class="ico"><use href="#i-film"/></svg>回忆 → 720p mp4</div>
+    <p class="stage-note">界面示意 · 实际以应用为准</p>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true"><span></span></div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat reveal"><b>30</b><span>种视频格式</span><small>MP4 / MKV / AVI / WebM / TS / MXF…</small></div>
+    <div class="stat reveal"><b>26</b><span>个助手工具</span><small>检索、整理、压缩、美化与恢复，写操作先确认</small></div>
+    <div class="stat reveal"><b>4</b><span>种显示形式</span><small>正方形 / 完整比例 / 瀑布流 / 列表</small></div>
+    <div class="stat reveal"><b>0</b><span>张照片默认上传</span><small>端侧 Vision 离线；助手按需显式开启</small></div>
+  </div>
+</section>
+
+<!-- Sources -->
+<section class="section sources" id="sources">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">一个窗口，所有来源</p>
+      <h2>你的照片分散在四处。<br>拾光把它们放在一起。</h2>
+      <p class="section-lede">每个 <code>.photoslibrary</code> 都是一等公民。库可以放在任何文件夹、外置磁盘或 NAS 上，所有数据都写入库内 —— 换机、归档、备份，只是移动一个文件夹。</p>
+    </div>
+
+    <div class="source-grid">
+      <article class="source-card reveal">
+        <div class="source-visual sv-local" aria-hidden="true">
+          <div class="folder-stack"><span></span><span></span><span></span></div>
+          <div class="source-pill">.photoslibrary</div>
+        </div>
+        <h3>拾光图库</h3>
+        <p>完整的本地图库：原图、缩略图、编辑渲染与元数据都在包内。超过 5,000 张自动切换分页窗口，十万张也照常浏览。</p>
+        <ul class="tick-list">
+          <li>任意位置 · 可放外置磁盘</li>
+          <li>SQLite 元数据 · 单文件可备份</li>
+          <li>非破坏编辑 · 原图始终保留</li>
+        </ul>
+      </article>
+
+      <article class="source-card reveal">
+        <div class="source-visual sv-native" aria-hidden="true">
+          <div class="native-stack"><span>Photos.sqlite</span><span>PhotosClone.sqlite</span></div>
+          <div class="source-pill">只读 + sidecar</div>
+        </div>
+        <h3>系统「照片」</h3>
+        <p>直接打开官方图库：内容读取 <code>Photos.sqlite</code>，收藏、隐藏、关键词与查看时间写入拾光的 sidecar，绝不修改 Apple 的一行数据。</p>
+        <ul class="tick-list">
+          <li>官方人物、相簿、文件夹照常展示</li>
+          <li>补充元数据写在 <code>asset_overlays</code></li>
+          <li>删除、编辑与导入保持禁用</li>
+        </ul>
+      </article>
+
+      <article class="source-card reveal">
+        <div class="source-visual sv-cloud" aria-hidden="true">
+          <div class="cloud-nodes"><span>SMB</span><span>WebDAV</span><span>阿里</span><span>百度</span><span>AList</span></div>
+          <div class="source-pill">只取缩略图</div>
+        </div>
+        <h3>网络存储</h3>
+        <p>把 NAS 当成图库浏览：优先服务端缩略图，WebDAV 只读取文件头 256KB，SMB 直接复用系统挂载点。凭据只进钥匙串。</p>
+        <ul class="tick-list">
+          <li>WebDAV 支持上传、重命名、新建与删除</li>
+          <li>SMB / 云盘只读浏览与播放</li>
+          <li>收藏只留在本机，不写回 NAS</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Multi-library -->
+<section class="section libraries" id="libraries">
+  <div class="wrap">
+    <div class="lib-panel reveal">
+      <div class="lib-copy">
+        <p class="eyebrow">多图库并存</p>
+        <h2>一个窗口，<br>装下多个图库。</h2>
+        <p class="section-lede">最近图库与官方「照片」连接同时保留在侧边栏，点一下即可切换。每个库拥有独立的照片、相簿、设置、网盘与助手对话。</p>
+        <ul class="tick-list roomy">
+          <li><b>同时保留</b>：最多 10 个最近图库，每个库再保存最多 10 个系统图库连接。</li>
+          <li><b>各自独立</b>：切换库即切换设置、连接与助手对话，不串数据。</li>
+          <li><b>边界清晰</b>：额外连接只读浏览，只有当前库可写入。</li>
+        </ul>
+        <p class="fine">同一时间渲染一个「当前图库」的网格；多个连接同时在线，但不会把两个库并排显示。</p>
+        <a class="text-link" href="manual.html#library">查看多图库规则<span>→</span></a>
+      </div>
+      <div class="lib-visual" aria-hidden="true">
+        <div class="lib-window">
+          <div class="lib-window-bar"><span>拾光 · 图库</span><i></i></div>
+          <div class="lib-list">
+            <div class="lib-row is-current"><span class="lib-dot"></span><div><b>我的图库</b><small>当前 · 12,842 项</small></div><em>当前</em></div>
+            <div class="lib-row"><span class="lib-dot alt"></span><div><b>家庭照片</b><small>只读连接 · 8,120 项</small></div><em>切换</em></div>
+            <div class="lib-row"><span class="lib-dot alt2"></span><div><b>2024 旅行</b><small>最近打开 · 2,406 项</small></div><em>切换</em></div>
+            <div class="lib-row"><span class="lib-dot alt3"></span><div><b>工作室 NAS</b><small>网络存储 · 已连接</small></div><em>浏览</em></div>
+          </div>
+          <div class="lib-footer">每个库独立设置、连接与助手对话</div>
+        </div>
+        <div class="lib-chip chip-cur">当前图库</div>
+        <div class="lib-chip chip-ro">只读连接</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bento features -->
+<section class="section features" id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">不只是看图</p>
+      <h2>为「很多照片」<br>重新设计的一整套工具。</h2>
+      <p class="section-lede">从打开第一万张照片，到导出最后一段回忆。每一个环节都为大规模图库、离线环境与真实工作流准备。</p>
+    </div>
+
+    <div class="bento">
+      <article class="bento-card span-6 reveal">
+        <div class="bento-copy">
+          <span class="pill">性能</span>
+          <h3>为百万张设计</h3>
+          <p>超过 5,000 张时，筛选、排序与计数下推到 SQLite；网格每页只加载 600 张，年 / 月总览用 SQL 分区取样本。翻页成本与照片总量无关。</p>
+        </div>
+        <div class="bento-visual paging" aria-hidden="true">
+          <div class="page-row"><span class="page-chip on">0 – 600</span><span class="page-chip">600 – 1,200</span><span class="page-chip">1,200 – 1,800</span><span class="page-chip ghost">…</span></div>
+          <div class="page-meter"><i></i></div>
+          <div class="page-caption">PhotoQuery → SQLite → window</div>
+        </div>
+      </article>
+
+      <article class="bento-card span-6 reveal">
+        <div class="bento-copy">
+          <span class="pill">智能</span>
+          <h3>端侧智能，不上传</h3>
+          <p>Vision 场景标签、OCR 与特征向量全部在本机计算，结果写入当前图库的 <code>asset_analysis</code>。用「去年 海边 狗」这样的口语就能定位照片。</p>
+        </div>
+        <div class="bento-visual mini-search" aria-hidden="true">
+          <div class="mini-bar"><svg class="ico"><use href="#i-search"/></svg><span>去年 海边 狗</span></div>
+          <div class="mini-chips"><span>时间 · 去年</span><span>场景 · 海边</span><span>对象 · 狗</span></div>
+          <div class="mini-results"><i class="s2"></i><i class="s8"></i><i class="s3"></i><b>3 个结果</b></div>
+        </div>
+      </article>
+
+      <article class="bento-card span-4 reveal">
+        <div class="bento-copy">
+          <span class="pill">回忆</span>
+          <h3>回忆，可以带走</h3>
+          <p>那年今日、按月、按地点、按收藏自动成片。三种风格、Ken Burns 运镜，还能导出成 720p mp4。</p>
+        </div>
+        <div class="bento-visual filmstrip" aria-hidden="true">
+          <div class="film-strip"><i class="s1"></i><i class="s5"></i><i class="s2"></i><i class="s9"></i></div>
+          <span class="film-play"><svg class="ico"><use href="#i-play"/></svg></span>
+        </div>
+      </article>
+
+      <article class="bento-card span-4 reveal">
+        <div class="bento-copy">
+          <span class="pill">旅行</span>
+          <h3>旅行会自己讲故事</h3>
+          <p>按拍摄时间与定位识别出行，自动生成「杭州之行」故事线：首图拼贴、按天分组，一键播成电影。</p>
+        </div>
+        <div class="bento-visual trip-visual" aria-hidden="true">
+          <svg viewBox="0 0 260 120" class="route-svg"><path d="M12 96 C 52 88, 48 46, 92 44 S 138 84, 174 62 S 222 20, 248 26"/><circle cx="12" cy="96" r="4"/><circle cx="92" cy="44" r="4"/><circle cx="174" cy="62" r="4"/><circle cx="248" cy="26" r="4"/></svg>
+          <div class="trip-meta"><b>杭州之行</b><span>5 天 · 214 项</span></div>
+        </div>
+      </article>
+
+      <article class="bento-card span-4 reveal">
+        <div class="bento-copy">
+          <span class="pill">清理</span>
+          <h3>图库体检</h3>
+          <p>模糊照片、相似连拍与过大视频集中成一张清单。保留每组最清晰的一张，其余一次性移入最近删除。</p>
+        </div>
+        <div class="bento-visual health-visual" aria-hidden="true">
+          <div class="health-meter"><span style="width:38%"></span><span style="width:74%"></span><span style="width:56%"></span></div>
+          <div class="health-legend"><span>模糊 38</span><span>相似 214</span><span>大视频 12</span></div>
+        </div>
+      </article>
+
+      <article class="bento-card span-4 reveal">
+        <div class="bento-copy">
+          <span class="pill">编辑</span>
+          <h3>非破坏，且专业</h3>
+          <p>曝光、色彩、曲线、裁剪、滤镜与降噪；配方随图库保存，随时重调。RAW 走 <code>CIRAWFilter</code>，实况照片带配对视频。</p>
+        </div>
+        <div class="bento-visual edit-visual" aria-hidden="true">
+          <div class="edit-pane before"></div><div class="edit-pane after"></div>
+          <span class="edit-handle"></span>
+          <div class="edit-meta"><span>原图</span><span>已编辑</span></div>
+        </div>
+      </article>
+
+      <article class="bento-card span-4 reveal">
+        <div class="bento-copy">
+          <span class="pill">存储</span>
+          <h3>NAS 也是图库</h3>
+          <p>SMB、WebDAV、阿里云盘、百度网盘与 AList 直接浏览播放。缩略图只取需要的那一段，不为一格预览下载整张原图。</p>
+        </div>
+        <div class="bento-visual cloud-visual" aria-hidden="true">
+          <div class="cloud-hub"><svg class="ico"><use href="#i-cloud"/></svg><span>工作室 NAS</span></div>
+          <div class="cloud-lines"><i></i><i></i><i></i></div>
+          <div class="cloud-grid"><span class="s2"></span><span class="s6"></span><span class="s10"></span></div>
+        </div>
+      </article>
+
+      <article class="bento-card span-4 reveal">
+        <div class="bento-copy">
+          <span class="pill">互操作</span>
+          <h3>官方图库的增强层</h3>
+          <p>不迁移、不导入：打开官方「照片」图库，就能拥有拾光的检索、收藏与查看时间。原来的库依旧属于「照片」。</p>
+        </div>
+        <div class="bento-visual overlay-visual" aria-hidden="true">
+          <div class="layer layer-back">Photos.sqlite</div>
+          <div class="layer layer-front">PhotosClone.sqlite<small>收藏 · 隐藏 · 关键词</small></div>
+        </div>
+      </article>
+      <article class="bento-card span-4 reveal">
+        <div class="bento-copy">
+          <span class="pill">重温</span>
+          <h3>值得重看</h3>
+          <p>只收拍摄超过两年、一年以上没打开的照片。今日一张大图开场，再按人物 / 地点 / 场景 / 年份拆成主体；年份胶囊随时收窄范围。</p>
+        </div>
+        <div class="bento-visual mini-search" aria-hidden="true">
+          <div class="mini-bar"><svg class="ico"><use href="#i-film"/></svg><span>今日重看 · 四年前的五月 · 杭州</span></div>
+          <div class="mini-chips"><span>人物</span><span>地点</span><span>场景</span><span>年份</span></div>
+          <div class="mini-results"><i class="s9"></i><i class="s2"></i><i class="s6"></i><b>只看未打开</b></div>
+        </div>
+      </article>
+
+      <article class="bento-card span-4 reveal">
+        <div class="bento-copy">
+          <span class="pill">安全</span>
+          <h3>敢动手，也能回头</h3>
+          <p>删除、收藏、隐藏、关键词、批量更改、相簿与文件夹改动、合并重复都支持 <code>⌘Z</code> / <code>⇧⌘Z</code>。撤销栈只留在当前图库，最近 30 步。</p>
+        </div>
+        <div class="bento-visual" aria-hidden="true">
+          <div class="page-row"><span class="page-chip on">⌘Z 撤销</span><span class="page-chip">⇧⌘Z 重做</span><span class="page-chip ghost">30 步</span></div>
+          <div class="page-meter"><i style="width:46%"></i></div>
+          <div class="page-caption">只记录元数据变更 · 切换图库即清空</div>
+        </div>
+      </article>
+
+      <article class="bento-card span-4 reveal">
+        <div class="bento-copy">
+          <span class="pill">叙事</span>
+          <h3>人物与地点，也有摘要</h3>
+          <p>人物有画像、年度轨迹、光线偏好、常去之地、同框与色彩气质；地点有到访轨迹、四季、时段、地标与旅行日志。统计全部在本机派生。</p>
+        </div>
+        <div class="bento-visual" aria-hidden="true">
+          <div class="mini-chips"><span>人物画像</span><span>年度轨迹</span><span>四季流转</span><span>色彩气质</span><span>旅行日志</span></div>
+          <div class="film-strip" style="margin-top:12px"><i class="s4"></i><i class="s7"></i><i class="s11"></i></div>
+        </div>
+      </article>
+
+      <article class="bento-card span-12 reveal">
+        <div class="bento-copy">
+          <span class="pill">助手</span>
+          <h3>用自己的模型，读懂当前图库</h3>
+          <p>DeepSeek、Kimi、GLM、通义千问、豆包、OpenAI，或任意 OpenAI 兼容服务。检索、相簿、文件夹、图片与视频操作都能真的执行，还能原地压缩与自动美化；修改图库前弹窗确认，默认只发送当前范围摘要与端侧标签。</p>
+          <div class="mini-chips assistant-chips">
+            <span>DeepSeek</span><span>Kimi</span><span>GLM</span><span>通义千问</span><span>豆包</span><span>OpenAI</span><span>自定义</span>
+          </div>
+        </div>
+        <div class="bento-visual chat-mini" aria-hidden="true">
+          <div class="chat-mini-row"><span class="chat-mini-avatar"><svg class="ico"><use href="#i-spark"/></svg></span><span class="chat-mini-bubble">按主题把这 4 张整理成相簿。</span></div>
+          <div class="chat-mini-row bot"><span class="chat-mini-avatar"><svg class="ico"><use href="#i-shield"/></svg></span><span class="chat-mini-bubble">已创建 4 个相簿并放入对应项目，需要再归到「2025」文件夹吗？</span></div>
+          <div class="chat-mini-actions"><span>✓ 创建相簿 ×4</span><span>修改前已确认</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="section demo-section" id="display">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">同一批照片，四种看法</p>
+      <h2>怎么看，由你决定。</h2>
+      <p class="section-lede">正方形快速扫、完整比例看构图、瀑布流逛灵感、列表核对元数据。尺寸从 56 到 360 连续可调，支持 ⌘+ / ⌘- / ⌘0 与双指捏合。</p>
+    </div>
+
+    <div class="demo-shell reveal">
+      <div class="demo-toolbar">
+        <div class="demo-seg" role="tablist" aria-label="显示形式">
+          <button class="demo-btn is-on" data-layout="square" role="tab" aria-selected="true">正方形</button>
+          <button class="demo-btn" data-layout="aspect" role="tab" aria-selected="false">完整比例</button>
+          <button class="demo-btn" data-layout="waterfall" role="tab" aria-selected="false">瀑布流</button>
+          <button class="demo-btn" data-layout="list" role="tab" aria-selected="false">列表</button>
+        </div>
+        <div class="demo-info"><span>拍摄日期 ↓</span><span>杭州 · 2026</span></div>
+      </div>
+
+      <div class="demo-canvas">
+        <div class="demo-grid" id="demoGrid" data-layout="square">
+          <article class="demo-item"><div class="demo-thumb shot s1"></div><div class="demo-text"><b>西湖落日</b><span>2026-05-20 · JPEG · 8.4 MB</span></div></article>
+          <article class="demo-item tall"><div class="demo-thumb shot s2"></div><div class="demo-text"><b>海岸线</b><span>2026-05-20 · HEIC · 6.1 MB</span></div></article>
+          <article class="demo-item"><div class="demo-thumb shot s3"></div><div class="demo-text"><b>山径</b><span>2026-05-19 · JPEG · 12.2 MB</span></div></article>
+          <article class="demo-item"><div class="demo-thumb shot s4"></div><div class="demo-text"><b>夜色</b><span>2026-05-19 · JPEG · 9.8 MB</span></div></article>
+          <article class="demo-item tall"><div class="demo-thumb shot s5"></div><div class="demo-text"><b>猫</b><span>2026-05-18 · HEIC · 4.3 MB</span></div></article>
+          <article class="demo-item"><div class="demo-thumb shot s6"></div><div class="demo-text"><b>早餐</b><span>2026-05-18 · JPEG · 5.7 MB</span></div></article>
+          <article class="demo-item"><div class="demo-thumb shot s7"></div><div class="demo-text"><b>雪线</b><span>2026-05-17 · JPEG · 11.0 MB</span></div></article>
+          <article class="demo-item"><div class="demo-thumb shot s8"></div><div class="demo-text"><b>沙丘</b><span>2026-05-17 · JPEG · 7.9 MB</span></div></article>
+          <article class="demo-item tall"><div class="demo-thumb shot s9"></div><div class="demo-text"><b>花房</b><span>2026-05-16 · HEIC · 5.2 MB</span></div></article>
+          <article class="demo-item"><div class="demo-thumb shot s10"></div><div class="demo-text"><b>星野</b><span>2026-05-16 · RAW · 42.6 MB</span></div></article>
+          <article class="demo-item"><div class="demo-thumb shot s11"></div><div class="demo-text"><b>街角</b><span>2026-05-15 · JPEG · 6.8 MB</span></div></article>
+          <article class="demo-item"><div class="demo-thumb shot s12"></div><div class="demo-text"><b>湖面</b><span>2026-05-15 · JPEG · 8.1 MB</span></div></article>
+        </div>
+      </div>
+
+      <div class="demo-foot">
+        <span>12 张照片 · <b id="demoLabel">正方形裁剪</b></span>
+        <span class="demo-hint">切换上方选项试试</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Intelligence -->
+<section class="section intelligence" id="intelligence">
+  <div class="wrap int-grid">
+    <div class="int-copy reveal">
+      <p class="eyebrow">端侧智能 · 完全离线</p>
+      <h2>它真的「看得懂」<br>你的照片。</h2>
+      <p class="section-lede">场景分类、图内文字识别与图像特征向量，全部由 Vision 在本机完成。结果只写进当前图库：本地 <code>asset_analysis</code>、系统图库 <code>system_analysis</code>、网盘 <code>cloud_assets</code> —— 不写 <code>Photos.sqlite</code>、不写网盘、不联网。</p>
+
+      <ul class="int-list">
+        <li>
+          <svg class="ico"><use href="#i-spark"/></svg>
+          <div><b>场景标签</b><span>人物、动物与宠物、植物花卉、自然风景、食物、建筑、交通、室内、文档、夜景与活动；票据、证件、证件照、二维码条码与名胜古迹也单独成类，地标会结合拍摄坐标判定。</span></div>
+        </li>
+        <li>
+          <svg class="ico"><use href="#i-search"/></svg>
+          <div><b>自然语言搜索</b><span>时间词、类型、人物与场景自由组合：「2024年5月 日落」「上个月 小猫」「去年 海边 狗」。</span></div>
+        </li>
+        <li>
+          <svg class="ico"><use href="#i-layers"/></svg>
+          <div><b>相似照片</b><span>按特征向量余弦相似度找同场景、同构图。本地用落库特征；系统图库与网盘对当前范围现算并缓存，下次直接复用。</span></div>
+        </li>
+        <li>
+          <svg class="ico"><use href="#i-camera"/></svg>
+          <div><b>OCR 图内文字</b><span>中英文识别后落库，可浏览所有「包含文字」的照片，也能直接输入文字定位。</span></div>
+        </li>
+      </ul>
+
+      <a class="text-link" href="manual.html#intelligence">查看智能功能说明<span>→</span></a>
+    </div>
+
+    <div class="int-visual reveal">
+      <div class="search-card">
+        <div class="search-card-bar">
+          <svg class="ico"><use href="#i-search"/></svg>
+          <span class="typed" id="typedQuery">去年 海边 狗</span><i class="caret"></i>
+          <kbd>⌘F</kbd>
+        </div>
+        <div class="search-chips" id="searchChips">
+          <span class="chip-time">时间 · 去年</span>
+          <span class="chip-scene">场景 · 海边</span>
+          <span class="chip-object">对象 · 狗</span>
+        </div>
+        <div class="search-results">
+          <div class="result-head"><span id="resultCount">找到 3 个结果</span><small>本地索引 · 12,842 张</small></div>
+          <div class="result-grid">
+            <figure class="shot s2"><span class="ph-tag">场景</span></figure>
+            <figure class="shot s8"><span class="ph-tag">场景</span></figure>
+            <figure class="shot s3"><span class="ph-tag">相似</span></figure>
+          </div>
+          <div class="result-note"><svg class="ico"><use href="#i-shield"/></svg>查询在本机解析，未发送任何网络请求</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Assistant -->
+<section class="section assistant" id="assistant">
+  <div class="wrap int-grid">
+    <div class="int-copy reveal">
+      <p class="eyebrow">可选 · 自带 API Key</p>
+      <h2>让大模型<br>读懂当前图库。</h2>
+      <p class="section-lede">配置自己的模型后，可以就当前范围提问、总结照片、解释画面，也能直接让它整理图库：建相簿、建文件夹、收藏、加关键词、隐藏、压缩与美化图片、移入最近删除，或切换浏览范围。默认只发送元数据与端侧标签；图片理解需要你显式开启。</p>
+
+      <ul class="int-list">
+        <li>
+          <svg class="ico"><use href="#i-spark"/></svg>
+          <div><b>多种提供商</b><span>DeepSeek、Kimi、GLM（智谱）、通义千问、豆包、OpenAI，或任意 OpenAI 兼容服务（SiliconFlow、OpenRouter、Ollama、自建网关）。</span></div>
+        </li>
+        <li>
+          <svg class="ico"><use href="#i-search"/></svg>
+          <div><b>上下文刚好够用</b><span>当前范围摘要 + 最多 40 张候选照片的元数据与端侧标签；不发送文件路径，也不会把整个图库塞进提示词。</span></div>
+        </li>
+        <li>
+          <svg class="ico"><use href="#i-lock"/></svg>
+          <div><b>默认不传图片</b><span>图片理解默认关闭；开启后只发送长边约 1024 的 JPEG，单次最多 6 张，跳过 RAW、视频与云端照片。</span></div>
+        </li>
+        <li>
+          <svg class="ico"><use href="#i-layers"/></svg>
+          <div><b>七类工具，真的会动手</b><span>检索与浏览（搜索 / 相簿 / 文件夹 / 视频、切换范围、筛选、排序、选中、打开）、相簿（新建 / 加入 / 移出 / 改名 / 删除 / 移动 / 封面）、文件夹（新建 / 改名 / 删除）、图片与视频（收藏、隐藏、关键词、标题）、压缩（原地压缩）、美化（自动调色生成可还原副本）与最近删除（移入 / 恢复）。</span></div>
+        </li>
+        <li>
+          <svg class="ico"><use href="#i-shield"/></svg>
+          <div><b>先确认，再动手</b><span>每次修改前弹窗确认；不支持永久删除、导入或编辑原图，也不会写官方「照片」库，只补收藏 / 隐藏 / 关键词。</span></div>
+        </li>
+      </ul>
+
+      <div class="mini-chips assistant-chips">
+        <span>DeepSeek</span><span>Kimi</span><span>GLM</span><span>通义千问</span><span>豆包</span><span>OpenAI</span><span>自定义</span>
+      </div>
+
+      <a class="text-link" href="manual.html#assistant">查看智能助手说明<span>→</span></a>
+    </div>
+
+    <div class="int-visual reveal">
+      <div class="search-card chat-card" aria-hidden="true">
+        <div class="chat-head">
+          <span class="chat-mini-avatar"><svg class="ico"><use href="#i-spark"/></svg></span>
+          <b>智能助手</b>
+          <span class="chat-model">DeepSeek · deepseek-chat</span>
+        </div>
+        <div class="chat-body">
+          <div class="chat-bubble user">按主题把这 4 张整理成相簿。</div>
+          <div class="chat-bubble bot">已创建 4 个相簿并放入对应项目：美食食材、室内家居、艺术抽象、户外自然。需要再把它们归到「2025」文件夹吗？</div>
+          <div class="chat-actions">
+            <span>✓ 创建相簿 ×4</span>
+            <span>确认后已执行</span>
+          </div>
+        </div>
+        <div class="chat-note">
+          <svg class="ico"><use href="#i-lock"/></svg>
+          默认只发元数据与端侧标签 · 修改前需确认
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="tool-deck reveal">
+      <div class="tool-deck-head">
+        <div>
+          <p class="eyebrow">工具清单</p>
+          <h3>55 个工具，9 类操作。</h3>
+        </div>
+        <p>模型通过 OpenAI function calling 调用本地工具。写操作先弹窗确认，再经 <code>LibraryStore</code> 落盘；失败或取消会如实回传，不伪造成功。</p>
+      </div>
+
+      <div class="tool-grid">
+        <div class="tool-group">
+          <div class="tool-group-head"><b>检索与浏览</b><em>7</em></div>
+          <p>搜索照片与视频、列出相簿 / 文件夹 / 视频、切换范围、设置筛选与排序、选中、在查看器中打开。</p>
+          <div class="tool-tags"><span>search_photos</span><span>list_albums</span><span>list_folders</span><span>list_videos</span><span>navigate</span><span>select_photos</span><span>open_photo</span></div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-head"><b>相簿</b><em>7</em></div>
+          <p>新建相簿（可同时放入项目并指定文件夹）、加入 / 移出项目、重命名、删除相簿、移动到文件夹、设置封面。</p>
+          <div class="tool-tags"><span>create_albums</span><span>add_photos_to_album</span><span>remove_photos_from_album</span><span>rename_album</span><span>delete_album</span><span>move_album</span><span>set_album_cover</span></div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-head"><b>文件夹</b><em>3</em></div>
+          <p>新建多级文件夹、重命名、删除文件夹；只删除组织关系，不删除照片与视频。</p>
+          <div class="tool-tags"><span>create_folder</span><span>rename_folder</span><span>delete_folder</span></div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-head"><b>图片与视频</b><em>5</em></div>
+          <p>收藏 / 取消收藏、隐藏 / 取消隐藏、添加 / 移除关键词、设置展示标题；照片与视频共用。</p>
+          <div class="tool-tags"><span>set_favorite</span><span>set_hidden</span><span>add_keywords</span><span>remove_keywords</span><span>set_title</span></div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-head"><b>压缩</b><em>1</em></div>
+          <p>对指定照片原地压缩，支持有损与无损：有损可调画质、长边与输出格式；无损保持像素与尺寸（JPEG 去元数据、其它格式转 PNG）；仅本地图库照片。</p>
+          <div class="tool-tags"><span>compress_photos</span></div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-head"><b>美化</b><em>1</em></div>
+          <p>按画面自动调整曝光、对比度、白平衡、饱和度与锐度，生成可还原的美化副本，保留原图。</p>
+          <div class="tool-tags"><span>beautify_photos</span></div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-head"><b>最近删除</b><em>2</em></div>
+          <p>把项目移入最近删除，或从最近删除恢复；不提供永久删除。</p>
+          <div class="tool-tags"><span>trash_photos</span><span>restore_photos</span></div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-head"><b>影院</b><em>20</em></div>
+          <p>检索本库影片 / 剧集 / 演员，查看继续观看、观看记录、清单、任务与通知；切换影院分段与筛选、播放下一集；收藏 / 想看 / 评分、管理清单、忽略或恢复视频、补详情或重新刮削、跳过片头、清理观看记录。</p>
+          <div class="tool-tags"><span>list_cinema_items</span><span>list_cinema_scopes</span><span>cinema_tree</span><span>search_cinema_library</span><span>list_cinema_series</span><span>list_cinema_lists</span><span>list_cinema_activity</span><span>navigate_cinema</span><span>play_cinema</span><span>search_cinema_candidates</span><span>apply_cinema_match</span><span>scrape_cinema</span><span>match_cinema</span><span>update_cinema_state</span><span>manage_cinema_list</span><span>ignore_cinema</span><span>restore_cinema_ignored</span><span>refresh_cinema_metadata</span><span>set_cinema_intro_skip</span><span>manage_cinema_progress</span></div>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-head"><b>网络资源</b><em>9</em></div>
+          <p>查看已接入站点、跨源搜索、今日更新、关注与稍后看；打开源的首页 / 排行 / 分类；播放条目；加入或移出稍后看；关注人物 / 片商 / 模特。</p>
+          <div class="tool-tags"><span>list_catalog_sources</span><span>search_catalog</span><span>catalog_new_today</span><span>list_catalog_following</span><span>list_catalog_watchlist</span><span>browse_catalog</span><span>play_catalog_item</span><span>set_catalog_watchlist</span><span>follow_catalog_person</span></div>
+        </div>
+      </div>
+
+      <p class="tool-foot">31 个写操作全部需确认 · 只读来源、官方「照片」库与网盘按权限矩阵限制 · 永久删除、导入、编辑原图不在工具集内 · 影院忽略与清理观看记录不会删除原视频</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="case-grid">
+      <article class="case-card reveal">
+        <span class="case-ico"><svg class="ico"><use href="#i-sliders"/></svg></span>
+        <b>压缩这组照片</b>
+        <p>有损可调画质与长边，无损保持像素与尺寸；只有更小的结果才会替换。</p>
+        <span class="case-prompt">“把这 3 张压到长边 2048、质量 80”</span>
+      </article>
+      <article class="case-card reveal">
+        <span class="case-ico"><svg class="ico"><use href="#i-pin"/></svg></span>
+        <b>去年在上海的照片</b>
+        <p>从拍摄时间与地点里找出目标照片，一次新建相簿并全部归组。</p>
+        <span class="case-prompt">“把去年在上海拍的照片整理成相簿”</span>
+      </article>
+      <article class="case-card reveal">
+        <span class="case-ico"><svg class="ico"><use href="#i-layers"/></svg></span>
+        <b>按主题整理</b>
+        <p>按画面内容一次创建多个相簿，也可以直接放进指定文件夹。</p>
+        <span class="case-prompt">“按主题把这 8 张整理成 4 个相簿”</span>
+      </article>
+      <article class="case-card reveal">
+        <span class="case-ico"><svg class="ico"><use href="#i-film"/></svg></span>
+        <b>视频归组</b>
+        <p>取回最近的视频清单，挑出需要的加入相簿或收藏。</p>
+        <span class="case-prompt">“把最近的视频放进「旅行」”</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Big library -->
+<section class="section engine">
+  <div class="wrap engine-grid">
+    <div class="engine-visual reveal">
+      <div class="pipeline">
+        <div class="pipe-node">
+          <span class="pipe-kicker">输入</span>
+          <b>PhotoQuery</b>
+          <small>范围 · 筛选 · 排序</small>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node">
+          <span class="pipe-kicker">下推</span>
+          <b>SQLite 索引</b>
+          <small>复合索引 · keyset</small>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node accent">
+          <span class="pipe-kicker">窗口</span>
+          <b>600 / 页</b>
+          <small>只渲染可见范围</small>
+        </div>
+      </div>
+      <div class="engine-note">超过 5,000 张自动启用 · 查看器翻页用相邻查询</div>
+    </div>
+
+    <div class="engine-copy reveal">
+      <p class="eyebrow">大图库引擎</p>
+      <h2>照片越多，<br>越该像没有变多。</h2>
+      <p class="section-lede">拾光不在视图里对全库 <code>filter</code> 或 <code>sorted</code>。范围、筛选与排序直接下推到 SQLite，按 600 张一页滚动加载；年 / 月总览用窗口函数按年、月、日分区取样。</p>
+      <div class="engine-facts">
+        <div><b>5,000</b><span>张触发的分页阈值</span></div>
+        <div><b>600</b><span>每页加载条目</span></div>
+        <div><b>keyset</b><span>查看器相邻翻页</span></div>
+      </div>
+      <p class="fine">缩略图按显示尺寸选择解码档位：网格 1200px、快速层 260px、查看器 2600px —— 既清晰，也不浪费内存。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Video & Compression -->
+<section class="section media" id="video-compression">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">视频与压缩</p>
+      <h2>能播，也能收拾。</h2>
+      <p class="section-lede">30 种视频格式直接打开；照片压缩有专业参数，也有可逐字节还原的退路。两件事都按「不牺牲原文件」的方式做。</p>
+    </div>
+
+    <div class="media-grid">
+      <article class="media-card reveal" id="video">
+        <div class="media-head">
+          <span class="pill">视频</span>
+          <h3>30 种格式，<br>打开就能播。</h3>
+          <p>从 MP4、MOV 到 MKV、AVI、WebM、TS、MTS、MXF、RMVB —— 拖进图库就能预览、播放与导出。</p>
+        </div>
+
+        <div class="video-mock" aria-hidden="true">
+          <div class="video-screen">
+            <span class="video-format">MKV · HEVC · 4K</span>
+            <span class="video-play"><svg class="ico"><use href="#i-play"/></svg></span>
+            <div class="video-controls">
+              <span class="vc-time">00:42</span>
+              <span class="vc-track"><i></i><b></b></span>
+              <span class="vc-time">12:08</span>
+              <span class="vc-chip">1.5×</span>
+              <span class="vc-chip">PiP</span>
+              <span class="vc-chip">⛶</span>
+            </div>
+          </div>
+        </div>
+
+        <ul class="media-list">
+          <li><b>原生 + 转码</b><span>AVPlayer 直接解码 H.264 / HEVC / ProRes / MPEG-4 / VP9 / AV1；系统不支持的容器交给可选 ffmpeg，转成 H.264 + AAC 后缓存，二次播放秒开。</span></li>
+          <li><b>像播放器一样播放</b><span>0.25–4× 倍速、自动连播下一个、循环、画中画、保存当前帧、全屏、填充 / 适应、可拖动控制条。</span></li>
+          <li><b>贯穿整个图库</b><span>时长角标、视频筛选、按时长排序、实况照片配对视频；导出始终保留原文件。</span></li>
+        </ul>
+
+        <div class="format-chips" aria-hidden="true">
+          <span>MP4</span><span>MOV</span><span>MKV</span><span>AVI</span><span>WebM</span><span>WMV</span><span>FLV</span><span>TS</span><span>MTS</span><span>MXF</span><span>3GP</span><span>RMVB</span><span class="more">+ 18</span>
+        </div>
+        <a class="text-link" href="manual.html#video">查看视频格式与播放说明<span>→</span></a>
+      </article>
+
+      <article class="media-card reveal" id="compression">
+        <div class="media-head">
+          <span class="pill">专业压缩 · 双模式</span>
+          <h3>无损压缩，<br>像素不动。</h3>
+          <p>无损模式保持像素与尺寸：JPEG 只去元数据，PNG / HEIC / TIFF 转无损 PNG；有损模式再按画质与长边继续压。</p>
+        </div>
+
+        <div class="compress-mock" aria-hidden="true">
+          <div class="compress-row">
+            <span>原图</span><b>8.4 MB</b>
+            <span class="cmp-bar"><i class="before"></i></span>
+          </div>
+          <div class="compress-row">
+            <span>无损</span><b>7.9 MB</b>
+            <span class="cmp-bar"><i class="lossless"></i></span>
+          </div>
+          <div class="compress-row">
+            <span>有损</span><b>2.1 MB</b>
+            <span class="cmp-bar"><i class="after"></i></span>
+          </div>
+          <div class="compress-opts">
+            <span class="on">无损 · 像素不变</span><span>有损 · 画质 82%</span><span>长边 2560</span><span class="on">原图备份</span>
+          </div>
+          <div class="compress-restore"><svg class="ico"><use href="#i-shield"/></svg>两份结果都能逐字节还原</div>
+        </div>
+
+        <ul class="media-list">
+          <li><b>无损模式</b><span>保持像素与尺寸：JPEG 仅移除 EXIF / XMP / IPTC 与注释，压缩数据原样保留；PNG / HEIC / TIFF 重编码为无损 PNG。</span></li>
+          <li><b>有损模式</b><span>保持原格式或转 JPEG / HEIC；画质 30–100%；长边原始 / 4096 / 2560 / 2048 / 1600 / 1280。</span></li>
+          <li><b>不亏本再替换</b><span>逐张预估体积，结果更大就跳过；批量进度可见、可随时取消。无损体积可能不会减小。</span></li>
+        </ul>
+        <p class="fine">无损保证像素与尺寸，有损追求更小体积；两条路都可开启原图备份，逐字节回滚。</p>
+        <a class="text-link" href="manual.html#compression">查看压缩与还原说明<span>→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Memories -->
+<section class="section memories">
+  <div class="wrap">
+    <div class="memory-banner reveal">
+      <div class="memory-bg" aria-hidden="true">
+        <span class="shot s1"></span><span class="shot s5"></span><span class="shot s2"></span>
+      </div>
+      <div class="memory-content">
+        <p class="eyebrow">那年今日</p>
+        <h2>有些照片，<br>值得被重新播放。</h2>
+        <p>精选集按「按月 / 按地点 / 收藏 / 那年今日」自动生成回忆。Ken Burns 缓慢推拉，三种风格模板，随时导出成一段可以分享的影片。</p>
+        <div class="memory-actions">
+          <button class="btn btn-light btn-md" type="button" data-demo-play>
+            <svg class="ico"><use href="#i-play"/></svg>播放回忆
+          </button>
+          <span class="memory-tag">经典 / 电影 / 清新 · 720p mp4</span>
+        </div>
+      </div>
+      <div class="memory-frame" aria-hidden="true">
+        <div class="memory-photo"><span class="shot s9"></span><div class="memory-caption">五月 · 杭州</div></div>
+        <div class="memory-progress"><i></i></div>
+      </div>
+    </div>
+
+    <div class="memory-strip">
+      <div class="memory-card reveal">
+        <span class="memory-kicker">按月</span>
+        <h3>五月，428 张</h3>
+        <p>每个月自动挑出足够多的照片，生成一条可以播放的回忆。</p>
+      </div>
+      <div class="memory-card reveal">
+        <span class="memory-kicker">按地点</span>
+        <h3>杭州之行</h3>
+        <p>相同地点的照片自动聚合，旅行故事线按天分组。</p>
+      </div>
+      <div class="memory-card reveal">
+        <span class="memory-kicker">收藏</span>
+        <h3>你反复看的那几张</h3>
+        <p>收藏数量足够时，生成一条只属于「最喜欢」的回忆。</p>
+      </div>
+      <div class="memory-card reveal">
+        <span class="memory-kicker">那年今日</span>
+        <h3>三年前的今天</h3>
+        <p>最近三年各生成一条，以大横幅置顶在精选集最上方。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Map -->
+<section class="section map-section">
+  <div class="wrap map-grid">
+    <div class="map-copy reveal">
+      <p class="eyebrow">地图与足迹</p>
+      <h2>把时间，<br>铺在地图上。</h2>
+      <p class="section-lede">照片里的坐标不只是信息。拾光按「地点 + 连续日期」把带定位的照片切成行程段，点开就是这次旅行的照片墙。</p>
+      <ul class="tick-list roomy">
+        <li><b>地图网格</b>：城市、日期范围与张数成段展示，跟手缩放。</li>
+        <li><b>视野统计</b>：「N 个地点 · M 张照片」随缩放与平移实时只算当前视野；网格与足迹回放共用同一范围。</li>
+        <li><b>足迹回放</b>：按拍摄时间顺序逐站点亮，把一年行程播成一条线。</li>
+        <li><b>位置详情</b>：到访轨迹、四季流转、一天中的时段、镜头里的地标、同行的人与旅行日志，全部由该地点的照片在本机派生。</li>
+        <li><b>地点统计</b>：城市与地点的照片数量排行，看看你把时间留在了哪里。</li>
+      </ul>
+      <a class="text-link" href="manual.html#map">查看地图使用说明<span>→</span></a>
+    </div>
+
+    <div class="map-visual reveal">
+      <div class="map-frame">
+        <svg viewBox="0 0 520 380" class="map-svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,.10)"/>
+              <stop offset="1" stop-color="rgba(255,255,255,.02)"/>
+            </linearGradient>
+            <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#6ee7ff"/>
+              <stop offset=".5" stop-color="#a98bff"/>
+              <stop offset="1" stop-color="#ff8f7a"/>
+            </linearGradient>
+          </defs>
+          <g class="map-lines">
+            <path d="M0 96 H520 M0 190 H520 M0 284 H520 M120 0 V380 M260 0 V380 M400 0 V380"/>
+          </g>
+          <path class="map-land" d="M-20 240 C 60 200, 90 260, 150 244 S 250 180, 320 206 S 430 262, 540 232 L540 400 L-20 400Z" fill="url(#land)"/>
+          <path class="map-land two" d="M-20 120 C 50 80, 120 130, 180 104 S 300 46, 380 84 S 470 120, 540 96 L540 160 C 460 180, 400 130, 320 154 S 170 216, 100 186 S 30 164, -20 190Z" fill="url(#land)"/>
+          <path class="route" d="M84 286 C 132 268, 140 214, 196 210 S 270 262, 318 226 S 398 154, 448 132"/>
+          <g class="pins">
+            <g transform="translate(84,286)"><circle r="13" class="pin-halo"/><circle r="5" class="pin-dot"/><text y="-20">杭州</text></g>
+            <g transform="translate(196,210)"><circle r="13" class="pin-halo"/><circle r="5" class="pin-dot"/><text y="-20">黄山</text></g>
+            <g transform="translate(318,226)"><circle r="13" class="pin-halo"/><circle r="5" class="pin-dot"/><text y="-20">景德镇</text></g>
+            <g transform="translate(448,132)"><circle r="13" class="pin-halo"/><circle r="5" class="pin-dot"/><text y="-20">婺源</text></g>
+          </g>
+        </svg>
+        <div class="map-badge"><svg class="ico"><use href="#i-pin"/></svg>一段行程 · 4 个地点 · 5 天</div>
+        <div class="map-player"><span>足迹回放</span><div class="map-track"><i></i></div><b>2.4×</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Health -->
+<section class="section health-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">图库体检</p>
+      <h2>该留下的留下，<br>该腾出的腾出来。</h2>
+      <p class="section-lede">一次扫描，把「可能模糊」「相似连拍」「过大视频」与「可腾出空间」集中成一张可操作清单。清晰度用缩略图上的拉普拉斯方差评估，不解码原图。</p>
+    </div>
+
+    <div class="health-panel reveal">
+      <div class="health-metrics">
+        <div class="health-metric"><small>可腾出空间</small><b>12.4 GB</b><span class="bar"><i style="width:62%"></i></span></div>
+        <div class="health-metric"><small>可能模糊</small><b>38 张</b><span class="bar"><i style="width:22%"></i></span></div>
+        <div class="health-metric"><small>相似备选</small><b>214 张</b><span class="bar"><i style="width:78%"></i></span></div>
+        <div class="health-metric"><small>已检查</small><b>12,842 张</b><span class="bar"><i style="width:100%"></i></span></div>
+      </div>
+      <div class="health-groups">
+        <div class="group-head"><b>相似连拍</b><span>保留每组最清晰的一张</span></div>
+        <div class="group-row">
+          <figure class="shot s1 keep"><span class="keep-tag">保留</span></figure>
+          <figure class="shot s1 dim"></figure>
+          <figure class="shot s1 dim"></figure>
+          <figure class="shot s5 keep"><span class="keep-tag">保留</span></figure>
+          <figure class="shot s5 dim"></figure>
+        </div>
+        <div class="group-foot"><span>相似度 0.94 · 可释放 86.2 MB</span><span class="ghost-btn">移入最近删除</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="section compare" id="compare">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <p class="eyebrow">与 macOS「照片」相比</p>
+      <h2>不是替代。<br>是把缺失的那一层补上。</h2>
+      <p class="section-lede">拾光尊重系统「照片」的位置：iCloud 同步、共享图库与系统级集成继续交给它。拾光负责它做不到的部分 —— 任意图库、超大图库、网络存储、可检查的端侧索引与可带走的内存。</p>
+    </div>
+
+    <div class="compare-tabs reveal" role="tablist" aria-label="对比分类">
+      <button class="cmp-tab is-on" data-cat="all" role="tab" aria-selected="true">全部</button>
+      <button class="cmp-tab" data-cat="browse" role="tab" aria-selected="false">浏览</button>
+      <button class="cmp-tab" data-cat="smart" role="tab" aria-selected="false">智能</button>
+      <button class="cmp-tab" data-cat="storage" role="tab" aria-selected="false">存储</button>
+      <button class="cmp-tab" data-cat="output" role="tab" aria-selected="false">组织与输出</button>
+    </div>
+
+    <div class="compare-table-wrap reveal">
+      <table class="compare-table" id="compareTable">
+        <thead>
+          <tr>
+            <th scope="col" class="col-cap">能力</th>
+            <th scope="col">macOS「照片」</th>
+            <th scope="col" class="col-luma">拾光 Luma</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-cat="browse">
+            <th scope="row">图库位置</th>
+            <td>系统图库为主，多库需按住 Option 切换</td>
+            <td class="luma">任意位置的 <code>.photoslibrary</code>，最近图库一键切换</td>
+          </tr>
+          <tr data-cat="browse">
+            <th scope="row">多图库</th>
+            <td>多库切换，单窗口一个图库</td>
+            <td class="luma">最多 10 个最近图库 + 每库 10 个连接同时保留，随时切换；同屏仍只渲染当前库</td>
+          </tr>
+          <tr data-cat="browse">
+            <th scope="row">大图库浏览</th>
+            <td>由系统统一管理</td>
+            <td class="luma"><b>超过 5,000 张自动 SQL 分页</b>，每页 600 张；年 / 月总览走 SQL 分区</td>
+          </tr>
+          <tr data-cat="browse">
+            <th scope="row">显示形式</th>
+            <td>正方形网格，按年 / 月 / 日分段</td>
+            <td class="luma">正方形 / 完整比例 / 瀑布流 / 列表，四种可缩放</td>
+          </tr>
+          <tr data-cat="browse">
+            <th scope="row">查看器</th>
+            <td>窗口或全屏</td>
+            <td class="luma">窗口内浏览 / 全屏沉浸；灯箱底 + 玻璃 HUD + 胶片条，渐进加载 + 邻图预取</td>
+          </tr>
+          <tr data-cat="browse">
+            <th scope="row">缩略图尺寸</th>
+            <td>滑杆缩放</td>
+            <td class="luma">56–360 连续缩放，⌘+ / ⌘- / ⌘0 与双指捏合</td>
+          </tr>
+          <tr data-cat="browse">
+            <th scope="row">视频格式</th>
+            <td>系统可解码格式</td>
+            <td class="luma"><b>30 种扩展名</b>直接导入；ffmpeg 自动转码，0.25–4×、连播、循环、画中画、存帧</td>
+          </tr>
+
+          <tr data-cat="smart">
+            <th scope="row">搜索</th>
+            <td>系统智能搜索</td>
+            <td class="luma">文件名 / 相机 / 地点 + 端侧场景 + OCR；中文口语组合</td>
+          </tr>
+          <tr data-cat="smart">
+            <th scope="row">人物</th>
+            <td>系统人物识别</td>
+            <td class="luma">本地图库端侧聚类，系统库读官方结果；摘要 / 全部双视图、常一起出现与色彩气质</td>
+          </tr>
+          <tr data-cat="smart">
+            <th scope="row">相似照片</th>
+            <td>重复项目检测</td>
+            <td class="luma">特征向量余弦相似，右键任意照片「查找相似照片」；系统图库与网盘按当前范围现算并缓存</td>
+          </tr>
+          <tr data-cat="smart">
+            <th scope="row">图库体检</th>
+            <td>—</td>
+            <td class="luma">模糊 / 相似连拍 / 大视频 / 可腾出空间，一次扫描</td>
+          </tr>
+          <tr data-cat="smart">
+            <th scope="row">值得重看</th>
+            <td>—</td>
+            <td class="luma">今日重看 + 人物 / 地点 / 场景 / 年份主体 + 年份胶囊 + 时光碎片，按未打开时间排序</td>
+          </tr>
+          <tr data-cat="smart">
+            <th scope="row">图内文字</th>
+            <td>系统实况文本</td>
+            <td class="luma">分析时 OCR 落库，可浏览「包含文字」并参与搜索</td>
+          </tr>
+          <tr data-cat="smart">
+            <th scope="row">智能助手（可选）</th>
+            <td>—</td>
+            <td class="luma">自带 API Key；<b>55 个工具</b>，检索 / 相簿 / 文件夹 / 图片视频 / 压缩 / 美化 / 最近删除 / 影院 / 网络资源，31 个写操作先确认</td>
+          </tr>
+
+          <tr data-cat="storage">
+            <th scope="row">系统「照片」图库</th>
+            <td>本体</td>
+            <td class="luma"><b>读取 + PhotoKit 写回</b>（编辑 / 删除 / 相簿 / 收藏隐藏），关键词与标题走 sidecar；不改 <code>Photos.sqlite</code></td>
+          </tr>
+          <tr data-cat="storage">
+            <th scope="row">网盘元数据</th>
+            <td>需先导入图库</td>
+            <td class="luma">按文件头 Range 读取 EXIF（时间 / 相机 / 曝光 / GPS），不下载整张原图；结果落 <code>cloud_assets</code></td>
+          </tr>
+          <tr data-cat="storage">
+            <th scope="row">网盘分类浏览</th>
+            <td>按文件夹</td>
+            <td class="luma">媒体类型 / 场景 / 更多项目：值得重看、地图、位置、人物、重复项目、体检与相似检索，只读派生</td>
+          </tr>
+          <tr data-cat="storage">
+            <th scope="row">网络存储</th>
+            <td>需先导入到图库</td>
+            <td class="luma">SMB / WebDAV / 阿里云盘 / 百度网盘 / AList 直接浏览</td>
+          </tr>
+          <tr data-cat="storage">
+            <th scope="row">云端写入</th>
+            <td>—</td>
+            <td class="luma">WebDAV 支持上传、重命名、新建文件夹与删除</td>
+          </tr>
+          <tr data-cat="storage">
+            <th scope="row">云端依赖</th>
+            <td>iCloud 照片可选</td>
+            <td class="luma">默认完全本地，无账号；可选助手自带 Key 直连所选模型</td>
+          </tr>
+          <tr data-cat="storage">
+            <th scope="row">凭据存放</th>
+            <td>系统钥匙串</td>
+            <td class="luma">钥匙串（含助手 API Key）；绝不写入 UserDefaults、日志或挂载信息</td>
+          </tr>
+
+          <tr data-cat="output">
+            <th scope="row">智能相簿</th>
+            <td>系统条件</td>
+            <td class="luma">14+ 组条件（全部 / 任一），实时预览命中数量</td>
+          </tr>
+          <tr data-cat="output">
+            <th scope="row">相册封面</th>
+            <td>支持</td>
+            <td class="luma">自定义封面，一键恢复自动封面</td>
+          </tr>
+          <tr data-cat="output">
+            <th scope="row">相簿显示方式</th>
+            <td>网格 / 列表</td>
+            <td class="luma">网格 / 列表 / 拼贴墙；列表列数自适应，拼贴墙 1–4 张无边框拼合、名称压在渐变上</td>
+          </tr>
+          <tr data-cat="output">
+            <th scope="row">撤销 / 重做</th>
+            <td>部分操作</td>
+            <td class="luma">删除、收藏、关键词、批量更改、相簿 / 文件夹、合并重复都支持 <code>⌘Z</code> / <code>⇧⌘Z</code>；30 步、按图库隔离</td>
+          </tr>
+          <tr data-cat="output">
+            <th scope="row">相册内排序</th>
+            <td>支持拖拽</td>
+            <td class="luma">拖到照片左 / 右半侧即插入其前 / 后，随相簿保存</td>
+          </tr>
+          <tr data-cat="output">
+            <th scope="row">回忆</th>
+            <td>系统回忆</td>
+            <td class="luma">三种风格 + <b>导出 720p mp4</b>（无声）</td>
+          </tr>
+          <tr data-cat="output">
+            <th scope="row">导出</th>
+            <td>原片 / 转换</td>
+            <td class="luma">原格式 / JPEG / HEIC / PNG / TIFF；质量、尺寸、命名规则</td>
+          </tr>
+          <tr data-cat="output">
+            <th scope="row">专业压缩</th>
+            <td>—</td>
+            <td class="luma">无损 / 有损双模式：无损保持像素与尺寸（JPEG 仅去元数据、其它转 PNG），有损可调画质与长边；备份可逐字节还原</td>
+          </tr>
+          <tr data-cat="output">
+            <th scope="row">旅行</th>
+            <td>回忆 / 地图</td>
+            <td class="luma">自动旅行故事线 + 地图行程段 + 视野统计 + 足迹回放 + 地点详情</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="compare-caveat reveal">
+      <svg class="ico"><use href="#i-shield"/></svg>
+      <p><b>拾光不接管 iCloud。</b>跨设备同步、共享图库、视频修剪与慢动作变速、屏幕保护输出仍请使用系统「照片」；拾光把精力放在本地大图库、可检查的智能索引与多来源浏览上。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Privacy -->
+<section class="section privacy" id="privacy">
+  <div class="wrap">
+    <div class="privacy-head reveal">
+      <p class="eyebrow">隐私，是架构而不是承诺</p>
+      <h2>默认，你的照片<br>不离开这台 Mac。</h2>
+      <p class="section-lede">没有账号、没有遥测。端侧分析默认离线；可选的智能助手只有在你配置 API Key 后，才会把当前范围摘要（或你显式开启的压缩图）发送给你选择的模型。</p>
+    </div>
+
+    <div class="privacy-grid">
+      <div class="privacy-card reveal">
+        <b class="big-num">0</b>
+        <h3>张照片默认上传</h3>
+        <p>场景、OCR 与特征向量由 Vision 在本机计算，分析结果只写入当前图库：本地 <code>asset_analysis</code>，系统图库 <code>system_analysis</code> 与 <code>derived_reports</code>，网盘 <code>cloud_assets</code> / <code>cloud_people</code>。智能助手默认也不发送图片，只在显式开启图片理解时发送压缩缩略图。</p>
+      </div>
+      <div class="privacy-card reveal">
+        <b class="big-num">1</b>
+        <h3>个本地数据库</h3>
+        <p>元数据只有一份真源：图库内的 <code>PhotosClone.sqlite</code>。删除记录时同步清理原图、缩略图、渲染与转码缓存。</p>
+      </div>
+      <div class="privacy-card reveal">
+        <b class="big-num">100<small>%</small></b>
+        <h3>断网可用</h3>
+        <p>断网状态下依然可以分析场景、识别文字、查找相似与自然语言搜索。云端助手是独立的可选功能，关闭时不发送任何数据。</p>
+      </div>
+      <div class="privacy-card reveal">
+        <b class="big-num">0</b>
+        <h3>个第三方依赖</h3>
+        <p>SwiftUI + AppKit + Core Image + AVFoundation + Vision + 系统 SQLite。没有 SDK、没有统计组件、没有自动更新器。</p>
+      </div>
+    </div>
+
+    <div class="privacy-note reveal">
+      <svg class="ico"><use href="#i-lock"/></svg>
+      <span>网盘密码、OAuth token 与智能助手 API Key 只存放在 macOS 钥匙串；SMB 密码不会进入命令行、环境变量或日志。系统图库与网盘的识别、体检、美化推荐结果都只落在当前图库的缓存表里，断开挂载时一并清理。</span>
+    </div>
+  </div>
+</section>
+
+<!-- Specs -->
+<section class="section specs" id="specs">
+  <div class="wrap specs-grid">
+    <div class="specs-copy reveal">
+      <p class="eyebrow">规格</p>
+      <h2>原生，且克制。</h2>
+      <p class="section-lede">一个 SwiftPM 工程，一个 <code>Luma.app</code>。没有安装器、没有后台服务、没有账号体系。</p>
+
+      <dl class="spec-list">
+        <div><dt>系统要求</dt><dd>macOS 14 Sonoma 或更高</dd></div>
+        <div><dt>技术栈</dt><dd>Swift 5.9 · SwiftUI · AppKit · Core Image · AVFoundation · Vision · SQLite</dd></div>
+        <div><dt>第三方依赖</dt><dd>无（仅链接系统 <code>libsqlite3</code>）</dd></div>
+        <div><dt>图像格式</dt><dd>JPEG · HEIC · PNG · TIFF · RAW（DNG / CR2 / CR3 / NEF / ARW / RAF / ORF / RW2）</dd></div>
+        <div><dt>视频</dt><dd>系统可解码的编码；可选 <code>ffmpeg</code> 转码为 H.264 播放</dd></div>
+        <div><dt>智能助手</dt><dd>可选：DeepSeek / Kimi / GLM / 通义千问 / 豆包 / OpenAI，或任意 OpenAI 兼容服务；自带 API Key</dd></div>
+        <div><dt>应用标识</dt><dd><code>com.baymax.luma</code> · 显示名「拾光」</dd></div>
+        <div><dt>界面语言</dt><dd>简体中文</dd></div>
+      </dl>
+    </div>
+
+    <div class="specs-terminal reveal">
+      <div class="terminal">
+        <div class="terminal-bar"><i></i><i></i><i></i><span>终端 — 构建拾光</span></div>
+        <div class="terminal-body">
+          <div class="term-line"><span class="prompt">$</span><code>./build.sh debug</code><button class="copy-btn" data-copy="./build.sh debug" aria-label="复制命令"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+          <div class="term-line"><span class="prompt">$</span><code>./build.sh</code><button class="copy-btn" data-copy="./build.sh" aria-label="复制命令"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+          <div class="term-line"><span class="prompt">$</span><code>open Luma.app</code><button class="copy-btn" data-copy="open Luma.app" aria-label="复制命令"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+          <div class="term-line"><span class="prompt">$</span><code>swift run LumaCoreChecks</code><button class="copy-btn" data-copy="swift run LumaCoreChecks" aria-label="复制命令"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+          <div class="term-out">构建产出一份 ad-hoc 签名的 <b>Luma.app</b>，纯逻辑检查以断言方式运行。</div>
+        </div>
+      </div>
+      <p class="term-note">需要 Xcode 15+ 或 Swift 5.9 工具链。图标由 <code>Tools/make_icon.swift</code> 绘制。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Start -->
+<section class="section start" id="start">
+  <div class="wrap">
+    <div class="start-panel reveal">
+      <img src="assets/luma-icon-512.png" alt="拾光 Luma 应用图标" width="88" height="88" class="start-icon">
+      <h2>把照片，还给照片。</h2>
+      <p>从建一个自己的图库开始，或者直接打开系统「照片」—— 拾光会替你把剩下的整理好。</p>
+      <div class="cta-row">
+        <a class="btn btn-light btn-lg" href="https://github.com/houshanren/luma/releases/download/v2.0.0/Luma-2.0.0-macOS.zip">下载拾光 2.0.0<span class="btn-arrow">→</span></a>
+        <a class="btn btn-ghost btn-lg" href="https://github.com/houshanren/luma" target="_blank" rel="noopener">源码（GitHub）</a>
+        <a class="btn btn-ghost btn-lg" href="manual.html">阅读使用手册</a>
+      </div>
+      <p class="start-note">macOS 14+，解压后把 <code>Luma.app</code> 拖进「应用程序」。首次打开如提示“无法验证”，请右键 → 打开，或执行 <code>xattr -dr com.apple.quarantine /Applications/Luma.app</code>。</p>
+      <p class="start-note">首次启动无图库时会引导你新建或打开一个 <code>.photoslibrary</code>。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="#top"><img src="assets/luma-icon-180.png" alt="" width="28" height="28"><span>拾光 <em>Luma</em></span></a>
+      <p>为 macOS 打造的原生照片管理应用。<br>本地优先，端侧智能，无第三方依赖。</p>
+    </div>
+    <div class="footer-col">
+      <h4>产品</h4>
+      <a href="https://github.com/houshanren/luma/releases/download/v2.0.0/Luma-2.0.0-macOS.zip">下载 2.0.0</a>
+      <a href="https://github.com/houshanren/luma" target="_blank" rel="noopener">源码（GitHub）</a>
+      <a href="#sources">图库来源</a>
+      <a href="#libraries">多图库</a>
+      <a href="#features">功能总览</a>
+      <a href="#video-compression">视频与压缩</a>
+      <a href="#display">显示形式</a>
+      <a href="#intelligence">端侧智能</a>
+    </div>
+    <div class="footer-col">
+      <h4>了解</h4>
+      <a href="#compare">与「照片」对比</a>
+      <a href="#privacy">隐私架构</a>
+      <a href="#specs">技术规格</a>
+      <a href="manual.html#faq">常见问题</a>
+    </div>
+    <div class="footer-col">
+      <h4>手册</h4>
+      <a href="manual.html#start">开始使用</a>
+      <a href="manual.html#library">图库结构</a>
+      <a href="manual.html#shortcuts">键盘快捷键</a>
+      <a href="manual.html#limits">已知限制</a>
+      <a href="luma-manual.pdf" download>下载 PDF 手册</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 拾光 Luma. 为 macOS 14+ 构建。</span>
+    <span>本页界面为示意，实际以应用为准。</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

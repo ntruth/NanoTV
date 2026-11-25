@@ -1,0 +1,527 @@
+{
+  "servers": {
+    "plain": {
+      "title": "WebDAV / 普通 Range 直链",
+      "latency_ms": 0,
+      "throughput_mbps": 0,
+      "headers_injected": [],
+      "tests": {
+        "04_h264_ac3_51.mkv": {
+          "ffprobe": {
+            "ok": true,
+            "seconds": 0.15,
+            "error": "",
+            "duration": 8.0
+          },
+          "remux": {
+            "ok": true,
+            "seconds": 1.75,
+            "stderr": "",
+            "reliable": true,
+            "segments": 3
+          },
+          "ttfb_seconds": 1.9
+        },
+        "06_h264_dts_51.mkv": {
+          "ffprobe": {
+            "ok": true,
+            "seconds": 0.07,
+            "error": "",
+            "duration": 8.0
+          },
+          "remux": {
+            "ok": true,
+            "seconds": 1.43,
+            "stderr": "",
+            "reliable": true,
+            "segments": 3
+          },
+          "ttfb_seconds": 1.5
+        },
+        "01_h264_aac_stereo.mp4": {
+          "avplayer": {
+            "audioOptions": [
+              {
+                "displayName": "Unknown language",
+                "language": "und",
+                "mediaType": "soun"
+              }
+            ],
+            "displayEDR": 1.2000000476837158,
+            "displayPotentialEDR": 16,
+            "duration": 8,
+            "elapsedSeconds": 1.7379978895187378,
+            "input": "http://127.0.0.1:61824/files/01_h264_aac_stereo.mp4",
+            "isPlayable": true,
+            "itemStatus": "readyToPlay",
+            "itemTracks": [
+              "vide:avc1:enabled=true",
+              "soun:aac:enabled=true"
+            ],
+            "likelyToKeepUp": true,
+            "playedRate": 1,
+            "playedSeconds": 1.423811042,
+            "presentationSize": "640x360",
+            "tracks": [
+              {
+                "codecs": [
+                  "avc1"
+                ],
+                "colorExtensions": {
+                  "FullRangeVideo": "0"
+                },
+                "decodable": true,
+                "fps": 25,
+                "language": "und",
+                "size": "640x360",
+                "type": "vide"
+              },
+              {
+                "channels": 2,
+                "codecs": [
+                  "aac"
+                ],
+                "decodable": true,
+                "language": "und",
+                "sampleRate": 48000,
+                "type": "soun"
+              }
+            ],
+            "transport": "http",
+            "videoRange": "SDR",
+            "wallSeconds": 2.66
+          }
+        },
+        "18_hevc_aac_stereo.mp4": {
+          "avplayer": {
+            "audioOptions": [
+              {
+                "displayName": "Unknown language",
+                "language": "und",
+                "mediaType": "soun"
+              }
+            ],
+            "displayEDR": 1.2000000476837158,
+            "displayPotentialEDR": 16,
+            "duration": 8,
+            "elapsedSeconds": 1.6984399557113647,
+            "input": "http://127.0.0.1:61824/files/18_hevc_aac_stereo.mp4",
+            "isPlayable": false,
+            "itemStatus": "readyToPlay",
+            "itemTracks": [
+              "vide:hev1:enabled=true",
+              "soun:aac:enabled=true"
+            ],
+            "likelyToKeepUp": true,
+            "playedRate": 1,
+            "playedSeconds": 1.4282425,
+            "presentationSize": "0x0",
+            "tracks": [
+              {
+                "codecs": [
+                  "hev1"
+                ],
+                "colorExtensions": {
+                  "BitsPerComponent": "8",
+                  "FullRangeVideo": "0"
+                },
+                "decodable": false,
+                "fps": 25,
+                "language": "und",
+                "size": "640x360",
+                "type": "vide"
+              },
+              {
+                "channels": 2,
+                "codecs": [
+                  "aac"
+                ],
+                "decodable": true,
+                "language": "und",
+                "sampleRate": 48000,
+                "type": "soun"
+              }
+            ],
+            "transport": "http",
+            "videoRange": "SDR",
+            "wallSeconds": 1.72
+          }
+        }
+      }
+    },
+    "auth": {
+      "title": "WebDAV + Basic 鉴权 + Referer",
+      "latency_ms": 20,
+      "throughput_mbps": 12,
+      "headers_injected": [
+        "Authorization",
+        "Referer"
+      ],
+      "tests": {
+        "04_h264_ac3_51.mkv": {
+          "ffprobe": {
+            "ok": true,
+            "seconds": 0.34,
+            "error": "",
+            "duration": 8.0
+          },
+          "remux": {
+            "ok": true,
+            "seconds": 3.27,
+            "stderr": "",
+            "reliable": true,
+            "segments": 3
+          },
+          "ttfb_seconds": 3.61
+        },
+        "06_h264_dts_51.mkv": {
+          "ffprobe": {
+            "ok": true,
+            "seconds": 0.27,
+            "error": "",
+            "duration": 8.0
+          },
+          "remux": {
+            "ok": true,
+            "seconds": 3.29,
+            "stderr": "",
+            "reliable": true,
+            "segments": 3
+          },
+          "ttfb_seconds": 3.57
+        },
+        "01_h264_aac_stereo.mp4": {
+          "avplayer": {
+            "audioOptions": [
+              {
+                "displayName": "Unknown language",
+                "language": "und",
+                "mediaType": "soun"
+              }
+            ],
+            "displayEDR": 1.2000000476837158,
+            "displayPotentialEDR": 16,
+            "duration": 8,
+            "elapsedSeconds": 1.9709619283676147,
+            "input": "http://127.0.0.1:61853/files/01_h264_aac_stereo.mp4",
+            "isPlayable": true,
+            "itemStatus": "readyToPlay",
+            "itemTracks": [
+              "vide:avc1:enabled=true",
+              "soun:aac:enabled=true"
+            ],
+            "likelyToKeepUp": true,
+            "playedRate": 1,
+            "playedSeconds": 0.994254667,
+            "presentationSize": "640x360",
+            "tracks": [
+              {
+                "codecs": [
+                  "avc1"
+                ],
+                "colorExtensions": {
+                  "FullRangeVideo": "0"
+                },
+                "decodable": true,
+                "fps": 25,
+                "language": "und",
+                "size": "640x360",
+                "type": "vide"
+              },
+              {
+                "channels": 2,
+                "codecs": [
+                  "aac"
+                ],
+                "decodable": true,
+                "language": "und",
+                "sampleRate": 48000,
+                "type": "soun"
+              }
+            ],
+            "transport": "http",
+            "videoRange": "SDR",
+            "wallSeconds": 1.99
+          }
+        },
+        "18_hevc_aac_stereo.mp4": {
+          "avplayer": {
+            "audioOptions": [
+              {
+                "displayName": "Unknown language",
+                "language": "und",
+                "mediaType": "soun"
+              }
+            ],
+            "displayEDR": 1.2000000476837158,
+            "displayPotentialEDR": 16,
+            "duration": 8,
+            "elapsedSeconds": 1.994454026222229,
+            "input": "http://127.0.0.1:61853/files/18_hevc_aac_stereo.mp4",
+            "isPlayable": false,
+            "itemStatus": "readyToPlay",
+            "itemTracks": [
+              "vide:hev1:enabled=true",
+              "soun:aac:enabled=true"
+            ],
+            "likelyToKeepUp": true,
+            "playedRate": 1,
+            "playedSeconds": 1.241715792,
+            "presentationSize": "0x0",
+            "tracks": [
+              {
+                "codecs": [
+                  "hev1"
+                ],
+                "colorExtensions": {
+                  "BitsPerComponent": "8",
+                  "FullRangeVideo": "0"
+                },
+                "decodable": false,
+                "fps": 25,
+                "language": "und",
+                "size": "640x360",
+                "type": "vide"
+              },
+              {
+                "channels": 2,
+                "codecs": [
+                  "aac"
+                ],
+                "decodable": true,
+                "language": "und",
+                "sampleRate": 48000,
+                "type": "soun"
+              }
+            ],
+            "transport": "http",
+            "videoRange": "SDR",
+            "wallSeconds": 2.01
+          }
+        }
+      }
+    },
+    "redirect": {
+      "title": "网盘 302 签名直链 + Range",
+      "latency_ms": 40,
+      "throughput_mbps": 8,
+      "headers_injected": [],
+      "tests": {
+        "04_h264_ac3_51.mkv": {
+          "ffprobe": {
+            "ok": true,
+            "seconds": 0.37,
+            "error": "",
+            "duration": 8.0
+          },
+          "remux": {
+            "ok": true,
+            "seconds": 3.73,
+            "stderr": "",
+            "reliable": true,
+            "segments": 3
+          },
+          "ttfb_seconds": 4.11
+        },
+        "06_h264_dts_51.mkv": {
+          "ffprobe": {
+            "ok": true,
+            "seconds": 0.37,
+            "error": "",
+            "duration": 8.0
+          },
+          "remux": {
+            "ok": true,
+            "seconds": 3.83,
+            "stderr": "",
+            "reliable": true,
+            "segments": 3
+          },
+          "ttfb_seconds": 4.2
+        },
+        "01_h264_aac_stereo.mp4": {
+          "avplayer": {
+            "audioOptions": [
+              {
+                "displayName": "Unknown language",
+                "language": "und",
+                "mediaType": "soun"
+              }
+            ],
+            "displayEDR": 1.2000000476837158,
+            "displayPotentialEDR": 16,
+            "duration": 8,
+            "elapsedSeconds": 2.0813710689544678,
+            "input": "http://127.0.0.1:61871/files/01_h264_aac_stereo.mp4",
+            "isPlayable": true,
+            "itemStatus": "readyToPlay",
+            "itemTracks": [
+              "vide:avc1:enabled=true",
+              "soun:aac:enabled=true"
+            ],
+            "likelyToKeepUp": true,
+            "playedRate": 1,
+            "playedSeconds": 0.981713292,
+            "presentationSize": "640x360",
+            "tracks": [
+              {
+                "codecs": [
+                  "avc1"
+                ],
+                "colorExtensions": {
+                  "FullRangeVideo": "0"
+                },
+                "decodable": true,
+                "fps": 25,
+                "language": "und",
+                "size": "640x360",
+                "type": "vide"
+              },
+              {
+                "channels": 2,
+                "codecs": [
+                  "aac"
+                ],
+                "decodable": true,
+                "language": "und",
+                "sampleRate": 48000,
+                "type": "soun"
+              }
+            ],
+            "transport": "http",
+            "videoRange": "SDR",
+            "wallSeconds": 2.11
+          }
+        },
+        "18_hevc_aac_stereo.mp4": {
+          "avplayer": {
+            "audioOptions": [
+              {
+                "displayName": "Unknown language",
+                "language": "und",
+                "mediaType": "soun"
+              }
+            ],
+            "displayEDR": 1.2000000476837158,
+            "displayPotentialEDR": 16,
+            "duration": 8,
+            "elapsedSeconds": 2.064637064933777,
+            "input": "http://127.0.0.1:61871/files/18_hevc_aac_stereo.mp4",
+            "isPlayable": false,
+            "itemStatus": "readyToPlay",
+            "itemTracks": [
+              "vide:hev1:enabled=true",
+              "soun:aac:enabled=true"
+            ],
+            "likelyToKeepUp": true,
+            "playedRate": 1,
+            "playedSeconds": 0.995332999,
+            "presentationSize": "0x0",
+            "tracks": [
+              {
+                "codecs": [
+                  "hev1"
+                ],
+                "colorExtensions": {
+                  "BitsPerComponent": "8",
+                  "FullRangeVideo": "0"
+                },
+                "decodable": false,
+                "fps": 25,
+                "language": "und",
+                "size": "640x360",
+                "type": "vide"
+              },
+              {
+                "channels": 2,
+                "codecs": [
+                  "aac"
+                ],
+                "decodable": true,
+                "language": "und",
+                "sampleRate": 48000,
+                "type": "soun"
+              }
+            ],
+            "transport": "http",
+            "videoRange": "SDR",
+            "wallSeconds": 2.08
+          }
+        }
+      }
+    },
+    "norange": {
+      "title": "不支持 Range（只能顺序转发）",
+      "latency_ms": 20,
+      "throughput_mbps": 12,
+      "headers_injected": [],
+      "tests": {
+        "04_h264_ac3_51.mkv": {
+          "ffprobe": {
+            "ok": true,
+            "seconds": 0.28,
+            "error": "",
+            "duration": 8.0
+          },
+          "remux": {
+            "ok": true,
+            "seconds": 1.86,
+            "stderr": "[http @ 0x772cc3c000] Unexpected offset: expected 1551269, got 0\n[http @ 0x772cc3c000] Unexpected offset: expected 368966, got 0",
+            "reliable": false,
+            "segments": 1
+          },
+          "ttfb_seconds": 2.14
+        },
+        "06_h264_dts_51.mkv": {
+          "ffprobe": {
+            "ok": true,
+            "seconds": 0.26,
+            "error": "",
+            "duration": 8.0
+          },
+          "remux": {
+            "ok": true,
+            "seconds": 2.0,
+            "stderr": "[http @ 0x7b45078000] Unexpected offset: expected 1682762, got 0\n[http @ 0x7b45078000] Unexpected offset: expected 399488, got 0",
+            "reliable": false,
+            "segments": 1
+          },
+          "ttfb_seconds": 2.27
+        },
+        "01_h264_aac_stereo.mp4": {
+          "avplayer": {
+            "audioOptions": [],
+            "displayEDR": 1.2000000476837158,
+            "displayPotentialEDR": 16,
+            "elapsedSeconds": 0.3513319492340088,
+            "input": "http://127.0.0.1:61893/files/01_h264_aac_stereo.mp4",
+            "isPlayable": false,
+            "itemError": "Error Domain=AVFoundationErrorDomain Code=-11850 \"Operation Stopped\" UserInfo={NSLocalizedFailureReason=The server is not correctly configured., NSLocalizedDescription=Operation Stopped, NSUnderlyingError=0x7f89fb12c9c0 {Error Domain=NSOSStatusErrorDomain Code=-12939 \"(null)\"}}",
+            "itemStatus": "failed",
+            "presentationSize": "0x0",
+            "tracks": [],
+            "transport": "http",
+            "wallSeconds": 0.37
+          }
+        },
+        "18_hevc_aac_stereo.mp4": {
+          "avplayer": {
+            "audioOptions": [],
+            "displayEDR": 1.2000000476837158,
+            "displayPotentialEDR": 16,
+            "elapsedSeconds": 0.35541296005249023,
+            "input": "http://127.0.0.1:61893/files/18_hevc_aac_stereo.mp4",
+            "isPlayable": false,
+            "itemError": "Error Domain=AVFoundationErrorDomain Code=-11850 \"Operation Stopped\" UserInfo={NSLocalizedFailureReason=The server is not correctly configured., NSLocalizedDescription=Operation Stopped, NSUnderlyingError=0x7fb13873cd70 {Error Domain=NSOSStatusErrorDomain Code=-12939 \"(null)\"}}",
+            "itemStatus": "failed",
+            "presentationSize": "0x0",
+            "tracks": [],
+            "transport": "http",
+            "wallSeconds": 0.37
+          }
+        }
+      }
+    }
+  },
+  "avplayer": {}
+}

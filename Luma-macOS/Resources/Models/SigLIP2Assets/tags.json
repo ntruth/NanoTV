@@ -1,0 +1,3173 @@
+{
+  "version": 1,
+  "model": "siglip2-base-patch16-256",
+  "embeddingDim": 768,
+  "defaultThreshold": 0.085,
+  "groupLimits": {
+    "scene": 4,
+    "animal": 1,
+    "plant": 2,
+    "food": 3,
+    "object": 4,
+    "transport": 2,
+    "activity": 2,
+    "person": 3,
+    "framing": 1,
+    "doc": 3,
+    "style": 3
+  },
+  "tags": [
+    {
+      "id": "person",
+      "title": "人物",
+      "group": "person",
+      "threshold": 0.06,
+      "prompts": [
+        "a photo of a person",
+        "people in the photo"
+      ],
+      "aliases": [
+        "人",
+        "人物",
+        "有人",
+        "一个人",
+        "people",
+        "person",
+        "女孩",
+        "男孩",
+        "女生",
+        "男生",
+        "美女",
+        "小孩儿"
+      ]
+    },
+    {
+      "id": "beach",
+      "title": "海边",
+      "group": "scene",
+      "prompts": [
+        "a photo of a beach",
+        "a seaside landscape with waves"
+      ],
+      "aliases": [
+        "海滩",
+        "沙滩",
+        "海岸",
+        "大海",
+        "海",
+        "beach",
+        "seaside"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "lake",
+      "title": "湖泊",
+      "group": "scene",
+      "prompts": [
+        "a photo of a lake",
+        "a calm lake surrounded by nature"
+      ],
+      "aliases": [
+        "湖",
+        "湖畔",
+        "湖水",
+        "lake"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "river",
+      "title": "河流",
+      "group": "scene",
+      "prompts": [
+        "a photo of a river",
+        "a stream flowing through nature"
+      ],
+      "aliases": [
+        "河",
+        "小溪",
+        "溪流",
+        "river",
+        "stream"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "waterfall",
+      "title": "瀑布",
+      "group": "scene",
+      "prompts": [
+        "a photo of a waterfall",
+        "a waterfall in the mountains"
+      ],
+      "aliases": [
+        "瀑布",
+        "waterfall"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "mountain",
+      "title": "山脉",
+      "group": "scene",
+      "threshold": 0.08,
+      "prompts": [
+        "a photo of mountains",
+        "a mountain landscape"
+      ],
+      "aliases": [
+        "山",
+        "山峰",
+        "爬山",
+        "登山",
+        "mountain"
+      ]
+    },
+    {
+      "id": "forest",
+      "title": "森林",
+      "group": "scene",
+      "prompts": [
+        "a photo of a forest",
+        "trees in a forest"
+      ],
+      "aliases": [
+        "树林",
+        "森林",
+        "forest",
+        "woods"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "grassland",
+      "title": "草原",
+      "group": "scene",
+      "prompts": [
+        "a photo of a grassland",
+        "a green meadow"
+      ],
+      "aliases": [
+        "草地",
+        "草原",
+        "牧场",
+        "meadow",
+        "grassland"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "desert",
+      "title": "沙漠",
+      "group": "scene",
+      "prompts": [
+        "a photo of a desert",
+        "sand dunes in a desert"
+      ],
+      "aliases": [
+        "沙漠",
+        "荒漠",
+        "desert"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "snowscene",
+      "title": "雪景",
+      "group": "scene",
+      "prompts": [
+        "a snowy landscape",
+        "a photo of snow covered ground"
+      ],
+      "aliases": [
+        "雪",
+        "下雪",
+        "雪地",
+        "雪景",
+        "snow"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "garden",
+      "title": "花园",
+      "group": "scene",
+      "prompts": [
+        "a photo of a garden",
+        "a flower garden"
+      ],
+      "aliases": [
+        "花园",
+        "花圃",
+        "garden"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "park",
+      "title": "公园",
+      "group": "scene",
+      "prompts": [
+        "a photo of a park",
+        "a park with trees and paths"
+      ],
+      "aliases": [
+        "公园",
+        "park"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "city",
+      "title": "城市",
+      "group": "scene",
+      "threshold": 0.075,
+      "prompts": [
+        "a photo of a city",
+        "a city skyline"
+      ],
+      "aliases": [
+        "都市",
+        "城市",
+        "city",
+        "skyline"
+      ]
+    },
+    {
+      "id": "street",
+      "title": "街道",
+      "group": "scene",
+      "prompts": [
+        "a photo of a street",
+        "a street in a town"
+      ],
+      "aliases": [
+        "街",
+        "马路",
+        "街道",
+        "street",
+        "road"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "countryside",
+      "title": "乡村",
+      "group": "scene",
+      "prompts": [
+        "a photo of the countryside",
+        "a rural village"
+      ],
+      "aliases": [
+        "农村",
+        "田野",
+        "乡村",
+        "countryside",
+        "village"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "ancient_town",
+      "title": "古镇",
+      "group": "scene",
+      "threshold": 0.085,
+      "prompts": [
+        "a photo of an ancient Chinese town",
+        "old town streets with traditional buildings"
+      ],
+      "aliases": [
+        "古城",
+        "老街",
+        "古镇",
+        "ancient town"
+      ]
+    },
+    {
+      "id": "building",
+      "title": "建筑",
+      "group": "scene",
+      "threshold": 0.075,
+      "prompts": [
+        "a photo of a building",
+        "an architectural photo"
+      ],
+      "aliases": [
+        "楼",
+        "建筑",
+        "建筑群",
+        "architecture"
+      ]
+    },
+    {
+      "id": "house",
+      "title": "房屋",
+      "group": "scene",
+      "prompts": [
+        "a photo of a house",
+        "a residential house"
+      ],
+      "aliases": [
+        "房子",
+        "住宅",
+        "房屋",
+        "house"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "bridge",
+      "title": "桥梁",
+      "group": "scene",
+      "prompts": [
+        "a photo of a bridge",
+        "a bridge over water"
+      ],
+      "aliases": [
+        "桥",
+        "桥梁",
+        "bridge"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "temple",
+      "title": "寺庙",
+      "group": "scene",
+      "prompts": [
+        "a photo of a temple",
+        "a Chinese temple"
+      ],
+      "aliases": [
+        "寺",
+        "庙",
+        "寺庙",
+        "temple"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "church",
+      "title": "教堂",
+      "group": "scene",
+      "prompts": [
+        "a photo of a church",
+        "a church building"
+      ],
+      "aliases": [
+        "教堂",
+        "church"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "castle",
+      "title": "城堡",
+      "group": "scene",
+      "prompts": [
+        "a photo of a castle",
+        "an old castle"
+      ],
+      "aliases": [
+        "城堡",
+        "castle"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "tower",
+      "title": "塔",
+      "group": "scene",
+      "prompts": [
+        "a photo of a tower",
+        "a tall tower"
+      ],
+      "aliases": [
+        "高塔",
+        "塔",
+        "tower"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "night_view",
+      "title": "夜景",
+      "group": "scene",
+      "prompts": [
+        "a night view of a city",
+        "a photo taken at night with lights"
+      ],
+      "aliases": [
+        "夜晚",
+        "晚上",
+        "夜景",
+        "night",
+        "night view"
+      ],
+      "threshold": 0.07
+    },
+    {
+      "id": "starry_sky",
+      "title": "星空",
+      "group": "scene",
+      "prompts": [
+        "a photo of a starry night sky",
+        "the milky way in the sky"
+      ],
+      "aliases": [
+        "星空",
+        "银河",
+        "繁星",
+        "starry sky",
+        "milky way"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "sunset",
+      "title": "日落",
+      "group": "scene",
+      "prompts": [
+        "a photo of a sunset",
+        "a sunset sky with warm colors"
+      ],
+      "aliases": [
+        "夕阳",
+        "晚霞",
+        "黄昏",
+        "日落",
+        "sunset"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "sunrise",
+      "title": "日出",
+      "group": "scene",
+      "prompts": [
+        "a photo of a sunrise",
+        "a sunrise over the horizon"
+      ],
+      "aliases": [
+        "清晨",
+        "朝霞",
+        "日出",
+        "sunrise"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "sky",
+      "title": "天空",
+      "group": "scene",
+      "threshold": 0.075,
+      "prompts": [
+        "a photo of the sky",
+        "blue sky with clouds"
+      ],
+      "aliases": [
+        "天空",
+        "蓝天",
+        "sky"
+      ]
+    },
+    {
+      "id": "clouds",
+      "title": "云朵",
+      "group": "scene",
+      "prompts": [
+        "a photo of clouds",
+        "clouds in the sky"
+      ],
+      "aliases": [
+        "云",
+        "白云",
+        "云朵",
+        "clouds"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "rainbow",
+      "title": "彩虹",
+      "group": "scene",
+      "prompts": [
+        "a photo of a rainbow",
+        "a rainbow in the sky"
+      ],
+      "aliases": [
+        "彩虹",
+        "rainbow"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "fog",
+      "title": "雾",
+      "group": "scene",
+      "prompts": [
+        "a foggy landscape",
+        "a photo of thick fog"
+      ],
+      "aliases": [
+        "雾",
+        "雾气",
+        "fog",
+        "mist"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "rain",
+      "title": "雨",
+      "group": "scene",
+      "prompts": [
+        "a photo taken in the rain",
+        "rain drops on a window"
+      ],
+      "aliases": [
+        "下雨",
+        "雨天",
+        "雨",
+        "rain"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "indoor",
+      "title": "室内",
+      "group": "scene",
+      "threshold": 0.07,
+      "prompts": [
+        "an indoor photo of a room",
+        "inside a building"
+      ],
+      "aliases": [
+        "屋内",
+        "室内",
+        "indoor"
+      ]
+    },
+    {
+      "id": "cafe",
+      "title": "咖啡馆",
+      "group": "scene",
+      "prompts": [
+        "a photo inside a cafe",
+        "a coffee shop interior"
+      ],
+      "aliases": [
+        "咖啡店",
+        "咖啡馆",
+        "cafe",
+        "coffee shop"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "restaurant",
+      "title": "餐厅",
+      "group": "scene",
+      "prompts": [
+        "a photo inside a restaurant",
+        "a restaurant interior"
+      ],
+      "aliases": [
+        "饭店",
+        "餐馆",
+        "餐厅",
+        "restaurant"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "kitchen",
+      "title": "厨房",
+      "group": "scene",
+      "prompts": [
+        "a photo of a kitchen",
+        "a kitchen interior"
+      ],
+      "aliases": [
+        "厨房",
+        "kitchen"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "bedroom",
+      "title": "卧室",
+      "group": "scene",
+      "prompts": [
+        "a photo of a bedroom",
+        "a bedroom interior"
+      ],
+      "aliases": [
+        "卧室",
+        "bedroom"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "living_room",
+      "title": "客厅",
+      "group": "scene",
+      "prompts": [
+        "a photo of a living room",
+        "a living room with a sofa"
+      ],
+      "aliases": [
+        "客厅",
+        "沙发",
+        "living room"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "office",
+      "title": "办公室",
+      "group": "scene",
+      "prompts": [
+        "a photo of an office",
+        "an office workspace"
+      ],
+      "aliases": [
+        "办公室",
+        "office"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "classroom",
+      "title": "教室",
+      "group": "scene",
+      "prompts": [
+        "a photo of a classroom",
+        "a classroom with desks"
+      ],
+      "aliases": [
+        "教室",
+        "课堂",
+        "classroom"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "mall",
+      "title": "商场",
+      "group": "scene",
+      "prompts": [
+        "a photo inside a shopping mall",
+        "a shopping mall interior"
+      ],
+      "aliases": [
+        "购物中心",
+        "商场",
+        "mall"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "supermarket",
+      "title": "超市",
+      "group": "scene",
+      "prompts": [
+        "a photo inside a supermarket",
+        "supermarket shelves"
+      ],
+      "aliases": [
+        "超市",
+        "supermarket"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "airport",
+      "title": "机场",
+      "group": "scene",
+      "prompts": [
+        "a photo of an airport",
+        "an airport terminal"
+      ],
+      "aliases": [
+        "机场",
+        "airport"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "station",
+      "title": "车站",
+      "group": "scene",
+      "prompts": [
+        "a photo of a train station",
+        "a railway station platform"
+      ],
+      "aliases": [
+        "火车站",
+        "车站",
+        "train station"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "subway",
+      "title": "地铁",
+      "group": "scene",
+      "prompts": [
+        "a photo of a subway station",
+        "a subway train platform"
+      ],
+      "aliases": [
+        "地铁站",
+        "地铁",
+        "subway",
+        "metro"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "hotel",
+      "title": "酒店",
+      "group": "scene",
+      "prompts": [
+        "a photo of a hotel room",
+        "a hotel interior"
+      ],
+      "aliases": [
+        "酒店",
+        "宾馆",
+        "hotel"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "museum",
+      "title": "博物馆",
+      "group": "scene",
+      "prompts": [
+        "a photo inside a museum",
+        "museum exhibition"
+      ],
+      "aliases": [
+        "博物馆",
+        "展览",
+        "museum"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "library",
+      "title": "图书馆",
+      "group": "scene",
+      "prompts": [
+        "a photo inside a library",
+        "library bookshelves"
+      ],
+      "aliases": [
+        "图书馆",
+        "library"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "amusement_park",
+      "title": "游乐园",
+      "group": "scene",
+      "prompts": [
+        "a photo of an amusement park",
+        "a theme park with rides"
+      ],
+      "aliases": [
+        "游乐场",
+        "游乐园",
+        "amusement park"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "sports_field",
+      "title": "操场",
+      "group": "scene",
+      "prompts": [
+        "a photo of a sports field",
+        "a running track"
+      ],
+      "aliases": [
+        "田径场",
+        "操场",
+        "sports field"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "stage",
+      "title": "舞台",
+      "group": "scene",
+      "prompts": [
+        "a photo of a stage",
+        "a performance stage with lights"
+      ],
+      "aliases": [
+        "舞台",
+        "stage"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "wedding_venue",
+      "title": "婚礼现场",
+      "group": "scene",
+      "prompts": [
+        "a photo of a wedding ceremony",
+        "a wedding venue with decorations"
+      ],
+      "aliases": [
+        "婚礼现场",
+        "婚宴",
+        "wedding"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "concert_venue",
+      "title": "演唱会现场",
+      "group": "scene",
+      "prompts": [
+        "a photo of a concert",
+        "a live music concert with stage lights"
+      ],
+      "aliases": [
+        "演唱会",
+        "演出",
+        "音乐会",
+        "concert"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "market",
+      "title": "市集",
+      "group": "scene",
+      "prompts": [
+        "a photo of a street market",
+        "a market with stalls"
+      ],
+      "aliases": [
+        "集市",
+        "市集",
+        "market"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "rooftop",
+      "title": "天台",
+      "group": "scene",
+      "prompts": [
+        "a photo on a rooftop",
+        "a rooftop view"
+      ],
+      "aliases": [
+        "天台",
+        "屋顶",
+        "rooftop"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "selfie",
+      "title": "自拍",
+      "group": "person",
+      "prompts": [
+        "a selfie photo of a person",
+        "a person taking a selfie"
+      ],
+      "aliases": [
+        "自拍照",
+        "自拍",
+        "selfie"
+      ],
+      "threshold": 0.1
+    },
+    {
+      "id": "group_photo",
+      "title": "合影",
+      "group": "person",
+      "prompts": [
+        "a group photo of people",
+        "several people posing together"
+      ],
+      "aliases": [
+        "合照",
+        "集体照",
+        "合影",
+        "group photo"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "couple",
+      "title": "情侣",
+      "group": "person",
+      "threshold": 0.09,
+      "prompts": [
+        "a photo of a couple",
+        "a romantic couple together"
+      ],
+      "aliases": [
+        "恋人",
+        "情侣",
+        "couple"
+      ]
+    },
+    {
+      "id": "family_photo",
+      "title": "全家福",
+      "group": "person",
+      "threshold": 0.09,
+      "prompts": [
+        "a family photo",
+        "a family posing together"
+      ],
+      "aliases": [
+        "全家福",
+        "家人合影",
+        "family"
+      ]
+    },
+    {
+      "id": "children",
+      "title": "儿童",
+      "group": "person",
+      "prompts": [
+        "a photo of children",
+        "kids playing"
+      ],
+      "aliases": [
+        "小孩",
+        "孩子",
+        "儿童",
+        "children",
+        "kids"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "baby",
+      "title": "婴儿",
+      "group": "person",
+      "prompts": [
+        "a photo of a baby",
+        "a newborn baby"
+      ],
+      "aliases": [
+        "宝宝",
+        "婴儿",
+        "baby"
+      ],
+      "threshold": 0.09
+    },
+    {
+      "id": "elderly",
+      "title": "老人",
+      "group": "person",
+      "prompts": [
+        "a photo of an elderly person",
+        "an old person portrait"
+      ],
+      "aliases": [
+        "长者",
+        "老人",
+        "elderly"
+      ],
+      "threshold": 0.09
+    },
+    {
+      "id": "crowd",
+      "title": "人群",
+      "group": "person",
+      "prompts": [
+        "a crowd of people",
+        "many people in a crowd"
+      ],
+      "aliases": [
+        "人群",
+        "观众",
+        "crowd"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "portrait",
+      "title": "单人肖像",
+      "group": "person",
+      "threshold": 0.085,
+      "prompts": [
+        "a portrait photo of one person",
+        "a headshot portrait of a person"
+      ],
+      "aliases": [
+        "人像",
+        "肖像",
+        "portrait"
+      ]
+    },
+    {
+      "id": "back_view",
+      "title": "背影",
+      "group": "person",
+      "threshold": 0.095,
+      "prompts": [
+        "a photo of a person seen from behind",
+        "a person walking away seen from the back"
+      ],
+      "aliases": [
+        "背影",
+        "back view"
+      ]
+    },
+    {
+      "id": "profile_face",
+      "title": "侧脸",
+      "group": "person",
+      "threshold": 0.095,
+      "prompts": [
+        "a side profile photo of a person's face",
+        "a person's face in profile"
+      ],
+      "aliases": [
+        "侧脸",
+        "侧颜",
+        "profile"
+      ]
+    },
+    {
+      "id": "smiling",
+      "title": "微笑",
+      "group": "person",
+      "threshold": 0.08,
+      "prompts": [
+        "a smiling person",
+        "a person with a happy smile"
+      ],
+      "aliases": [
+        "笑容",
+        "笑脸",
+        "微笑",
+        "smile"
+      ]
+    },
+    {
+      "id": "bride",
+      "title": "婚纱",
+      "group": "person",
+      "prompts": [
+        "a bride in a wedding dress",
+        "a wedding dress photo"
+      ],
+      "aliases": [
+        "新娘",
+        "婚纱照",
+        "婚纱",
+        "bride"
+      ],
+      "threshold": 0.09
+    },
+    {
+      "id": "athlete",
+      "title": "运动人物",
+      "group": "person",
+      "threshold": 0.095,
+      "prompts": [
+        "a person playing sports",
+        "an athlete in action"
+      ],
+      "aliases": [
+        "运动的人",
+        "运动员",
+        "athlete"
+      ]
+    },
+    {
+      "id": "face_closeup",
+      "title": "脸部特写",
+      "group": "framing",
+      "threshold": 0.095,
+      "prompts": [
+        "a close-up photo of a human face",
+        "a face filling the frame"
+      ],
+      "aliases": [
+        "脸部",
+        "面部特写",
+        "face close-up"
+      ]
+    },
+    {
+      "id": "upper_body",
+      "title": "上半身",
+      "group": "framing",
+      "threshold": 0.09,
+      "prompts": [
+        "an upper body photo of a person",
+        "a half body portrait"
+      ],
+      "aliases": [
+        "半身",
+        "半身照",
+        "上半身",
+        "upper body"
+      ]
+    },
+    {
+      "id": "full_body",
+      "title": "全身",
+      "group": "framing",
+      "threshold": 0.095,
+      "prompts": [
+        "a full body photo of a person",
+        "a person standing full length"
+      ],
+      "aliases": [
+        "全身照",
+        "全身",
+        "full body"
+      ]
+    },
+    {
+      "id": "cat",
+      "title": "猫",
+      "group": "animal",
+      "prompts": [
+        "a photo of a cat",
+        "a close-up photo of a cat"
+      ],
+      "aliases": [
+        "小猫",
+        "猫咪",
+        "猫",
+        "cat",
+        "kitten",
+        "宠物"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "dog",
+      "title": "狗",
+      "group": "animal",
+      "prompts": [
+        "a photo of a dog",
+        "a close-up photo of a dog"
+      ],
+      "aliases": [
+        "小狗",
+        "狗狗",
+        "狗",
+        "dog",
+        "puppy",
+        "宠物"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "bird",
+      "title": "鸟",
+      "group": "animal",
+      "prompts": [
+        "a photo of a bird",
+        "a bird perched or flying"
+      ],
+      "aliases": [
+        "小鸟",
+        "鸟",
+        "bird"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "fish",
+      "title": "鱼",
+      "group": "animal",
+      "prompts": [
+        "a photo of a fish",
+        "fish underwater"
+      ],
+      "aliases": [
+        "金鱼",
+        "鱼",
+        "fish"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "horse",
+      "title": "马",
+      "group": "animal",
+      "prompts": [
+        "a photo of a horse",
+        "a horse in a field"
+      ],
+      "aliases": [
+        "马",
+        "horse"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "cow",
+      "title": "牛",
+      "group": "animal",
+      "prompts": [
+        "a photo of a cow",
+        "cattle in a field"
+      ],
+      "aliases": [
+        "奶牛",
+        "牛",
+        "cow",
+        "cattle"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "sheep",
+      "title": "羊",
+      "group": "animal",
+      "prompts": [
+        "a photo of a sheep or goat",
+        "sheep in a meadow"
+      ],
+      "aliases": [
+        "山羊",
+        "绵羊",
+        "羊",
+        "sheep",
+        "goat"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "pig",
+      "title": "猪",
+      "group": "animal",
+      "prompts": [
+        "a photo of a pig",
+        "a pig on a farm"
+      ],
+      "aliases": [
+        "猪",
+        "pig"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "chicken",
+      "title": "鸡",
+      "group": "animal",
+      "prompts": [
+        "a photo of a chicken",
+        "a rooster or hen"
+      ],
+      "aliases": [
+        "公鸡",
+        "母鸡",
+        "鸡",
+        "chicken",
+        "rooster"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "rabbit",
+      "title": "兔子",
+      "group": "animal",
+      "prompts": [
+        "a photo of a rabbit",
+        "a bunny rabbit"
+      ],
+      "aliases": [
+        "兔",
+        "兔子",
+        "rabbit",
+        "bunny",
+        "宠物"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "hamster",
+      "title": "仓鼠",
+      "group": "animal",
+      "prompts": [
+        "a photo of a hamster",
+        "a small pet hamster"
+      ],
+      "aliases": [
+        "仓鼠",
+        "hamster",
+        "宠物"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "parrot",
+      "title": "鹦鹉",
+      "group": "animal",
+      "prompts": [
+        "a photo of a parrot",
+        "a colorful parrot"
+      ],
+      "aliases": [
+        "鹦鹉",
+        "parrot",
+        "宠物"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "wildlife",
+      "title": "野生动物",
+      "group": "animal",
+      "threshold": 0.07,
+      "prompts": [
+        "a photo of wild animals",
+        "wildlife in nature"
+      ],
+      "aliases": [
+        "野生动物",
+        "wildlife"
+      ]
+    },
+    {
+      "id": "insect",
+      "title": "昆虫",
+      "group": "animal",
+      "prompts": [
+        "a close-up photo of an insect",
+        "a bug on a plant"
+      ],
+      "aliases": [
+        "昆虫",
+        "虫子",
+        "insect",
+        "bug"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "butterfly",
+      "title": "蝴蝶",
+      "group": "animal",
+      "prompts": [
+        "a photo of a butterfly",
+        "a butterfly on a flower"
+      ],
+      "aliases": [
+        "蝴蝶",
+        "butterfly"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "bee",
+      "title": "蜜蜂",
+      "group": "animal",
+      "prompts": [
+        "a photo of a bee",
+        "a bee on a flower"
+      ],
+      "aliases": [
+        "蜜蜂",
+        "bee"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "jellyfish",
+      "title": "水母",
+      "group": "animal",
+      "prompts": [
+        "a photo of a jellyfish",
+        "jellyfish underwater"
+      ],
+      "aliases": [
+        "水母",
+        "jellyfish"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "crab",
+      "title": "螃蟹",
+      "group": "animal",
+      "prompts": [
+        "a photo of a crab",
+        "a crab on the beach"
+      ],
+      "aliases": [
+        "螃蟹",
+        "蟹",
+        "crab"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "panda",
+      "title": "熊猫",
+      "group": "animal",
+      "prompts": [
+        "a photo of a giant panda",
+        "a panda bear"
+      ],
+      "aliases": [
+        "熊猫",
+        "panda"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "monkey",
+      "title": "猴子",
+      "group": "animal",
+      "prompts": [
+        "a photo of a monkey",
+        "a monkey in a tree"
+      ],
+      "aliases": [
+        "猴子",
+        "monkey"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "elephant",
+      "title": "大象",
+      "group": "animal",
+      "prompts": [
+        "a photo of an elephant",
+        "elephants in nature"
+      ],
+      "aliases": [
+        "大象",
+        "elephant"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "lion",
+      "title": "狮子",
+      "group": "animal",
+      "prompts": [
+        "a photo of a lion",
+        "a lion in the wild"
+      ],
+      "aliases": [
+        "狮子",
+        "lion"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "tiger",
+      "title": "老虎",
+      "group": "animal",
+      "prompts": [
+        "a photo of a tiger",
+        "a tiger in the wild"
+      ],
+      "aliases": [
+        "老虎",
+        "虎",
+        "tiger"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "deer",
+      "title": "鹿",
+      "group": "animal",
+      "prompts": [
+        "a photo of a deer",
+        "a deer in the forest"
+      ],
+      "aliases": [
+        "鹿",
+        "小鹿",
+        "deer"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "squirrel",
+      "title": "松鼠",
+      "group": "animal",
+      "prompts": [
+        "a photo of a squirrel",
+        "a squirrel in a tree"
+      ],
+      "aliases": [
+        "松鼠",
+        "squirrel"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "penguin",
+      "title": "企鹅",
+      "group": "animal",
+      "prompts": [
+        "a photo of a penguin",
+        "penguins in the snow"
+      ],
+      "aliases": [
+        "企鹅",
+        "penguin"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "flowers",
+      "title": "花",
+      "group": "plant",
+      "prompts": [
+        "a photo of flowers",
+        "a close-up of blooming flowers"
+      ],
+      "aliases": [
+        "鲜花",
+        "花朵",
+        "花卉",
+        "花",
+        "flowers"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "tree",
+      "title": "树",
+      "group": "plant",
+      "prompts": [
+        "a photo of a tree",
+        "a large tree with leaves"
+      ],
+      "aliases": [
+        "大树",
+        "树",
+        "tree"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "grass",
+      "title": "草地",
+      "group": "plant",
+      "prompts": [
+        "a photo of grass",
+        "green grass on the ground"
+      ],
+      "aliases": [
+        "草坪",
+        "草地",
+        "grass"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "leaves",
+      "title": "叶子",
+      "group": "plant",
+      "prompts": [
+        "a close-up photo of leaves",
+        "green leaves"
+      ],
+      "aliases": [
+        "绿叶",
+        "树叶",
+        "叶子",
+        "leaves"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "cactus",
+      "title": "仙人掌",
+      "group": "plant",
+      "prompts": [
+        "a photo of a cactus",
+        "a cactus plant"
+      ],
+      "aliases": [
+        "仙人掌",
+        "cactus"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "potted_plant",
+      "title": "盆栽",
+      "group": "plant",
+      "prompts": [
+        "a potted plant",
+        "a houseplant in a pot"
+      ],
+      "aliases": [
+        "绿植",
+        "盆栽",
+        "potted plant"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "cherry_blossom",
+      "title": "樱花",
+      "group": "plant",
+      "prompts": [
+        "a photo of cherry blossoms",
+        "pink cherry blossom flowers"
+      ],
+      "aliases": [
+        "樱花",
+        "cherry blossom"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "sunflower",
+      "title": "向日葵",
+      "group": "plant",
+      "prompts": [
+        "a photo of sunflowers",
+        "a sunflower field"
+      ],
+      "aliases": [
+        "向日葵",
+        "sunflower"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "food",
+      "title": "美食",
+      "group": "food",
+      "threshold": 0.06,
+      "prompts": [
+        "a photo of food",
+        "a plate of delicious food"
+      ],
+      "aliases": [
+        "吃的",
+        "菜",
+        "食物",
+        "美食",
+        "food"
+      ]
+    },
+    {
+      "id": "chinese_food",
+      "title": "中餐",
+      "group": "food",
+      "threshold": 0.065,
+      "prompts": [
+        "a photo of Chinese food",
+        "Chinese dishes on a table"
+      ],
+      "aliases": [
+        "中餐",
+        "中国菜",
+        "chinese food"
+      ]
+    },
+    {
+      "id": "hotpot",
+      "title": "火锅",
+      "group": "food",
+      "prompts": [
+        "a photo of Chinese hot pot",
+        "a boiling hot pot with ingredients"
+      ],
+      "aliases": [
+        "火锅",
+        "hot pot",
+        "hotpot"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "barbecue",
+      "title": "烧烤",
+      "group": "food",
+      "prompts": [
+        "a photo of barbecue food",
+        "grilled meat skewers"
+      ],
+      "aliases": [
+        "烤肉",
+        "烧烤",
+        "barbecue",
+        "bbq"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "sushi",
+      "title": "寿司",
+      "group": "food",
+      "prompts": [
+        "a photo of sushi",
+        "a plate of sushi rolls"
+      ],
+      "aliases": [
+        "寿司",
+        "sushi"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "pizza",
+      "title": "披萨",
+      "group": "food",
+      "prompts": [
+        "a photo of a pizza",
+        "a slice of pizza"
+      ],
+      "aliases": [
+        "披萨",
+        "比萨",
+        "pizza"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "burger",
+      "title": "汉堡",
+      "group": "food",
+      "prompts": [
+        "a photo of a hamburger",
+        "a burger with fries"
+      ],
+      "aliases": [
+        "汉堡",
+        "burger",
+        "hamburger"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "noodles",
+      "title": "面条",
+      "group": "food",
+      "prompts": [
+        "a photo of noodles",
+        "a bowl of noodle soup"
+      ],
+      "aliases": [
+        "面",
+        "面条",
+        "noodles"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "rice",
+      "title": "米饭",
+      "group": "food",
+      "prompts": [
+        "a photo of cooked rice",
+        "a bowl of rice"
+      ],
+      "aliases": [
+        "米饭",
+        "rice"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "dumplings",
+      "title": "饺子",
+      "group": "food",
+      "prompts": [
+        "a photo of dumplings",
+        "Chinese dumplings on a plate"
+      ],
+      "aliases": [
+        "饺子",
+        "dumplings"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "soup",
+      "title": "汤",
+      "group": "food",
+      "prompts": [
+        "a photo of soup",
+        "a bowl of soup"
+      ],
+      "aliases": [
+        "汤",
+        "soup"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "seafood",
+      "title": "海鲜",
+      "group": "food",
+      "prompts": [
+        "a photo of seafood",
+        "a plate of seafood"
+      ],
+      "aliases": [
+        "海鲜",
+        "seafood"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "dessert",
+      "title": "甜点",
+      "group": "food",
+      "threshold": 0.075,
+      "prompts": [
+        "a photo of dessert",
+        "a plate of sweet dessert"
+      ],
+      "aliases": [
+        "甜品",
+        "甜点",
+        "dessert"
+      ]
+    },
+    {
+      "id": "cake",
+      "title": "蛋糕",
+      "group": "food",
+      "prompts": [
+        "a photo of a cake",
+        "a decorated birthday cake"
+      ],
+      "aliases": [
+        "蛋糕",
+        "cake"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "bread",
+      "title": "面包",
+      "group": "food",
+      "prompts": [
+        "a photo of bread",
+        "fresh baked bread"
+      ],
+      "aliases": [
+        "面包",
+        "bread"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "fruit",
+      "title": "水果",
+      "group": "food",
+      "threshold": 0.08,
+      "prompts": [
+        "a photo of fruit",
+        "fresh fruits on a table"
+      ],
+      "aliases": [
+        "水果",
+        "fruit"
+      ]
+    },
+    {
+      "id": "vegetables",
+      "title": "蔬菜",
+      "group": "food",
+      "threshold": 0.08,
+      "prompts": [
+        "a photo of vegetables",
+        "fresh vegetables"
+      ],
+      "aliases": [
+        "蔬菜",
+        "vegetables"
+      ]
+    },
+    {
+      "id": "salad",
+      "title": "沙拉",
+      "group": "food",
+      "prompts": [
+        "a photo of a salad",
+        "a bowl of green salad"
+      ],
+      "aliases": [
+        "沙拉",
+        "salad"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "ice_cream",
+      "title": "冰淇淋",
+      "group": "food",
+      "prompts": [
+        "a photo of ice cream",
+        "an ice cream cone"
+      ],
+      "aliases": [
+        "冰淇淋",
+        "雪糕",
+        "ice cream"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "coffee",
+      "title": "咖啡",
+      "group": "food",
+      "prompts": [
+        "a photo of coffee",
+        "a cup of coffee"
+      ],
+      "aliases": [
+        "咖啡",
+        "coffee"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "tea",
+      "title": "茶",
+      "group": "food",
+      "prompts": [
+        "a photo of tea",
+        "a cup of tea"
+      ],
+      "aliases": [
+        "茶",
+        "tea"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "drink",
+      "title": "饮料",
+      "group": "food",
+      "threshold": 0.075,
+      "prompts": [
+        "a photo of a drink",
+        "a glass of beverage"
+      ],
+      "aliases": [
+        "奶茶",
+        "饮料",
+        "喝的",
+        "drink",
+        "beverage"
+      ]
+    },
+    {
+      "id": "alcohol",
+      "title": "酒",
+      "group": "food",
+      "prompts": [
+        "a photo of alcoholic drinks",
+        "a glass of wine or beer"
+      ],
+      "aliases": [
+        "啤酒",
+        "红酒",
+        "酒",
+        "wine",
+        "beer"
+      ],
+      "threshold": 0.075
+    },
+    {
+      "id": "breakfast",
+      "title": "早餐",
+      "group": "food",
+      "threshold": 0.075,
+      "prompts": [
+        "a photo of breakfast",
+        "a breakfast table"
+      ],
+      "aliases": [
+        "早餐",
+        "早饭",
+        "breakfast"
+      ]
+    },
+    {
+      "id": "snacks",
+      "title": "零食",
+      "group": "food",
+      "threshold": 0.075,
+      "prompts": [
+        "a photo of snacks",
+        "packaged snacks"
+      ],
+      "aliases": [
+        "零食",
+        "小吃",
+        "snacks"
+      ]
+    },
+    {
+      "id": "smartphone",
+      "title": "手机",
+      "group": "object",
+      "prompts": [
+        "a photo of a smartphone",
+        "a close-up of a mobile phone"
+      ],
+      "aliases": [
+        "电话",
+        "手机",
+        "smartphone",
+        "phone"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "computer",
+      "title": "电脑",
+      "group": "object",
+      "prompts": [
+        "a photo of a computer",
+        "a laptop on a desk"
+      ],
+      "aliases": [
+        "笔记本",
+        "电脑",
+        "computer",
+        "laptop"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "camera",
+      "title": "相机",
+      "group": "object",
+      "prompts": [
+        "a photo of a camera",
+        "a mirrorless camera"
+      ],
+      "aliases": [
+        "单反",
+        "微单",
+        "相机",
+        "camera"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "headphones",
+      "title": "耳机",
+      "group": "object",
+      "prompts": [
+        "a photo of headphones",
+        "a pair of headphones"
+      ],
+      "aliases": [
+        "耳机",
+        "headphones",
+        "earphones"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "book",
+      "title": "书本",
+      "group": "object",
+      "prompts": [
+        "a photo of a book",
+        "an open book"
+      ],
+      "aliases": [
+        "书",
+        "书本",
+        "book"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "toy",
+      "title": "玩具",
+      "group": "object",
+      "threshold": 0.08,
+      "prompts": [
+        "a photo of toys",
+        "children's toys"
+      ],
+      "aliases": [
+        "玩具",
+        "toys"
+      ]
+    },
+    {
+      "id": "bouquet",
+      "title": "花束",
+      "group": "object",
+      "prompts": [
+        "a photo of a flower bouquet",
+        "a wrapped bouquet of flowers"
+      ],
+      "aliases": [
+        "花束",
+        "bouquet"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "gift",
+      "title": "礼物",
+      "group": "object",
+      "prompts": [
+        "a photo of a gift box",
+        "a wrapped present"
+      ],
+      "aliases": [
+        "礼盒",
+        "礼物",
+        "gift",
+        "present"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "furniture",
+      "title": "家具",
+      "group": "object",
+      "threshold": 0.08,
+      "prompts": [
+        "a photo of furniture",
+        "furniture in a room"
+      ],
+      "aliases": [
+        "家具",
+        "furniture"
+      ]
+    },
+    {
+      "id": "tableware",
+      "title": "餐具",
+      "group": "object",
+      "prompts": [
+        "a photo of tableware",
+        "plates and bowls on a table"
+      ],
+      "aliases": [
+        "碗筷",
+        "餐具",
+        "tableware"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "bottle",
+      "title": "瓶子",
+      "group": "object",
+      "prompts": [
+        "a photo of a bottle",
+        "a glass bottle"
+      ],
+      "aliases": [
+        "瓶子",
+        "bottle"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "cup",
+      "title": "杯子",
+      "group": "object",
+      "prompts": [
+        "a photo of a cup",
+        "a mug on a table"
+      ],
+      "aliases": [
+        "水杯",
+        "杯子",
+        "cup",
+        "mug"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "handbag",
+      "title": "包包",
+      "group": "object",
+      "prompts": [
+        "a photo of a handbag",
+        "a stylish bag"
+      ],
+      "aliases": [
+        "背包",
+        "包",
+        "包包",
+        "handbag",
+        "bag"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "shoes",
+      "title": "鞋子",
+      "group": "object",
+      "prompts": [
+        "a photo of shoes",
+        "a pair of shoes"
+      ],
+      "aliases": [
+        "鞋",
+        "鞋子",
+        "shoes"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "clothing",
+      "title": "衣服",
+      "group": "object",
+      "threshold": 0.08,
+      "prompts": [
+        "a photo of clothing",
+        "clothes on a hanger"
+      ],
+      "aliases": [
+        "服装",
+        "衣服",
+        "clothing",
+        "clothes"
+      ]
+    },
+    {
+      "id": "jewelry",
+      "title": "珠宝",
+      "group": "object",
+      "prompts": [
+        "a close-up photo of jewelry",
+        "rings and necklaces"
+      ],
+      "aliases": [
+        "首饰",
+        "珠宝",
+        "jewelry"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "instrument",
+      "title": "乐器",
+      "group": "object",
+      "threshold": 0.08,
+      "prompts": [
+        "a photo of a musical instrument",
+        "instruments on a stage"
+      ],
+      "aliases": [
+        "乐器",
+        "instrument"
+      ]
+    },
+    {
+      "id": "guitar",
+      "title": "吉他",
+      "group": "object",
+      "prompts": [
+        "a photo of a guitar",
+        "someone playing a guitar"
+      ],
+      "aliases": [
+        "吉他",
+        "guitar"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "piano",
+      "title": "钢琴",
+      "group": "object",
+      "prompts": [
+        "a photo of a piano",
+        "someone playing the piano"
+      ],
+      "aliases": [
+        "钢琴",
+        "piano"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "sports_equipment",
+      "title": "运动器材",
+      "group": "object",
+      "threshold": 0.08,
+      "prompts": [
+        "a photo of sports equipment",
+        "fitness equipment"
+      ],
+      "aliases": [
+        "运动器材",
+        "健身器材",
+        "sports equipment"
+      ]
+    },
+    {
+      "id": "umbrella",
+      "title": "雨伞",
+      "group": "object",
+      "prompts": [
+        "a photo of an umbrella",
+        "an open umbrella"
+      ],
+      "aliases": [
+        "雨伞",
+        "伞",
+        "umbrella"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "watch",
+      "title": "手表",
+      "group": "object",
+      "prompts": [
+        "a close-up photo of a watch",
+        "a wristwatch"
+      ],
+      "aliases": [
+        "手表",
+        "腕表",
+        "watch"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "glasses",
+      "title": "眼镜",
+      "group": "object",
+      "prompts": [
+        "a photo of eyeglasses",
+        "a person wearing glasses"
+      ],
+      "aliases": [
+        "眼镜",
+        "glasses"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "candle",
+      "title": "蜡烛",
+      "group": "object",
+      "prompts": [
+        "a photo of candles",
+        "lit candles"
+      ],
+      "aliases": [
+        "蜡烛",
+        "candle"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "balloon",
+      "title": "气球",
+      "group": "object",
+      "prompts": [
+        "a photo of balloons",
+        "colorful party balloons"
+      ],
+      "aliases": [
+        "气球",
+        "balloon"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "flag",
+      "title": "旗帜",
+      "group": "object",
+      "prompts": [
+        "a photo of a flag",
+        "a flag waving"
+      ],
+      "aliases": [
+        "旗帜",
+        "国旗",
+        "flag"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "bicycle",
+      "title": "自行车",
+      "group": "transport",
+      "prompts": [
+        "a photo of a bicycle",
+        "a bike on the street"
+      ],
+      "aliases": [
+        "单车",
+        "自行车",
+        "bicycle",
+        "bike"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "car",
+      "title": "汽车",
+      "group": "transport",
+      "prompts": [
+        "a photo of a car",
+        "a car on the road"
+      ],
+      "aliases": [
+        "轿车",
+        "汽车",
+        "车",
+        "car"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "motorcycle",
+      "title": "摩托车",
+      "group": "transport",
+      "prompts": [
+        "a photo of a motorcycle",
+        "a motorbike on the road"
+      ],
+      "aliases": [
+        "摩托车",
+        "机车",
+        "motorcycle"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "boat",
+      "title": "船",
+      "group": "transport",
+      "prompts": [
+        "a photo of a boat",
+        "a boat on the water"
+      ],
+      "aliases": [
+        "轮船",
+        "游船",
+        "船",
+        "boat",
+        "ship"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "airplane",
+      "title": "飞机",
+      "group": "transport",
+      "prompts": [
+        "a photo of an airplane",
+        "an airplane in the sky"
+      ],
+      "aliases": [
+        "飞机",
+        "airplane",
+        "plane"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "train",
+      "title": "火车",
+      "group": "transport",
+      "prompts": [
+        "a photo of a train",
+        "a train on the tracks"
+      ],
+      "aliases": [
+        "火车",
+        "列车",
+        "train"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "bus",
+      "title": "公交车",
+      "group": "transport",
+      "prompts": [
+        "a photo of a bus",
+        "a city bus"
+      ],
+      "aliases": [
+        "公交车",
+        "巴士",
+        "bus"
+      ],
+      "threshold": 0.08
+    },
+    {
+      "id": "sports",
+      "title": "运动",
+      "group": "activity",
+      "threshold": 0.07,
+      "prompts": [
+        "a photo of people doing sports",
+        "a sports activity"
+      ],
+      "aliases": [
+        "运动",
+        "体育",
+        "sports"
+      ]
+    },
+    {
+      "id": "running",
+      "title": "跑步",
+      "group": "activity",
+      "prompts": [
+        "a person running",
+        "running on a road or track"
+      ],
+      "aliases": [
+        "跑步",
+        "奔跑",
+        "running"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "cycling",
+      "title": "骑行",
+      "group": "activity",
+      "prompts": [
+        "a person riding a bicycle",
+        "cycling outdoors"
+      ],
+      "aliases": [
+        "骑车",
+        "骑行",
+        "cycling"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "swimming",
+      "title": "游泳",
+      "group": "activity",
+      "prompts": [
+        "a person swimming",
+        "swimming in a pool or sea"
+      ],
+      "aliases": [
+        "游泳",
+        "swimming"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "hiking",
+      "title": "登山",
+      "group": "activity",
+      "prompts": [
+        "people hiking on a mountain trail",
+        "hiking outdoors"
+      ],
+      "aliases": [
+        "徒步",
+        "爬山",
+        "登山",
+        "hiking"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "camping",
+      "title": "露营",
+      "group": "activity",
+      "prompts": [
+        "a camping scene with a tent",
+        "people camping outdoors"
+      ],
+      "aliases": [
+        "露营",
+        "帐篷",
+        "camping"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "picnic",
+      "title": "野餐",
+      "group": "activity",
+      "prompts": [
+        "a picnic outdoors",
+        "a picnic blanket with food"
+      ],
+      "aliases": [
+        "野餐",
+        "picnic"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "fishing",
+      "title": "钓鱼",
+      "group": "activity",
+      "prompts": [
+        "a person fishing",
+        "fishing by the water"
+      ],
+      "aliases": [
+        "钓鱼",
+        "fishing"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "skiing",
+      "title": "滑雪",
+      "group": "activity",
+      "prompts": [
+        "a person skiing",
+        "skiing on a snowy slope"
+      ],
+      "aliases": [
+        "滑雪",
+        "skiing"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "party",
+      "title": "派对",
+      "group": "activity",
+      "prompts": [
+        "a party with people celebrating",
+        "a birthday party"
+      ],
+      "aliases": [
+        "聚会",
+        "派对",
+        "party"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "festival",
+      "title": "节日庆祝",
+      "group": "activity",
+      "prompts": [
+        "a festival celebration",
+        "people celebrating a holiday"
+      ],
+      "aliases": [
+        "节日",
+        "庆祝",
+        "festival"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "graduation",
+      "title": "毕业典礼",
+      "group": "activity",
+      "prompts": [
+        "a graduation ceremony",
+        "graduates in gowns"
+      ],
+      "aliases": [
+        "毕业",
+        "毕业典礼",
+        "graduation"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "travel",
+      "title": "旅游",
+      "group": "activity",
+      "threshold": 0.07,
+      "prompts": [
+        "a travel photo of a tourist",
+        "people sightseeing"
+      ],
+      "aliases": [
+        "旅行",
+        "旅游",
+        "travel"
+      ]
+    },
+    {
+      "id": "shopping",
+      "title": "购物",
+      "group": "activity",
+      "prompts": [
+        "people shopping",
+        "a shopping scene"
+      ],
+      "aliases": [
+        "购物",
+        "逛街",
+        "shopping"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "reading",
+      "title": "阅读",
+      "group": "activity",
+      "prompts": [
+        "a person reading a book",
+        "reading a book or newspaper"
+      ],
+      "aliases": [
+        "阅读",
+        "看书",
+        "reading"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "cooking",
+      "title": "做饭",
+      "group": "activity",
+      "prompts": [
+        "a person cooking in a kitchen",
+        "cooking food"
+      ],
+      "aliases": [
+        "做饭",
+        "烹饪",
+        "cooking"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "painting",
+      "title": "绘画",
+      "group": "activity",
+      "prompts": [
+        "a person painting",
+        "painting with brushes"
+      ],
+      "aliases": [
+        "画画",
+        "绘画",
+        "painting"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "dancing",
+      "title": "舞蹈",
+      "group": "activity",
+      "prompts": [
+        "people dancing",
+        "a dance performance"
+      ],
+      "aliases": [
+        "舞蹈",
+        "跳舞",
+        "dancing"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "meeting",
+      "title": "会议",
+      "group": "activity",
+      "prompts": [
+        "a business meeting",
+        "people in a meeting room"
+      ],
+      "aliases": [
+        "开会",
+        "会议",
+        "meeting"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "presentation",
+      "title": "演讲",
+      "group": "activity",
+      "prompts": [
+        "a person giving a presentation",
+        "a speaker on stage"
+      ],
+      "aliases": [
+        "演讲",
+        "分享会",
+        "presentation"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "document",
+      "title": "文档",
+      "group": "doc",
+      "threshold": 0.08,
+      "prompts": [
+        "a photo of a document",
+        "a page of printed text"
+      ],
+      "aliases": [
+        "文件",
+        "文档",
+        "document"
+      ]
+    },
+    {
+      "id": "receipt",
+      "title": "票据",
+      "group": "doc",
+      "threshold": 0.095,
+      "prompts": [
+        "a photo of a receipt or invoice",
+        "a printed bill"
+      ],
+      "aliases": [
+        "发票",
+        "收据",
+        "小票",
+        "票据",
+        "receipt",
+        "invoice"
+      ]
+    },
+    {
+      "id": "id_document",
+      "title": "证件",
+      "group": "doc",
+      "threshold": 0.1,
+      "prompts": [
+        "a photo of an ID card or passport",
+        "an official identity document"
+      ],
+      "aliases": [
+        "身份证",
+        "护照",
+        "驾照",
+        "证件",
+        "id card",
+        "passport"
+      ]
+    },
+    {
+      "id": "id_photo",
+      "title": "证件照",
+      "group": "doc",
+      "threshold": 0.115,
+      "prompts": [
+        "a formal ID photo of a person",
+        "a passport style photo"
+      ],
+      "aliases": [
+        "证件照",
+        "id photo"
+      ]
+    },
+    {
+      "id": "qr_code",
+      "title": "二维码",
+      "group": "doc",
+      "threshold": 0.1,
+      "prompts": [
+        "a photo of a QR code",
+        "a QR code on a screen or paper"
+      ],
+      "aliases": [
+        "二维码",
+        "qr code",
+        "qrcode"
+      ]
+    },
+    {
+      "id": "barcode",
+      "title": "条码",
+      "group": "doc",
+      "threshold": 0.1,
+      "prompts": [
+        "a photo of a barcode",
+        "a product barcode"
+      ],
+      "aliases": [
+        "条形码",
+        "条码",
+        "barcode"
+      ]
+    },
+    {
+      "id": "whiteboard",
+      "title": "白板",
+      "group": "doc",
+      "prompts": [
+        "a photo of a whiteboard",
+        "writing on a whiteboard"
+      ],
+      "aliases": [
+        "白板",
+        "whiteboard"
+      ],
+      "threshold": 0.095
+    },
+    {
+      "id": "screenshot",
+      "title": "截图",
+      "group": "doc",
+      "threshold": 0.095,
+      "prompts": [
+        "a smartphone screenshot",
+        "a computer screen capture"
+      ],
+      "aliases": [
+        "屏幕截图",
+        "截图",
+        "screenshot"
+      ]
+    },
+    {
+      "id": "business_card",
+      "title": "名片",
+      "group": "doc",
+      "prompts": [
+        "a photo of a business card",
+        "a printed name card"
+      ],
+      "aliases": [
+        "名片",
+        "business card"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "menu",
+      "title": "菜单",
+      "group": "doc",
+      "prompts": [
+        "a photo of a menu",
+        "a restaurant menu"
+      ],
+      "aliases": [
+        "菜单",
+        "menu"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "poster",
+      "title": "海报",
+      "group": "doc",
+      "prompts": [
+        "a photo of a poster",
+        "a printed poster on a wall"
+      ],
+      "aliases": [
+        "海报",
+        "poster"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "book_page",
+      "title": "书页",
+      "group": "doc",
+      "prompts": [
+        "a photo of a book page",
+        "text on a book page"
+      ],
+      "aliases": [
+        "书页",
+        "书页内容",
+        "book page"
+      ],
+      "threshold": 0.085
+    },
+    {
+      "id": "bw_photo",
+      "title": "黑白照片",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "a black and white photograph",
+        "a monochrome photo"
+      ],
+      "aliases": [
+        "黑白",
+        "黑白照片",
+        "black and white"
+      ]
+    },
+    {
+      "id": "vintage",
+      "title": "复古照片",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "a vintage style photograph",
+        "a retro photo with faded colors"
+      ],
+      "aliases": [
+        "复古",
+        "怀旧",
+        "vintage",
+        "retro"
+      ]
+    },
+    {
+      "id": "film",
+      "title": "胶片质感",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "a film photograph with grain",
+        "analog film look"
+      ],
+      "aliases": [
+        "胶片",
+        "film"
+      ]
+    },
+    {
+      "id": "backlit",
+      "title": "逆光",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "a backlit photograph with strong light behind",
+        "a photo with lens flare and backlight"
+      ],
+      "aliases": [
+        "逆光",
+        "backlit"
+      ]
+    },
+    {
+      "id": "low_light",
+      "title": "低光照片",
+      "group": "style",
+      "threshold": 0.09,
+      "prompts": [
+        "a low light photograph taken at night",
+        "a dimly lit photo"
+      ],
+      "aliases": [
+        "暗光",
+        "低光",
+        "low light"
+      ]
+    },
+    {
+      "id": "macro",
+      "title": "微距",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "a macro photograph with extreme close-up detail",
+        "a macro shot of a small subject"
+      ],
+      "aliases": [
+        "微距",
+        "特写",
+        "macro"
+      ]
+    },
+    {
+      "id": "aerial",
+      "title": "航拍",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "an aerial photograph from above",
+        "a drone photo looking down"
+      ],
+      "aliases": [
+        "航拍",
+        "无人机",
+        "aerial",
+        "drone"
+      ]
+    },
+    {
+      "id": "long_exposure",
+      "title": "长曝光",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "a long exposure photograph with motion blur",
+        "light trails from a long exposure"
+      ],
+      "aliases": [
+        "长曝光",
+        "慢门",
+        "long exposure"
+      ]
+    },
+    {
+      "id": "panorama",
+      "title": "全景照片",
+      "group": "style",
+      "threshold": 0.09,
+      "prompts": [
+        "a panoramic landscape photograph",
+        "a wide panorama photo"
+      ],
+      "aliases": [
+        "全景",
+        "panorama"
+      ]
+    },
+    {
+      "id": "motion_blur",
+      "title": "动态模糊",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "a photo with motion blur",
+        "moving subjects blurred"
+      ],
+      "aliases": [
+        "动态模糊",
+        "motion blur"
+      ]
+    },
+    {
+      "id": "high_contrast",
+      "title": "高对比",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "a high contrast photograph",
+        "a photo with strong shadows and highlights"
+      ],
+      "aliases": [
+        "高对比",
+        "high contrast"
+      ]
+    },
+    {
+      "id": "soft_focus",
+      "title": "柔焦",
+      "group": "style",
+      "threshold": 0.1,
+      "prompts": [
+        "a soft focus photograph",
+        "a dreamy soft focus photo"
+      ],
+      "aliases": [
+        "柔焦",
+        "soft focus"
+      ]
+    }
+  ]
+}

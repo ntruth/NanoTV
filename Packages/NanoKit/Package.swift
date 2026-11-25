@@ -59,10 +59,13 @@ let package = Package(
             name: "NanoLiveTV",
             dependencies: ["NanoCore"]
         ),
-        // 5. 远程网络资源聚合引擎（苹果CMS JSON + TVBox/FongMi订阅 + 自定义网页爬虫规则）
+        // 5. 远程网络资源聚合引擎（苹果CMS JSON + TVBox/FongMi订阅 + 自定义网页爬虫规则 + Luma 预置片源包）
         .target(
             name: "NanoRemoteHub",
-            dependencies: ["NanoCore"]
+            dependencies: ["NanoCore"],
+            resources: [
+                .process("Resources")
+            ]
         ),
         // 6. 高解析度音乐中心（无损元数据、整轨 CUE 分轨器、LRC 逐字/逐行歌词引擎）
         .target(

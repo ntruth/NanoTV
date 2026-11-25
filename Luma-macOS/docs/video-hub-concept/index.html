@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luma · 视频页概念稿</title>
+<style>
+  :root {
+    --bg: #07080c;
+    --panel: rgba(20, 22, 30, .72);
+    --stroke: rgba(255, 255, 255, .09);
+    --stroke-soft: rgba(255, 255, 255, .055);
+    --text: #f4f5f9;
+    --muted: rgba(236, 239, 248, .62);
+    --dim: rgba(236, 239, 248, .36);
+    --violet: #8f7cff;
+    --cyan: #5fd4ff;
+    --warm: #ffb35c;
+    --radius: 18px;
+
+    --hero: url("assets/07.jpg");
+    --i1: url("assets/04.jpg");
+    --i2: url("assets/06.jpg");
+    --i3: url("assets/05.jpg");
+    --i4: url("assets/08.jpg");
+    --i5: url("assets/02.jpg");
+    --i6: url("assets/01.jpg");
+    --i7: url("assets/10.jpg");
+    --i8: url("assets/07.jpg");
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" 1;
+  }
+
+  .page { padding: 34px 28px 80px; }
+  .concept-head {
+    max-width: 1460px; margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    color: var(--dim); font-size: 12px; letter-spacing: .08em;
+  }
+  .concept-head strong { color: var(--text); font-weight: 600; letter-spacing: .02em; }
+  .concept-tags { display: flex; gap: 8px; }
+  .concept-tags span {
+    padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--stroke-soft); background: rgba(255,255,255,.03);
+    font-size: 11px; letter-spacing: .04em;
+  }
+
+  /* ── App window ───────────────────────────────────────────── */
+  .window {
+    max-width: 1460px; margin: 0 auto; height: 920px;
+    display: flex; position: relative; overflow: hidden;
+    border-radius: 20px; border: 1px solid rgba(255,255,255,.10);
+    background: #0a0b10;
+    box-shadow: 0 50px 120px -30px rgba(0,0,0,.9),
+                0 0 0 1px rgba(0,0,0,.6),
+                0 30px 90px -60px rgba(143,124,255,.55);
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 234px; flex: none; padding: 14px 12px 16px;
+    background: linear-gradient(180deg, rgba(26,28,38,.82), rgba(16,18,25,.86));
+    backdrop-filter: blur(30px);
+    border-right: 1px solid var(--stroke-soft);
+    display: flex; flex-direction: column; gap: 2px;
+    position: relative; z-index: 3;
+  }
+  .traffic { display: flex; gap: 7px; padding: 2px 4px 16px; }
+  .traffic i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+  .traffic i:nth-child(1) { background: #ff5f57; }
+  .traffic i:nth-child(2) { background: #febc2e; }
+  .traffic i:nth-child(3) { background: #28c840; }
+
+  .lib-name {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 8px 12px; font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,.92);
+  }
+  .lib-name .dot {
+    width: 18px; height: 18px; border-radius: 5px;
+    background: linear-gradient(135deg, var(--violet), var(--cyan));
+    box-shadow: 0 2px 8px rgba(143,124,255,.35);
+  }
+
+  .nav-label {
+    padding: 14px 9px 6px; font-size: 10.5px; font-weight: 600;
+    letter-spacing: .10em; color: var(--dim);
+  }
+  .nav-row {
+    display: flex; align-items: center; gap: 9px;
+    padding: 6px 9px; border-radius: 8px;
+    font-size: 12.5px; color: var(--muted);
+    cursor: default; position: relative;
+  }
+  .nav-row .ic { width: 17px; text-align: center; font-size: 13px; opacity: .9; }
+  .nav-row:hover { background: rgba(255,255,255,.045); }
+  .nav-row.active {
+    color: #fff;
+    background: linear-gradient(100deg, rgba(143,124,255,.34), rgba(95,212,255,.14));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  .nav-row.active::before {
+    content: ""; position: absolute; left: -12px; top: 7px; bottom: 7px;
+    width: 3px; border-radius: 0 3px 3px 0;
+    background: linear-gradient(180deg, var(--violet), var(--cyan));
+  }
+  .nav-count { margin-left: auto; font-size: 10.5px; color: var(--dim); }
+  .sidebar-foot {
+    margin-top: auto; padding: 12px 9px 0; border-top: 1px solid var(--stroke-soft);
+    font-size: 10.5px; color: var(--dim); line-height: 1.7;
+  }
+
+  /* Main */
+  .main { flex: 1; min-width: 0; position: relative; overflow: hidden; }
+  .ambient { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .ambient ::before, .ambient ::after { content: ""; position: absolute; border-radius: 50%; filter: blur(90px); }
+  .glow-a {
+    position: absolute; width: 620px; height: 620px; right: -140px; top: -260px;
+    background: radial-gradient(circle, rgba(143,124,255,.30), transparent 68%);
+  }
+  .glow-b {
+    position: absolute; width: 520px; height: 520px; left: -180px; bottom: -240px;
+    background: radial-gradient(circle, rgba(95,212,255,.16), transparent 70%);
+  }
+  .noise {
+    position: absolute; inset: 0; opacity: .035; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .toolbar {
+    position: relative; z-index: 4; height: 54px;
+    display: flex; align-items: center; gap: 14px; padding: 0 24px;
+    border-bottom: 1px solid var(--stroke-soft);
+    background: linear-gradient(180deg, rgba(13,14,20,.86), rgba(13,14,20,.44));
+    backdrop-filter: blur(22px);
+  }
+  .toolbar h1 { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: .01em; }
+  .toolbar .sub { font-size: 11px; color: var(--dim); }
+  .toolbar .spacer { flex: 1; }
+
+  .seg {
+    display: flex; padding: 3px; gap: 2px; border-radius: 9px;
+    background: rgba(255,255,255,.055); border: 1px solid var(--stroke-soft);
+  }
+  .seg span {
+    padding: 4px 10px; border-radius: 7px; font-size: 11px; color: var(--muted);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .seg span.on {
+    background: rgba(255,255,255,.13); color: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  .zoom { display: flex; align-items: center; gap: 7px; color: var(--dim); font-size: 12px; }
+  .zoom .track { width: 76px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.12); position: relative; }
+  .zoom .track i {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 58%; border-radius: 3px;
+    background: rgba(255,255,255,.55);
+  }
+  .zoom .track b {
+    position: absolute; left: 58%; top: 50%; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px;
+    border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5);
+  }
+  .icon-btn {
+    width: 28px; height: 24px; display: grid; place-items: center;
+    border-radius: 7px; color: var(--muted); font-size: 13px;
+  }
+  .icon-btn:hover { background: rgba(255,255,255,.07); color: #fff; }
+
+  .scroll { position: absolute; inset: 54px 0 0; overflow-y: auto; overflow-x: hidden; }
+  .scroll::-webkit-scrollbar { width: 10px; }
+  .scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.10); border-radius: 10px; border: 3px solid transparent; background-clip: padding-box; }
+  .scroll::-webkit-scrollbar-track { background: transparent; }
+
+  .content { position: relative; z-index: 2; padding: 22px 26px 64px; }
+
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .hero {
+    position: relative; height: 356px; border-radius: 24px; overflow: hidden;
+    background: #14151c;
+    box-shadow: 0 36px 80px -34px rgba(255,150,90,.35),
+                0 0 0 1px rgba(255,255,255,.10);
+  }
+  .hero-bg {
+    position: absolute; inset: -2%;
+    background-image: var(--hero); background-size: cover; background-position: center 42%;
+    transform: scale(1.03);
+  }
+  .hero-shade {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(7,8,12,.92) 0%, rgba(7,8,12,.66) 34%, rgba(7,8,12,.12) 66%, rgba(7,8,12,.10) 100%),
+      linear-gradient(0deg, rgba(7,8,12,.88) 0%, rgba(7,8,12,.24) 42%, transparent 68%);
+  }
+  .hero-top {
+    position: absolute; top: 18px; left: 20px; right: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 5px 11px 5px 9px; border-radius: 999px;
+    background: rgba(12,13,18,.52); backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,.18);
+    font-size: 11px; letter-spacing: .04em; color: rgba(255,255,255,.9);
+  }
+  .live-badge i {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--warm);
+    box-shadow: 0 0 0 4px rgba(255,179,92,.16);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .42; } }
+  .hero-top .right { margin-left: auto; display: flex; gap: 8px; }
+  .glass-mini {
+    padding: 5px 10px; border-radius: 999px; font-size: 10.5px; letter-spacing: .05em;
+    color: rgba(255,255,255,.82); background: rgba(12,13,18,.46);
+    border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(14px);
+  }
+
+  .hero-bottom {
+    position: absolute; left: 28px; right: 26px; bottom: 24px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
+  }
+  .hero-copy { max-width: 58%; }
+  .eyebrow {
+    font-size: 10.5px; letter-spacing: .14em; color: rgba(255,255,255,.56);
+    text-transform: uppercase; margin-bottom: 9px;
+  }
+  .hero h2 {
+    margin: 0 0 12px; font-size: 34px; line-height: 1.1; font-weight: 650;
+    letter-spacing: -.02em; text-shadow: 0 2px 24px rgba(0,0,0,.35);
+  }
+  .hero-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+  .chip {
+    padding: 4px 9px; border-radius: 6px; font-size: 10.5px; letter-spacing: .03em;
+    color: rgba(255,255,255,.78); background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.12);
+  }
+  .chip.warm { color: #ffd9a8; background: rgba(255,179,92,.14); border-color: rgba(255,179,92,.28); }
+
+  .hero-actions { display: flex; align-items: center; gap: 14px; }
+  .play-lg {
+    width: 52px; height: 52px; border-radius: 50%; border: 0; cursor: pointer;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,.92); color: #0a0b10; font-size: 16px;
+    box-shadow: 0 10px 30px -8px rgba(0,0,0,.6), inset 0 -1px 0 rgba(0,0,0,.14);
+    transition: transform .22s cubic-bezier(.2,.8,.2,1), background .22s;
+  }
+  .play-lg:hover { transform: scale(1.06); background: #fff; }
+  .resume { min-width: 190px; }
+  .resume-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 11px; color: rgba(255,255,255,.78); margin-bottom: 7px;
+  }
+  .resume-label span { font-size: 10px; color: rgba(255,255,255,.52); font-variant-numeric: tabular-nums; }
+  .bar { height: 3px; border-radius: 3px; background: rgba(255,255,255,.18); overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #fff, rgba(255,255,255,.7)); }
+
+  .info-panel {
+    width: 224px; flex: none; padding: 14px 15px 12px;
+    border-radius: 16px;
+    background: rgba(14,15,21,.52);
+    border: 1px solid rgba(255,255,255,.13);
+    backdrop-filter: blur(24px) saturate(130%);
+    box-shadow: 0 16px 40px -18px rgba(0,0,0,.7);
+  }
+  .info-title {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 10.5px; letter-spacing: .12em; color: rgba(255,255,255,.48);
+    padding-bottom: 10px; margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,.09);
+  }
+  .info-title b {
+    width: 14px; height: 14px; border-radius: 50%; display: grid; place-items: center;
+    font-size: 9px; font-weight: 600; color: rgba(255,255,255,.6);
+    border: 1px solid rgba(255,255,255,.22);
+  }
+  .info-row {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 7px 0; font-size: 11px;
+  }
+  .info-row span { color: rgba(255,255,255,.42); }
+  .info-row strong { font-weight: 500; color: rgba(255,255,255,.88); font-variant-numeric: tabular-nums; }
+
+  /* ── Stats ────────────────────────────────────────────────── */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0 22px; }
+  .stat {
+    padding: 13px 15px 12px; border-radius: 14px;
+    background: linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+    border: 1px solid var(--stroke-soft);
+    position: relative; overflow: hidden;
+  }
+  .stat::after {
+    content: ""; position: absolute; right: -22px; bottom: -30px;
+    width: 90px; height: 90px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(143,124,255,.12), transparent 70%);
+  }
+  .stat label { display: block; font-size: 10.5px; color: var(--dim); margin-bottom: 6px; letter-spacing: .04em; }
+  .stat strong {
+    font-size: 21px; font-weight: 600; letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat strong em { font-style: normal; font-size: 11px; font-weight: 500; color: var(--muted); margin-left: 3px; }
+  .stat small { display: block; margin-top: 4px; font-size: 10px; color: var(--dim); }
+  .stat small b { color: #8fe3b0; font-weight: 500; }
+
+  /* ── Dimension chips ──────────────────────────────────────── */
+  .dims { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
+  .dims .label { font-size: 10.5px; letter-spacing: .12em; color: var(--dim); margin-right: 4px; }
+  .dim {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border-radius: 999px; font-size: 11.5px;
+    color: var(--muted); background: rgba(255,255,255,.045);
+    border: 1px solid var(--stroke-soft); cursor: default;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .dim:hover { background: rgba(255,255,255,.08); color: #fff; }
+  .dim b { font-size: 10px; font-weight: 500; color: var(--dim); font-variant-numeric: tabular-nums; }
+  .dim.on {
+    color: #fff; border-color: rgba(143,124,255,.55);
+    background: linear-gradient(100deg, rgba(143,124,255,.26), rgba(95,212,255,.13));
+    box-shadow: 0 6px 20px -10px rgba(143,124,255,.8), inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  .dim.on b { color: rgba(255,255,255,.62); }
+
+  /* ── Shelves ──────────────────────────────────────────────── */
+  .shelf { margin-bottom: 26px; }
+  .shelf-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 11px; }
+  .shelf-head h3 { margin: 0; font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; }
+  .shelf-head .note { font-size: 10.5px; color: var(--dim); }
+  .shelf-head .more {
+    margin-left: auto; font-size: 11px; color: var(--muted);
+    display: flex; align-items: center; gap: 3px;
+  }
+  .shelf-head .more:hover { color: #fff; }
+  .row {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 226px; gap: 14px;
+    overflow-x: auto; padding: 2px 2px 10px; margin: -2px -2px -10px;
+    scrollbar-width: none;
+  }
+  .row::-webkit-scrollbar { display: none; }
+
+  .card { cursor: pointer; }
+  .card .thumb {
+    position: relative; aspect-ratio: 16 / 9; border-radius: 13px; overflow: hidden;
+    background: #171922 center/cover;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 14px 30px -22px rgba(0,0,0,.9);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s;
+  }
+  .card:hover .thumb {
+    transform: translateY(-4px) scale(1.018);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.16), 0 26px 46px -22px rgba(0,0,0,.9), 0 12px 40px -18px rgba(143,124,255,.5);
+  }
+  .thumb .img { position: absolute; inset: 0; background-size: cover; background-position: center; transform: scale(1.01); transition: transform 4s ease; filter: brightness(1.14) saturate(1.04); }
+  .card:hover .thumb .img { transform: scale(1.07); }
+  .thumb .scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(5,6,9,.72), transparent 46%);
+    opacity: .85;
+  }
+  .dur {
+    position: absolute; right: 8px; bottom: 8px; z-index: 2;
+    padding: 2px 6px; border-radius: 5px;
+    font-size: 10px; font-variant-numeric: tabular-nums; letter-spacing: .02em;
+    color: rgba(255,255,255,.94); background: rgba(8,9,13,.62);
+    border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(8px);
+  }
+  .tag {
+    position: absolute; left: 8px; top: 8px; z-index: 2;
+    padding: 2px 6px; border-radius: 5px; font-size: 9px; letter-spacing: .06em;
+    color: rgba(255,255,255,.8); background: rgba(8,9,13,.5);
+    border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(8px);
+  }
+  .card .hover {
+    position: absolute; inset: 0; z-index: 3;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px;
+    opacity: 0; transition: opacity .24s;
+    background: radial-gradient(circle at 50% 46%, rgba(8,9,13,.32), rgba(8,9,13,.06) 60%);
+  }
+  .card:hover .hover { opacity: 1; }
+  .play-sm {
+    width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(255,255,255,.92); color: #0a0b10; font-size: 12px;
+    box-shadow: 0 8px 24px -6px rgba(0,0,0,.7);
+    transform: scale(.9); transition: transform .24s;
+  }
+  .card:hover .play-sm { transform: scale(1); }
+  .hover .hint {
+    font-size: 9.5px; letter-spacing: .06em; color: rgba(255,255,255,.72);
+    padding: 3px 8px; border-radius: 999px;
+    background: rgba(8,9,13,.42); border: 1px solid rgba(255,255,255,.14);
+    backdrop-filter: blur(8px);
+  }
+  .card .meta { padding: 9px 2px 0; }
+  .card .title { font-size: 12px; font-weight: 500; letter-spacing: .01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card .sub { margin-top: 3px; font-size: 10.5px; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2.5px; background: rgba(255,255,255,.16); z-index: 3; }
+  .progress i { display: block; height: 100%; background: linear-gradient(90deg, var(--violet), var(--cyan)); }
+
+  /* ── Year group / wall ────────────────────────────────────── */
+  .group-head { display: flex; align-items: baseline; gap: 10px; margin: 30px 0 14px; }
+  .group-head h3 { margin: 0; font-size: 19px; font-weight: 650; letter-spacing: -.02em; }
+  .group-head span { font-size: 10.5px; color: var(--dim); }
+  .group-head .rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,.10), transparent); margin-left: 4px; }
+  .wall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px 16px; }
+  .wall .thumb { aspect-ratio: 4 / 3; border-radius: 12px; }
+
+  /* preview demo state */
+  .card.preview .hover { opacity: 1; background: radial-gradient(circle at 50% 40%, rgba(8,9,13,.18), rgba(8,9,13,.42)); }
+  .card.preview .play-sm { transform: scale(1); }
+  .scrub {
+    position: absolute; left: 10px; right: 10px; bottom: 30px; z-index: 4;
+    height: 3px; border-radius: 3px; background: rgba(255,255,255,.24);
+  }
+  .scrub i { display: block; width: 38%; height: 100%; border-radius: 3px; background: #fff; }
+  .scrub b {
+    position: absolute; left: 38%; top: 50%; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
+    border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5);
+  }
+
+  /* ── Design notes ─────────────────────────────────────────── */
+  .notes {
+    max-width: 1160px; margin: 84px auto 0;
+    display: grid; grid-template-columns: 300px 1fr; gap: 56px;
+  }
+  .notes-head { position: sticky; top: 32px; align-self: start; }
+  .notes-head .kicker { font-size: 10.5px; letter-spacing: .16em; color: var(--dim); margin-bottom: 12px; }
+  .notes-head h2 { margin: 0 0 14px; font-size: 32px; line-height: 1.16; font-weight: 650; letter-spacing: -.03em; }
+  .notes-head p { margin: 0; font-size: 13px; line-height: 1.85; color: var(--muted); }
+  .notes-head .rule {
+    width: 46px; height: 2px; margin: 22px 0;
+    background: linear-gradient(90deg, var(--violet), var(--cyan));
+  }
+  .refs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .refs span {
+    font-size: 10.5px; color: var(--muted); padding: 4px 9px; border-radius: 999px;
+    background: rgba(255,255,255,.04); border: 1px solid var(--stroke-soft);
+  }
+  .notes-list { display: flex; flex-direction: column; }
+  .note {
+    display: grid; grid-template-columns: 46px 1fr; gap: 18px;
+    padding: 24px 0; border-top: 1px solid var(--stroke-soft);
+  }
+  .note:first-child { border-top: 0; padding-top: 0; }
+  .note .num {
+    font-size: 11px; font-weight: 600; letter-spacing: .08em; color: var(--violet);
+    padding-top: 3px; font-variant-numeric: tabular-nums;
+  }
+  .note h4 { margin: 0 0 7px; font-size: 15.5px; font-weight: 600; letter-spacing: -.01em; }
+  .note p { margin: 0; font-size: 12.5px; line-height: 1.8; color: var(--muted); }
+  .note p b { color: rgba(255,255,255,.86); font-weight: 500; }
+  .note .small {
+    margin-top: 9px; font-size: 11px; color: var(--dim); line-height: 1.7;
+    padding-left: 11px; border-left: 1px solid rgba(143,124,255,.4);
+  }
+
+  @media (max-width: 1180px) {
+    .window { height: 860px; }
+    .sidebar { width: 200px; }
+    .hero { height: 320px; }
+    .hero-copy { max-width: 62%; }
+    .info-panel { width: 200px; }
+    .row { grid-auto-columns: 200px; }
+    .notes { grid-template-columns: 1fr; gap: 28px; }
+    .notes-head { position: static; }
+  }
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+  }
+  @media (max-width: 860px) {
+    .page { padding: 18px 12px 60px; }
+    .window { height: auto; }
+    .scroll { position: relative; inset: auto; overflow: visible; }
+    .main { overflow: visible; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .wall { grid-template-columns: repeat(2, 1fr); }
+    .info-panel { display: none; }
+    .hero-copy { max-width: 100%; }
+    .hero h2 { font-size: 27px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="concept-head">
+    <div><strong>Luma</strong> · 视频页概念稿 <span style="opacity:.55">/ v1</span></div>
+    <div class="concept-tags"><span>剧场式浏览</span><span>悬停预览</span><span>维度下钻</span></div>
+  </div>
+
+  <div class="window">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="traffic"><i></i><i></i><i></i></div>
+      <div class="lib-name"><span class="dot"></span>李佳龙图库</div>
+
+      <div class="nav-row"><span class="ic">▦</span>图库</div>
+      <div class="nav-row"><span class="ic">◫</span>精选集</div>
+
+      <div class="nav-label">固定</div>
+      <div class="nav-row"><span class="ic">♥</span>个人收藏<span class="nav-count">328</span></div>
+      <div class="nav-row"><span class="ic">◉</span>人物<span class="nav-count">24</span></div>
+      <div class="nav-row"><span class="ic">◈</span>地图</div>
+      <div class="nav-row"><span class="ic">⌖</span>位置<span class="nav-count">18</span></div>
+
+      <div class="nav-label">媒体类型</div>
+      <div class="nav-row active"><span class="ic">▶</span>视频<span class="nav-count">128</span></div>
+      <div class="nav-row"><span class="ic">◐</span>自拍</div>
+      <div class="nav-row"><span class="ic">◍</span>实况照片</div>
+      <div class="nav-row"><span class="ic">☺</span>人像</div>
+      <div class="nav-row"><span class="ic">▱</span>全景照片</div>
+      <div class="nav-row"><span class="ic">◔</span>延时摄影</div>
+      <div class="nav-row"><span class="ic">◌</span>慢动作</div>
+
+      <div class="sidebar-foot">128 段视频 · 4 小时 12 分<br>86.4 GB · 本地图库</div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="ambient"><div class="glow-a"></div><div class="glow-b"></div><div class="noise"></div></div>
+
+      <div class="toolbar">
+        <h1>视频</h1>
+        <span class="sub">128 段 · 2018—2026</span>
+        <div class="spacer"></div>
+        <div class="seg"><span class="on">▦ 海报墙</span><span>≡ 时间轴</span></div>
+        <div class="zoom"><span>−</span><span class="track"><i></i><b></b></span><span>＋</span></div>
+        <div class="icon-btn">⌕</div>
+        <div class="icon-btn">↕</div>
+      </div>
+
+      <div class="scroll">
+        <div class="content">
+
+          <!-- Hero -->
+          <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-shade"></div>
+            <div class="hero-top">
+              <span class="live-badge"><i></i>最近放映</span>
+              <div class="right">
+                <span class="glass-mini">4K · HDR</span>
+                <span class="glass-mini">已收藏</span>
+              </div>
+            </div>
+            <div class="hero-bottom">
+              <div class="hero-copy">
+                <div class="eyebrow">2026年8月12日 · 青岛 · 石老人海水浴场</div>
+                <h2>海边的傍晚</h2>
+                <div class="hero-chips">
+                  <span class="chip">0:42</span>
+                  <span class="chip">3840 × 2160</span>
+                  <span class="chip">60 fps</span>
+                  <span class="chip warm">HEVC</span>
+                </div>
+                <div class="hero-actions">
+                  <button class="play-lg">▶</button>
+                  <div class="resume">
+                    <div class="resume-label">继续播放 <span>0:18 / 0:42</span></div>
+                    <div class="bar"><i style="width:43%"></i></div>
+                  </div>
+                </div>
+              </div>
+              <aside class="info-panel">
+                <div class="info-title">影像信息 <b>i</b></div>
+                <div class="info-row"><span>设备</span><strong>iPhone 16 Pro</strong></div>
+                <div class="info-row"><span>编码</span><strong>HEVC · 10-bit</strong></div>
+                <div class="info-row"><span>大小</span><strong>218 MB</strong></div>
+                <div class="info-row"><span>声音</span><strong>AAC · 立体声</strong></div>
+              </aside>
+            </div>
+          </section>
+
+          <!-- Stats -->
+          <section class="stats">
+            <div class="stat"><label>视频总数</label><strong>128<em>段</em></strong><small>其中 23 段已收藏</small></div>
+            <div class="stat"><label>总时长</label><strong>4<em>h</em> 12<em>m</em></strong><small>平均每段 1 分 58 秒</small></div>
+            <div class="stat"><label>本月新增</label><strong>+9<em>段</em></strong><small><b>↑ 3</b> 较上月</small></div>
+            <div class="stat"><label>最长影像</label><strong>12<em>m</em> 40<em>s</em></strong><small>2024 · 毕业典礼</small></div>
+          </section>
+
+          <!-- Dimension chips -->
+          <div class="dims">
+            <span class="label">视角</span>
+            <span class="dim on">精选 <b>128</b></span>
+            <span class="dim">年份 <b>8</b></span>
+            <span class="dim">时长 <b>4</b></span>
+            <span class="dim">地点 <b>18</b></span>
+            <span class="dim">人物 <b>6</b></span>
+          </div>
+
+          <!-- Shelf: recent -->
+          <section class="shelf">
+            <div class="shelf-head">
+              <h3>最近添加</h3>
+              <span class="note">按导入时间</span>
+              <span class="more">查看全部 ›</span>
+            </div>
+            <div class="row">
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i1)">
+                  <div class="img" style="background-image:var(--i1)"></div>
+                  <div class="scrim"></div><span class="tag">夜间</span><span class="dur">0:11</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                </div>
+                <div class="meta"><div class="title">雨夜回家路</div><div class="sub">昨天 22:14 · 车内</div></div>
+              </article>
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i4)">
+                  <div class="img" style="background-image:var(--i4)"></div>
+                  <div class="scrim"></div><span class="tag">海边</span><span class="dur">0:24</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                </div>
+                <div class="meta"><div class="title">海面起风了</div><div class="sub">11月16日 · 海边</div></div>
+              </article>
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i7)">
+                  <div class="img" style="background-image:var(--i7)"></div>
+                  <div class="scrim"></div><span class="tag">清晨</span><span class="dur">0:18</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                </div>
+                <div class="meta"><div class="title">雾里的清晨</div><div class="sub">11月9日 · 窗边</div></div>
+              </article>
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i3)">
+                  <div class="img" style="background-image:var(--i3)"></div>
+                  <div class="scrim"></div><span class="tag">夜晚</span><span class="dur">1:06</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                </div>
+                <div class="meta"><div class="title">灯串下的夜晚</div><div class="sub">11月2日 · 露台</div></div>
+              </article>
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i5)">
+                  <div class="img" style="background-image:var(--i5)"></div>
+                  <div class="scrim"></div><span class="tag">山野</span><span class="dur">2:28</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                </div>
+                <div class="meta"><div class="title">月色下的山脊</div><div class="sub">10月21日 · 黄山</div></div>
+              </article>
+            </div>
+          </section>
+
+          <!-- Shelf: long -->
+          <section class="shelf">
+            <div class="shelf-head">
+              <h3>值得重看 <span style="font-weight:400;color:var(--dim);font-size:11px">长片段</span></h3>
+              <span class="note">超过 3 分钟</span>
+              <span class="more">查看全部 ›</span>
+            </div>
+            <div class="row">
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i6)">
+                  <div class="img" style="background-image:var(--i6)"></div>
+                  <div class="scrim"></div><span class="tag">旅拍</span><span class="dur">6:12</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                  <div class="progress"><i style="width:64%"></i></div>
+                </div>
+                <div class="meta"><div class="title">落日山丘</div><div class="sub">2025年10月 · 郊外</div></div>
+              </article>
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i8)">
+                  <div class="img" style="background-image:var(--i8)"></div>
+                  <div class="scrim"></div><span class="tag">旅拍</span><span class="dur">4:37</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                </div>
+                <div class="meta"><div class="title">海边的傍晚</div><div class="sub">2026年8月 · 青岛</div></div>
+              </article>
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i2)">
+                  <div class="img" style="background-image:var(--i2)"></div>
+                  <div class="scrim"></div><span class="tag">日常</span><span class="dur">3:21</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                </div>
+                <div class="meta"><div class="title">清晨的第一杯</div><div class="sub">2026年3月 · 厨房</div></div>
+              </article>
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i3)">
+                  <div class="img" style="background-image:var(--i3)"></div>
+                  <div class="scrim"></div><span class="tag">夜晚</span><span class="dur">5:04</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                </div>
+                <div class="meta"><div class="title">灯串下的夜晚</div><div class="sub">2025年12月 · 露台</div></div>
+              </article>
+              <article class="card">
+                <div class="thumb" style="background-image:var(--i7)">
+                  <div class="img" style="background-image:var(--i7)"></div>
+                  <div class="scrim"></div><span class="tag">清晨</span><span class="dur">3:48</span>
+                  <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览 · 左右擦洗</span></div>
+                </div>
+                <div class="meta"><div class="title">雾里的清晨</div><div class="sub">2026年11月 · 窗边</div></div>
+              </article>
+            </div>
+          </section>
+
+          <!-- Year wall -->
+          <div class="group-head">
+            <h3>2026</h3>
+            <span>38 段 · 1 小时 06 分</span>
+            <div class="rule"></div>
+          </div>
+          <div class="wall">
+            <article class="card">
+              <div class="thumb" style="background-image:var(--i8)">
+                <div class="img" style="background-image:var(--i8)"></div>
+                <div class="scrim"></div><span class="dur">0:42</span>
+                <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览</span></div>
+              </div>
+              <div class="meta"><div class="title">海边的傍晚</div><div class="sub">8月12日 · 青岛</div></div>
+            </article>
+            <article class="card preview">
+              <div class="thumb" style="background-image:var(--i2)">
+                <div class="img" style="background-image:var(--i2)"></div>
+                <div class="scrim"></div><span class="dur">0:47</span>
+                <div class="hover"><span class="play-sm">▶</span><span class="hint">预览中 · 拖动擦洗</span></div>
+                <div class="scrub"><i></i><b></b></div>
+              </div>
+              <div class="meta"><div class="title">清晨的第一杯</div><div class="sub">3月2日 · 厨房</div></div>
+            </article>
+            <article class="card">
+              <div class="thumb" style="background-image:var(--i4)">
+                <div class="img" style="background-image:var(--i4)"></div>
+                <div class="scrim"></div><span class="dur">0:18</span>
+                <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览</span></div>
+              </div>
+              <div class="meta"><div class="title">海面起风了</div><div class="sub">7月21日 · 海边</div></div>
+            </article>
+            <article class="card">
+              <div class="thumb" style="background-image:var(--i3)">
+                <div class="img" style="background-image:var(--i3)"></div>
+                <div class="scrim"></div><span class="dur">1:06</span>
+                <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览</span></div>
+              </div>
+              <div class="meta"><div class="title">灯串下的夜晚</div><div class="sub">11月2日 · 露台</div></div>
+            </article>
+            <article class="card">
+              <div class="thumb" style="background-image:var(--i1)">
+                <div class="img" style="background-image:var(--i1)"></div>
+                <div class="scrim"></div><span class="dur">0:11</span>
+                <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览</span></div>
+              </div>
+              <div class="meta"><div class="title">雨夜回家路</div><div class="sub">11月18日 · 车内</div></div>
+            </article>
+            <article class="card">
+              <div class="thumb" style="background-image:var(--i5)">
+                <div class="img" style="background-image:var(--i5)"></div>
+                <div class="scrim"></div><span class="dur">0:24</span>
+                <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览</span></div>
+              </div>
+              <div class="meta"><div class="title">月色下的山脊</div><div class="sub">10月21日 · 黄山</div></div>
+            </article>
+            <article class="card">
+              <div class="thumb" style="background-image:var(--i7)">
+                <div class="img" style="background-image:var(--i7)"></div>
+                <div class="scrim"></div><span class="dur">0:38</span>
+                <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览</span></div>
+              </div>
+              <div class="meta"><div class="title">雾里的清晨</div><div class="sub">11月10日 · 窗边</div></div>
+            </article>
+            <article class="card">
+              <div class="thumb" style="background-image:var(--i6)">
+                <div class="img" style="background-image:var(--i6)"></div>
+                <div class="scrim"></div><span class="dur">1:32</span>
+                <div class="hover"><span class="play-sm">▶</span><span class="hint">悬停预览</span></div>
+              </div>
+              <div class="meta"><div class="title">落日山丘</div><div class="sub">10月1日 · 郊外</div></div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Notes -->
+  <section class="notes">
+    <header class="notes-head">
+      <div class="kicker">DESIGN RATIONALE</div>
+      <h2>不是把视频<br>排得更整齐，<br>而是让它们被想起。</h2>
+      <p>照片页解决「找得到」，视频页应该解决「想不想点开」。所以整页围绕一件事：先给一个值得看的故事，再给继续探索的路径。</p>
+      <div class="rule"></div>
+      <div class="refs">
+        <span>Apple TV 2025</span>
+        <span>Google Photos Memories</span>
+        <span>Infuse / Zidoo</span>
+        <span>Immich Timeline</span>
+        <span>Eagle Hover</span>
+      </div>
+    </header>
+
+    <div class="notes-list">
+      <article class="note">
+        <div class="num">01</div>
+        <div>
+          <h4>剧场式首屏：一次只讲一段影像</h4>
+          <p>顶部不再直接铺网格，而是把「最近的一段 / 今天值得重看的一段」做成一张 <b>16:9 宽幅海报</b>：大标题、地点、时长、规格，右侧一块玻璃信息卡补充设备与编码。它承担的不是展示，而是<b>降低第一眼的决策成本</b>。</p>
+          <div class="small">对应数据：capturedAt、duration、pixelWidth/Height、placeCity、model、videoCodec，全部来自现有 PhotoItem。</div>
+        </div>
+      </article>
+
+      <article class="note">
+        <div class="num">02</div>
+        <div>
+          <h4>悬停静音预览 + 横向擦洗</h4>
+          <p>悬停 0.4 秒后，封面以静音方式播放 3 秒循环；光标左右移动时直接<b>擦洗帧</b>，像 Apple TV 的预告片交互。这是「视频页」区别于照片页最关键的一口气：在点开之前，就先看到运动。</p>
+          <div class="small">落地建议：复用 VideoPlayerModel 的静音循环实例，按可视区域最多同时 1 个，离开即销毁；首屏不预解码。</div>
+        </div>
+      </article>
+
+      <article class="note">
+        <div class="num">03</div>
+        <div>
+          <h4>用「视角」切换维度，而不是堆筛选器</h4>
+          <p>精选 / 年份 / 时长 / 地点 / 人物，沿用个人收藏页的<b>一屏一维度</b>：点卡片下钻，不做多层筛选器叠罗汉。视频尤其适合「时长」这一维——眨眼片段、故事片段、长镜头，本身就是不同的观看心情。</p>
+          <div class="small">时长分档：&lt;15s 瞬间 · 15s–1min 片段 · 1–5min 故事 · &gt;5min 长镜头。</div>
+        </div>
+      </article>
+
+      <article class="note">
+        <div class="num">04</div>
+        <div>
+          <h4>两种布局，一种数据</h4>
+          <p>「海报墙」用于浏览与挑选，信息密度高；「时间轴胶片」用于回忆，按天分组、左侧一条细胶片导轨。切换只改变排列，不重新查询，保持滚动位置与选择状态。</p>
+          <div class="small">时间轴模式可以复用现有 Timeline 分页与日期分组的逻辑，避免新写一套数据通路。</div>
+        </div>
+      </article>
+
+      <article class="note">
+        <div class="num">05</div>
+        <div>
+          <h4>把「媒体类型」翻译成「使用情境」</h4>
+          <p>录屏、慢动作、延时、电影效果、空间视频不再只是侧边栏的入口，而是在视频页内自动聚成「情境轨道」——用户找的往往不是格式，而是「那段慢动作」或「那次旅行的航拍」。</p>
+          <div class="small">现有字段已足够：isScreenRecording、isSlowMotion、isTimelapse、isCinematic、isSpatial。</div>
+        </div>
+      </article>
+
+      <article class="note">
+        <div class="num">06</div>
+        <div>
+          <h4>性能边界先于视觉</h4>
+          <p>视频页最容易掉进的坑，是为了「统计总时长」在主线程扫全库。概念稿里的统计、分组与封面全部<b>只对当前可视窗口增量聚合</b>；年份分组头随分页到达再补全，封面只走缩略图缓存。</p>
+          <div class="small">绝不新增整库 DISTINCT JOIN；首帧只读已加载页；悬停预览按需创建，同一时刻最多一个解码器。</div>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "components": [
+    {
+      "id": "siglip2",
+      "version": "hf-2026.06",
+      "size": 350293481,
+      "sources": [],
+      "files": [
+        {
+          "name": "image",
+          "urls": [
+            "https://hf-mirror.com/palmier-io/siglip2-base-coreml/resolve/main/ImageEncoder.mlpackage.zip",
+            "https://huggingface.co/palmier-io/siglip2-base-coreml/resolve/main/ImageEncoder.mlpackage.zip"
+          ],
+          "size": 91700398,
+          "sha256": "426115f240ead5faf69b073e08dd1b959d850ca5c592537cd81886992283b2fb",
+          "archive": "zip"
+        },
+        {
+          "name": "text",
+          "urls": [
+            "https://hf-mirror.com/palmier-io/siglip2-base-coreml/resolve/main/TextEncoder.mlpackage.zip",
+            "https://huggingface.co/palmier-io/siglip2-base-coreml/resolve/main/TextEncoder.mlpackage.zip"
+          ],
+          "size": 258593083,
+          "sha256": "48f80e35ce40a9dcdc55bef986a104d3153e1cfa78229bb45c4724f3f3427368",
+          "archive": "zip"
+        }
+      ]
+    },
+    {
+      "id": "local-llm",
+      "version": "pending",
+      "size": 0,
+      "sources": [],
+      "files": []
+    }
+  ]
+}

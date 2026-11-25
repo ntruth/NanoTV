@@ -210,4 +210,13 @@ final class NanoKitCoreTests: XCTestCase {
         let slowReport = SpeedBenchmarkReport(sourceName: "慢速源", averageMbps: 8.5)
         XCTAssertTrue(slowReport.qualityVerdict.contains("受限"))
     }
+
+    // MARK: - Luma 预置片源 JSON 双端加载测试
+
+    func testLumaBundledPresetsLoading() {
+        let bundled = LumaPresetImporter.loadBundledPresets()
+        XCTAssertGreaterThanOrEqual(bundled.tvSubscriptions.count, 10)
+        XCTAssertFalse(bundled.remoteSites.isEmpty)
+        XCTAssertTrue(bundled.remoteSites.contains(where: { $0.isPrivate }))
+    }
 }

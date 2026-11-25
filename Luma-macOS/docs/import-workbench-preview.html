@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拾光 · 入库工作台（静态原型）</title>
+<style>
+  :root{
+    --bg:#141317;
+    --sidebar:rgba(28,25,38,.72);
+    --panel:#1b1a20;
+    --panel-2:#22212a;
+    --line:rgba(255,255,255,.075);
+    --line-strong:rgba(255,255,255,.13);
+    --text:#ecebf2;
+    --sub:rgba(236,235,242,.62);
+    --tert:rgba(236,235,242,.36);
+    --accent:#8188ff;
+    --accent-soft:rgba(129,136,255,.16);
+    --ok:#4ecb8f;
+    --warn:#f0b45e;
+    --danger:#ff7070;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Helvetica Neue",sans-serif;
+    background:
+      radial-gradient(1200px 700px at 18% -10%, rgba(108,92,231,.22), transparent 60%),
+      radial-gradient(900px 600px at 100% 100%, rgba(64,120,255,.12), transparent 60%),
+      #0c0b0f;
+    color:var(--text);
+    display:flex;align-items:center;justify-content:center;
+    padding:22px;
+    -webkit-font-smoothing:antialiased;
+    overflow:auto;
+  }
+  .ic{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .ic.sm{width:13px;height:13px}
+  .ic.xs{width:11px;height:11px}
+
+  /* ---------- 窗口 ---------- */
+  .window{
+    width:min(1510px,100%);
+    min-width:1180px;
+    height:min(930px,calc(100vh - 44px));
+    border-radius:14px;
+    background:var(--bg);
+    box-shadow:0 50px 130px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.07);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    position:relative;
+  }
+  .titlebar{
+    height:46px;flex:none;display:flex;align-items:center;gap:14px;
+    padding:0 16px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(255,255,255,.035), transparent);
+  }
+  .lights{display:flex;gap:8px}
+  .lights i{width:11px;height:11px;border-radius:50%;display:block}
+  .lights i:nth-child(1){background:#ff5f57}
+  .lights i:nth-child(2){background:#febc2e}
+  .lights i:nth-child(3){background:#28c840}
+  .titlebar .lib{font-size:12px;color:var(--sub);letter-spacing:.2px}
+  .titlebar .spacer{flex:1}
+  .proto-note{font-size:10.5px;color:var(--tert);border:1px solid var(--line);border-radius:99px;padding:3px 9px}
+
+  .app{flex:1;display:flex;min-height:0}
+
+  /* ---------- 侧边栏 ---------- */
+  .sidebar{
+    width:216px;flex:none;padding:14px 10px;
+    background:var(--sidebar);
+    border-right:1px solid var(--line);
+    display:flex;flex-direction:column;gap:2px;overflow:auto;
+    backdrop-filter:blur(20px);
+  }
+  .side-section{margin:10px 8px 4px;font-size:10.5px;color:var(--tert);letter-spacing:.4px}
+  .side-row{
+    display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:7px;
+    font-size:12.5px;color:rgba(236,235,242,.82);cursor:default;user-select:none;
+  }
+  .side-row .ic{color:var(--accent);opacity:.9}
+  .side-row:hover{background:rgba(255,255,255,.045)}
+  .side-row.active{background:rgba(255,255,255,.09);color:#fff}
+  .side-row .count{margin-left:auto;font-size:10.5px;color:var(--tert);font-variant-numeric:tabular-nums}
+  .side-row.small{font-size:12px;color:var(--sub)}
+
+  /* ---------- 主区 ---------- */
+  .main{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
+
+  .topbar{
+    flex:none;display:flex;align-items:center;gap:12px;
+    padding:12px 20px;border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.012);
+  }
+  .ghost-back{
+    display:flex;align-items:center;gap:3px;
+    border:1px solid var(--line);background:transparent;color:var(--sub);
+    font-size:11.5px;padding:5px 9px;border-radius:7px;cursor:pointer;
+  }
+  .ghost-back:hover{color:var(--text);border-color:var(--line-strong)}
+  .topbar h1{font-size:15px;font-weight:600;letter-spacing:.2px;display:flex;align-items:center;gap:8px}
+  .tag{
+    font-size:10px;padding:2px 7px;border-radius:99px;
+    background:var(--accent-soft);color:#b9bcff;border:1px solid rgba(129,136,255,.28);
+    font-weight:500;letter-spacing:.2px;
+  }
+  .meta{font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums}
+  .meta b{color:var(--text);font-weight:600}
+  .spacer{flex:1}
+  .stage-switch{
+    display:flex;background:rgba(255,255,255,.05);border-radius:8px;padding:2px;gap:2px;
+    border:1px solid var(--line);
+  }
+  .stage-switch button{
+    border:0;background:transparent;color:var(--sub);font-size:11px;
+    padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit;
+  }
+  .stage-switch button[aria-selected="true"]{background:rgba(255,255,255,.13);color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+
+  /* ---------- 阶段容器 ---------- */
+  .stage{display:none;flex:1;min-height:0;flex-direction:column;position:relative}
+  .window[data-stage="preview"] .stage-preview{display:flex}
+  .window[data-stage="importing"] .stage-gallery{display:flex}
+  .window[data-stage="finished"] .stage-gallery{display:flex}
+
+  /* ---------- 来源条 ---------- */
+  .sources{
+    flex:none;display:flex;align-items:center;gap:8px;padding:11px 20px;
+    border-bottom:1px solid var(--line);
+  }
+  .sources .label{font-size:10.5px;color:var(--tert);margin-right:2px}
+  .chip{
+    display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:7px;
+    border:1px solid var(--line);background:rgba(255,255,255,.03);
+    font-size:11.5px;color:var(--sub);cursor:pointer;font-family:inherit;
+  }
+  .chip .ic{color:var(--tert)}
+  .chip.on{background:var(--accent-soft);border-color:rgba(129,136,255,.35);color:#d7d9ff}
+  .chip.on .ic{color:var(--accent)}
+  .chip .num{font-variant-numeric:tabular-nums;color:var(--tert);font-size:10.5px}
+  .sources .path{margin-left:auto;font-size:10.5px;color:var(--tert);max-width:330px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  /* ---------- 工作区两栏 ---------- */
+  .work{flex:1;display:flex;min-height:0}
+  .preview-pane{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
+  .pane-head{
+    flex:none;display:flex;align-items:center;gap:10px;
+    padding:10px 20px;border-bottom:1px solid var(--line);
+  }
+  .viewtabs{display:flex;gap:2px;background:rgba(255,255,255,.045);padding:2px;border-radius:7px;border:1px solid var(--line)}
+  .viewtabs button{
+    border:0;background:transparent;color:var(--sub);font-size:11px;font-family:inherit;
+    padding:4px 10px;border-radius:5px;cursor:pointer;
+  }
+  .viewtabs button[aria-selected="true"]{background:rgba(255,255,255,.12);color:#fff}
+  .sel-count{font-size:10.5px;color:var(--tert);font-variant-numeric:tabular-nums}
+  .icon-btn{
+    width:26px;height:26px;border-radius:6px;border:1px solid var(--line);
+    background:transparent;color:var(--sub);display:grid;place-items:center;cursor:pointer;
+  }
+  .icon-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
+
+  .scroll{flex:1;overflow:auto;padding:12px 20px 20px;min-height:0}
+  .scroll::-webkit-scrollbar{width:10px}
+  .scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:99px;border:3px solid transparent;background-clip:content-box}
+
+  .view{display:none}
+  .view.on{display:block}
+
+  .group{margin-bottom:18px}
+  .group-head{display:flex;align-items:center;gap:8px;padding:4px 2px 8px}
+  .twist{
+    width:18px;height:18px;border:0;background:transparent;color:var(--tert);cursor:pointer;
+    display:grid;place-items:center;padding:0;
+  }
+  .twist:hover{color:var(--text)}
+  .gtitle{font-size:12px;font-weight:600;letter-spacing:.1px}
+  .gmeta{font-size:10.5px;color:var(--tert)}
+  .gbytes{margin-left:auto;font-size:10.5px;color:var(--tert);font-variant-numeric:tabular-nums}
+  .group.collapsed .thumbs{display:none}
+
+  .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(106px,1fr));gap:6px}
+  .tile{
+    position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;border:0;padding:0;
+    background:#26252c;cursor:pointer;display:block;
+    box-shadow:0 0 0 1px rgba(255,255,255,.05);
+  }
+  .tile img{width:100%;height:100%;object-fit:cover;display:block}
+  .tile::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,.18),transparent 34%,transparent 62%,rgba(0,0,0,.3));
+    pointer-events:none;
+  }
+  .tile:not(.sel) img{opacity:.42;filter:grayscale(.35) saturate(.6)}
+  .tile:not(.sel)::before{
+    content:"";position:absolute;inset:0;background:rgba(12,11,16,.25);z-index:1;pointer-events:none;
+  }
+  .tile .check{
+    position:absolute;top:6px;left:6px;width:17px;height:17px;border-radius:50%;
+    display:grid;place-items:center;z-index:3;
+    background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.5);color:transparent;
+  }
+  .tile.sel .check{background:var(--accent);border-color:var(--accent);color:#fff}
+  .tile .badge{
+    position:absolute;left:6px;bottom:6px;z-index:3;
+    font-size:9.5px;padding:2px 6px;border-radius:5px;letter-spacing:.2px;
+    background:rgba(0,0,0,.55);color:#eee;backdrop-filter:blur(6px);
+    display:flex;align-items:center;gap:3px;
+  }
+  .badge.dup{background:rgba(240,180,94,.9);color:#2a1c00}
+  .badge.burst{background:rgba(99,160,255,.9);color:#04121f}
+  .badge.raw{background:rgba(255,255,255,.16)}
+  .tile .dur{position:absolute;right:6px;bottom:6px;z-index:3;font-size:9.5px;color:#fff;text-shadow:0 1px 3px #000}
+  .tile.more{
+    display:grid;place-items:center;background:rgba(255,255,255,.045);color:var(--sub);
+    box-shadow:inset 0 0 0 1px var(--line);
+  }
+  .tile.more span{font-size:12px;font-weight:600}
+  .tile.more small{display:block;font-size:9.5px;color:var(--tert);margin-top:2px;font-weight:400}
+
+  /* 按文件夹视图 */
+  .folder-row{
+    display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:9px;
+    border:1px solid var(--line);background:rgba(255,255,255,.025);margin-bottom:6px;
+  }
+  .folder-row .cover{width:44px;height:44px;border-radius:6px;object-fit:cover}
+  .folder-row .fname{font-size:12px;font-weight:600}
+  .folder-row .fsub{font-size:10.5px;color:var(--tert);margin-top:2px}
+  .folder-row .fcount{font-size:10.5px;color:var(--sub);font-variant-numeric:tabular-nums}
+  .folder-row.indent{margin-left:22px}
+  .folder-row.parent{background:rgba(255,255,255,.04);border-color:var(--line-strong)}
+
+  /* 重复组视图 */
+  .dup-row{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:rgba(255,255,255,.022)}
+  .dup-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .dup-head .t{font-size:11.5px;font-weight:600}
+  .dup-head .m{font-size:10.5px;color:var(--tert)}
+  .dup-head .save{margin-left:auto;font-size:10.5px;color:var(--ok)}
+  .dup-list{display:flex;gap:6px}
+  .dup-item{display:flex;gap:7px;align-items:center;padding:4px 7px 4px 4px;border-radius:7px;background:rgba(255,255,255,.035);flex:1;min-width:0}
+  .dup-item img{width:34px;height:34px;border-radius:4px;object-fit:cover}
+  .dup-item .n{font-size:10px;color:var(--sub);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dup-item .k{font-size:9.5px;color:var(--tert);margin-top:1px}
+  .dup-item.keep{box-shadow:inset 0 0 0 1px rgba(78,203,143,.5);background:rgba(78,203,143,.08)}
+  .dup-item .kp{font-size:9px;color:var(--ok);background:rgba(78,203,143,.14);padding:1px 5px;border-radius:4px;flex:none}
+
+  .hint-bar{
+    flex:none;display:flex;align-items:center;gap:14px;padding:8px 20px;
+    border-top:1px solid var(--line);font-size:10.5px;color:var(--tert);
+  }
+  .hint-bar kbd{
+    font-family:inherit;font-size:9.5px;padding:1px 5px;border-radius:4px;
+    background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--sub);
+  }
+
+  /* ---------- 计划面板 ---------- */
+  .plan-pane{
+    width:330px;flex:none;border-left:1px solid var(--line);
+    background:rgba(255,255,255,.015);display:flex;flex-direction:column;min-height:0;
+  }
+  .plan-head{flex:none;padding:13px 16px 10px;border-bottom:1px solid var(--line)}
+  .plan-head .t{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600}
+  .plan-head .t .ic{color:var(--accent)}
+  .plan-head .s{font-size:10.5px;color:var(--tert);margin-top:4px;font-variant-numeric:tabular-nums}
+  .plan-scroll{flex:1;overflow:auto;padding:6px 16px 18px;min-height:0}
+  .plan-scroll::-webkit-scrollbar{width:10px}
+  .plan-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.09);border-radius:99px;border:3px solid transparent;background-clip:content-box}
+
+  .block{padding:12px 0;border-bottom:1px solid var(--line)}
+  .block:last-child{border-bottom:0}
+  .block-title{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--tert);letter-spacing:.3px;margin-bottom:8px}
+  .block-title .r{margin-left:auto;color:var(--tert);font-size:10px}
+
+  .tree{display:flex;flex-direction:column;gap:1px}
+  .tree-row{display:flex;align-items:center;gap:6px;padding:4px 2px;font-size:11.5px;color:var(--sub);border-radius:5px}
+  .tree-row .ic{color:var(--tert)}
+  .tree-row .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tree-row .c{margin-left:auto;font-size:10.5px;color:var(--tert);font-variant-numeric:tabular-nums}
+  .tree-row.root{color:var(--text);font-weight:500}
+  .tree-row.indent-1{padding-left:18px}
+  .tree-row.indent-2{padding-left:36px}
+  .tree-row .twist{width:14px;height:14px}
+
+  .stat-row{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:11.5px;color:var(--sub)}
+  .stat-row .num{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--text);font-size:11px}
+  .stat-row .ic{color:var(--tert)}
+  .stat-row.skip .num{color:var(--warn)}
+
+  .switch{width:30px;height:17px;border-radius:99px;background:rgba(255,255,255,.14);position:relative;margin-left:auto;flex:none;cursor:pointer;transition:background .18s}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#fff;transition:transform .18s}
+  .switch.on{background:var(--accent)}
+  .switch.on::after{transform:translateX(13px)}
+
+  .suggest{display:flex;flex-direction:column;gap:6px}
+  .suggest-row{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;border:1px dashed rgba(129,136,255,.35);background:rgba(129,136,255,.07);font-size:11px;color:#cfd1ff}
+  .suggest-row .n{margin-left:auto;font-size:10px;color:var(--tert)}
+  .suggest-row .add{font-size:10px;padding:2px 7px;border-radius:5px;border:1px solid rgba(129,136,255,.4);color:#dfe0ff;cursor:pointer;background:transparent}
+
+  .seg{display:flex;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:7px;padding:2px;gap:2px}
+  .seg button{flex:1;border:0;background:transparent;color:var(--sub);font-size:10.5px;font-family:inherit;padding:4px 0;border-radius:5px;cursor:pointer}
+  .seg button[aria-selected="true"]{background:rgba(255,255,255,.13);color:#fff}
+
+  .field{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--sub);padding:4px 0}
+  .field .v{margin-left:auto;font-size:11px;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:6px;padding:4px 9px;cursor:pointer}
+
+  /* ---------- 底部操作条 ---------- */
+  .footer{
+    flex:none;display:flex;align-items:center;gap:10px;
+    padding:12px 20px;border-top:1px solid var(--line);background:rgba(255,255,255,.02);
+  }
+  .foot-summary{font-size:10.5px;color:var(--tert);font-variant-numeric:tabular-nums}
+  .foot-summary b{color:var(--sub);font-weight:500}
+  .btn{
+    font-family:inherit;font-size:12px;padding:7px 14px;border-radius:8px;cursor:pointer;
+    border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--text);
+  }
+  .btn:hover{background:rgba(255,255,255,.08)}
+  .btn.primary{
+    background:linear-gradient(180deg,#8f95ff,#6f77f5);border-color:rgba(255,255,255,.16);
+    color:#0d0e22;font-weight:600;box-shadow:0 6px 18px rgba(111,119,245,.28);
+  }
+  .btn.primary:hover{filter:brightness(1.06)}
+
+  /* ---------- 图库（导入中 / 完成） ---------- */
+  .gallery-bar{
+    flex:none;display:flex;align-items:center;gap:12px;padding:12px 20px 11px;
+    border-bottom:1px solid var(--line);position:relative;
+  }
+  .gallery-bar h1{font-size:21px;font-weight:700;letter-spacing:.2px}
+  .gallery-bar .sub{font-size:11px;color:var(--tert)}
+  .imp-pill{
+    display:flex;align-items:center;gap:9px;padding:5px 10px 5px 12px;border-radius:9px;
+    background:var(--accent-soft);border:1px solid rgba(129,136,255,.3);
+    font-size:11px;color:#d5d7ff;cursor:pointer;user-select:none;
+  }
+  .imp-pill .ring{
+    width:22px;height:22px;border-radius:50%;
+    background:conic-gradient(var(--accent) 0 37%, rgba(255,255,255,.12) 37% 100%);
+    display:grid;place-items:center;
+  }
+  .imp-pill .ring::after{
+    content:"";width:15px;height:15px;border-radius:50%;background:#211f2b;display:block;
+  }
+  .imp-pill .txt b{font-weight:600;font-variant-numeric:tabular-nums}
+  .imp-pill .mini{width:78px;height:4px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden}
+  .imp-pill .mini i{display:block;height:100%;width:37%;background:var(--accent);border-radius:99px}
+  .imp-pill .chev{color:var(--tert);display:grid;place-items:center}
+  .imp-line{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent}
+  .imp-line i{display:block;height:100%;width:37%;background:linear-gradient(90deg,rgba(129,136,255,.4),var(--accent));box-shadow:0 0 10px rgba(129,136,255,.5)}
+
+  .gallery-scroll{flex:1;overflow:auto;padding:14px 20px 26px;min-height:0}
+  .gallery-scroll::-webkit-scrollbar{width:10px}
+  .gallery-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:99px;border:3px solid transparent;background-clip:content-box}
+  .gsec{margin-bottom:18px}
+  .gsec-head{display:flex;align-items:baseline;gap:10px;padding:2px 0 9px}
+  .gsec-head .y{font-size:14px;font-weight:700}
+  .gsec-head .m{font-size:11px;color:var(--tert)}
+  .ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(124px,1fr));gap:5px}
+  .ggrid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:7px;display:block;opacity:.94}
+  .ggrid .cell{position:relative}
+  .ggrid .cell .tagnew{
+    position:absolute;top:5px;left:5px;font-size:8.5px;padding:1.5px 5px;border-radius:4px;
+    background:rgba(78,203,143,.92);color:#062315;font-weight:600;
+  }
+
+  /* ---------- 悬浮进度卡 ---------- */
+  .hud{
+    position:absolute;top:56px;right:20px;width:318px;z-index:6;
+    border-radius:12px;border:1px solid rgba(255,255,255,.12);
+    background:rgba(32,30,42,.94);backdrop-filter:blur(24px);
+    box-shadow:0 24px 60px rgba(0,0,0,.55);
+    padding:14px 16px;
+    display:none;
+  }
+  .hud.show{display:block}
+  .hud::before{
+    content:"";position:absolute;top:-6px;right:58px;width:11px;height:11px;
+    background:rgba(32,30,42,.94);border-left:1px solid rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.12);
+    transform:rotate(45deg);
+  }
+  .hud-head{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600}
+  .hud-head .pct{margin-left:auto;font-size:16px;font-variant-numeric:tabular-nums;font-weight:600}
+  .hud .bar{height:5px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:9px 0 6px}
+  .hud .bar i{display:block;height:100%;width:37%;border-radius:99px;background:linear-gradient(90deg,#6f77f5,#9aa0ff)}
+  .hud .nm{font-size:10px;color:var(--tert);display:flex;align-items:center;gap:6px}
+  .hud .nm .r{margin-left:auto;font-variant-numeric:tabular-nums}
+  .hud-file{
+    margin-top:10px;border:1px solid var(--line);border-radius:7px;background:rgba(0,0,0,.2);
+    padding:7px 9px;font-size:10.5px;color:var(--sub);display:flex;align-items:center;gap:6px;
+  }
+  .hud-file b{color:var(--text);font-weight:500}
+  .hud-file .ic{color:var(--tert)}
+  .hud-file span:last-child{margin-left:auto;font-size:9.5px;color:var(--tert);white-space:nowrap}
+  .hud-stats{display:flex;gap:6px;margin-top:9px}
+  .hud-stats div{flex:1;border:1px solid var(--line);border-radius:6px;padding:5px 7px;background:rgba(255,255,255,.025)}
+  .hud-stats .k{font-size:9px;color:var(--tert)}
+  .hud-stats .v{font-size:12px;font-weight:600;margin-top:1px;font-variant-numeric:tabular-nums}
+  .hud-stats .ok .v{color:var(--ok)}
+  .hud-stats .warn .v{color:var(--warn)}
+  .hud-actions{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:flex-end}
+  .hud-actions .note{font-size:9.5px;color:var(--tert);line-height:1.5;flex:1 0 100%;margin-bottom:1px}
+  .hud-actions button{font-family:inherit;font-size:10.5px;padding:4px 9px;border-radius:6px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--sub);cursor:pointer}
+  .hud-actions button.danger{color:var(--danger);border-color:rgba(255,112,112,.28);background:rgba(255,112,112,.08)}
+  .hud-actions button:hover{color:var(--text)}
+
+  /* ---------- 完成 toast ---------- */
+  .toast{
+    position:absolute;left:50%;bottom:26px;transform:translateX(-50%) translateY(14px);
+    display:none;align-items:center;gap:10px;z-index:7;
+    padding:10px 12px 10px 14px;border-radius:11px;
+    background:rgba(34,32,44,.96);border:1px solid rgba(255,255,255,.13);
+    box-shadow:0 20px 50px rgba(0,0,0,.55);
+    font-size:11.5px;color:var(--sub);
+    min-width:520px;
+  }
+  .toast.show{display:flex;animation:rise .28s ease-out forwards}
+  @keyframes rise{to{transform:translateX(-50%) translateY(0)}}
+  .toast .ok{width:22px;height:22px;border-radius:50%;background:rgba(78,203,143,.16);color:var(--ok);display:grid;place-items:center;border:1px solid rgba(78,203,143,.32);flex:none}
+  .toast b{color:var(--text);font-weight:600}
+  .toast .sp{flex:1}
+  .toast button{font-family:inherit;font-size:10.5px;padding:4px 9px;border-radius:6px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer}
+  .toast .x{width:22px;height:22px;padding:0;display:grid;place-items:center;color:var(--tert);border:0;background:transparent}
+  .toast .countdown{
+    position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:0 0 11px 11px;overflow:hidden;
+  }
+  .toast .countdown i{display:block;height:100%;background:var(--accent);width:100%;animation:drain 6s linear forwards}
+  @keyframes drain{to{width:0}}
+
+  .legend{display:flex;gap:16px;font-size:10px;color:var(--tert);padding:0 2px;margin-top:2px}
+  .legend span{display:flex;align-items:center;gap:5px}
+  .legend i{width:7px;height:7px;border-radius:50%;display:block}
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="ic-photo" viewBox="0 0 20 20"><rect x="2.6" y="3.6" width="14.8" height="12.8" rx="2.6"/><circle cx="7" cy="8" r="1.3"/><path d="M3.8 14.2l3.9-3.9 2.9 2.9 2.6-2.6 3.2 3.2"/></symbol>
+  <symbol id="ic-album" viewBox="0 0 20 20"><rect x="3" y="5.4" width="12.6" height="10.6" rx="2"/><path d="M5.6 3.4h9.2a2 2 0 0 1 2 2v8.6"/></symbol>
+  <symbol id="ic-phone" viewBox="0 0 20 20"><rect x="5.6" y="2.4" width="8.8" height="15.2" rx="2"/><path d="M8.8 15h2.4"/></symbol>
+  <symbol id="ic-download" viewBox="0 0 20 20"><path d="M10 2.8v8.4M6.6 8.2L10 11.6l3.4-3.4M3.4 15.4h13.2"/></symbol>
+  <symbol id="ic-heart" viewBox="0 0 20 20"><path d="M10 16.4s-6.3-3.7-6.3-7.6A3.4 3.4 0 0 1 10 6.6a3.4 3.4 0 0 1 6.3 2.2c0 3.9-6.3 7.6-6.3 7.6z"/></symbol>
+  <symbol id="ic-clock" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4.2l2.8 1.6"/></symbol>
+  <symbol id="ic-map" viewBox="0 0 20 20"><path d="M10 17.2s5-4.1 5-8a5 5 0 1 0-10 0c0 3.9 5 8 5 8z"/><circle cx="10" cy="9" r="1.8"/></symbol>
+  <symbol id="ic-video" viewBox="0 0 20 20"><rect x="2.6" y="5.2" width="10.8" height="9.6" rx="2.2"/><path d="M13.4 9l4-2.2v6.4l-4-2.2"/></symbol>
+  <symbol id="ic-camera" viewBox="0 0 20 20"><rect x="2.6" y="5.6" width="14.8" height="10.2" rx="2.4"/><circle cx="10" cy="10.6" r="2.6"/><path d="M7.2 5.6l1.2-1.8h3.2l1.2 1.8"/></symbol>
+  <symbol id="ic-person" viewBox="0 0 20 20"><circle cx="10" cy="7" r="3"/><path d="M4.4 16.2c0-2.8 2.5-4.6 5.6-4.6s5.6 1.8 5.6 4.6"/></symbol>
+  <symbol id="ic-trash" viewBox="0 0 20 20"><path d="M3.6 5.6h12.8M7.4 5.6V3.8h5.2v1.8M5.4 5.6l.8 10.6h7.6l.8-10.6"/></symbol>
+  <symbol id="ic-folder" viewBox="0 0 20 20"><path d="M2.8 6.2a2 2 0 0 1 2-2h3.1l1.6 1.8h5.7a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4.8a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="ic-spark" viewBox="0 0 20 20"><path d="M10 2.8l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/><path d="M15.2 13.2l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 20 20"><path d="M4.4 10.4l3.4 3.4 7.8-7.8"/></symbol>
+  <symbol id="ic-chev" viewBox="0 0 20 20"><path d="M7.6 4.8l5.2 5.2-5.2 5.2"/></symbol>
+  <symbol id="ic-chevdown" viewBox="0 0 20 20"><path d="M4.8 7.6l5.2 5.2 5.2-5.2"/></symbol>
+  <symbol id="ic-info" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 9v4.4M10 6.6v.1"/></symbol>
+  <symbol id="ic-close" viewBox="0 0 20 20"><path d="M5.4 5.4l9.2 9.2M14.6 5.4l-9.2 9.2"/></symbol>
+  <symbol id="ic-cloud" viewBox="0 0 20 20"><path d="M6.2 15.2a3.6 3.6 0 0 1-.4-7.2 4.6 4.6 0 0 1 8.8-1 3.4 3.4 0 0 1 .6 6.7z"/></symbol>
+</svg>
+
+<div class="window" data-stage="preview" id="win">
+
+  <div class="titlebar">
+    <div class="lights"><i></i><i></i><i></i></div>
+    <span class="lib">拾光 · 我的图库</span>
+    <span class="spacer"></span>
+    <span class="proto-note">静态原型 · 数据为示意</span>
+  </div>
+
+  <div class="app">
+
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+      <div class="side-section">拾光</div>
+      <div class="side-row"><svg class="ic"><use href="#ic-photo"/></svg>图库<span class="count">12,480</span></div>
+      <div class="side-row"><svg class="ic"><use href="#ic-heart"/></svg>精选集</div>
+      <div class="side-row active"><svg class="ic"><use href="#ic-download"/></svg>导入<span class="count">485</span></div>
+      <div class="side-section">设备</div>
+      <div class="side-row"><svg class="ic"><use href="#ic-phone"/></svg>李佳龙的 iPhone</div>
+      <div class="side-section">固定</div>
+      <div class="side-row"><svg class="ic"><use href="#ic-heart"/></svg>个人收藏</div>
+      <div class="side-row"><svg class="ic"><use href="#ic-clock"/></svg>最近保存</div>
+      <div class="side-row"><svg class="ic"><use href="#ic-map"/></svg>地图</div>
+      <div class="side-row"><svg class="ic"><use href="#ic-video"/></svg>视频</div>
+      <div class="side-row"><svg class="ic"><use href="#ic-camera"/></svg>截屏</div>
+      <div class="side-row"><svg class="ic"><use href="#ic-person"/></svg>人物</div>
+      <div class="side-row"><svg class="ic"><use href="#ic-trash"/></svg>最近删除</div>
+      <div class="side-section">相簿</div>
+      <div class="side-row small"><svg class="ic"><use href="#ic-album"/></svg>旅行</div>
+      <div class="side-row small"><svg class="ic"><use href="#ic-album"/></svg>家庭</div>
+      <div class="side-row small"><svg class="ic"><use href="#ic-cloud"/></svg>网络存储</div>
+    </aside>
+
+    <!-- 主区 -->
+    <div class="main">
+
+      <div class="topbar">
+        <button class="ghost-back"><svg class="ic xs"><use href="#ic-chev"/></svg>图库</button>
+        <h1>导入 <span class="tag">预演</span></h1>
+        <span class="meta"><b>485</b> 项 · <b>12.4 GB</b> · 2019–2026</span>
+        <span class="spacer"></span>
+        <div class="stage-switch" role="tablist" aria-label="阶段预览">
+          <button data-go="preview" aria-selected="true">预演</button>
+          <button data-go="importing" aria-selected="false">导入中</button>
+          <button data-go="finished" aria-selected="false">完成提示</button>
+        </div>
+      </div>
+
+      <!-- ── 阶段一：预演（整页占位） ── -->
+      <section class="stage stage-preview">
+
+        <div class="sources">
+          <span class="label">来源</span>
+          <button class="chip on"><svg class="ic sm"><use href="#ic-download"/></svg>Finder 选择<span class="num">485</span></button>
+          <button class="chip"><svg class="ic sm"><use href="#ic-folder"/></svg>拖入文件夹</button>
+          <button class="chip"><svg class="ic sm"><use href="#ic-camera"/></svg>剪贴板</button>
+          <button class="chip"><svg class="ic sm"><use href="#ic-phone"/></svg>iPhone 设备</button>
+          <span class="path">~/Pictures/2019-2026 备份 / 待整理</span>
+        </div>
+
+        <div class="work">
+          <div class="preview-pane">
+            <div class="pane-head">
+              <div class="viewtabs" role="tablist">
+                <button data-view="date" aria-selected="true">按日期</button>
+                <button data-view="folder" aria-selected="false">按文件夹</button>
+                <button data-view="dup" aria-selected="false">按重复组</button>
+              </div>
+              <span class="sel-count">已选 <b id="selCount">443</b> / 485</span>
+              <span class="spacer"></span>
+              <button class="icon-btn" title="全选"><svg class="ic sm"><use href="#ic-check"/></svg></button>
+              <button class="icon-btn" title="网格密度"><svg class="ic sm"><use href="#ic-photo"/></svg></button>
+            </div>
+
+            <div class="scroll" id="scrollArea">
+
+              <div class="view on" data-view="date">
+
+                <div class="group">
+                  <div class="group-head">
+                    <button class="twist"><svg class="ic xs"><use href="#ic-chevdown"/></svg></button>
+                    <span class="gtitle">2019 年 8 月 12 日</span>
+                    <span class="gmeta">京都 · 24 张</span>
+                    <span class="gbytes">1.8 GB</span>
+                  </div>
+                  <div class="thumbs">
+                    <button class="tile sel"><img src="import-workbench-assets/01.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/02.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/03.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/04.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/05.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span><span class="badge"><svg class="ic xs"><use href="#ic-video"/></svg>视频</span><span class="dur">0:24</span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/06.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span><span class="badge raw">RAW</span></button>
+                    <button class="tile"><img src="import-workbench-assets/01.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span><span class="badge dup">已在图库</span></button>
+                    <button class="tile more"><div><span>+18</span><small>本组其余</small></div></button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="group-head">
+                    <button class="twist"><svg class="ic xs"><use href="#ic-chevdown"/></svg></button>
+                    <span class="gtitle">2021 年 5 月 2 日</span>
+                    <span class="gmeta">海边 · 16 张</span>
+                    <span class="gbytes">2.1 GB</span>
+                  </div>
+                  <div class="thumbs">
+                    <button class="tile sel"><img src="import-workbench-assets/07.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/08.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/09.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/07.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile"><img src="import-workbench-assets/08.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span><span class="badge dup">已在图库</span></button>
+                    <button class="tile more"><div><span>+11</span><small>本组其余</small></div></button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="group-head">
+                    <button class="twist"><svg class="ic xs"><use href="#ic-chevdown"/></svg></button>
+                    <span class="gtitle">2025 年 7 月 14 日</span>
+                    <span class="gmeta">连拍 · 11 张，已选最佳 1 张</span>
+                    <span class="gbytes">省 412 MB</span>
+                  </div>
+                  <div class="thumbs">
+                    <button class="tile sel"><img src="import-workbench-assets/09.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span><span class="badge burst"><svg class="ic xs"><use href="#ic-spark"/></svg>最佳</span></button>
+                    <button class="tile"><img src="import-workbench-assets/09.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile"><img src="import-workbench-assets/09.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile more"><div><span>+9</span><small>连拍其它</small></div></button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="group-head">
+                    <button class="twist"><svg class="ic xs"><use href="#ic-chevdown"/></svg></button>
+                    <span class="gtitle">2026 年 6 月 18 日</span>
+                    <span class="gmeta">婚礼 · 30 张</span>
+                    <span class="gbytes">3.4 GB</span>
+                  </div>
+                  <div class="thumbs">
+                    <button class="tile sel"><img src="import-workbench-assets/10.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/11.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/12.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile sel"><img src="import-workbench-assets/06.jpg" alt=""><span class="check"><svg class="ic xs"><use href="#ic-check"/></svg></span></button>
+                    <button class="tile more"><div><span>+26</span><small>本组其余</small></div></button>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="view" data-view="folder">
+                <div class="folder-row parent">
+                  <svg class="ic" style="color:var(--accent)"><use href="#ic-folder"/></svg>
+                  <div><div class="fname">2019-2026 备份</div><div class="fsub">根目录 · 3 个文件夹 · 485 个文件</div></div>
+                  <span class="spacer"></span>
+                  <span class="fcount">12.4 GB</span>
+                </div>
+                <div class="folder-row indent">
+                  <img class="cover" src="import-workbench-assets/01.jpg" alt="">
+                  <div><div class="fname">旅行</div><div class="fsub">将创建文件夹 · 含 2 个子目录</div></div>
+                  <span class="spacer"></span>
+                  <span class="fcount">180 张</span>
+                </div>
+                <div class="folder-row indent" style="margin-left:44px">
+                  <img class="cover" src="import-workbench-assets/02.jpg" alt="">
+                  <div><div class="fname">日本 2019</div><div class="fsub">将创建相簿 · 京都 / 大阪</div></div>
+                  <span class="spacer"></span>
+                  <span class="fcount">138 张</span>
+                </div>
+                <div class="folder-row indent" style="margin-left:44px">
+                  <img class="cover" src="import-workbench-assets/07.jpg" alt="">
+                  <div><div class="fname">海边 2021</div><div class="fsub">将创建相簿</div></div>
+                  <span class="spacer"></span>
+                  <span class="fcount">42 张</span>
+                </div>
+                <div class="folder-row indent">
+                  <img class="cover" src="import-workbench-assets/11.jpg" alt="">
+                  <div><div class="fname">家庭</div><div class="fsub">将创建文件夹 · 含 2 个子目录</div></div>
+                  <span class="spacer"></span>
+                  <span class="fcount">212 张</span>
+                </div>
+                <div class="folder-row indent">
+                  <img class="cover" src="import-workbench-assets/10.jpg" alt="">
+                  <div><div class="fname">婚礼 2026</div><div class="fsub">将创建相簿 · 6 组重复项已跳过</div></div>
+                  <span class="spacer"></span>
+                  <span class="fcount">24 张</span>
+                </div>
+                <div class="folder-row indent" style="opacity:.6">
+                  <img class="cover" src="import-workbench-assets/06.jpg" alt="">
+                  <div><div class="fname">零散照片</div><div class="fsub">69 个文件直接导入图库，不建相簿</div></div>
+                  <span class="spacer"></span>
+                  <span class="fcount">69 张</span>
+                </div>
+              </div>
+
+              <div class="view" data-view="dup">
+                <div class="dup-row">
+                  <div class="dup-head">
+                    <svg class="ic sm" style="color:var(--warn)"><use href="#ic-info"/></svg>
+                    <span class="t">文件大小与像素尺寸完全一致</span>
+                    <span class="m">2 个副本</span>
+                    <span class="save">可省 128 MB</span>
+                  </div>
+                  <div class="dup-list">
+                    <div class="dup-item keep">
+                      <img src="import-workbench-assets/01.jpg" alt="">
+                      <div style="min-width:0"><div class="n">IMG_4821.HEIC</div><div class="k">已在图库 · 2019-08-12</div></div>
+                      <span class="kp">跳过</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="dup-row">
+                  <div class="dup-head">
+                    <svg class="ic sm" style="color:var(--warn)"><use href="#ic-info"/></svg>
+                    <span class="t">同名 · 同大小 · 不同导入批次</span>
+                    <span class="m">2 个副本</span>
+                    <span class="save">可省 86 MB</span>
+                  </div>
+                  <div class="dup-list">
+                    <div class="dup-item keep">
+                      <img src="import-workbench-assets/08.jpg" alt="">
+                      <div style="min-width:0"><div class="n">IMG_2044.HEIC</div><div class="k">候选 · 2021-05-02</div></div>
+                      <span class="kp">保留</span>
+                    </div>
+                    <div class="dup-item">
+                      <img src="import-workbench-assets/08.jpg" alt="">
+                      <div style="min-width:0"><div class="n">IMG_2044 副本.HEIC</div><div class="k">已在图库 · 2022-11-03</div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dup-row">
+                  <div class="dup-head">
+                    <svg class="ic sm" style="color:var(--warn)"><use href="#ic-info"/></svg>
+                    <span class="t">疑似副本（尺寸不同）</span>
+                    <span class="m">2 个文件</span>
+                    <span class="save">保留两版也可</span>
+                  </div>
+                  <div class="dup-list">
+                    <div class="dup-item keep">
+                      <img src="import-workbench-assets/03.jpg" alt="">
+                      <div style="min-width:0"><div class="n">IMG_3310.JPG</div><div class="k">4032×3024 · 4.2 MB</div></div>
+                      <span class="kp">保留</span>
+                    </div>
+                    <div class="dup-item">
+                      <img src="import-workbench-assets/03.jpg" alt="">
+                      <div style="min-width:0"><div class="n">IMG_3310 编辑.jpg</div><div class="k">2048×1536 · 0.9 MB</div></div>
+                    </div>
+                  </div>
+                </div>
+                <p style="font-size:10.5px;color:var(--tert);margin-top:10px;line-height:1.6">重复检测在导入前完成，只比对元数据（大小 / 像素 / 文件名），不解码原图。被跳过的项目不会拷贝进图库。</p>
+              </div>
+
+            </div>
+
+            <div class="hint-bar">
+              <span><kbd>空格</kbd> 预览</span>
+              <span><kbd>⌘A</kbd> 全选</span>
+              <span><kbd>⌘↩</kbd> 开始导入</span>
+              <span class="spacer" style="flex:1"></span>
+              <span>共 485 项，此处展示 4 组</span>
+            </div>
+          </div>
+
+          <aside class="plan-pane">
+            <div class="plan-head">
+              <div class="t"><svg class="ic sm"><use href="#ic-spark"/></svg>入库计划</div>
+              <div class="s">预计入库 443 项 · 10.6 GB · 跳过 42 项</div>
+            </div>
+            <div class="plan-scroll">
+
+              <div class="block">
+                <div class="block-title">将创建的文件夹与相簿<span class="r">可折叠</span></div>
+                <div class="tree">
+                  <div class="tree-row root"><button class="twist"><svg class="ic xs"><use href="#ic-chevdown"/></svg></button><svg class="ic sm"><use href="#ic-folder"/></svg><span class="n">旅行</span><span class="c">180</span></div>
+                  <div class="tree-row indent-1"><button class="twist"><svg class="ic xs"><use href="#ic-chevdown"/></svg></button><svg class="ic sm"><use href="#ic-folder"/></svg><span class="n">日本 2019</span><span class="c">138</span></div>
+                  <div class="tree-row indent-2"><svg class="ic sm"><use href="#ic-album"/></svg><span class="n">京都</span><span class="c">96</span></div>
+                  <div class="tree-row indent-2"><svg class="ic sm"><use href="#ic-album"/></svg><span class="n">大阪</span><span class="c">42</span></div>
+                  <div class="tree-row indent-1"><svg class="ic sm"><use href="#ic-album"/></svg><span class="n">海边 2021</span><span class="c">42</span></div>
+                  <div class="tree-row root"><svg class="ic sm"><use href="#ic-folder"/></svg><span class="n">家庭</span><span class="c">212</span></div>
+                  <div class="tree-row indent-1"><svg class="ic sm"><use href="#ic-album"/></svg><span class="n">生日</span><span class="c">24</span></div>
+                  <div class="tree-row indent-1"><svg class="ic sm"><use href="#ic-album"/></svg><span class="n">婚礼 2026</span><span class="c">188</span></div>
+                  <div class="tree-row"><svg class="ic sm" style="opacity:.5"><use href="#ic-photo"/></svg><span class="n">直接导入图库（不建相簿）</span><span class="c">51</span></div>
+                </div>
+              </div>
+
+              <div class="block">
+                <div class="block-title">检查结果</div>
+                <div class="stat-row skip"><svg class="ic sm"><use href="#ic-info"/></svg>已在图库，跳过<span class="num">−42</span></div>
+                <div class="stat-row"><svg class="ic sm"><use href="#ic-spark"/></svg>连拍精选可省<span class="num">86 张</span></div>
+                <div class="stat-row"><svg class="ic sm"><use href="#ic-video"/></svg>视频 / 实况<span class="num">18 / 26</span></div>
+                <div class="stat-row"><svg class="ic sm"><use href="#ic-camera"/></svg>RAW 原片<span class="num">34</span></div>
+              </div>
+
+              <div class="block">
+                <div class="block-title">连拍精选</div>
+                <div class="stat-row" style="padding-top:0"><span style="color:var(--sub)">同机位 2 秒内只保留最清晰的一张</span><span class="switch on"></span></div>
+                <div style="font-size:10px;color:var(--tert);line-height:1.55;margin-top:2px">被折叠的照片仍可在「按日期」中逐张勾选导入。</div>
+              </div>
+
+              <div class="block">
+                <div class="block-title">建议相簿</div>
+                <div class="suggest">
+                  <div class="suggest-row"><svg class="ic sm"><use href="#ic-spark"/></svg>海边 · 72 张<span class="n">场景</span><button class="add">采纳</button></div>
+                  <div class="suggest-row"><svg class="ic sm"><use href="#ic-spark"/></svg>婚礼 · 130 张<span class="n">场景</span><button class="add">采纳</button></div>
+                </div>
+              </div>
+
+              <div class="block">
+                <div class="block-title">入库压缩</div>
+                <div class="seg">
+                  <button aria-selected="true">原始</button>
+                  <button aria-selected="false">无损剥离</button>
+                  <button aria-selected="false">有损 2048</button>
+                </div>
+                <div style="font-size:10px;color:var(--tert);line-height:1.55;margin-top:6px">在拷贝时直接落结果，不产生第二份文件。</div>
+              </div>
+
+              <div class="block">
+                <div class="block-title">选项</div>
+                <div class="field">将最后一层文件夹创建为相簿<span class="switch on"></span></div>
+                <div class="field">保留上层文件夹结构<span class="switch on"></span></div>
+                <div class="field">导入后自动美化<span class="switch"></span></div>
+                <div class="field">目标相簿<span class="v">无</span></div>
+              </div>
+
+            </div>
+          </aside>
+        </div>
+
+        <div class="footer">
+          <button class="btn">取消</button>
+          <span class="foot-summary">将导入 <b id="footCount">443</b> 项 · 跳过 42 项 · 创建 2 个文件夹 / 4 个相簿</span>
+          <span class="spacer"></span>
+          <button class="btn" data-go="importing">导入全部 485</button>
+          <button class="btn primary" data-go="importing">导入所选（443）</button>
+        </div>
+
+      </section>
+
+      <!-- ── 阶段二 / 三：图库 + 浮动进度 / 完成 toast ── -->
+      <section class="stage stage-gallery">
+
+        <div class="gallery-bar">
+          <h1>图库</h1>
+          <span class="sub" id="gallerySub">12,923 项 · 2019–2026</span>
+          <span class="spacer"></span>
+
+          <!-- 进度入口：工具栏胶囊 -->
+          <div class="imp-pill" id="impPill">
+            <span class="ring"></span>
+            <span class="txt">导入中 <b>37%</b> · 179/443</span>
+            <span class="mini"><i></i></span>
+            <span class="chev"><svg class="ic xs"><use href="#ic-chevdown"/></svg></span>
+          </div>
+
+          <button class="icon-btn" title="筛选"><svg class="ic sm"><use href="#ic-info"/></svg></button>
+          <button class="icon-btn" title="网格"><svg class="ic sm"><use href="#ic-photo"/></svg></button>
+          <span class="imp-line"><i></i></span>
+        </div>
+
+        <div class="gallery-scroll">
+          <div class="gsec">
+            <div class="gsec-head"><span class="y">2026</span><span class="m">6 月 18 日 · 30 张</span></div>
+            <div class="ggrid">
+              <div class="cell"><img src="import-workbench-assets/10.jpg" alt=""><span class="tagnew">新</span></div>
+              <div class="cell"><img src="import-workbench-assets/11.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/12.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/06.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/04.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/03.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/05.jpg" alt=""></div>
+            </div>
+          </div>
+
+          <div class="gsec">
+            <div class="gsec-head"><span class="y">2025</span><span class="m">7 月 14 日 · 11 张</span></div>
+            <div class="ggrid">
+              <div class="cell"><img src="import-workbench-assets/09.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/07.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/08.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/01.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/02.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/06.jpg" alt=""></div>
+            </div>
+          </div>
+
+          <div class="gsec">
+            <div class="gsec-head"><span class="y">2021</span><span class="m">5 月 2 日 · 16 张</span></div>
+            <div class="ggrid">
+              <div class="cell"><img src="import-workbench-assets/07.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/08.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/03.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/12.jpg" alt=""></div>
+              <div class="cell"><img src="import-workbench-assets/04.jpg" alt=""></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 悬浮信息卡 -->
+        <div class="hud" id="hud">
+          <div class="hud-head"><svg class="ic sm" style="color:var(--accent)"><use href="#ic-download"/></svg>正在导入<span class="pct">37%</span></div>
+          <div class="bar"><i></i></div>
+          <div class="nm"><span>179 / 443 个文件</span><span class="r">4.1 / 10.6 GB</span></div>
+          <div class="hud-file">
+            <svg class="ic xs"><use href="#ic-photo"/></svg>
+            <span><b>IMG_4821.HEIC</b></span>
+            <span>→ 京都</span>
+          </div>
+          <div class="hud-stats">
+            <div class="ok"><div class="k">已导入</div><div class="v">176</div></div>
+            <div class="warn"><div class="k">跳过</div><div class="v">42</div></div>
+            <div><div class="k">失败</div><div class="v">1</div></div>
+          </div>
+          <div class="hud-actions">
+            <span class="note">可以继续浏览，导入在后台进行</span>
+            <button class="danger" id="cancelBtn">取消</button>
+            <button id="hideHud">收起</button>
+            <button id="simulateDone">模拟完成</button>
+          </div>
+        </div>
+
+        <!-- 完成 toast -->
+        <div class="toast" id="toast">
+          <span class="ok"><svg class="ic xs"><use href="#ic-check"/></svg></span>
+          <span><b>已导入 443 项</b>，跳过 42 张重复，创建 4 个相簿</span>
+          <span class="sp"></span>
+          <button id="openImported">查看本次导入</button>
+          <button class="x" id="closeToast"><svg class="ic xs"><use href="#ic-close"/></svg></button>
+          <span class="countdown"><i></i></span>
+        </div>
+
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const win = document.getElementById('win');
+  const hud = document.getElementById('hud');
+  const toast = document.getElementById('toast');
+  const pill = document.getElementById('impPill');
+
+  function setStage(stage){
+    win.dataset.stage = stage;
+    document.querySelectorAll('.stage-switch button').forEach(b=>{
+      b.setAttribute('aria-selected', String(b.dataset.go === stage));
+    });
+    // 进入导入中：显示胶囊，默认展开悬浮卡；完成：隐藏进度、显示 toast
+    const importing = stage === 'importing';
+    pill.style.display = importing ? '' : 'none';
+    const line = document.querySelector('.imp-line');
+    if (line) line.style.display = importing ? '' : 'none';
+    hud.classList.toggle('show', importing);
+    toast.classList.toggle('show', stage === 'finished');
+    if (stage === 'finished') {
+      hud.classList.remove('show');
+      restartCountdown();
+    }
+  }
+
+  // 每次进入「完成提示」重置自动关闭的 6 秒计时
+  function restartCountdown(){
+    const bar = document.querySelector('.countdown i');
+    bar.style.animation = 'none';
+    void bar.offsetHeight;
+    bar.style.animation = 'drain 6s linear forwards';
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(()=> toast.classList.remove('show'), 6000);
+  }
+
+  document.querySelectorAll('[data-go]').forEach(el=>{
+    el.addEventListener('click', ()=> setStage(el.dataset.go));
+  });
+
+  // 悬浮卡开合
+  pill.addEventListener('click', ()=> hud.classList.toggle('show'));
+  document.getElementById('hideHud').addEventListener('click', ()=> hud.classList.remove('show'));
+  document.getElementById('cancelBtn').addEventListener('click', ()=>{
+    hud.classList.remove('show');
+    pill.style.display = 'none';
+    const line = document.querySelector('.imp-line');
+    if (line) line.style.display = 'none';
+    toast.classList.remove('show');
+  });
+  document.getElementById('simulateDone').addEventListener('click', ()=> setStage('finished'));
+
+  // 完成 toast 手动关闭
+  document.getElementById('closeToast').addEventListener('click', ()=> toast.classList.remove('show'));
+  document.getElementById('openImported').addEventListener('click', ()=> toast.classList.remove('show'));
+
+  // 视图切换
+  document.querySelectorAll('.viewtabs button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.viewtabs button').forEach(b=>b.setAttribute('aria-selected','false'));
+      btn.setAttribute('aria-selected','true');
+      document.querySelectorAll('.view[data-view]').forEach(v=>{
+        v.classList.toggle('on', v.dataset.view === btn.dataset.view);
+      });
+      document.getElementById('scrollArea').scrollTop = 0;
+    });
+  });
+
+  // 选择与计数
+  let selected = 443;
+  const selCount = document.getElementById('selCount');
+  const footCount = document.getElementById('footCount');
+  function refresh(){
+    selCount.textContent = selected;
+    footCount.textContent = selected;
+  }
+  document.querySelectorAll('.tile:not(.more)').forEach(tile=>{
+    tile.addEventListener('click', ()=>{
+      const on = tile.classList.toggle('sel');
+      selected += on ? 1 : -1;
+      refresh();
+    });
+  });
+
+  // 组折叠
+  document.querySelectorAll('.group-head .twist').forEach(tw=>{
+    tw.addEventListener('click', ()=>{
+      const group = tw.closest('.group');
+      group.classList.toggle('collapsed');
+      tw.innerHTML = group.classList.contains('collapsed')
+        ? '<svg class="ic xs"><use href="#ic-chev"/></svg>'
+        : '<svg class="ic xs"><use href="#ic-chevdown"/></svg>';
+    });
+  });
+
+  // 开关
+  document.querySelectorAll('.switch').forEach(sw=>{
+    sw.addEventListener('click', ()=> sw.classList.toggle('on'));
+  });
+
+  // 分段控件
+  document.querySelectorAll('.seg button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      b.closest('.seg').querySelectorAll('button').forEach(x=>x.setAttribute('aria-selected','false'));
+      b.setAttribute('aria-selected','true');
+    });
+  });
+
+  refresh();
+  setStage('preview');
+</script>
+</body>
+</html>

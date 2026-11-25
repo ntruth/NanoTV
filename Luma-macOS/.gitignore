@@ -1,0 +1,15 @@
+.build/
+.env
+Luma.app/
+Luma-*-macOS.zip
+Luma-*-macOS-dev.zip
+.DS_Store
+*.xcuserstate
+.trae-html-share-packages/
+Vendor/ffmpeg/
+# 由 Tools/make_vendor_runtime.sh 生成（ffmpeg-full + libplacebo + MoltenVK，约 95MB）
+Vendor/ffmpeg-dv/
+
+# Python 缓存与原始抓取数据（可重建，不入库）
+__pycache__/
+Tools/catalog_build/raw/

@@ -1,0 +1,1413 @@
+{
+  "files": {
+    "01_h264_aac_stereo.mp4": {
+      "file": "01_h264_aac_stereo.mp4",
+      "note": "最通用基线：H.264 8bit + AAC 立体声",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "duration": 8.0,
+      "size_mb": 0.99,
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": null,
+        "codec_tag": "avc1",
+        "field_order": "progressive",
+        "bitrate": 907298
+      },
+      "audio": [
+        {
+          "codec": "aac",
+          "profile": "LC",
+          "channels": 2,
+          "layout": "stereo",
+          "sample_rate": 48000,
+          "bitrate": 127999,
+          "language": "und",
+          "title": null,
+          "default": 1
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1043122
+    },
+    "02_h264_aac_51.mp4": {
+      "file": "02_h264_aac_51.mp4",
+      "note": "MP4 多声道 AAC 5.1",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "duration": 8.0,
+      "size_mb": 1.05,
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": null,
+        "codec_tag": "avc1",
+        "field_order": "progressive",
+        "bitrate": 907298
+      },
+      "audio": [
+        {
+          "codec": "aac",
+          "profile": "LC",
+          "channels": 6,
+          "layout": "5.1",
+          "sample_rate": 48000,
+          "bitrate": 187238,
+          "language": "und",
+          "title": null,
+          "default": 1
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1102519
+    },
+    "03_h264_ac3_51.mp4": {
+      "file": "03_h264_ac3_51.mp4",
+      "note": "MP4 + AC-3 5.1（蓝光常见，验证 AVPlayer 原生直读）",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "duration": 8.0,
+      "size_mb": 1.48,
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": null,
+        "codec_tag": "avc1",
+        "field_order": "progressive",
+        "bitrate": 907298
+      },
+      "audio": [
+        {
+          "codec": "ac3",
+          "profile": null,
+          "channels": 6,
+          "layout": "5.1(side)",
+          "sample_rate": 48000,
+          "bitrate": 640000,
+          "language": "und",
+          "title": null,
+          "default": 1
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1553772
+    },
+    "04_h264_ac3_51.mkv": {
+      "file": "04_h264_ac3_51.mkv",
+      "note": "MKV + AC-3 5.1（remux 音频直通候选）",
+      "container": "matroska,webm",
+      "duration": 8.0,
+      "size_mb": 1.48,
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "ac3",
+          "profile": null,
+          "channels": 6,
+          "layout": "5.1(side)",
+          "sample_rate": 48000,
+          "bitrate": 640000,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1551357
+    },
+    "05_h264_eac3_51.mkv": {
+      "file": "05_h264_eac3_51.mkv",
+      "note": "MKV + E-AC-3 5.1（直通候选）",
+      "container": "matroska,webm",
+      "duration": 8.0,
+      "size_mb": 1.48,
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "eac3",
+          "profile": null,
+          "channels": 6,
+          "layout": "5.1(side)",
+          "sample_rate": 48000,
+          "bitrate": 640000,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1551359
+    },
+    "06_h264_dts_51.mkv": {
+      "file": "06_h264_dts_51.mkv",
+      "note": "MKV + DTS 5.1（必须重编码音频）",
+      "container": "matroska,webm",
+      "duration": 8.0,
+      "size_mb": 1.6,
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "dts",
+          "profile": "DTS",
+          "channels": 6,
+          "layout": "5.1(side)",
+          "sample_rate": 48000,
+          "bitrate": 768000,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1682850
+    },
+    "07_hevc_mlp_51.mkv": {
+      "file": "07_hevc_mlp_51.mkv",
+      "note": "MKV + TrueHD 家族（MLP）5.1，验证 AC-3 降级策略",
+      "container": "matroska,webm",
+      "duration": 8.0,
+      "size_mb": 0.96,
+      "video": {
+        "codec": "hevc",
+        "profile": "Main",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "mlp",
+          "profile": null,
+          "channels": 6,
+          "layout": "5.1",
+          "sample_rate": 48000,
+          "bitrate": 0,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1001543
+    },
+    "08_hevc10_hdr10_flac_51.mkv": {
+      "file": "08_hevc10_hdr10_flac_51.mkv",
+      "note": "HEVC 10bit HDR10 + FLAC 5.1（HDR + 音频重编码）",
+      "container": "matroska,webm",
+      "duration": 8.0,
+      "size_mb": 0.74,
+      "video": {
+        "codec": "hevc",
+        "profile": "Main 10",
+        "pix_fmt": "yuv420p10le",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": "bt2020nc",
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "flac",
+          "profile": null,
+          "channels": 6,
+          "layout": "5.1",
+          "sample_rate": 48000,
+          "bitrate": 0,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 777744
+    },
+    "09_hevc10_hdr10_ac3_51.mkv": {
+      "file": "09_hevc10_hdr10_ac3_51.mkv",
+      "note": "HEVC 10bit HDR10 + AC-3 5.1（HDR + 音频直通）",
+      "container": "matroska,webm",
+      "duration": 8.0,
+      "size_mb": 1.22,
+      "video": {
+        "codec": "hevc",
+        "profile": "Main 10",
+        "pix_fmt": "yuv420p10le",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": "bt2020nc",
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "ac3",
+          "profile": null,
+          "channels": 6,
+          "layout": "5.1(side)",
+          "sample_rate": 48000,
+          "bitrate": 640000,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1275240
+    },
+    "10_av1_opus_51.mkv": {
+      "file": "10_av1_opus_51.mkv",
+      "note": "AV1 + Opus 5.1（AV1 是否可 remux 由实测决定）",
+      "container": "matroska,webm",
+      "duration": 8.008,
+      "size_mb": 0.64,
+      "video": {
+        "codec": "av1",
+        "profile": "Main",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "opus",
+          "profile": null,
+          "channels": 6,
+          "layout": "5.1",
+          "sample_rate": 48000,
+          "bitrate": 0,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 669542
+    },
+    "11_vp9_opus_51.webm": {
+      "file": "11_vp9_opus_51.webm",
+      "note": "VP9 + Opus 5.1 WebM",
+      "container": "matroska,webm",
+      "duration": 8.008,
+      "size_mb": 0.85,
+      "video": {
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "opus",
+          "profile": null,
+          "channels": 6,
+          "layout": "5.1",
+          "sample_rate": 48000,
+          "bitrate": 0,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 891089
+    },
+    "12_mpeg2_1080i_mp3.mkv": {
+      "file": "12_mpeg2_1080i_mp3.mkv",
+      "note": "MPEG-2 1080i 隔行 + MP3（去隔行能力）",
+      "container": "matroska,webm",
+      "duration": 8.023,
+      "size_mb": 11.65,
+      "video": {
+        "codec": "mpeg2video",
+        "profile": "Main",
+        "pix_fmt": "yuv420p",
+        "size": "1920x1080",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "bt",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "mp3",
+          "profile": null,
+          "channels": 2,
+          "layout": "stereo",
+          "sample_rate": 48000,
+          "bitrate": 192000,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 12183304
+    },
+    "13_mpeg4_mp3.avi": {
+      "file": "13_mpeg4_mp3.avi",
+      "note": "MPEG-4 Part 2 + MP3 AVI（老片库）",
+      "container": "avi",
+      "duration": 8.04,
+      "size_mb": 2.26,
+      "video": {
+        "codec": "mpeg4",
+        "profile": "Simple Profile",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": null,
+        "codec_tag": "FMP4",
+        "field_order": null,
+        "bitrate": 2155115
+      },
+      "audio": [
+        {
+          "codec": "mp3",
+          "profile": null,
+          "channels": 2,
+          "layout": "stereo",
+          "sample_rate": 48000,
+          "bitrate": 192000,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 2359233
+    },
+    "14_prores_pcm.mov": {
+      "file": "14_prores_pcm.mov",
+      "note": "ProRes 422 HQ + PCM（剪辑母版）",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "duration": 8.0,
+      "size_mb": 16.46,
+      "video": {
+        "codec": "prores",
+        "profile": "HQ",
+        "pix_fmt": "yuv422p10le",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "apch",
+        "field_order": "progressive",
+        "bitrate": 15720244
+      },
+      "audio": [
+        {
+          "codec": "pcm_s16le",
+          "profile": null,
+          "channels": 2,
+          "layout": "stereo",
+          "sample_rate": 48000,
+          "bitrate": 1536000,
+          "language": null,
+          "title": null,
+          "default": 1
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 17260466
+    },
+    "15_h264_alac.mov": {
+      "file": "15_h264_alac.mov",
+      "note": "MOV + ALAC（Apple 无损）",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "duration": 8.0,
+      "size_mb": 1.01,
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": null,
+        "codec_tag": "avc1",
+        "field_order": "progressive",
+        "bitrate": 907298
+      },
+      "audio": [
+        {
+          "codec": "alac",
+          "profile": null,
+          "channels": 2,
+          "layout": "stereo",
+          "sample_rate": 48000,
+          "bitrate": 146472,
+          "language": null,
+          "title": null,
+          "default": 1
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1058960
+    },
+    "16_h264_aac51_ac351.mkv": {
+      "file": "16_h264_aac51_ac351.mkv",
+      "note": "双音轨：AAC 5.1(eng) + AC-3 5.1(jpn)，验证多音轨 master",
+      "container": "matroska,webm",
+      "duration": 8.021,
+      "size_mb": 1.66,
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "[0][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "aac",
+          "profile": "LC",
+          "channels": 6,
+          "layout": "5.1",
+          "sample_rate": 48000,
+          "bitrate": 0,
+          "language": "eng",
+          "title": "English AAC 5.1",
+          "default": 1
+        },
+        {
+          "codec": "ac3",
+          "profile": null,
+          "channels": 6,
+          "layout": "5.1(side)",
+          "sample_rate": 48000,
+          "bitrate": 640000,
+          "language": "jpn",
+          "title": "Japanese AC-3 5.1",
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1737378
+    },
+    "17_h264_aac_stereo.ts": {
+      "file": "17_h264_aac_stereo.ts",
+      "note": "MPEG-TS + AAC（直播录制）",
+      "container": "mpegts",
+      "duration": 8.021333,
+      "size_mb": 1.07,
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": null,
+        "codec_tag": "[27][0][0][0]",
+        "field_order": "progressive",
+        "bitrate": 0
+      },
+      "audio": [
+        {
+          "codec": "aac",
+          "profile": "LC",
+          "channels": 2,
+          "layout": "stereo",
+          "sample_rate": 48000,
+          "bitrate": 130600,
+          "language": null,
+          "title": null,
+          "default": 0
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 1117875
+    },
+    "18_hevc_aac_stereo.mp4": {
+      "file": "18_hevc_aac_stereo.mp4",
+      "note": "HEVC 8bit MP4（hvc1 标签与原生直读）",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "duration": 8.0,
+      "size_mb": 0.73,
+      "video": {
+        "codec": "hevc",
+        "profile": "Main",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "hev1",
+        "field_order": "progressive",
+        "bitrate": 624508
+      },
+      "audio": [
+        {
+          "codec": "aac",
+          "profile": "LC",
+          "channels": 2,
+          "layout": "stereo",
+          "sample_rate": 48000,
+          "bitrate": 127999,
+          "language": "und",
+          "title": null,
+          "default": 1
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 762675
+    },
+    "19_hevc10_hdr10_4k60.mp4": {
+      "file": "19_hevc10_hdr10_4k60.mp4",
+      "note": "4K60 HDR10 HEVC（像素率降档 + libplacebo 映射）",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "duration": 6.0,
+      "size_mb": 8.42,
+      "video": {
+        "codec": "hevc",
+        "profile": "Main 10",
+        "pix_fmt": "yuv420p10le",
+        "size": "3840x2160",
+        "fps": "60/1",
+        "primaries": "bt2020",
+        "transfer": "smpte2084",
+        "matrix": "bt2020nc",
+        "range": "tv",
+        "codec_tag": "hev1",
+        "field_order": "progressive",
+        "bitrate": 11569718
+      },
+      "audio": [
+        {
+          "codec": "aac",
+          "profile": "LC",
+          "channels": 6,
+          "layout": "5.1",
+          "sample_rate": 48000,
+          "bitrate": 187260,
+          "language": "und",
+          "title": null,
+          "default": 1
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 11776217
+    },
+    "20_hevc_aac_stereo_hvc1.mp4": {
+      "file": "20_hevc_aac_stereo_hvc1.mp4",
+      "note": "HEVC MP4（hvc1 标签）：验证 isPlayable 与 hev1 的差异",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "duration": 8.0,
+      "size_mb": 0.73,
+      "video": {
+        "codec": "hevc",
+        "profile": "Main",
+        "pix_fmt": "yuv420p",
+        "size": "640x360",
+        "fps": "25/1",
+        "primaries": null,
+        "transfer": null,
+        "matrix": null,
+        "range": "tv",
+        "codec_tag": "hvc1",
+        "field_order": "progressive",
+        "bitrate": 624508
+      },
+      "audio": [
+        {
+          "codec": "aac",
+          "profile": "LC",
+          "channels": 2,
+          "layout": "stereo",
+          "sample_rate": 48000,
+          "bitrate": 127999,
+          "language": "und",
+          "title": null,
+          "default": 1
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 762675
+    },
+    "21_hevc10_hdr10_hvc1.mp4": {
+      "file": "21_hevc10_hdr10_hvc1.mp4",
+      "note": "1080p HDR10 HEVC hvc1：验证原生 HDR 直读",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "duration": 8.0,
+      "size_mb": 5.9,
+      "video": {
+        "codec": "hevc",
+        "profile": "Main 10",
+        "pix_fmt": "yuv420p10le",
+        "size": "1920x1080",
+        "fps": "25/1",
+        "primaries": "bt2020",
+        "transfer": "smpte2084",
+        "matrix": "bt2020nc",
+        "range": "tv",
+        "codec_tag": "hvc1",
+        "field_order": "progressive",
+        "bitrate": 5988432
+      },
+      "audio": [
+        {
+          "codec": "aac",
+          "profile": "LC",
+          "channels": 6,
+          "layout": "5.1",
+          "sample_rate": 48000,
+          "bitrate": 187238,
+          "language": "und",
+          "title": null,
+          "default": 1
+        }
+      ],
+      "subtitle_count": 0,
+      "format_bitrate": 6186121
+    }
+  },
+  "avplayer": {
+    "01_h264_aac_stereo.mp4": {
+      "audioOptions": [
+        {
+          "displayName": "Unknown language",
+          "language": "und",
+          "mediaType": "soun"
+        }
+      ],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 8,
+      "elapsedSeconds": 2.3462990522384644,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/01_h264_aac_stereo.mp4",
+      "isPlayable": true,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.441577959,
+      "presentationSize": "640x360",
+      "tracks": [
+        {
+          "codecs": [
+            "avc1"
+          ],
+          "colorExtensions": {
+            "FullRangeVideo": "0"
+          },
+          "decodable": true,
+          "fps": 25,
+          "language": "und",
+          "size": "640x360",
+          "type": "vide"
+        },
+        {
+          "channels": 2,
+          "codecs": [
+            "aac"
+          ],
+          "decodable": true,
+          "language": "und",
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "SDR",
+      "wallSeconds": 19.45
+    },
+    "02_h264_aac_51.mp4": {
+      "audioOptions": [
+        {
+          "displayName": "Unknown language",
+          "language": "und",
+          "mediaType": "soun"
+        }
+      ],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 8,
+      "elapsedSeconds": 1.7082300186157227,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/02_h264_aac_51.mp4",
+      "isPlayable": true,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.441453935,
+      "presentationSize": "640x360",
+      "tracks": [
+        {
+          "codecs": [
+            "avc1"
+          ],
+          "colorExtensions": {
+            "FullRangeVideo": "0"
+          },
+          "decodable": true,
+          "fps": 25,
+          "language": "und",
+          "size": "640x360",
+          "type": "vide"
+        },
+        {
+          "channels": 6,
+          "codecs": [
+            "aac"
+          ],
+          "decodable": true,
+          "language": "und",
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "SDR",
+      "wallSeconds": 19.45
+    },
+    "03_h264_ac3_51.mp4": {
+      "audioOptions": [
+        {
+          "displayName": "Unknown language Dolby Digital",
+          "language": "und",
+          "mediaType": "soun"
+        }
+      ],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 8,
+      "elapsedSeconds": 1.7044320106506348,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/03_h264_ac3_51.mp4",
+      "isPlayable": true,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.439713135,
+      "presentationSize": "640x360",
+      "tracks": [
+        {
+          "codecs": [
+            "avc1"
+          ],
+          "colorExtensions": {
+            "FullRangeVideo": "0"
+          },
+          "decodable": true,
+          "fps": 25,
+          "language": "und",
+          "size": "640x360",
+          "type": "vide"
+        },
+        {
+          "channels": 6,
+          "codecs": [
+            "ac-3"
+          ],
+          "decodable": true,
+          "language": "und",
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "SDR",
+      "wallSeconds": 19.45
+    },
+    "04_h264_ac3_51.mkv": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.10866105556488037,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/04_h264_ac3_51.mkv",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae83804c50 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "05_h264_eac3_51.mkv": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.10630297660827637,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/05_h264_eac3_51.mkv",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae83807b30 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "06_h264_dts_51.mkv": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.1155710220336914,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/06_h264_dts_51.mkv",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae81c12af0 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "07_hevc_mlp_51.mkv": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.11396002769470215,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/07_hevc_mlp_51.mkv",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae83b05000 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "08_hevc10_hdr10_flac_51.mkv": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.1075359582901001,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/08_hevc10_hdr10_flac_51.mkv",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae81c52ec0 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "09_hevc10_hdr10_ac3_51.mkv": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.10835707187652588,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/09_hevc10_hdr10_ac3_51.mkv",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae80f49a30 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "10_av1_opus_51.mkv": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.10890698432922363,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/10_av1_opus_51.mkv",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae81c135f0 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "11_vp9_opus_51.webm": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.10454893112182617,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/11_vp9_opus_51.webm",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae83b06590 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "12_mpeg2_1080i_mp3.mkv": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.10779190063476562,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/12_mpeg2_1080i_mp3.mkv",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae81c51520 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "13_mpeg4_mp3.avi": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.10837399959564209,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/13_mpeg4_mp3.avi",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11829 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media may be damaged., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae83e083d0 {Error Domain=NSOSStatusErrorDomain Code=-12848 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "14_prores_pcm.mov": {
+      "audioOptions": [
+        {
+          "displayName": "Unknown language",
+          "language": "und",
+          "mediaType": "soun"
+        }
+      ],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 8,
+      "elapsedSeconds": 1.6889430284500122,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/14_prores_pcm.mov",
+      "isPlayable": true,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.502544824,
+      "presentationSize": "640x360",
+      "tracks": [
+        {
+          "codecs": [
+            "apch"
+          ],
+          "colorExtensions": {
+            "BitsPerComponent": "12"
+          },
+          "decodable": true,
+          "fps": 25,
+          "language": "und",
+          "size": "640x360",
+          "type": "vide"
+        },
+        {
+          "channels": 2,
+          "codecs": [
+            "lpcm"
+          ],
+          "decodable": true,
+          "language": "und",
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "SDR",
+      "wallSeconds": 19.45
+    },
+    "15_h264_alac.mov": {
+      "audioOptions": [
+        {
+          "displayName": "Unknown language",
+          "language": "und",
+          "mediaType": "soun"
+        }
+      ],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 8,
+      "elapsedSeconds": 1.7258270978927612,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/15_h264_alac.mov",
+      "isPlayable": true,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.502001992,
+      "presentationSize": "640x360",
+      "tracks": [
+        {
+          "codecs": [
+            "avc1"
+          ],
+          "colorExtensions": {
+            "FullRangeVideo": "0"
+          },
+          "decodable": true,
+          "fps": 25,
+          "language": "und",
+          "size": "640x360",
+          "type": "vide"
+        },
+        {
+          "channels": 2,
+          "codecs": [
+            "alac"
+          ],
+          "decodable": true,
+          "language": "und",
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "SDR",
+      "wallSeconds": 19.45
+    },
+    "16_h264_aac51_ac351.mkv": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "elapsedSeconds": 0.10652601718902588,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/16_h264_aac51_ac351.mkv",
+      "isPlayable": false,
+      "itemError": "Error Domain=AVFoundationErrorDomain Code=-11828 \"Cannot Open\" UserInfo={NSLocalizedFailureReason=This media format is not supported., NSLocalizedDescription=Cannot Open, NSUnderlyingError=0x7fae83a04f50 {Error Domain=NSOSStatusErrorDomain Code=-12847 \"(null)\"}}",
+      "itemStatus": "failed",
+      "presentationSize": "0x0",
+      "tracks": [],
+      "transport": "file",
+      "wallSeconds": 19.45
+    },
+    "17_h264_aac_stereo.ts": {
+      "audioOptions": [],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 8,
+      "elapsedSeconds": 1.707980990409851,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/17_h264_aac_stereo.ts",
+      "isPlayable": true,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.493638506,
+      "presentationSize": "640x360",
+      "tracks": [
+        {
+          "codecs": [
+            "avc1"
+          ],
+          "colorExtensions": {
+            "FullRangeVideo": "0"
+          },
+          "decodable": true,
+          "fps": 25,
+          "size": "640x360",
+          "type": "vide"
+        },
+        {
+          "channels": 2,
+          "codecs": [
+            "aac"
+          ],
+          "decodable": true,
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "SDR",
+      "wallSeconds": 19.45
+    },
+    "18_hevc_aac_stereo.mp4": {
+      "audioOptions": [
+        {
+          "displayName": "Unknown language",
+          "language": "und",
+          "mediaType": "soun"
+        }
+      ],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 8,
+      "elapsedSeconds": 1.7165000438690186,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/18_hevc_aac_stereo.mp4",
+      "isPlayable": false,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.514704246,
+      "presentationSize": "0x0",
+      "tracks": [
+        {
+          "codecs": [
+            "hev1"
+          ],
+          "colorExtensions": {
+            "BitsPerComponent": "8",
+            "FullRangeVideo": "0"
+          },
+          "decodable": false,
+          "fps": 25,
+          "language": "und",
+          "size": "640x360",
+          "type": "vide"
+        },
+        {
+          "channels": 2,
+          "codecs": [
+            "aac"
+          ],
+          "decodable": true,
+          "language": "und",
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "SDR",
+      "wallSeconds": 19.45
+    },
+    "19_hevc10_hdr10_4k60.mp4": {
+      "audioOptions": [
+        {
+          "displayName": "Unknown language",
+          "language": "und",
+          "mediaType": "soun"
+        }
+      ],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 6,
+      "elapsedSeconds": 1.7080730199813843,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/19_hevc10_hdr10_4k60.mp4",
+      "isPlayable": false,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.449178524,
+      "presentationSize": "0x0",
+      "tracks": [
+        {
+          "codecs": [
+            "hev1"
+          ],
+          "colorExtensions": {
+            "BitsPerComponent": "10",
+            "CVImageBufferColorPrimaries": "ITU_R_2020",
+            "CVImageBufferTransferFunction": "SMPTE_ST_2084_PQ",
+            "CVImageBufferYCbCrMatrix": "ITU_R_2020",
+            "ContentLightLevelInfo": "{length = 4, bytes = 0x03e80190}",
+            "FullRangeVideo": "0",
+            "MasteringDisplayColorVolume": "{length = 24, bytes = 0x33c286c41d4c0bb884d03e803d1340420098968000000001}"
+          },
+          "decodable": false,
+          "fps": 60.000003814697266,
+          "language": "und",
+          "size": "3840x2160",
+          "type": "vide"
+        },
+        {
+          "channels": 6,
+          "codecs": [
+            "aac"
+          ],
+          "decodable": true,
+          "language": "und",
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "HDR10/PQ",
+      "wallSeconds": 19.45
+    },
+    "20_hevc_aac_stereo_hvc1.mp4": {
+      "audioOptions": [
+        {
+          "displayName": "Unknown language",
+          "language": "und",
+          "mediaType": "soun"
+        }
+      ],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 8,
+      "elapsedSeconds": 1.7193740606307983,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/20_hevc_aac_stereo_hvc1.mp4",
+      "isPlayable": true,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.518931496,
+      "presentationSize": "640x360",
+      "tracks": [
+        {
+          "codecs": [
+            "hvc1"
+          ],
+          "colorExtensions": {
+            "BitsPerComponent": "8",
+            "FullRangeVideo": "0"
+          },
+          "decodable": true,
+          "fps": 25,
+          "language": "und",
+          "size": "640x360",
+          "type": "vide"
+        },
+        {
+          "channels": 2,
+          "codecs": [
+            "aac"
+          ],
+          "decodable": true,
+          "language": "und",
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "SDR",
+      "wallSeconds": 19.45
+    },
+    "21_hevc10_hdr10_hvc1.mp4": {
+      "audioOptions": [
+        {
+          "displayName": "Unknown language",
+          "language": "und",
+          "mediaType": "soun"
+        }
+      ],
+      "displayEDR": 1.2000000476837158,
+      "displayPotentialEDR": 16,
+      "duration": 8,
+      "elapsedSeconds": 1.725376009941101,
+      "input": "/Users/lijialong/Movies/LumaTestMedia/media/21_hevc10_hdr10_hvc1.mp4",
+      "isPlayable": true,
+      "itemStatus": "readyToPlay",
+      "likelyToKeepUp": true,
+      "playedRate": 1,
+      "playedSeconds": 1.449418321,
+      "presentationSize": "1920x1080",
+      "tracks": [
+        {
+          "codecs": [
+            "hvc1"
+          ],
+          "colorExtensions": {
+            "BitsPerComponent": "10",
+            "CVImageBufferColorPrimaries": "ITU_R_2020",
+            "CVImageBufferTransferFunction": "SMPTE_ST_2084_PQ",
+            "CVImageBufferYCbCrMatrix": "ITU_R_2020",
+            "ContentLightLevelInfo": "{length = 4, bytes = 0x03e80190}",
+            "FullRangeVideo": "0",
+            "MasteringDisplayColorVolume": "{length = 24, bytes = 0x33c286c41d4c0bb884d03e803d1340420098968000000001}"
+          },
+          "decodable": true,
+          "fps": 25,
+          "language": "und",
+          "size": "1920x1080",
+          "type": "vide"
+        },
+        {
+          "channels": 6,
+          "codecs": [
+            "aac"
+          ],
+          "decodable": true,
+          "language": "und",
+          "sampleRate": 48000,
+          "type": "soun"
+        }
+      ],
+      "transport": "file",
+      "videoRange": "HDR10/PQ",
+      "wallSeconds": 19.45
+    }
+  }
+}

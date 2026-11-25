@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>zh_CN</string>
+    <key>CFBundleExecutable</key>
+    <string>Luma</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.baymax.luma</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>拾光</string>
+    <key>CFBundleDisplayName</key>
+    <string>拾光</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>照片图库</string>
+            <key>CFBundleTypeRole</key>
+            <string>Viewer</string>
+            <key>LSHandlerRank</key>
+            <string>Alternate</string>
+            <key>CFBundleTypeExtensions</key>
+            <array>
+                <string>photoslibrary</string>
+            </array>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>com.apple.photos.library</string>
+            </array>
+        </dict>
+    </array>
+    <key>CFBundleShortVersionString</key>
+    <string>2.1.0</string>
+    <key>CFBundleVersion</key>
+    <string>8</string>
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.photography</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>14.0</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>用于发现并连接局域网内的 SMB / WebDAV 服务器（如群晖 NAS）浏览照片和视频。</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>用于把美化结果与清理操作写回系统「照片」图库；全部处理都在本机完成。</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>用于把美化后的照片保存到系统「照片」图库。</string>
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_smb._tcp</string>
+    </array>
+    <key>NSHumanReadableCopyright</key>
+    <string>© 2026 拾光 Luma</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
+</dict>
+</plist>

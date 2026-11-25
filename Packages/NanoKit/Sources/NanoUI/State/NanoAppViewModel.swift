@@ -428,6 +428,18 @@ public final class NanoAppViewModel: @unchecked Sendable {
             }
         }
 
+        if payload.contains("\"luma.sources\""),
+           let lumaData = payload.data(using: .utf8),
+           let lumaBundle = try? LumaPresetImporter.parseLumaSourcesJSON(lumaData) {
+            if !lumaBundle.remoteSites.isEmpty {
+                self.remoteSites.append(contentsOf: lumaBundle.remoteSites)
+            }
+            for tvSub in lumaBundle.tvSubscriptions {
+                await addAndSyncIPTVSubscription(tvSub)
+            }
+            return
+        }
+
         if payload.contains("\"sites\""), let bundle = try? RemoteResourceEngineHub.parseFongMiSubscriptionJSON(payload) {
             self.remoteSites.append(contentsOf: bundle.sites)
             for live in bundle.liveM3UURLs {
@@ -688,6 +700,12 @@ public final class NanoAppViewModel: @unchecked Sendable {
         )
         self.iptvSubscriptions = [sub1, sub2]
 
+        // 自动加载已同步进仓库的 3 份 Luma 预置片源包（电视 11 组全球 M3U + 网络影院 + 隐私受控资源站，macOS 与 Apple TV 双端开箱即用）
+        let bundledLuma = LumaPresetImporter.loadBundledPresets()
+        if !bundledLuma.tvSubscriptions.isEmpty {
+            self.iptvSubscriptions.append(contentsOf: bundledLuma.tvSubscriptions)
+        }
+
         let now = Date()
         self.liveChannels = [
             IPTVChannelGroup(
@@ -806,9 +824,11 @@ public final class NanoAppViewModel: @unchecked Sendable {
             RemoteResourceSite(name: "极光 4K 资源库", engineType: .macCMSJson, apiURL: "https://cms.example.org/api.php/provide/vod/", healthStatus: .online, latencyMs: 169, categoryCount: 27, continueWatchCount: 3, cachedPosterBytes: 19_400_000, cachedPosterCount: 664),
             RemoteResourceSite(name: "星辰短剧合集", engineType: .fongMiTVBox, apiURL: "https://fongmi.example.org/vod/duanju.json", healthStatus: .online, latencyMs: 280, categoryCount: 18, continueWatchCount: 13, cachedPosterBytes: 533_800_000, cachedPosterCount: 4186),
             RemoteResourceSite(name: "次元番剧社", engineType: .macCMSJson, apiURL: "https://anime.example.org/api.php/provide/vod/", healthStatus: .online, latencyMs: 381, categoryCount: 38, continueWatchCount: 1, cachedPosterBytes: 21_100_000, cachedPosterCount: 586),
-            RemoteResourceSite(name: "海外剧场直嗅站", engineType: .customWebRule, apiURL: "https://webrule.example.org", healthStatus: .requireVerify, latencyMs: 1278, categoryCount: 12, continueWatchCount: 1, cachedPosterBytes: 9_700_000, cachedPosterCount: 162),
-            RemoteResourceSite(name: "私密典藏影库 (加密分区)", engineType: .customWebRule, apiURL: "https://private.example.org", isPrivate: true, healthStatus: .online, latencyMs: 195, categoryCount: 32, continueWatchCount: 2, cachedPosterBytes: 42_000_000, cachedPosterCount: 320)
+            RemoteResourceSite(name: "海外剧场直嗅站", engineType: .customWebRule, apiURL: "https://webrule.example.org", healthStatus: .requireVerify, latencyMs: 1278, categoryCount: 12, continueWatchCount: 1, cachedPosterBytes: 9_700_000, cachedPosterCount: 162)
         ]
+        if !bundledLuma.remoteSites.isEmpty {
+            self.remoteSites.insert(contentsOf: bundledLuma.remoteSites, at: 0)
+        }
 
         self.musicTracks = [
             MusicTrack(sourceID: nasSMB.id, vfsPath: "/Music/渡口.flac", title: "渡口 (24bit/96kHz 母带)", artist: "蔡琴", album: "民歌蔡琴", formatTag: "FLAC · Hi-Res", durationSec: 225, lrcContent: "[00:00.00]渡口 - 蔡琴\n[00:12.50]让我与你握别\n[00:18.20]再轻轻抽出我的手\n[00:25.00]知道思念从此生根\n[00:32.10]浮云白日 山川庄严温柔"),

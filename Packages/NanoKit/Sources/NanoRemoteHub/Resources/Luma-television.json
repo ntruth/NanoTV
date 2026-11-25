@@ -1,0 +1,118 @@
+{
+  "exportedAt" : "2026-11-25T04:35:06Z",
+  "format" : "luma.sources",
+  "items" : [
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000001",
+      "isEnabled" : true,
+      "lastChannelCount" : 147,
+      "lastCheckedAt" : "2026-11-23T04:48:42Z",
+      "lastLatencyMilliseconds" : 1406,
+      "name" : "大陆 · 央视与卫视",
+      "region" : "mainland",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/cn.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000002",
+      "isEnabled" : true,
+      "lastChannelCount" : 18,
+      "lastCheckedAt" : "2026-11-23T04:48:41Z",
+      "lastLatencyMilliseconds" : 566,
+      "name" : "香港",
+      "region" : "hongKong",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/hk.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000003",
+      "isEnabled" : true,
+      "lastChannelCount" : 33,
+      "lastCheckedAt" : "2026-11-23T04:48:41Z",
+      "lastLatencyMilliseconds" : 583,
+      "name" : "台湾",
+      "region" : "taiwan",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/tw.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000004",
+      "isEnabled" : true,
+      "lastChannelCount" : 1361,
+      "lastCheckedAt" : "2026-11-23T04:49:02Z",
+      "lastLatencyMilliseconds" : 21518,
+      "name" : "美国",
+      "region" : "usa",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/us.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000005",
+      "isEnabled" : true,
+      "lastChannelCount" : 17,
+      "lastCheckedAt" : "2026-11-23T04:48:41Z",
+      "lastLatencyMilliseconds" : 793,
+      "name" : "日本",
+      "region" : "japan",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/jp.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000006",
+      "isEnabled" : true,
+      "lastChannelCount" : 71,
+      "lastCheckedAt" : "2026-11-23T04:48:42Z",
+      "lastLatencyMilliseconds" : 2173,
+      "name" : "韩国",
+      "region" : "korea",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/kr.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000007",
+      "isEnabled" : true,
+      "lastChannelCount" : 275,
+      "lastCheckedAt" : "2026-11-23T04:48:52Z",
+      "lastLatencyMilliseconds" : 11719,
+      "name" : "英国",
+      "region" : "uk",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/uk.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000008",
+      "isEnabled" : true,
+      "lastChannelCount" : 223,
+      "lastCheckedAt" : "2026-11-23T04:48:52Z",
+      "lastLatencyMilliseconds" : 11473,
+      "name" : "法国",
+      "region" : "france",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/fr.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000009",
+      "isEnabled" : true,
+      "lastChannelCount" : 276,
+      "lastCheckedAt" : "2026-11-23T04:48:53Z",
+      "lastLatencyMilliseconds" : 13182,
+      "name" : "德国",
+      "region" : "germany",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/de.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000010",
+      "isEnabled" : true,
+      "lastChannelCount" : 344,
+      "lastCheckedAt" : "2026-11-23T04:48:54Z",
+      "lastLatencyMilliseconds" : 13393,
+      "name" : "意大利",
+      "region" : "italy",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/it.m3u"
+    },
+    {
+      "id" : "6F1B7C2A-1000-4A11-9C01-000000000011",
+      "isEnabled" : true,
+      "lastChannelCount" : 9,
+      "lastCheckedAt" : "2026-11-23T04:48:41Z",
+      "lastLatencyMilliseconds" : 551,
+      "name" : "新加坡",
+      "region" : "singapore",
+      "urlString" : "https://iptv-org.github.io/iptv/countries/sg.m3u"
+    }
+  ],
+  "scope" : "television",
+  "version" : 1
+}

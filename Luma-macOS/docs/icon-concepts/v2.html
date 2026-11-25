@@ -1,0 +1,1396 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>拾光 2.0 · 三十个图标方向</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: #070708;
+    color: #f2ede4;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1300px; margin: 0 auto; padding: 76px 32px 120px; }
+
+  .eyebrow { font-size: 11px; letter-spacing: .36em; text-transform: uppercase; color: rgba(242,237,228,.4); font-weight: 600; }
+  h1 { font-size: 50px; line-height: 1.08; letter-spacing: -.03em; margin: 18px 0 0; font-weight: 700; }
+  h1 em { font-style: normal; color: #ffcf9a; }
+  .lead { max-width: 720px; margin: 22px 0 0; font-size: 15px; line-height: 1.85; color: rgba(242,237,228,.56); }
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+  .chips span {
+    font-size: 12px; padding: 7px 14px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12); color: rgba(242,237,228,.66);
+  }
+  .chips span b { color: #ffcf9a; font-weight: 600; }
+
+  .overview { display: grid; grid-template-columns: repeat(10, 1fr); gap: 16px; margin-top: 52px; }
+  .overview figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 7px; }
+  .overview svg { width: 100%; height: auto; border-radius: 24%; filter: drop-shadow(0 10px 18px rgba(0,0,0,.55)); }
+  .overview figcaption { font-size: 9.5px; color: rgba(242,237,228,.28); font-variant-numeric: tabular-nums; letter-spacing: .08em; }
+
+  .section-head { margin-top: 92px; display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+                  padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .section-head h2 { font-size: 27px; margin: 0; letter-spacing: -.02em; font-weight: 650; }
+  .section-head .sub { font-size: 12.5px; color: rgba(242,237,228,.42); }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 26px; }
+
+  .card {
+    position: relative; padding: 22px 22px 20px; border-radius: 24px;
+    background: linear-gradient(168deg, rgba(255,255,255,.055), rgba(255,255,255,.012) 60%, rgba(255,255,255,.03));
+    border: 1px solid rgba(255,255,255,.08);
+    transition: transform .26s cubic-bezier(.2,.8,.2,1), border-color .26s, box-shadow .26s;
+  }
+  .card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,.2); box-shadow: 0 28px 60px -34px #000; }
+  .card .icon-main {
+    display: block; width: 100%; max-width: 188px; margin: 0 auto 16px; border-radius: 24%;
+    filter: drop-shadow(0 18px 30px rgba(0,0,0,.55));
+  }
+  .card .titlerow { display: flex; align-items: baseline; gap: 8px; }
+  .card .num { font-size: 11px; font-weight: 700; color: rgba(242,237,228,.28); font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+  .card h3 { font-size: 16px; margin: 0; font-weight: 650; letter-spacing: -.01em; }
+  .card .desc { font-size: 12px; line-height: 1.72; color: rgba(242,237,228,.52); margin: 9px 0 0; min-height: 62px; }
+  .card .row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .card .pill { font-size: 10px; padding: 3px 8px; border-radius: 6px; background: rgba(255,255,255,.055); color: rgba(242,237,228,.48); }
+
+  .sizes { display: flex; align-items: flex-end; gap: 16px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,.08); }
+  .sizes figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .sizes svg { display: block; border-radius: 22%; }
+  .sizes figcaption { font-size: 9px; color: rgba(242,237,228,.26); font-variant-numeric: tabular-nums; }
+
+  footer { margin-top: 72px; padding-top: 26px; border-top: 1px solid rgba(255,255,255,.07);
+           font-size: 12.5px; line-height: 2; color: rgba(242,237,228,.4); }
+  footer b { color: rgba(242,237,228,.7); font-weight: 600; }
+
+  @media (max-width: 1120px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .overview { grid-template-columns: repeat(5, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .grid { grid-template-columns: 1fr; }
+    .overview { grid-template-columns: repeat(4, 1fr); }
+    h1 { font-size: 34px; }
+    .wrap { padding: 48px 20px 80px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="v2-clip"><rect x="62" y="62" width="900" height="900" rx="212" ry="212" /></clipPath>
+    <clipPath id="v2-netclip" clipPathUnits="userSpaceOnUse">
+      <ellipse cx="430" cy="420" rx="176" ry="146" />
+    </clipPath>
+    <clipPath id="v2-filmclip" clipPathUnits="userSpaceOnUse">
+      <rect x="300" y="316" width="424" height="392" rx="18" />
+    </clipPath>
+
+    <linearGradient id="v2-dusk" x1="512" y1="980" x2="512" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07050a" /><stop offset=".55" stop-color="#1a0f18" /><stop offset="1" stop-color="#2d1a28" />
+    </linearGradient>
+    <linearGradient id="v2-indigo" x1="512" y1="980" x2="512" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#04070f" /><stop offset=".5" stop-color="#0b1224" /><stop offset="1" stop-color="#17233d" />
+    </linearGradient>
+    <linearGradient id="v2-obsidian" x1="512" y1="980" x2="512" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000000" /><stop offset=".55" stop-color="#0a0a0e" /><stop offset="1" stop-color="#18181f" />
+    </linearGradient>
+    <linearGradient id="v2-paper" x1="512" y1="980" x2="512" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ecdfc9" /><stop offset=".5" stop-color="#f6efe1" /><stop offset="1" stop-color="#fdf9ef" />
+    </linearGradient>
+    <linearGradient id="v2-silver" x1="512" y1="980" x2="512" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07080a" /><stop offset=".55" stop-color="#121419" /><stop offset="1" stop-color="#20252d" />
+    </linearGradient>
+
+    <radialGradient id="v2-warmglow" cx="512" cy="430" r="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffab6b" stop-opacity=".28" />
+      <stop offset=".6" stop-color="#ff7a8a" stop-opacity=".08" />
+      <stop offset="1" stop-color="#ff7a8a" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="v2-cyanglow" cx="520" cy="420" r="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4fe3d0" stop-opacity=".22" />
+      <stop offset=".55" stop-color="#5b8fff" stop-opacity=".10" />
+      <stop offset="1" stop-color="#5b8fff" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="v2-magentaglow" cx="560" cy="430" r="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff5fa8" stop-opacity=".24" />
+      <stop offset=".6" stop-color="#a855f7" stop-opacity=".10" />
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="v2-paperglow" cx="512" cy="460" r="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd9a0" stop-opacity=".55" />
+      <stop offset=".55" stop-color="#f0c08a" stop-opacity=".22" />
+      <stop offset="1" stop-color="#f0c08a" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="v2-vig" cx="512" cy="512" r="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000000" stop-opacity="0" />
+      <stop offset=".65" stop-color="#000000" stop-opacity="0" />
+      <stop offset="1" stop-color="#000000" stop-opacity=".34" />
+    </radialGradient>
+    <radialGradient id="v2-vig-light" cx="512" cy="512" r="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6b5a3e" stop-opacity="0" />
+      <stop offset=".7" stop-color="#6b5a3e" stop-opacity="0" />
+      <stop offset="1" stop-color="#6b5a3e" stop-opacity=".16" />
+    </radialGradient>
+
+    <filter id="v2-b18" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="18" /></filter>
+    <filter id="v2-b24" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="24" /></filter>
+    <filter id="v2-b40" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40" /></filter>
+    <filter id="v2-b60" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60" /></filter>
+
+    <radialGradient id="g-warm-core" cx="512" cy="490" r="115" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset=".38" stop-color="#ffe3b0" />
+      <stop offset=".72" stop-color="#ffab6b" />
+      <stop offset="1" stop-color="#ff7a8a" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="g-lantern" x1="512" y1="498" x2="512" y2="638" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff4d6" /><stop offset=".55" stop-color="#ffc07a" /><stop offset="1" stop-color="#e0663f" />
+    </linearGradient>
+    <radialGradient id="g-pearl" cx="480" cy="392" r="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" /><stop offset=".3" stop-color="#e6faff" />
+      <stop offset=".72" stop-color="#9fdcff" /><stop offset="1" stop-color="#5b8fff" />
+    </radialGradient>
+    <linearGradient id="g-shell" x1="512" y1="792" x2="512" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a1626" /><stop offset="1" stop-color="#20456e" />
+    </linearGradient>
+    <linearGradient id="g-ear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe6b8" /><stop offset=".6" stop-color="#f0b062" /><stop offset="1" stop-color="#c4772e" />
+    </linearGradient>
+    <linearGradient id="g-cardglow" x1="512" y1="368" x2="512" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd89a" /><stop offset="1" stop-color="#ff9d6e" />
+    </linearGradient>
+    <linearGradient id="g-thumb" x1="288" y1="674" x2="396" y2="782" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5ed9ff" /><stop offset="1" stop-color="#a88cff" />
+    </linearGradient>
+    <linearGradient id="g-tile" x1="690" y1="180" x2="846" y2="336" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" /><stop offset=".5" stop-color="#cfe0ff" /><stop offset="1" stop-color="#8fb0ff" />
+    </linearGradient>
+    <linearGradient id="g-spill" x1="512" y1="352" x2="512" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe6b8" stop-opacity=".95" /><stop offset="1" stop-color="#ffb46b" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="g-shelf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe6b8" /><stop offset=".6" stop-color="#f5b96a" /><stop offset="1" stop-color="#c9822f" />
+    </linearGradient>
+    <linearGradient id="g-beam" x1="512" y1="296" x2="744" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc46b" stop-opacity=".8" /><stop offset="1" stop-color="#ff7a8a" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="g-sand" x1="512" y1="220" x2="512" y2="780" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe6b8" /><stop offset=".6" stop-color="#ffab6b" /><stop offset="1" stop-color="#e0663f" />
+    </linearGradient>
+    <linearGradient id="g-ring" x1="306" y1="306" x2="718" y2="718" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc46b" /><stop offset=".35" stop-color="#ff7a8a" />
+      <stop offset=".7" stop-color="#c98bff" /><stop offset="1" stop-color="#5ed9ff" />
+    </linearGradient>
+    <linearGradient id="g-film" x1="436" y1="350" x2="588" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5ed9ff" /><stop offset=".5" stop-color="#a88cff" /><stop offset="1" stop-color="#ff7ac7" />
+    </linearGradient>
+    <linearGradient id="g-cone" x1="596" y1="528" x2="930" y2="528" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff4d6" stop-opacity=".95" />
+      <stop offset=".55" stop-color="#ffc07a" stop-opacity=".40" />
+      <stop offset="1" stop-color="#ff9d6e" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="g-amber" cx="470" cy="420" r="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe6b8" /><stop offset=".45" stop-color="#ffb46b" />
+      <stop offset=".82" stop-color="#c4682f" /><stop offset="1" stop-color="#7a3a1c" />
+    </radialGradient>
+    <linearGradient id="g-blade" x1="300" y1="260" x2="724" y2="764" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#edf1f8" /><stop offset=".5" stop-color="#b9c3d4" /><stop offset="1" stop-color="#78838f" />
+    </linearGradient>
+    <radialGradient id="g-pane1" cx="393" cy="393" r="170" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe6b8" /><stop offset="1" stop-color="#ff9d6e" />
+    </radialGradient>
+    <radialGradient id="g-pane2" cx="631" cy="393" r="170" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff8a9e" /><stop offset="1" stop-color="#a855f7" />
+    </radialGradient>
+    <radialGradient id="g-pane3" cx="393" cy="631" r="170" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3b4d8f" /><stop offset="1" stop-color="#0c1428" />
+    </radialGradient>
+    <radialGradient id="g-pane4" cx="631" cy="631" r="170" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7fd8ff" /><stop offset="1" stop-color="#2e7dff" />
+    </radialGradient>
+    <linearGradient id="g-trail" x1="280" y1="700" x2="620" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5ed9ff" /><stop offset=".5" stop-color="#a88cff" /><stop offset="1" stop-color="#ff7ac7" stop-opacity=".2" />
+    </linearGradient>
+
+    <!-- 第二批：合体 21—30 -->
+    <linearGradient id="g-spectrum" x1="280" y1="300" x2="700" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc46b" /><stop offset=".3" stop-color="#ff7a8a" />
+      <stop offset=".55" stop-color="#c98bff" /><stop offset=".8" stop-color="#5ed9ff" /><stop offset="1" stop-color="#4fe3d0" />
+    </linearGradient>
+    <linearGradient id="g-metal" x1="380" y1="300" x2="780" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2f6fc" /><stop offset=".5" stop-color="#b9c3d4" /><stop offset="1" stop-color="#6f7b8c" />
+    </linearGradient>
+    <linearGradient id="g-ribbon" x1="512" y1="292" x2="512" y2="726" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc46b" /><stop offset=".45" stop-color="#ff7a8a" /><stop offset="1" stop-color="#a88cff" />
+    </linearGradient>
+    <linearGradient id="g-pageL" x1="296" y1="392" x2="512" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fdf7ea" /><stop offset="1" stop-color="#e8dcc6" />
+    </linearGradient>
+    <linearGradient id="g-pageR" x1="512" y1="470" x2="728" y2="742" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f1e6d2" /><stop offset="1" stop-color="#d6c6ab" />
+    </linearGradient>
+    <linearGradient id="g-haze" x1="512" y1="470" x2="512" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc46b" stop-opacity=".45" /><stop offset=".35" stop-color="#ff7a8a" stop-opacity=".3" />
+      <stop offset=".7" stop-color="#a88cff" stop-opacity=".18" /><stop offset="1" stop-color="#5ed9ff" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="g-glowbar" x1="512" y1="470" x2="512" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd9a2" stop-opacity=".9" /><stop offset="1" stop-color="#ffb46b" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="g-key" x1="420" y1="260" x2="640" y2="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd89a" /><stop offset=".55" stop-color="#d9a24a" /><stop offset="1" stop-color="#a8772a" />
+    </linearGradient>
+    <linearGradient id="g-clip" x1="380" y1="300" x2="640" y2="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#eef2f8" /><stop offset=".5" stop-color="#aeb9c9" /><stop offset="1" stop-color="#6f7b8c" />
+    </linearGradient>
+    <linearGradient id="g-strip" x1="520" y1="250" x2="520" y2="810" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff4d6" /><stop offset=".5" stop-color="#ffc07a" /><stop offset="1" stop-color="#ff7a8a" />
+    </linearGradient>
+    <linearGradient id="g-slat" x1="512" y1="280" x2="512" y2="788" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe6b8" /><stop offset=".6" stop-color="#ffc07a" /><stop offset="1" stop-color="#e0663f" />
+    </linearGradient>
+  </defs>
+
+  <!-- 01 指尖拾光 -->
+  <symbol id="i01" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-dusk)" />
+      <rect width="1024" height="1024" fill="url(#v2-warmglow)" />
+      <circle cx="512" cy="512" r="160" fill="#ffab6b" opacity=".32" filter="url(#v2-b40)" />
+      <g fill="#f4e6d6">
+        <rect x="-26" y="-140" width="52" height="280" rx="26" transform="translate(454 770) rotate(14)" />
+        <rect x="-26" y="-140" width="52" height="280" rx="26" transform="translate(570 770) rotate(-14)" />
+      </g>
+      <g fill="#ffffff" opacity=".20">
+        <rect x="-9" y="-118" width="12" height="236" rx="6" transform="translate(454 770) rotate(14)" />
+        <rect x="-9" y="-118" width="12" height="236" rx="6" transform="translate(570 770) rotate(-14)" />
+      </g>
+      <circle cx="512" cy="512" r="98" fill="url(#g-warm-core)" />
+      <circle cx="512" cy="500" r="34" fill="#ffffff" opacity=".9" filter="url(#v2-b18)" />
+      <g fill="#ffd9a2">
+        <circle cx="706" cy="330" r="6" opacity=".7" />
+        <circle cx="318" cy="392" r="4" opacity=".6" />
+        <circle cx="754" cy="642" r="5" opacity=".5" />
+      </g>
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 02 提灯而归 -->
+  <symbol id="i02" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-obsidian)" />
+      <rect width="1024" height="1024" fill="url(#v2-magentaglow)" />
+      <ellipse cx="512" cy="640" rx="210" ry="220" fill="#ff9f45" opacity=".22" filter="url(#v2-b40)" />
+      <path d="M450 470 V434 A62 62 0 0 1 574 434 V470" fill="none" stroke="#ffd9a2" stroke-opacity=".85"
+            stroke-width="12" stroke-linecap="round" />
+      <rect x="398" y="466" width="228" height="236" rx="34" fill="#141418" stroke="#ffd9a2" stroke-opacity=".5" stroke-width="8" />
+      <rect x="428" y="498" width="168" height="140" rx="20" fill="url(#g-lantern)" opacity=".55" filter="url(#v2-b24)" />
+      <rect x="428" y="498" width="168" height="140" rx="20" fill="url(#g-lantern)" />
+      <path d="M512 500 V638 M428 568 H596" stroke="#7a3a1c" stroke-opacity=".35" stroke-width="5" />
+      <ellipse cx="512" cy="596" rx="28" ry="38" fill="#fff6d8" opacity=".85" filter="url(#v2-b18)" />
+      <ellipse cx="512" cy="596" rx="16" ry="26" fill="#ffffff" />
+      <rect x="376" y="700" width="272" height="26" rx="13" fill="#ffd9a2" opacity=".45" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 03 拾贝藏光 -->
+  <symbol id="i03" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-indigo)" />
+      <rect width="1024" height="1024" fill="url(#v2-cyanglow)" />
+      <circle cx="512" cy="420" r="170" fill="#7fd8ff" opacity=".28" filter="url(#v2-b40)" />
+      <path d="M512 792 L318 566 A232 232 0 0 1 706 566 Z" fill="url(#g-shell)"
+            stroke="#dff3ff" stroke-opacity=".30" stroke-width="3" stroke-linejoin="round" />
+      <g stroke="#dff3ff" stroke-opacity=".22" stroke-width="3">
+        <path d="M512 782 L311 577 M512 782 L396 492 M512 782 L512 461 M512 782 L628 492 M512 782 L713 577" />
+      </g>
+      <path d="M338 556 A232 232 0 0 1 686 556" fill="none" stroke="#dff3ff" stroke-opacity=".30" stroke-width="6" />
+      <circle cx="512" cy="420" r="82" fill="url(#g-pearl)" />
+      <circle cx="486" cy="392" r="24" fill="#ffffff" opacity=".7" filter="url(#v2-b18)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 04 拾穗 -->
+  <symbol id="i04" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-dusk)" />
+      <rect width="1024" height="1024" fill="url(#v2-warmglow)" />
+      <circle cx="512" cy="560" r="220" fill="#ffab6b" opacity=".20" filter="url(#v2-b60)" />
+      <g transform="translate(468 806) rotate(-18)">
+        <path d="M0 -320 C 50 -220 50 -80 0 0 C -50 -80 -50 -220 0 -320 Z" fill="url(#g-ear)" opacity=".8" />
+      </g>
+      <g transform="translate(556 806) rotate(18)">
+        <path d="M0 -320 C 50 -220 50 -80 0 0 C -50 -80 -50 -220 0 -320 Z" fill="url(#g-ear)" opacity=".8" />
+      </g>
+      <g transform="translate(512 800)">
+        <path d="M0 -354 C 56 -244 56 -92 0 0 C -56 -92 -56 -244 0 -354 Z" fill="url(#g-ear)" />
+        <g stroke="#8a4d1c" stroke-opacity=".40" stroke-width="6" fill="none">
+          <path d="M-28 -286 Q0 -262 28 -286" />
+          <path d="M-28 -222 Q0 -198 28 -222" />
+          <path d="M-26 -158 Q0 -134 26 -158" />
+          <path d="M-24 -94 Q0 -70 24 -94" />
+          <path d="M-20 -32 Q0 -12 20 -32" />
+        </g>
+        <circle cx="0" cy="-348" r="46" fill="#ffd9a2" opacity=".45" filter="url(#v2-b24)" />
+      </g>
+      <rect x="448" y="778" width="128" height="38" rx="19" fill="#2a1a10" stroke="#e8c79a" stroke-opacity=".35" stroke-width="4" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 05 捕光网 -->
+  <symbol id="i05" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-indigo)" />
+      <rect width="1024" height="1024" fill="url(#v2-cyanglow)" />
+      <circle cx="470" cy="430" r="210" fill="#4fe3d0" opacity=".16" filter="url(#v2-b40)" />
+      <path d="M566 562 L756 800" stroke="#dff3ff" stroke-opacity=".78" stroke-width="26" stroke-linecap="round" />
+      <path d="M566 562 L756 800" stroke="#ffffff" stroke-opacity=".35" stroke-width="6" stroke-linecap="round" />
+      <g transform="rotate(-20 430 420)">
+        <ellipse cx="430" cy="420" rx="176" ry="146" fill="#08111f" fill-opacity=".6"
+                 stroke="#dff3ff" stroke-width="14" />
+        <g clip-path="url(#v2-netclip)" stroke="#dff3ff" stroke-opacity=".20" stroke-width="3" fill="none">
+          <path d="M254 340 H606 M254 400 H606 M254 460 H606 M254 520 H606" />
+          <path d="M330 274 V566 M390 274 V566 M450 274 V566 M510 274 V566 M570 274 V566" />
+        </g>
+        <g>
+          <circle cx="410" cy="400" r="34" fill="#9feaff" opacity=".5" filter="url(#v2-b18)" />
+          <circle cx="410" cy="400" r="20" fill="#e8fbff" />
+          <circle cx="470" cy="456" r="12" fill="#bff0ff" opacity=".9" />
+          <circle cx="372" cy="342" r="9" fill="#ffffff" opacity=".7" />
+        </g>
+      </g>
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 06 归档盒 -->
+  <symbol id="i06" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-paper)" />
+      <rect width="1024" height="1024" fill="url(#v2-paperglow)" />
+      <ellipse cx="512" cy="812" rx="250" ry="24" fill="#6b5a3e" opacity=".18" filter="url(#v2-b18)" />
+      <rect x="344" y="392" width="150" height="190" rx="20" fill="#d9482f" opacity=".85" />
+      <rect x="610" y="396" width="126" height="186" rx="20" fill="#b8892f" opacity=".9" />
+      <rect x="474" y="368" width="156" height="214" rx="20" fill="#ffb46b" opacity=".55" filter="url(#v2-b24)" />
+      <rect x="474" y="368" width="156" height="214" rx="20" fill="url(#g-cardglow)" />
+      <rect x="266" y="492" width="492" height="76" rx="24" fill="#e9dcc4" stroke="#241a12" stroke-width="6" />
+      <rect x="296" y="548" width="432" height="250" rx="32" fill="#f3e8d4" stroke="#241a12" stroke-width="6" />
+      <rect x="300" y="548" width="424" height="12" fill="#ffb46b" opacity=".85" filter="url(#v2-b18)" />
+      <rect x="396" y="626" width="232" height="12" rx="6" fill="#241a12" opacity=".16" />
+      <rect x="436" y="666" width="152" height="12" rx="6" fill="#241a12" opacity=".10" />
+      <rect width="1024" height="1024" fill="url(#v2-vig-light)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#000000" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 07 相册叠影 -->
+  <symbol id="i07" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-indigo)" />
+      <rect width="1024" height="1024" fill="url(#v2-cyanglow)" />
+      <g transform="rotate(-8 512 396)">
+        <rect x="246" y="330" width="532" height="132" rx="26" fill="#132139" stroke="#dff3ff" stroke-opacity=".18" stroke-width="3" />
+        <rect x="744" y="352" width="34" height="88" rx="17" fill="#5ed9ff" opacity=".85" />
+      </g>
+      <g transform="rotate(5 512 556)">
+        <rect x="246" y="486" width="532" height="140" rx="26" fill="#182a46" stroke="#dff3ff" stroke-opacity=".18" stroke-width="3" />
+        <rect x="744" y="512" width="34" height="88" rx="17" fill="#a88cff" opacity=".85" />
+      </g>
+      <circle cx="342" cy="728" r="96" fill="#5ed9ff" opacity=".25" filter="url(#v2-b40)" />
+      <rect x="258" y="648" width="508" height="160" rx="30" fill="#20344f" stroke="#dff3ff" stroke-opacity=".28" stroke-width="3" />
+      <rect x="288" y="674" width="108" height="108" rx="16" fill="url(#g-thumb)" />
+      <rect x="422" y="694" width="240" height="14" rx="7" fill="#dff3ff" opacity=".35" />
+      <rect x="422" y="726" width="160" height="12" rx="6" fill="#dff3ff" opacity=".18" />
+      <rect x="744" y="684" width="34" height="88" rx="17" fill="#ff7ac7" opacity=".8" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 08 归位 -->
+  <symbol id="i08" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-silver)" />
+      <rect width="1024" height="1024" fill="url(#v2-cyanglow)" opacity=".7" />
+      <g fill="#242932" stroke="#ffffff" stroke-opacity=".12" stroke-width="3">
+        <rect x="200" y="340" width="122" height="122" rx="28" />
+        <rect x="342" y="340" width="122" height="122" rx="28" />
+        <rect x="200" y="482" width="122" height="122" rx="28" />
+        <rect x="342" y="482" width="122" height="122" rx="28" />
+        <rect x="200" y="624" width="122" height="122" rx="28" />
+        <rect x="342" y="624" width="122" height="122" rx="28" />
+        <rect x="484" y="482" width="122" height="122" rx="28" />
+        <rect x="484" y="624" width="122" height="122" rx="28" />
+      </g>
+      <rect x="484" y="340" width="122" height="122" rx="28" fill="none"
+            stroke="#7fa4ff" stroke-opacity=".55" stroke-width="4" stroke-dasharray="14 12" />
+      <path d="M688 300 C 660 350 640 380 606 404" fill="none" stroke="#7fa4ff" stroke-opacity=".4"
+            stroke-width="4" stroke-dasharray="10 14" />
+      <g transform="rotate(16 768 258)">
+        <rect x="690" y="180" width="156" height="156" rx="34" fill="#b7ccff" opacity=".45" filter="url(#v2-b24)" />
+        <rect x="690" y="180" width="156" height="156" rx="34" fill="url(#g-tile)" />
+        <rect x="706" y="196" width="124" height="60" rx="22" fill="#ffffff" opacity=".55" />
+      </g>
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 09 抽屉藏光 -->
+  <symbol id="i09" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-dusk)" />
+      <rect width="1024" height="1024" fill="url(#v2-warmglow)" />
+      <rect x="244" y="286" width="536" height="470" rx="40" fill="#180f16" stroke="#f4e6d6" stroke-opacity=".16" stroke-width="5" />
+      <rect x="272" y="352" width="480" height="96" rx="16" fill="url(#g-spill)" />
+      <path d="M272 448 L752 448 L820 640 L204 640 Z" fill="#ffb46b" opacity=".22" filter="url(#v2-b40)" />
+      <rect x="310" y="436" width="520" height="148" rx="22" fill="#241723" stroke="#f4e6d6" stroke-opacity=".24" stroke-width="4" />
+      <rect x="474" y="504" width="80" height="14" rx="7" fill="#f4e6d6" opacity=".55" />
+      <rect x="272" y="612" width="480" height="126" rx="22" fill="#1d121b" stroke="#f4e6d6" stroke-opacity=".16" stroke-width="4" />
+      <rect x="474" y="668" width="76" height="13" rx="6" fill="#f4e6d6" opacity=".32" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 10 光之书架 -->
+  <symbol id="i10" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-paper)" />
+      <rect width="1024" height="1024" fill="url(#v2-paperglow)" />
+      <ellipse cx="475" cy="700" rx="90" ry="170" fill="#ffcb7a" opacity=".55" filter="url(#v2-b60)" />
+      <rect x="222" y="752" width="580" height="20" rx="10" fill="#241a12" />
+      <g>
+        <rect x="250" y="470" width="56" height="282" rx="8" fill="#2b2118" />
+        <rect x="316" y="430" width="48" height="322" rx="8" fill="#3a2c1f" />
+        <rect x="374" y="486" width="62" height="266" rx="8" fill="#6b4a2a" />
+        <rect x="448" y="414" width="54" height="338" rx="8" fill="url(#g-shelf)" />
+        <rect x="512" y="466" width="46" height="286" rx="8" fill="#2b2118" />
+        <rect x="568" y="506" width="60" height="246" rx="8" fill="#3a2c1f" />
+        <rect x="644" y="500" width="54" height="252" rx="8" fill="#4a3826" transform="rotate(14 671 752)" />
+      </g>
+      <rect x="444" y="470" width="8" height="120" rx="4" fill="#fff6df" opacity=".65" />
+      <rect width="1024" height="1024" fill="url(#v2-vig-light)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#000000" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 11 日晷拾光 -->
+  <symbol id="i11" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-paper)" />
+      <rect width="1024" height="1024" fill="url(#v2-paperglow)" />
+      <ellipse cx="512" cy="812" rx="270" ry="26" fill="#6b5a3e" opacity=".16" filter="url(#v2-b18)" />
+      <circle cx="512" cy="540" r="286" fill="#f1e5cf" stroke="#241a12" stroke-width="7" />
+      <circle cx="512" cy="540" r="246" fill="none" stroke="#241a12" stroke-opacity=".15" stroke-width="3" />
+      <g stroke="#241a12" stroke-opacity=".55" stroke-width="7" stroke-linecap="round">
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(0 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(30 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(60 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(90 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(120 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(150 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(180 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(210 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(240 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(270 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(300 512 540)" />
+        <line x1="512" y1="290" x2="512" y2="326" transform="rotate(330 512 540)" />
+      </g>
+      <path d="M512 296 L744 470 L700 540 Z" fill="url(#g-beam)" />
+      <path d="M512 296 L556 540 L468 540 Z" fill="#241a12" />
+      <circle cx="512" cy="296" r="26" fill="#ffd9a2" opacity=".8" filter="url(#v2-b18)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig-light)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#000000" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 12 光沙漏 -->
+  <symbol id="i12" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-obsidian)" />
+      <rect width="1024" height="1024" fill="url(#v2-magentaglow)" />
+      <circle cx="512" cy="600" r="200" fill="#ff9f45" opacity=".18" filter="url(#v2-b40)" />
+      <rect x="336" y="168" width="352" height="40" rx="20" fill="#f4e6d6" opacity=".85" />
+      <rect x="336" y="796" width="352" height="40" rx="20" fill="#f4e6d6" opacity=".85" />
+      <path d="M372 210 H652 L512 496 L652 790 H372 L512 496 Z" fill="#0b0b0f" stroke="#f4e6d6"
+            stroke-opacity=".72" stroke-width="10" stroke-linejoin="round" />
+      <path d="M400 230 H624 L512 470 Z" fill="url(#g-sand)" opacity=".9" />
+      <rect x="506" y="470" width="12" height="250" rx="6" fill="#ffd9a2" opacity=".9" />
+      <rect x="506" y="470" width="12" height="250" rx="6" fill="#ffd9a2" filter="url(#v2-b18)" />
+      <ellipse cx="512" cy="758" rx="88" ry="26" fill="url(#g-sand)" />
+      <path d="M436 758 Q 512 690 588 758 Z" fill="url(#g-sand)" opacity=".75" />
+      <circle cx="512" cy="712" r="22" fill="#fff4d6" opacity=".9" filter="url(#v2-b18)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 13 年轮 -->
+  <symbol id="i13" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-dusk)" />
+      <rect width="1024" height="1024" fill="url(#v2-warmglow)" />
+      <circle cx="512" cy="512" r="302" fill="none" stroke="#f4e6d6" stroke-opacity=".16" stroke-width="3" />
+      <circle cx="512" cy="512" r="254" fill="none" stroke="#f4e6d6" stroke-opacity=".22" stroke-width="5" stroke-dasharray="46 18" />
+      <circle cx="512" cy="512" r="206" fill="none" stroke="url(#g-ring)" stroke-width="10" opacity=".9" />
+      <circle cx="512" cy="512" r="150" fill="none" stroke="#f4e6d6" stroke-opacity=".20" stroke-width="4" stroke-dasharray="30 22" />
+      <circle cx="512" cy="512" r="96" fill="none" stroke="#f4e6d6" stroke-opacity=".28" stroke-width="4" />
+      <circle cx="512" cy="512" r="30" fill="#ffd9a2" opacity=".55" filter="url(#v2-b24)" />
+      <circle cx="512" cy="512" r="20" fill="#fff4d6" />
+      <path d="M232 330 L796 700" stroke="#ffffff" stroke-opacity=".045" stroke-width="90" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 14 胶片帧 -->
+  <symbol id="i14" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-indigo)" />
+      <rect width="1024" height="1024" fill="url(#v2-cyanglow)" />
+      <rect x="392" y="160" width="240" height="704" rx="28" fill="#0a1526" stroke="#dff3ff" stroke-opacity=".25" stroke-width="3" />
+      <g fill="#05070c">
+        <rect x="402" y="196" width="20" height="32" rx="8" /><rect x="602" y="196" width="20" height="32" rx="8" />
+        <rect x="402" y="270" width="20" height="32" rx="8" /><rect x="602" y="270" width="20" height="32" rx="8" />
+        <rect x="402" y="344" width="20" height="32" rx="8" /><rect x="602" y="344" width="20" height="32" rx="8" />
+        <rect x="402" y="418" width="20" height="32" rx="8" /><rect x="602" y="418" width="20" height="32" rx="8" />
+        <rect x="402" y="492" width="20" height="32" rx="8" /><rect x="602" y="492" width="20" height="32" rx="8" />
+        <rect x="402" y="566" width="20" height="32" rx="8" /><rect x="602" y="566" width="20" height="32" rx="8" />
+        <rect x="402" y="640" width="20" height="32" rx="8" /><rect x="602" y="640" width="20" height="32" rx="8" />
+        <rect x="402" y="714" width="20" height="32" rx="8" /><rect x="602" y="714" width="20" height="32" rx="8" />
+        <rect x="402" y="788" width="20" height="32" rx="8" /><rect x="602" y="788" width="20" height="32" rx="8" />
+      </g>
+      <g fill="#101d33">
+        <rect x="436" y="190" width="152" height="150" rx="10" />
+        <rect x="436" y="510" width="152" height="150" rx="10" />
+        <rect x="436" y="670" width="152" height="150" rx="10" />
+      </g>
+      <rect x="430" y="344" width="164" height="168" rx="14" fill="#5ed9ff" opacity=".45" filter="url(#v2-b40)" />
+      <rect x="436" y="350" width="152" height="150" rx="10" fill="url(#g-film)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 15 幻灯机 -->
+  <symbol id="i15" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-obsidian)" />
+      <rect width="1024" height="1024" fill="url(#v2-magentaglow)" opacity=".8" />
+      <path d="M596 500 L930 292 L930 764 L596 556 Z" fill="url(#g-cone)" />
+      <path d="M596 512 L930 380 L930 676 L596 544 Z" fill="#ffe6b8" opacity=".10" filter="url(#v2-b24)" />
+      <ellipse cx="640" cy="528" rx="70" ry="90" fill="#ffb46b" opacity=".28" filter="url(#v2-b24)" />
+      <rect x="232" y="430" width="300" height="196" rx="32" fill="#141419" stroke="#f4e6d6" stroke-opacity=".25" stroke-width="5" />
+      <circle cx="560" cy="528" r="62" fill="#0b0b0e" stroke="#ffd9a2" stroke-opacity=".7" stroke-width="8" />
+      <circle cx="560" cy="528" r="30" fill="#ffe6b8" opacity=".9" filter="url(#v2-b18)" />
+      <circle cx="560" cy="528" r="16" fill="#ffffff" />
+      <g stroke="#f4e6d6" stroke-opacity=".22" stroke-width="5" stroke-linecap="round">
+        <path d="M286 400 V368 M330 400 V368 M374 400 V368" />
+      </g>
+      <rect x="284" y="626" width="34" height="26" rx="8" fill="#f4e6d6" opacity=".3" />
+      <rect x="446" y="626" width="34" height="26" rx="8" fill="#f4e6d6" opacity=".3" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 16 琥珀 -->
+  <symbol id="i16" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-dusk)" />
+      <rect width="1024" height="1024" fill="url(#v2-warmglow)" />
+      <ellipse cx="512" cy="800" rx="200" ry="26" fill="#000000" opacity=".35" filter="url(#v2-b24)" />
+      <path d="M512 236 C 640 250 720 356 704 500 C 690 660 604 780 512 788 C 420 780 334 660 320 500 C 304 356 384 250 512 236 Z"
+            fill="url(#g-amber)" stroke="#ffd9a2" stroke-opacity=".35" stroke-width="4" />
+      <ellipse cx="440" cy="392" rx="54" ry="86" fill="#fff4d6" opacity=".30" filter="url(#v2-b24)" />
+      <circle cx="492" cy="482" r="62" fill="#fff4d6" opacity=".55" filter="url(#v2-b24)" />
+      <path d="M492 428 C 500 470 522 492 564 500 C 522 508 500 530 492 572 C 484 530 462 508 420 500 C 462 492 484 470 492 428 Z"
+            fill="#fffaf0" opacity=".92" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 17 拾光印章 -->
+  <symbol id="i17" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-paper)" />
+      <rect width="1024" height="1024" fill="url(#v2-paperglow)" />
+      <rect x="250" y="250" width="524" height="524" rx="70" fill="#c8452f" opacity=".35" filter="url(#v2-b40)" />
+      <rect x="262" y="262" width="500" height="500" rx="64" fill="#c8452f" />
+      <rect x="300" y="300" width="424" height="424" rx="40" fill="none" stroke="#f7f0e4" stroke-opacity=".55" stroke-width="10" />
+      <text x="512" y="516" text-anchor="middle" dominant-baseline="central"
+            font-family="'Songti SC','STSong','PingFang SC',serif" font-size="300" font-weight="600" fill="#f7f0e4">拾</text>
+      <path d="M262 470 L762 300" stroke="#ffffff" stroke-opacity=".14" stroke-width="70" />
+      <rect width="1024" height="1024" fill="url(#v2-vig-light)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#000000" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 18 光圈纪元 -->
+  <symbol id="i18" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-silver)" />
+      <rect width="1024" height="1024" fill="url(#v2-cyanglow)" opacity=".8" />
+      <g stroke="#ffffff" stroke-opacity=".30" stroke-width="5" stroke-linecap="round">
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(0 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(30 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(60 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(90 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(120 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(150 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(180 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(210 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(240 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(270 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(300 512 512)" />
+        <line x1="512" y1="182" x2="512" y2="216" transform="rotate(330 512 512)" />
+      </g>
+      <circle cx="512" cy="512" r="252" fill="url(#g-blade)" />
+      <circle cx="512" cy="512" r="252" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="2" />
+      <path d="M512 408 L602 460 L602 564 L512 616 L422 564 L422 460 Z" fill="#0a0b0f" />
+      <path d="M512 408 L602 460 L602 564 L512 616 L422 564 L422 460 Z" fill="none" stroke="#ffffff" stroke-opacity=".25" stroke-width="2" />
+      <g stroke="#0a0b0f" stroke-opacity=".45" stroke-width="3">
+        <path d="M512 408 L610 282" /><path d="M602 460 L760 482" /><path d="M602 564 L662 712" />
+        <path d="M512 616 L414 742" /><path d="M422 564 L264 542" /><path d="M422 460 L362 312" />
+      </g>
+      <path d="M512 260 C 524 300 540 320 580 332 C 540 344 524 364 512 404 C 500 364 484 344 444 332 C 484 320 500 300 512 260 Z"
+            fill="#ffffff" opacity=".30" filter="url(#v2-b18)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 19 窗格光年 -->
+  <symbol id="i19" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-indigo)" />
+      <circle cx="393" cy="393" r="220" fill="#ffab6b" opacity=".16" filter="url(#v2-b60)" />
+      <circle cx="631" cy="631" r="220" fill="#5ed9ff" opacity=".16" filter="url(#v2-b60)" />
+      <rect x="252" y="252" width="520" height="520" rx="48" fill="#0f1b30" stroke="#dff3ff" stroke-opacity=".25" stroke-width="5" />
+      <rect x="282" y="282" width="222" height="222" rx="18" fill="url(#g-pane1)" />
+      <rect x="520" y="282" width="222" height="222" rx="18" fill="url(#g-pane2)" />
+      <rect x="282" y="520" width="222" height="222" rx="18" fill="url(#g-pane3)" />
+      <rect x="520" y="520" width="222" height="222" rx="18" fill="url(#g-pane4)" />
+      <g fill="#ffffff" opacity=".18">
+        <rect x="282" y="282" width="222" height="70" rx="18" />
+        <rect x="520" y="282" width="222" height="70" rx="18" />
+      </g>
+      <path d="M252 512 H772 M512 252 V772" stroke="#0a1424" stroke-width="10" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 20 拾光星轨 -->
+  <symbol id="i20" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-obsidian)" />
+      <rect width="1024" height="1024" fill="url(#v2-magentaglow)" opacity=".8" />
+      <g fill="none" stroke="url(#g-trail)" stroke-linecap="round">
+        <path d="M625 487 A220 220 0 0 1 493 205" stroke-width="12" opacity=".95" />
+        <path d="M597 562 A300 300 0 0 1 418 177" stroke-width="10" opacity=".7" />
+        <path d="M570 637 A380 380 0 0 1 343 150" stroke-width="8" opacity=".5" />
+        <path d="M543 712 A460 460 0 0 1 268 123" stroke-width="6" opacity=".32" />
+      </g>
+      <circle cx="625" cy="487" r="60" fill="#ff9f45" opacity=".35" filter="url(#v2-b40)" />
+      <circle cx="625" cy="487" r="18" fill="#fff4d6" />
+      <circle cx="625" cy="487" r="8" fill="#ffffff" />
+      <g fill="#ffffff" opacity=".55">
+        <circle cx="300" cy="520" r="4" />
+        <circle cx="760" cy="600" r="5" />
+        <circle cx="700" cy="712" r="3.5" />
+        <circle cx="258" cy="352" r="3" />
+        <circle cx="844" cy="300" r="3" />
+      </g>
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 21 双环拾光 -->
+  <symbol id="i21" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-silver)" />
+      <rect width="1024" height="1024" fill="url(#v2-cyanglow)" />
+      <circle cx="440" cy="512" r="250" fill="#5b8fff" opacity=".16" filter="url(#v2-b60)" />
+      <circle cx="440" cy="512" r="196" fill="none" stroke="url(#g-spectrum)" stroke-width="28" />
+      <circle cx="584" cy="512" r="196" fill="none" stroke="url(#g-metal)" stroke-width="28" />
+      <path d="M440 316 A196 196 0 0 1 578 373" fill="none" stroke="url(#g-spectrum)" stroke-width="28" />
+      <circle cx="512" cy="330" r="40" fill="#ffffff" opacity=".30" filter="url(#v2-b24)" />
+      <circle cx="512" cy="330" r="12" fill="#ffffff" opacity=".9" />
+      <circle cx="512" cy="694" r="18" fill="#b9c3d4" opacity=".45" filter="url(#v2-b18)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 22 光之书签 -->
+  <symbol id="i22" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-dusk)" />
+      <rect width="1024" height="1024" fill="url(#v2-warmglow)" />
+      <ellipse cx="512" cy="792" rx="250" ry="26" fill="#000000" opacity=".35" filter="url(#v2-b24)" />
+      <rect x="270" y="246" width="484" height="524" rx="16" fill="#f6ecda" stroke="#ffffff" stroke-opacity=".18" stroke-width="3" />
+      <g stroke="#241a12" stroke-opacity=".10" stroke-width="10" stroke-linecap="round">
+        <path d="M316 336 H708" /><path d="M316 388 H652" /><path d="M316 440 H688" />
+        <path d="M316 492 H600" /><path d="M316 544 H676" />
+      </g>
+      <path d="M446 292 H578 V726 L512 668 L446 726 Z" fill="#ffb46b" opacity=".5" filter="url(#v2-b40)" />
+      <path d="M446 292 H578 V726 L512 668 L446 726 Z" fill="url(#g-ribbon)" />
+      <rect x="446" y="292" width="132" height="22" fill="#000000" opacity=".12" />
+      <circle cx="512" cy="676" r="46" fill="#ffe6b8" opacity=".55" filter="url(#v2-b24)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 23 折页棱镜 -->
+  <symbol id="i23" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-indigo)" />
+      <rect width="1024" height="1024" fill="url(#v2-cyanglow)" />
+      <ellipse cx="512" cy="774" rx="250" ry="24" fill="#000000" opacity=".4" filter="url(#v2-b24)" />
+      <path d="M512 470 L440 150 H584 Z" fill="url(#g-haze)" filter="url(#v2-b40)" />
+      <path d="M512 742 L296 636 L296 392 L512 470 Z" fill="url(#g-pageL)" />
+      <path d="M512 742 L728 636 L728 392 L512 470 Z" fill="url(#g-pageR)" />
+      <g stroke="#241a12" stroke-opacity=".10" stroke-width="8" stroke-linecap="round">
+        <path d="M332 448 L470 508" /><path d="M332 512 L470 572" /><path d="M332 576 L470 636" />
+        <path d="M554 508 L692 448" /><path d="M554 572 L692 512" /><path d="M554 636 L692 576" />
+      </g>
+      <path d="M512 470 V742" stroke="url(#g-spectrum)" stroke-width="12" />
+      <path d="M512 470 V742" stroke="#ffffff" stroke-opacity=".55" stroke-width="3" />
+      <circle cx="512" cy="470" r="26" fill="#ffffff" opacity=".55" filter="url(#v2-b18)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 24 沙漏光圈 -->
+  <symbol id="i24" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-obsidian)" />
+      <rect width="1024" height="1024" fill="url(#v2-magentaglow)" />
+      <rect x="336" y="168" width="352" height="40" rx="20" fill="#dfe6f2" opacity=".85" />
+      <rect x="336" y="796" width="352" height="40" rx="20" fill="#dfe6f2" opacity=".85" />
+      <path d="M372 210 H652 L512 500 L652 790 H372 L512 500 Z" fill="#0b0b0f" stroke="#dfe6f2"
+            stroke-opacity=".72" stroke-width="10" stroke-linejoin="round" />
+      <rect x="494" y="230" width="36" height="230" rx="18" fill="#fff4d6" opacity=".85" />
+      <rect x="494" y="230" width="36" height="230" rx="18" fill="#fff4d6" filter="url(#v2-b24)" />
+      <g opacity=".75">
+        <path d="M512 540 L400 772 L446 772 Z" fill="#ffc46b" />
+        <path d="M512 540 L446 772 L492 772 Z" fill="#ff8a8a" />
+        <path d="M512 540 L492 772 L532 772 Z" fill="#ffe6b8" />
+        <path d="M512 540 L532 772 L578 772 Z" fill="#a88cff" />
+        <path d="M512 540 L578 772 L624 772 Z" fill="#5ed9ff" />
+      </g>
+      <circle cx="512" cy="500" r="76" fill="#dfe6f2" opacity=".25" filter="url(#v2-b24)" />
+      <circle cx="512" cy="500" r="64" fill="none" stroke="#dfe6f2" stroke-width="9" />
+      <path d="M512 448 L556 500 L512 552 L468 500 Z" fill="#0b0b0f" />
+      <circle cx="512" cy="500" r="14" fill="#ffffff" opacity=".9" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 25 光层档案 -->
+  <symbol id="i25" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-dusk)" />
+      <rect width="1024" height="1024" fill="url(#v2-warmglow)" />
+      <ellipse cx="512" cy="782" rx="250" ry="24" fill="#000000" opacity=".35" filter="url(#v2-b24)" />
+      <rect x="282" y="616" width="460" height="112" rx="28" fill="#1c1116" stroke="#f4e6d6" stroke-opacity=".12" stroke-width="3" />
+      <rect x="282" y="506" width="460" height="112" rx="28" fill="#1f1319" stroke="#f4e6d6" stroke-opacity=".14" stroke-width="3" />
+      <rect x="290" y="472" width="444" height="56" fill="url(#g-glowbar)" filter="url(#v2-b24)" />
+      <rect x="302" y="470" width="420" height="10" rx="5" fill="#ffe6b8" opacity=".9" />
+      <rect x="282" y="378" width="460" height="112" rx="28" fill="#241722" stroke="#f4e6d6" stroke-opacity=".22" stroke-width="3" />
+      <rect x="302" y="390" width="420" height="8" rx="4" fill="url(#g-spectrum)" opacity=".5" />
+      <g fill="#ffd9a2">
+        <circle cx="420" cy="446" r="7" opacity=".8" />
+        <circle cx="512" cy="418" r="5" opacity=".6" />
+        <circle cx="600" cy="440" r="6" opacity=".7" />
+      </g>
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 26 星轨胶片 -->
+  <symbol id="i26" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-obsidian)" />
+      <rect width="1024" height="1024" fill="url(#v2-magentaglow)" opacity=".7" />
+      <rect x="252" y="252" width="520" height="520" rx="44" fill="#08080b" stroke="#f4e6d6" stroke-opacity=".30" stroke-width="4" />
+      <g fill="#000000" stroke="#f4e6d6" stroke-opacity=".16" stroke-width="2">
+        <rect x="286" y="266" width="26" height="18" rx="6" /><rect x="366" y="266" width="26" height="18" rx="6" />
+        <rect x="446" y="266" width="26" height="18" rx="6" /><rect x="526" y="266" width="26" height="18" rx="6" />
+        <rect x="606" y="266" width="26" height="18" rx="6" /><rect x="686" y="266" width="26" height="18" rx="6" />
+        <rect x="286" y="740" width="26" height="18" rx="6" /><rect x="366" y="740" width="26" height="18" rx="6" />
+        <rect x="446" y="740" width="26" height="18" rx="6" /><rect x="526" y="740" width="26" height="18" rx="6" />
+        <rect x="606" y="740" width="26" height="18" rx="6" /><rect x="686" y="740" width="26" height="18" rx="6" />
+      </g>
+      <rect x="300" y="316" width="424" height="392" rx="18" fill="#0b0b11" stroke="#f4e6d6" stroke-opacity=".12" stroke-width="2" />
+      <g clip-path="url(#v2-filmclip)">
+        <g fill="none" stroke="url(#g-trail)" stroke-linecap="round">
+          <path d="M656 466 A150 150 0 0 1 534 292" stroke-width="10" opacity=".95" />
+          <path d="M646 525 A210 210 0 0 1 475 282" stroke-width="8" opacity=".65" />
+          <path d="M635 584 A270 270 0 0 1 416 271" stroke-width="6" opacity=".4" />
+        </g>
+      </g>
+      <circle cx="656" cy="466" r="44" fill="#ff9f45" opacity=".45" filter="url(#v2-b24)" />
+      <circle cx="656" cy="466" r="12" fill="#fff4d6" />
+      <g fill="#ffffff" opacity=".45">
+        <circle cx="386" cy="620" r="4" /><circle cx="700" cy="636" r="3.5" /><circle cx="420" cy="368" r="3" />
+      </g>
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 27 拾光之钥 -->
+  <symbol id="i27" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-paper)" />
+      <rect width="1024" height="1024" fill="url(#v2-paperglow)" />
+      <ellipse cx="512" cy="742" rx="170" ry="20" fill="#6b5a3e" opacity=".18" filter="url(#v2-b18)" />
+      <circle cx="512" cy="352" r="112" fill="none" stroke="url(#g-key)" stroke-width="36" />
+      <circle cx="512" cy="352" r="74" fill="none" stroke="#241a12" stroke-opacity=".12" stroke-width="4" />
+      <circle cx="512" cy="352" r="56" fill="#ffd9a2" opacity=".55" filter="url(#v2-b24)" />
+      <circle cx="512" cy="352" r="26" fill="#fffaf0" />
+      <rect x="494" y="430" width="36" height="272" rx="18" fill="url(#g-key)" />
+      <rect x="512" y="608" width="98" height="34" rx="9" fill="url(#g-key)" />
+      <rect x="512" y="660" width="72" height="34" rx="9" fill="url(#g-key)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig-light)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#000000" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 28 回形针光 -->
+  <symbol id="i28" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-silver)" />
+      <rect width="1024" height="1024" fill="url(#v2-cyanglow)" opacity=".7" />
+      <rect x="492" y="250" width="56" height="560" rx="28" fill="#ffc07a" opacity=".45" filter="url(#v2-b40)" />
+      <rect x="492" y="250" width="56" height="560" rx="28" fill="url(#g-strip)" opacity=".9" />
+      <path d="M620 320 V660 A110 110 0 0 1 400 660 V400 A60 60 0 0 1 520 400 V610"
+            fill="none" stroke="url(#g-clip)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M620 320 V660 A110 110 0 0 1 400 660 V400 A60 60 0 0 1 520 400 V610"
+            fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="6" stroke-linecap="round" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 29 百叶拾光 -->
+  <symbol id="i29" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-dusk)" />
+      <rect width="1024" height="1024" fill="url(#v2-warmglow)" />
+      <circle cx="640" cy="400" r="240" fill="#ffb46b" opacity=".26" filter="url(#v2-b60)" />
+      <g fill="url(#g-slat)" opacity=".9">
+        <rect x="252" y="304" width="520" height="60" rx="10" />
+        <rect x="252" y="424" width="520" height="60" rx="10" />
+        <rect x="252" y="664" width="520" height="60" rx="10" />
+        <rect x="252" y="784" width="520" height="60" rx="10" />
+      </g>
+      <g fill="#221520" stroke="#f4e6d6" stroke-opacity=".14" stroke-width="3">
+        <rect x="252" y="248" width="520" height="60" rx="14" />
+        <rect x="252" y="368" width="520" height="60" rx="14" />
+        <rect x="252" y="608" width="520" height="60" rx="14" />
+        <rect x="252" y="728" width="520" height="60" rx="14" />
+      </g>
+      <rect x="252" y="488" width="520" height="60" rx="14" fill="#2a1a22" stroke="#f4e6d6" stroke-opacity=".22" stroke-width="3"
+            transform="rotate(-8 512 518)" />
+      <rect x="252" y="540" width="520" height="76" rx="12" fill="url(#g-slat)" opacity=".75" filter="url(#v2-b24)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+
+  <!-- 30 火漆信封 -->
+  <symbol id="i30" viewBox="0 0 1024 1024">
+    <g clip-path="url(#v2-clip)">
+      <rect width="1024" height="1024" fill="url(#v2-paper)" />
+      <rect width="1024" height="1024" fill="url(#v2-paperglow)" />
+      <ellipse cx="512" cy="748" rx="280" ry="24" fill="#6b5a3e" opacity=".16" filter="url(#v2-b18)" />
+      <rect x="252" y="340" width="520" height="372" rx="26" fill="#f3e7d2" stroke="#241a12" stroke-width="6" />
+      <path d="M252 356 L512 566 L772 356" fill="none" stroke="#241a12" stroke-width="6" stroke-linejoin="round" />
+      <circle cx="512" cy="566" r="132" fill="#ffb46b" opacity=".40" filter="url(#v2-b40)" />
+      <g fill="#c8452f">
+        <circle cx="512" cy="470" r="20" /><circle cx="576" cy="490" r="16" /><circle cx="600" cy="548" r="18" />
+        <circle cx="580" cy="618" r="16" /><circle cx="516" cy="650" r="18" /><circle cx="450" cy="624" r="16" />
+        <circle cx="426" cy="552" r="18" /><circle cx="452" cy="488" r="16" />
+      </g>
+      <circle cx="512" cy="566" r="86" fill="#c8452f" />
+      <circle cx="512" cy="566" r="52" fill="none" stroke="#f7f0e4" stroke-opacity=".5" stroke-width="3" />
+      <circle cx="512" cy="566" r="16" fill="#f7f0e4" opacity=".85" />
+      <circle cx="512" cy="566" r="90" fill="#ffb46b" opacity=".35" filter="url(#v2-b24)" />
+      <rect width="1024" height="1024" fill="url(#v2-vig-light)" />
+    </g>
+    <rect x="62" y="62" width="900" height="900" rx="212" fill="none" stroke="#000000" stroke-opacity=".10" stroke-width="2" />
+  </symbol>
+</svg>
+
+<header>
+  <div class="eyebrow">Shiguang 2.0 · 30 Icon Directions</div>
+  <h1>拾光 <em>2.0</em><br />三十个图标方向</h1>
+  <p class="lead">
+    这一轮不再沿用旧的棱镜色系。三十个方向按「拾」的三层含义分组：
+    用手拾起、把东西收拾归位、把时光拿出来品味。每组都给了全新的底色与材质，
+    最后十枚是「合体」——把三层含义压成一枚品牌标记。
+  </p>
+  <div class="chips">
+    <span><b>拾起</b> · 指尖、提灯、拾贝、拾穗、捕网</span>
+    <span><b>整理</b> · 归档、成册、归位、抽屉、书架</span>
+    <span><b>时光</b> · 日晷、沙漏、年轮、胶片、幻灯、琥珀</span>
+    <span><b>合体</b> · 印章、光圈、窗格、星轨 + 十枚新标记</span>
+  </div>
+</header>
+
+<section class="overview">
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i01" /></svg><figcaption>01</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i02" /></svg><figcaption>02</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i03" /></svg><figcaption>03</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i04" /></svg><figcaption>04</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i05" /></svg><figcaption>05</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i06" /></svg><figcaption>06</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i07" /></svg><figcaption>07</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i08" /></svg><figcaption>08</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i09" /></svg><figcaption>09</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i10" /></svg><figcaption>10</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i11" /></svg><figcaption>11</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i12" /></svg><figcaption>12</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i13" /></svg><figcaption>13</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i14" /></svg><figcaption>14</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i15" /></svg><figcaption>15</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i16" /></svg><figcaption>16</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i17" /></svg><figcaption>17</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i18" /></svg><figcaption>18</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i19" /></svg><figcaption>19</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i20" /></svg><figcaption>20</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i21" /></svg><figcaption>21</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i22" /></svg><figcaption>22</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i23" /></svg><figcaption>23</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i24" /></svg><figcaption>24</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i25" /></svg><figcaption>25</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i26" /></svg><figcaption>26</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i27" /></svg><figcaption>27</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i28" /></svg><figcaption>28</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i29" /></svg><figcaption>29</figcaption></figure>
+  <figure><svg viewBox="0 0 1024 1024"><use href="#i30" /></svg><figcaption>30</figcaption></figure>
+</section>
+
+<div class="section-head">
+  <h2>一 · 拾起</h2>
+  <span class="sub">用手把光捡回来 —— 最字面的「拾」</span>
+</div>
+<main class="grid">
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i01" /></svg>
+    <div class="titlerow"><span class="num">01</span><h3>指尖拾光</h3></div>
+    <p class="desc">两根指头夹起一粒光。最直白的「拾」动作，暮金底色让动作带一点温度。</p>
+    <div class="row"><span class="pill">暮金</span><span class="pill">动作直白</span><span class="pill">高对比</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i01" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i01" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i01" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i02" /></svg>
+    <div class="titlerow"><span class="num">02</span><h3>提灯而归</h3></div>
+    <p class="desc">一盏亮着的提灯，把光提回来。适合「收藏 · 回家」的叙事，暗底透光最耐看。</p>
+    <div class="row"><span class="pill">墨黑</span><span class="pill">暖光</span><span class="pill">亲和</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i02" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i02" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i02" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i03" /></svg>
+    <div class="titlerow"><span class="num">03</span><h3>拾贝藏光</h3></div>
+    <p class="desc">贝壳里托着一颗珍珠。拾的是壳，收的是光；安静、贵气，也像把记忆含在心地。</p>
+    <div class="row"><span class="pill">靛蓝</span><span class="pill">珍珠光</span><span class="pill">雅致</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i03" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i03" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i03" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i04" /></svg>
+    <div class="titlerow"><span class="num">04</span><h3>拾穗</h3></div>
+    <p class="desc">三束麦穗合拢成一捆。「拾穗者」的隐喻：捡起地上被遗落的时光，一束也不放过。</p>
+    <div class="row"><span class="pill">暮金</span><span class="pill">谷物金</span><span class="pill">叙事感</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i04" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i04" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i04" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i05" /></svg>
+    <div class="titlerow"><span class="num">05</span><h3>捕光网</h3></div>
+    <p class="desc">网兜扣住几粒光点。把「拾取」做成动词，动感最强，也最像在追一阵光。</p>
+    <div class="row"><span class="pill">靛蓝</span><span class="pill">动势</span><span class="pill">年轻</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i05" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i05" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i05" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+</main>
+
+<div class="section-head">
+  <h2>二 · 整理</h2>
+  <span class="sub">收拾、归位、成册 —— 「拾」的另一半含义</span>
+</div>
+<main class="grid">
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i06" /></svg>
+    <div class="titlerow"><span class="num">06</span><h3>归档盒</h3></div>
+    <p class="desc">卡片盒里三张索引卡，中间一张发着光。整理即收藏——最贴近「收拾整理」的字面。</p>
+    <div class="row"><span class="pill">宣纸</span><span class="pill">深色图标里的浅色例外</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i06" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i06" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i06" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i07" /></svg>
+    <div class="titlerow"><span class="num">07</span><h3>相册叠影</h3></div>
+    <p class="desc">三本相册叠放，最上面一本露出缩略图与彩色索引标签。整理成册的直观表达。</p>
+    <div class="row"><span class="pill">靛蓝</span><span class="pill">叠层</span><span class="pill">索引色</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i07" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i07" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i07" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i08" /></svg>
+    <div class="titlerow"><span class="num">08</span><h3>归位</h3></div>
+    <p class="desc">九宫格缺一格，一块光片正飞回它的位置。整理里最爽的那一刻：全部对齐。</p>
+    <div class="row"><span class="pill">冷银</span><span class="pill">网格</span><span class="pill">秩序感</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i08" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i08" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i08" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i09" /></svg>
+    <div class="titlerow"><span class="num">09</span><h3>抽屉藏光</h3></div>
+    <p class="desc">拉开的抽屉里漏出一线暖光。私密、妥帖的收纳感，像把好东西收进自己的柜子。</p>
+    <div class="row"><span class="pill">暮金</span><span class="pill">暖光缝</span><span class="pill">私藏感</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i09" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i09" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i09" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i10" /></svg>
+    <div class="titlerow"><span class="num">10</span><h3>光之书架</h3></div>
+    <p class="desc">一排书脊，其中一本被抽出并透着光。秩序里保留挑拣的快感，适合做系列图标。</p>
+    <div class="row"><span class="pill">宣纸</span><span class="pill">书脊</span><span class="pill">秩序</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i10" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i10" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i10" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+</main>
+
+<div class="section-head">
+  <h2>三 · 时光</h2>
+  <span class="sub">把照片与视频拿出来，慢慢品</span>
+</div>
+<main class="grid">
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i11" /></svg>
+    <div class="titlerow"><span class="num">11</span><h3>日晷拾光</h3></div>
+    <p class="desc">晷针投下的不是影子，而是一束光。把「光」和「时间」直接缝在一起的唯一方案。</p>
+    <div class="row"><span class="pill">宣纸</span><span class="pill">日晷</span><span class="pill">时间 × 光</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i11" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i11" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i11" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i12" /></svg>
+    <div class="titlerow"><span class="num">12</span><h3>光沙漏</h3></div>
+    <p class="desc">沙漏里流的是光。时间在漏，也在被接住——最直白的时间隐喻，缩到 32px 依旧成立。</p>
+    <div class="row"><span class="pill">墨黑</span><span class="pill">沙漏</span><span class="pill">小尺寸稳</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i12" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i12" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i12" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i13" /></svg>
+    <div class="titlerow"><span class="num">13</span><h3>年轮</h3></div>
+    <p class="desc">一圈圈年轮中有一圈是光谱。时间有了颜色，像把十年的照片压缩成一棵树。</p>
+    <div class="row"><span class="pill">暮金</span><span class="pill">同心圆</span><span class="pill">时间感</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i13" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i13" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i13" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i14" /></svg>
+    <div class="titlerow"><span class="num">14</span><h3>胶片帧</h3></div>
+    <p class="desc">一格发光的胶片。旧影像被重新点亮——照片与视频最原始的载体。</p>
+    <div class="row"><span class="pill">靛蓝</span><span class="pill">胶片孔</span><span class="pill">影像感</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i14" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i14" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i14" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i15" /></svg>
+    <div class="titlerow"><span class="num">15</span><h3>幻灯机</h3></div>
+    <p class="desc">机器把旧时光投成一束光。是「品味旧照片」这件事最浪漫的物证。</p>
+    <div class="row"><span class="pill">墨黑</span><span class="pill">光锥</span><span class="pill">复古</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i15" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i15" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i15" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i16" /></svg>
+    <div class="titlerow"><span class="num">16</span><h3>琥珀</h3></div>
+    <p class="desc">一块封存了光点的琥珀。最贵的一枚「时间标本」——把某个瞬间永久包住。</p>
+    <div class="row"><span class="pill">暮金</span><span class="pill">树脂质感</span><span class="pill">收藏感</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i16" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i16" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i16" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+</main>
+
+<div class="section-head">
+  <h2>四 · 合体</h2>
+  <span class="sub">把三层含义压进一枚标记 —— 品牌化方向</span>
+</div>
+<main class="grid">
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i17" /></svg>
+    <div class="titlerow"><span class="num">17</span><h3>拾光印章</h3></div>
+    <p class="desc">朱砂方印，白文「拾」。中式、克制、可延展成整套品牌章；浅色图标在 Dock 里最跳。</p>
+    <div class="row"><span class="pill">宣纸</span><span class="pill">朱砂</span><span class="pill">中式品牌</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i17" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i17" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i17" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i18" /></svg>
+    <div class="titlerow"><span class="num">18</span><h3>光圈纪元</h3></div>
+    <p class="desc">六叶光圈外圈套着十二个时间刻度。光与钟同时可读，是旧棱镜思路的金属化重写。</p>
+    <div class="row"><span class="pill">冷银</span><span class="pill">光圈</span><span class="pill">时钟刻度</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i18" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i18" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i18" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i19" /></svg>
+    <div class="titlerow"><span class="num">19</span><h3>窗格光年</h3></div>
+    <p class="desc">四格窗，四段时间：晨、昏、夜、昼。相册网格的另一种说法，一格里是一段光阴。</p>
+    <div class="row"><span class="pill">靛蓝</span><span class="pill">四段时间</span><span class="pill">网格</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i19" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i19" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i19" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i20" /></svg>
+    <div class="titlerow"><span class="num">20</span><h3>拾光星轨</h3></div>
+    <p class="desc">长曝光星轨绕着一个亮点旋转。时间是圆的，光是轨迹——最抽象也最高级的一枚。</p>
+    <div class="row"><span class="pill">墨黑</span><span class="pill">长曝光</span><span class="pill">抽象</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i20" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i20" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i20" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+</main>
+
+<div class="section-head">
+  <h2>五 · 合体 · 续</h2>
+  <span class="sub">再十枚标记 —— 每枚都同时说清「拾起、整理、时光」里的至少两层</span>
+</div>
+<main class="grid">
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i21" /></svg>
+    <div class="titlerow"><span class="num">21</span><h3>双环拾光</h3></div>
+    <p class="desc">光谱环与金属环互相咬合：光与时间交织，谁也不能单独存在。抽象到可以直接做图形资产。</p>
+    <div class="row"><span class="pill">冷银</span><span class="pill">双环咬合</span><span class="pill">极抽象</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i21" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i21" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i21" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i22" /></svg>
+    <div class="titlerow"><span class="num">22</span><h3>光之书签</h3></div>
+    <p class="desc">书页间夹着一条光谱书签，末端汇成一点暖光。整理与拾起，在同一个动作里完成。</p>
+    <div class="row"><span class="pill">暮金</span><span class="pill">书页</span><span class="pill">书签</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i22" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i22" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i22" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i23" /></svg>
+    <div class="titlerow"><span class="num">23</span><h3>折页棱镜</h3></div>
+    <p class="desc">摊开的相册书页，中缝漏出一条光谱。册页负责整理，光负责被看见。</p>
+    <div class="row"><span class="pill">靛蓝</span><span class="pill">对开书页</span><span class="pill">中缝漏光</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i23" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i23" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i23" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i24" /></svg>
+    <div class="titlerow"><span class="num">24</span><h3>沙漏光圈</h3></div>
+    <p class="desc">沙漏的腰变成光圈，白光穿过之后散成光谱。「时间 × 光」最直接的一次合体。</p>
+    <div class="row"><span class="pill">墨黑</span><span class="pill">沙漏</span><span class="pill">光圈腰</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i24" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i24" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i24" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i25" /></svg>
+    <div class="titlerow"><span class="num">25</span><h3>光层档案</h3></div>
+    <p class="desc">三层档案叠放，中间一层透出暖光。时光被分层归档，随时可以抽出一层来看。</p>
+    <div class="row"><span class="pill">暮金</span><span class="pill">叠层</span><span class="pill">分层归档</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i25" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i25" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i25" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i26" /></svg>
+    <div class="titlerow"><span class="num">26</span><h3>星轨胶片</h3></div>
+    <p class="desc">一小格胶片里装着一段星轨。影像与时间，被同一次曝光打包收好。</p>
+    <div class="row"><span class="pill">墨黑</span><span class="pill">胶片窗</span><span class="pill">星轨</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i26" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i26" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i26" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i27" /></svg>
+    <div class="titlerow"><span class="num">27</span><h3>拾光之钥</h3></div>
+    <p class="desc">环形钥匙头里含着一粒光。拾光就是一把钥匙，打开某一段被封存的记忆。</p>
+    <div class="row"><span class="pill">宣纸</span><span class="pill">钥匙</span><span class="pill">开启记忆</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i27" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i27" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i27" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i28" /></svg>
+    <div class="titlerow"><span class="num">28</span><h3>回形针光</h3></div>
+    <p class="desc">回形针夹住一条光带。最日常的「整理」动作，克制、现代，适合工具气质的产品。</p>
+    <div class="row"><span class="pill">冷银</span><span class="pill">回形针</span><span class="pill">克制</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i28" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i28" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i28" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i29" /></svg>
+    <div class="titlerow"><span class="num">29</span><h3>百叶拾光</h3></div>
+    <p class="desc">百叶窗把阳光切成横条，其中一片被拉起。光被切成可数的段落，像一帧一帧的时间。</p>
+    <div class="row"><span class="pill">暮金</span><span class="pill">百叶</span><span class="pill">横条节奏</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i29" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i29" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i29" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="card">
+    <svg class="icon-main" viewBox="0 0 1024 1024"><use href="#i30" /></svg>
+    <div class="titlerow"><span class="num">30</span><h3>火漆信封</h3></div>
+    <p class="desc">信封加火漆印，封住的是一段时光。收藏感与仪式感最强，也最温暖的一枚。</p>
+    <div class="row"><span class="pill">宣纸</span><span class="pill">火漆</span><span class="pill">封存</span></div>
+    <div class="sizes">
+      <figure><svg width="128" height="128" viewBox="0 0 1024 1024"><use href="#i30" /></svg><figcaption>128</figcaption></figure>
+      <figure><svg width="64" height="64" viewBox="0 0 1024 1024"><use href="#i30" /></svg><figcaption>64</figcaption></figure>
+      <figure><svg width="32" height="32" viewBox="0 0 1024 1024"><use href="#i30" /></svg><figcaption>32</figcaption></figure>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <b>怎么读这一版：</b>「整理」组讲产品能力（相册、归档、搜索、去重），「时光」组讲情绪价值（回忆、旧影像、慢下来），「拾起」组讲动作，适合做动效。<br />
+  <b>我的倾向：</b>商业感与语义最平衡的是 12 光沙漏、19 窗格光年；要中式独特性选 17 拾光印章；新增的 21 双环、24 沙漏光圈、28 回形针最像「能一直用下去的品牌标记」。<br />
+  <b>下一步：</b>挑 2–3 个方向，我可以做出真实 1024 渲染、深浅两版、Dock 预览，再落到 Tools/make_icon.swift 与 AppIcon.icns。
+</footer>
+
+</div>
+</body>
+</html>

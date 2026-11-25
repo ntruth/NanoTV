@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拾光 2.0 · 左侧栏新增设计</title>
+<style>
+  :root {
+    --bg: #0d0f13;
+    --panel: rgba(25, 28, 35, .78);
+    --panel-2: rgba(17, 19, 24, .9);
+    --text: #e9ecf2;
+    --secondary: #9aa3b2;
+    --tertiary: #6e7684;
+    --line: rgba(255, 255, 255, .065);
+    --hover: rgba(255, 255, 255, .055);
+    --accent: #ffc46b;
+    --accent-soft: rgba(255, 196, 107, .14);
+    --accent-line: rgba(255, 196, 107, .30);
+    --good: #7df7bf;
+    --warn: #ffc46b;
+    --bad: #ff8f7a;
+    --violet: #a88cff;
+    --cyan: #5ed9ff;
+    --pink: #ff7ac7;
+    --row-h: 27px;
+    --radius: 8px;
+    --twisty: 12px;
+    --twisty-gap: 3px;
+    --icon: 20px;
+    --icon-gap: 8px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 32px 56px;
+    background:
+      radial-gradient(760px 560px at 16% -8%, rgba(255, 196, 107, .10), transparent 60%),
+      radial-gradient(680px 520px at 92% 24%, rgba(94, 217, 255, .075), transparent 62%),
+      radial-gradient(760px 620px at 48% 116%, rgba(168, 140, 255, .07), transparent 60%),
+      var(--bg);
+  }
+
+  .stage {
+    display: flex;
+    gap: 34px;
+    align-items: flex-start;
+  }
+
+  /* ---------------- 左侧栏本体 ---------------- */
+
+  .sidebar-shell {
+    width: 286px;
+    flex: 0 0 286px;
+  }
+
+  .caption {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0 2px 10px;
+  }
+
+  .caption b { font-size: 12px; font-weight: 650; letter-spacing: .02em; }
+  .caption span { font-size: 10px; color: var(--tertiary); }
+
+  .sidebar {
+    width: 100%;
+    height: 744px;
+    border-radius: 16px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, .035), transparent 26%),
+      linear-gradient(180deg, rgba(31, 35, 43, .84), rgba(17, 19, 24, .92));
+    border: 1px solid var(--line);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, .46),
+      inset 0 1px 0 rgba(255, 255, 255, .06);
+    backdrop-filter: blur(26px) saturate(135%);
+    -webkit-backdrop-filter: blur(26px) saturate(135%);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .sidebar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(280px 220px at 100% 0%, rgba(255, 196, 107, .07), transparent 70%),
+      radial-gradient(240px 300px at 0% 100%, rgba(94, 217, 255, .045), transparent 70%);
+  }
+
+  .sidebar-scroll {
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 8px 16px;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar { width: 8px; }
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .10);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+
+  /* ---------------- 分区头 ---------------- */
+
+  .section { margin-bottom: 1px; }
+
+  .section-head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 22px;
+    padding: 13px 8px 3px;
+    cursor: default;
+    user-select: none;
+  }
+
+  .section-head:first-child { padding-top: 4px; }
+
+  .section-bar {
+    width: 2px;
+    height: 10px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgba(255, 196, 107, .82), rgba(255, 196, 107, .10));
+    flex: 0 0 2px;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--secondary);
+    white-space: nowrap;
+  }
+
+  .section-head .new-pill {
+    display: none;
+    font-size: 8.5px;
+    font-weight: 650;
+    letter-spacing: .04em;
+    color: #2a1d06;
+    background: linear-gradient(135deg, #ffd88f, #ffb45e);
+    border-radius: 5px;
+    padding: 1px 5px 1.5px;
+    transform: translateY(-.5px);
+  }
+
+  body.show-new .section.is-new .new-pill { display: inline-block; }
+
+  body.show-new .section.is-new {
+    border-radius: 10px;
+    outline: 1px dashed rgba(255, 196, 107, .20);
+    outline-offset: 2px;
+  }
+
+  .section-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity .12s ease;
+  }
+
+  .section-head:hover .section-actions,
+  .section-head:focus-within .section-actions { opacity: 1; }
+
+  .icon-btn {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: var(--secondary);
+    border-radius: 4px;
+    padding: 0;
+    cursor: default;
+  }
+
+  .icon-btn:hover { background: var(--hover); color: var(--text); }
+
+  .section-chevron { transition: transform .16s ease; }
+  .section.is-collapsed .section-chevron { transform: rotate(-90deg); }
+  .section.is-collapsed .section-body { display: none; }
+
+  /* ---------------- 行 ---------------- */
+
+  .row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: var(--row-h);
+    padding: 3px 8px 3px 8px;
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.25;
+    cursor: default;
+    user-select: none;
+    transition: background .1s ease, box-shadow .1s ease;
+  }
+
+  .row.sub { padding-left: calc(8px + 14px * var(--level, 1)); }
+
+  .row:hover { background: var(--hover); }
+
+  .row.is-selected {
+    background: linear-gradient(90deg, var(--accent-soft), rgba(255, 196, 107, .035));
+    box-shadow: inset 0 0 0 1px var(--accent-line);
+  }
+
+  .row.is-drop-target::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: -1px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 8px rgba(255, 196, 107, .5);
+  }
+
+  .twisty {
+    width: var(--twisty);
+    flex: 0 0 var(--twisty);
+    height: 16px;
+    margin-right: var(--twisty-gap);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tertiary);
+    border: 0;
+    background: transparent;
+    padding: 0;
+    border-radius: 3px;
+  }
+
+  .twisty-btn {
+    width: 12px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: var(--tertiary);
+    padding: 0;
+    border-radius: 3px;
+  }
+
+  button.twisty-btn { cursor: default; }
+  button.twisty-btn:hover { color: var(--text); background: rgba(255, 255, 255, .05); }
+  .twisty svg { transition: transform .16s ease; }
+  .row.is-expanded .twisty-btn svg { transform: rotate(90deg); }
+
+  .icon {
+    width: var(--icon);
+    flex: 0 0 var(--icon);
+    margin-right: var(--icon-gap);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+  }
+
+  .icon.secondary { color: var(--secondary); }
+  .icon.cyan { color: var(--cyan); }
+  .icon.violet { color: var(--violet); }
+  .icon.mint { color: var(--good); }
+  .icon.coral { color: var(--bad); }
+  .icon.pink { color: var(--pink); }
+
+  .label {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .row .spacer { flex: 1 1 auto; min-width: 4px; }
+
+  .count {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 9.5px;
+    color: var(--tertiary);
+    white-space: nowrap;
+    margin-left: 6px;
+  }
+
+  .badge {
+    margin-left: 6px;
+    font-size: 9px;
+    line-height: 1.25;
+    padding: 1.5px 5px;
+    border-radius: 5px;
+    color: var(--secondary);
+    background: rgba(255, 255, 255, .055);
+    white-space: nowrap;
+  }
+
+  .badge.current {
+    color: #2a1d06;
+    background: linear-gradient(135deg, #ffd88f, #ffb45e);
+    font-weight: 650;
+  }
+
+  .badge.ok { color: var(--good); background: rgba(125, 247, 191, .10); }
+  .badge.warn { color: var(--warn); background: rgba(255, 196, 107, .10); }
+  .badge.bad { color: var(--bad); background: rgba(255, 143, 122, .10); }
+
+  .row-actions {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    margin-left: 4px;
+    opacity: 0;
+    transition: opacity .12s ease;
+  }
+
+  .row:hover .row-actions,
+  .row:focus-within .row-actions { opacity: 1; }
+
+  .drag-handle {
+    width: 12px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tertiary);
+    cursor: grab;
+  }
+
+  .drag-handle:active { cursor: grabbing; }
+
+  .children.is-collapsed { display: none; }
+
+  .hint-row {
+    color: var(--tertiary);
+    font-size: 10.5px;
+    padding: 2px 12px 4px calc(8px + var(--twisty) + var(--twisty-gap) + var(--icon) + var(--icon-gap));
+  }
+
+  .action-row .icon { color: var(--secondary); }
+  .action-row .label { color: var(--secondary); }
+  .action-row:hover .label { color: var(--text); }
+
+  /* ---------------- 右侧标注 ---------------- */
+
+  .notes {
+    width: 466px;
+    flex: 0 0 466px;
+    padding-top: 26px;
+  }
+
+  .notes-card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .012));
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .28);
+    padding: 22px 24px 20px;
+  }
+
+  .notes h1 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+
+  .notes .lede {
+    margin: 0 0 18px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--secondary);
+  }
+
+  .notes h2 {
+    margin: 20px 0 8px;
+    font-size: 12px;
+    font-weight: 650;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .notes h2 .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgba(255, 196, 107, .55);
+  }
+
+  .notes ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .notes li {
+    position: relative;
+    padding-left: 14px;
+    margin: 6px 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--secondary);
+  }
+
+  .notes li::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    top: 8px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .22);
+  }
+
+  .notes li strong { color: var(--text); font-weight: 600; }
+
+  .notes code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10.5px;
+    color: #ffd89a;
+    background: rgba(255, 196, 107, .08);
+    border: 1px solid rgba(255, 196, 107, .14);
+    border-radius: 4px;
+    padding: 1px 4px;
+  }
+
+  .legend {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .legend-item {
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 9px 10px;
+    background: rgba(255, 255, 255, .018);
+  }
+
+  .legend-item b {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .legend-item span {
+    font-size: 10.5px;
+    line-height: 1.5;
+    color: var(--tertiary);
+  }
+
+  .legend-item.new b { color: var(--accent); }
+  .legend-item.keep b { color: var(--good); }
+
+  .switch-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .switch-row span {
+    font-size: 11.5px;
+    color: var(--secondary);
+  }
+
+  .switch {
+    width: 38px;
+    height: 22px;
+    border-radius: 22px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, .07);
+    padding: 2px;
+    cursor: default;
+    transition: background .16s ease, border-color .16s ease;
+  }
+
+  .switch::after {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #cfd5df;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+    transition: transform .16s ease, background .16s ease;
+  }
+
+  body.show-new .switch {
+    background: rgba(255, 196, 107, .24);
+    border-color: rgba(255, 196, 107, .35);
+  }
+
+  body.show-new .switch::after {
+    transform: translateX(16px);
+    background: #ffd48b;
+  }
+
+  .footnote {
+    margin-top: 14px;
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: var(--tertiary);
+  }
+
+  /* ---------------- 右键菜单 / 轻提示 ---------------- */
+
+  .menu {
+    position: fixed;
+    z-index: 20;
+    min-width: 176px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, .10);
+    background: rgba(30, 33, 40, .96);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, .48);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    display: none;
+  }
+
+  .menu.is-open { display: block; }
+
+  .menu button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 9px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text);
+    font: 12px/1.3 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    text-align: left;
+    cursor: default;
+  }
+
+  .menu button:hover { background: rgba(255, 255, 255, .07); }
+  .menu button.danger { color: #ff9f8d; }
+  .menu .sep { height: 1px; margin: 4px 6px; background: var(--line); }
+  .menu .menu-note {
+    padding: 5px 9px;
+    font-size: 9.5px;
+    color: var(--tertiary);
+  }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translate(-50%, 12px);
+    opacity: 0;
+    pointer-events: none;
+    max-width: 460px;
+    padding: 9px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, .10);
+    background: rgba(30, 33, 40, .94);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .42);
+    font-size: 12px;
+    color: var(--text);
+    transition: opacity .18s ease, transform .18s ease;
+    z-index: 30;
+  }
+
+  .toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 980px) {
+    body { padding: 24px 16px 40px; }
+    .stage { flex-direction: column; align-items: center; gap: 24px; }
+    .notes { width: 100%; max-width: 640px; flex: 0 0 auto; padding-top: 0; }
+  }
+</style>
+</head>
+<body class="show-new">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-photo" viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="11" rx="2"/><circle cx="6" cy="6.2" r="1.2"/><path d="M3.2 11.4l3.1-3.2 2.3 2.2 1.6-1.6 2.6 2.6"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 16 16"><rect x="2.4" y="5.4" width="11.2" height="8.2" rx="2"/><path d="M4.3 4.1h7.4M5.5 2.4h5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 16 16"><path d="M6.2 2.8h3.6l-.6 3.1 2 2-.8 1H4.6l-.8-1 2-2-.6-3.1z"/><path d="M8 9.1v4.1"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="4.3" height="4.3" rx="1"/><rect x="9.2" y="2.5" width="4.3" height="4.3" rx="1"/><rect x="2.5" y="9.2" width="4.3" height="4.3" rx="1"/><rect x="9.2" y="9.2" width="4.3" height="4.3" rx="1"/></symbol>
+    <symbol id="i-more" viewBox="0 0 16 16"><circle cx="3.2" cy="8" r="1"/><circle cx="8" cy="8" r="1"/><circle cx="12.8" cy="8" r="1"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 16 16"><path d="M8 1.8l1.1 3.1L12.2 6l-3.1 1.1L8 10.2 6.9 7.1 3.8 6l3.1-1.1L8 1.8z"/><path d="M12.4 10.2l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6-1.6-.6 1.6-.6.6-1.6z"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 16 16"><path d="M1.8 4.4c0-.8.6-1.4 1.4-1.4h3l1.4 1.5h4.8c.8 0 1.4.6 1.4 1.4v5.7c0 .8-.6 1.4-1.4 1.4H3.2c-.8 0-1.4-.6-1.4-1.4V4.4z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 16 16"><path d="M6.3 9.7l3.4-3.4"/><path d="M5.4 11.3l-.9.9a2 2 0 01-2.8-2.8l2-2a2 2 0 012.8 0"/><path d="M10.6 4.7l.9-.9a2 2 0 012.8 2.8l-2 2a2 2 0 01-2.8 0"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 16 16"><path d="M4.3 12.2h7.3a2.5 2.5 0 00.4-5 4 4 0 00-7.7-.9 2.9 2.9 0 000 5.9z"/></symbol>
+    <symbol id="i-server" viewBox="0 0 16 16"><rect x="2.4" y="2.3" width="11.2" height="4.5" rx="1.4"/><rect x="2.4" y="9.2" width="11.2" height="4.5" rx="1.4"/><path d="M4.8 4.5h.1M4.8 11.4h.1"/></symbol>
+    <symbol id="i-film" viewBox="0 0 16 16"><rect x="2.2" y="2.8" width="11.6" height="10.4" rx="2"/><path d="M5.2 2.8v10.4M10.8 2.8v10.4M2.2 5.6h3M2.2 10.4h3M10.8 5.6h3M10.8 10.4h3"/></symbol>
+    <symbol id="i-play" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M6.5 5.5l4 2.5-4 2.5v-5z"/></symbol>
+    <symbol id="i-tv" viewBox="0 0 16 16"><rect x="1.8" y="3.2" width="12.4" height="8.3" rx="1.8"/><path d="M6.4 13.4h3.2M8 11.5v1.9"/><path d="M5.6 1.8l2.4 1.4 2.4-1.4"/></symbol>
+    <symbol id="i-disk" viewBox="0 0 16 16"><rect x="2.4" y="2.4" width="11.2" height="11.2" rx="2"/><circle cx="8" cy="8" r="2.5"/><circle cx="8" cy="8" r=".5"/><path d="M8 12.1v1.5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 16 16"><path d="M6 3.8l4.1 4.2L6 12.2"/></symbol>
+    <symbol id="i-ellipsis" viewBox="0 0 16 16"><circle cx="3.2" cy="8" r=".9"/><circle cx="8" cy="8" r=".9"/><circle cx="12.8" cy="8" r=".9"/></symbol>
+    <symbol id="i-drag" viewBox="0 0 16 16"><circle cx="6" cy="4" r=".7"/><circle cx="10" cy="4" r=".7"/><circle cx="6" cy="8" r=".7"/><circle cx="10" cy="8" r=".7"/><circle cx="6" cy="12" r=".7"/><circle cx="10" cy="12" r=".7"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.5-3.6"/><path d="M13 2.8v2.6h-2.6"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 16 16"><path d="M3 12.8l.6-2.7L11 2.7l2.3 2.3-7.4 7.4-2.9.4z"/><path d="M10.2 3.5l2.3 2.3"/></symbol>
+    <symbol id="i-disconnect" viewBox="0 0 16 16"><path d="M6.2 3.2H3.6c-.8 0-1.4.6-1.4 1.4v6.8c0 .8.6 1.4 1.4 1.4h2.6"/><path d="M9.3 5.2L12.2 8l-2.9 2.8"/><path d="M12 8H6.1"/></symbol>
+    <symbol id="i-open" viewBox="0 0 16 16"><path d="M6 3.2h6.8V10"/><path d="M12.8 3.2L6.4 9.6"/><path d="M11.2 10.8v1.6c0 .7-.5 1.2-1.2 1.2H3.6c-.7 0-1.2-.5-1.2-1.2V6c0-.7.5-1.2 1.2-1.2h1.7"/></symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+  <div class="sidebar-shell">
+    <div class="caption">
+      <b>现有侧边栏 + 新增分区</b>
+      <span>宽度 286 · 行高 27 · 沿用现有组件</span>
+    </div>
+
+    <aside class="sidebar" aria-label="拾光左侧栏设计稿">
+      <div class="sidebar-scroll">
+
+        <!-- 拾光 -->
+        <section class="section" data-section="luma">
+          <div class="section-head" data-toggle="section">
+            <span class="section-bar"></span>
+            <span class="section-title">拾光</span>
+            <span class="section-actions">
+              <button class="icon-btn" data-menu="section" title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              <button class="icon-btn" data-chevron title="收起"><svg class="section-chevron" width="12" height="12"><use href="#i-chevron"/></svg></button>
+            </span>
+          </div>
+          <div class="section-body">
+            <div class="row is-selected" data-kind="library" data-title="图库">
+              <span class="twisty"></span>
+              <span class="icon"><svg width="16" height="16"><use href="#i-photo"/></svg></span>
+              <span class="label">图库</span>
+              <span class="spacer"></span>
+              <span class="count">2,486</span>
+              <span class="row-actions"><button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button></span>
+            </div>
+
+            <div class="row" data-kind="library" data-title="精选集">
+              <span class="twisty"></span>
+              <span class="icon"><svg width="16" height="16"><use href="#i-stack"/></svg></span>
+              <span class="label">精选集</span>
+              <span class="spacer"></span>
+              <span class="count">12</span>
+              <span class="row-actions"><button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button></span>
+            </div>
+
+            <div class="row" data-kind="library" data-title="固定">
+              <span class="twisty"></span>
+              <span class="icon"><svg width="16" height="16"><use href="#i-pin"/></svg></span>
+              <span class="label">固定</span>
+              <span class="spacer"></span>
+              <span class="count">6</span>
+              <span class="row-actions"><button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button></span>
+            </div>
+
+            <div class="row" data-kind="library" data-title="媒体类型">
+              <span class="twisty"></span>
+              <span class="icon"><svg width="16" height="16"><use href="#i-grid"/></svg></span>
+              <span class="label">媒体类型</span>
+              <span class="spacer"></span>
+              <span class="row-actions"><button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button></span>
+            </div>
+
+            <div class="row" data-kind="library" data-title="更多项目">
+              <span class="twisty"><button class="twisty-btn" data-expand title="展开"><svg width="12" height="12"><use href="#i-chevron"/></svg></button></span>
+              <span class="icon"><svg width="16" height="16"><use href="#i-more"/></svg></span>
+              <span class="label">更多项目</span>
+              <span class="spacer"></span>
+              <span class="row-actions"><button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button></span>
+            </div>
+            <div class="children is-collapsed" data-children>
+              <div class="row sub" style="--level:1" data-kind="library" data-title="个人收藏">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-pin"/></svg></span><span class="label">个人收藏</span><span class="spacer"></span><span class="count">128</span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="library" data-title="图库体检">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-sparkles"/></svg></span><span class="label">图库体检</span><span class="spacer"></span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="library" data-title="值得重看">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-refresh"/></svg></span><span class="label">值得重看</span><span class="spacer"></span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="library" data-title="关键词">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-grid"/></svg></span><span class="label">关键词</span><span class="spacer"></span>
+              </div>
+            </div>
+
+            <div class="row" data-kind="library" data-title="场景">
+              <span class="twisty"></span>
+              <span class="icon"><svg width="16" height="16"><use href="#i-sparkles"/></svg></span>
+              <span class="label">场景</span>
+              <span class="spacer"></span>
+              <span class="count">4</span>
+              <span class="row-actions"><button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button></span>
+            </div>
+
+            <div class="row is-expanded" data-kind="library" data-title="相簿">
+              <span class="twisty"><button class="twisty-btn" data-expand title="收起"><svg width="12" height="12"><use href="#i-chevron"/></svg></button></span>
+              <span class="icon"><svg width="16" height="16"><use href="#i-folder"/></svg></span>
+              <span class="label">相簿</span>
+              <span class="spacer"></span>
+              <span class="count">36</span>
+              <span class="row-actions"><button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button></span>
+            </div>
+            <div class="children" data-children>
+              <div class="row sub" style="--level:1" data-kind="library" data-title="2026 海岸线">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-folder"/></svg></span><span class="label">2026 海岸线</span><span class="spacer"></span><span class="count">42</span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="library" data-title="夏日">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-folder"/></svg></span><span class="label">夏日</span><span class="spacer"></span><span class="count">68</span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="library" data-title="建筑">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-folder"/></svg></span><span class="label">建筑</span><span class="spacer"></span><span class="count">24</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 系统图库（保持现有；单库重构后文案改为「链接图库」） -->
+        <section class="section" data-section="system">
+          <div class="section-head" data-toggle="section">
+            <span class="section-bar"></span>
+            <span class="section-title">系统图库</span>
+            <span class="section-actions">
+              <button class="icon-btn" data-menu="section" title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              <button class="icon-btn" data-chevron title="收起"><svg class="section-chevron" width="12" height="12"><use href="#i-chevron"/></svg></button>
+            </span>
+          </div>
+          <div class="section-body">
+            <div class="row" data-kind="system" data-title="家庭图库">
+              <span class="twisty"></span>
+              <span class="icon secondary"><svg width="16" height="16"><use href="#i-link"/></svg></span>
+              <span class="label">家庭图库</span>
+              <span class="badge current">当前</span>
+              <span class="spacer"></span>
+              <span class="count">2,486</span>
+              <span class="row-actions"><button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button></span>
+            </div>
+            <div class="row action-row" data-kind="action" data-title="打开其他图库…">
+              <span class="twisty"></span>
+              <span class="icon secondary"><svg width="16" height="16"><use href="#i-plus"/></svg></span>
+              <span class="label">打开其他图库…</span>
+            </div>
+            <div class="hint-row">单库重构后此处文案改为「链接图库」</div>
+          </div>
+        </section>
+
+        <!-- 网络存储（现有；模式名：网络云盘） -->
+        <section class="section" data-section="cloud">
+          <div class="section-head" data-toggle="section">
+            <span class="section-bar"></span>
+            <span class="section-title">网络存储</span>
+            <span class="section-actions">
+              <button class="icon-btn" data-menu="section" title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              <button class="icon-btn" data-chevron title="收起"><svg class="section-chevron" width="12" height="12"><use href="#i-chevron"/></svg></button>
+            </span>
+          </div>
+          <div class="section-body">
+            <div class="row is-expanded" data-kind="cloud" data-source="true" data-title="家庭 NAS">
+              <span class="twisty"><button class="twisty-btn" data-expand title="收起"><svg width="12" height="12"><use href="#i-chevron"/></svg></button></span>
+              <span class="icon cyan"><svg width="16" height="16"><use href="#i-server"/></svg></span>
+              <span class="label">家庭 NAS</span>
+              <span class="badge ok">在线</span>
+              <span class="spacer"></span>
+              <span class="count">18,204</span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="children" data-children>
+              <div class="row sub" style="--level:1" data-kind="cloud" data-title="Photos 2026">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-folder"/></svg></span><span class="label">Photos 2026</span><span class="spacer"></span><span class="count">16,820</span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="cloud" data-title="家庭视频">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-folder"/></svg></span><span class="label">家庭视频</span><span class="spacer"></span><span class="count">1,204</span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="cloud" data-title="电影库">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-folder"/></svg></span><span class="label">电影库</span><span class="spacer"></span><span class="count">180</span>
+              </div>
+            </div>
+
+            <div class="row" data-kind="cloud" data-source="true" data-title="工作 WebDAV">
+              <span class="twisty"></span>
+              <span class="icon cyan"><svg width="16" height="16"><use href="#i-cloud"/></svg></span>
+              <span class="label">工作 WebDAV</span>
+              <span class="badge ok">在线</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+
+            <div class="row" data-kind="cloud" data-source="true" data-title="阿里云盘">
+              <span class="twisty"></span>
+              <span class="icon cyan"><svg width="16" height="16"><use href="#i-cloud"/></svg></span>
+              <span class="label">阿里云盘</span>
+              <span class="badge warn">需授权</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+
+            <div class="row action-row" data-kind="action" data-title="添加网盘…">
+              <span class="twisty"></span>
+              <span class="icon secondary"><svg width="16" height="16"><use href="#i-plus"/></svg></span>
+              <span class="label">添加网盘…</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 新增：网络影院 -->
+        <section class="section is-new" data-section="cinema">
+          <div class="section-head" data-toggle="section">
+            <span class="section-bar"></span>
+            <span class="section-title">网络影院</span>
+            <span class="new-pill">新增</span>
+            <span class="section-actions">
+              <button class="icon-btn" data-menu="section" title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              <button class="icon-btn" data-chevron title="收起"><svg class="section-chevron" width="12" height="12"><use href="#i-chevron"/></svg></button>
+            </span>
+          </div>
+          <div class="section-body">
+            <div class="row" data-kind="cinema" data-source="true" data-title="本地影院">
+              <span class="twisty"></span>
+              <span class="icon violet"><svg width="16" height="16"><use href="#i-film"/></svg></span>
+              <span class="label">本地影院</span>
+              <span class="spacer"></span>
+              <span class="count">134</span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="row" data-kind="cinema" data-source="true" data-title="家庭 NAS · 影院">
+              <span class="twisty"></span>
+              <span class="icon violet"><svg width="16" height="16"><use href="#i-play"/></svg></span>
+              <span class="label">家庭 NAS · 影院</span>
+              <span class="spacer"></span>
+              <span class="count">86</span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="row" data-kind="cinema" data-source="true" data-title="在线电影源">
+              <span class="twisty"></span>
+              <span class="icon violet"><svg width="16" height="16"><use href="#i-cloud"/></svg></span>
+              <span class="label">在线电影源</span>
+              <span class="badge">待接入</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="row action-row" data-kind="action" data-title="接入电影源…">
+              <span class="twisty"></span>
+              <span class="icon secondary"><svg width="16" height="16"><use href="#i-plus"/></svg></span>
+              <span class="label">接入电影源…</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 网络资源（现有） -->
+        <section class="section" data-section="catalog">
+          <div class="section-head" data-toggle="section">
+            <span class="section-bar"></span>
+            <span class="section-title">网络资源</span>
+            <span class="section-actions">
+              <button class="icon-btn" data-menu="section" title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              <button class="icon-btn" data-chevron title="收起"><svg class="section-chevron" width="12" height="12"><use href="#i-chevron"/></svg></button>
+            </span>
+          </div>
+          <div class="section-body">
+            <div class="row" data-kind="catalog" data-source="true" data-title="全部资源">
+              <span class="twisty"></span>
+              <span class="icon pink"><svg width="16" height="16"><use href="#i-grid"/></svg></span>
+              <span class="label">全部资源</span>
+              <span class="spacer"></span>
+              <span class="count">5</span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="row" data-kind="catalog" data-source="true" data-title="星海资源">
+              <span class="twisty"></span>
+              <span class="icon pink"><svg width="16" height="16"><use href="#i-play"/></svg></span>
+              <span class="label">星海资源</span>
+              <span class="badge ok">在线</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="row" data-kind="catalog" data-source="true" data-title="映像站">
+              <span class="twisty"></span>
+              <span class="icon pink"><svg width="16" height="16"><use href="#i-play"/></svg></span>
+              <span class="label">映像站</span>
+              <span class="badge bad">需验证</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="row action-row" data-kind="action" data-title="导入资源…">
+              <span class="twisty"></span>
+              <span class="icon secondary"><svg width="16" height="16"><use href="#i-plus"/></svg></span>
+              <span class="label">导入资源…</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 新增：网络电视 -->
+        <section class="section is-new" data-section="tv">
+          <div class="section-head" data-toggle="section">
+            <span class="section-bar"></span>
+            <span class="section-title">网络电视</span>
+            <span class="new-pill">新增</span>
+            <span class="section-actions">
+              <button class="icon-btn" data-menu="section" title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              <button class="icon-btn" data-chevron title="收起"><svg class="section-chevron" width="12" height="12"><use href="#i-chevron"/></svg></button>
+            </span>
+          </div>
+          <div class="section-body">
+            <div class="row is-expanded" data-kind="tv" data-source="true" data-title="家庭 IPTV">
+              <span class="twisty"><button class="twisty-btn" data-expand title="收起"><svg width="12" height="12"><use href="#i-chevron"/></svg></button></span>
+              <span class="icon mint"><svg width="16" height="16"><use href="#i-tv"/></svg></span>
+              <span class="label">家庭 IPTV</span>
+              <span class="badge ok">42 频道</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="children" data-children>
+              <div class="row sub" style="--level:1" data-kind="tv" data-title="央视">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-grid"/></svg></span><span class="label">央视</span><span class="spacer"></span><span class="count">18</span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="tv" data-title="卫视">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-grid"/></svg></span><span class="label">卫视</span><span class="spacer"></span><span class="count">12</span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="tv" data-title="体育">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-grid"/></svg></span><span class="label">体育</span><span class="spacer"></span><span class="count">7</span>
+              </div>
+              <div class="row sub" style="--level:1" data-kind="tv" data-title="电影">
+                <span class="twisty"></span><span class="icon secondary"><svg width="14" height="14"><use href="#i-grid"/></svg></span><span class="label">电影</span><span class="spacer"></span><span class="count">5</span>
+              </div>
+            </div>
+
+            <div class="row" data-kind="tv" data-source="true" data-title="备用直播源">
+              <span class="twisty"></span>
+              <span class="icon mint"><svg width="16" height="16"><use href="#i-tv"/></svg></span>
+              <span class="label">备用直播源</span>
+              <span class="badge warn">需授权</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+
+            <div class="row action-row" data-kind="action" data-title="添加 M3U…">
+              <span class="twisty"></span>
+              <span class="icon secondary"><svg width="16" height="16"><use href="#i-plus"/></svg></span>
+              <span class="label">添加 M3U…</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 新增：本地磁盘 -->
+        <section class="section is-new" data-section="disk">
+          <div class="section-head" data-toggle="section">
+            <span class="section-bar"></span>
+            <span class="section-title">本地磁盘</span>
+            <span class="new-pill">新增</span>
+            <span class="section-actions">
+              <button class="icon-btn" data-menu="section" title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              <button class="icon-btn" data-chevron title="收起"><svg class="section-chevron" width="12" height="12"><use href="#i-chevron"/></svg></button>
+            </span>
+          </div>
+          <div class="section-body">
+            <div class="row" data-kind="disk" data-source="true" data-title="Macintosh HD">
+              <span class="twisty"></span>
+              <span class="icon coral"><svg width="16" height="16"><use href="#i-disk"/></svg></span>
+              <span class="label">Macintosh HD</span>
+              <span class="badge">内置</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="row" data-kind="disk" data-source="true" data-title="素材盘">
+              <span class="twisty"></span>
+              <span class="icon coral"><svg width="16" height="16"><use href="#i-disk"/></svg></span>
+              <span class="label">素材盘</span>
+              <span class="badge">只读</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="row" data-kind="disk" data-source="true" data-title="备份卷">
+              <span class="twisty"></span>
+              <span class="icon coral"><svg width="16" height="16"><use href="#i-disk"/></svg></span>
+              <span class="label">备份卷</span>
+              <span class="badge bad">未挂载</span>
+              <span class="spacer"></span>
+              <span class="row-actions">
+                <span class="drag-handle" draggable="true" title="拖动调整顺序"><svg width="12" height="12"><use href="#i-drag"/></svg></span>
+                <button class="icon-btn" data-more title="更多"><svg width="14" height="14"><use href="#i-ellipsis"/></svg></button>
+              </span>
+            </div>
+            <div class="row action-row" data-kind="action" data-title="挂载文件夹…">
+              <span class="twisty"></span>
+              <span class="icon secondary"><svg width="16" height="16"><use href="#i-plus"/></svg></span>
+              <span class="label">挂载文件夹…</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </aside>
+  </div>
+
+  <main class="notes">
+    <div class="notes-card">
+      <h1>拾光 2.0 · 左侧栏只做新增</h1>
+      <p class="lede">
+        这一版不重做侧边栏。分区头、行高、图标列、缩进、悬停高亮、分区收起、相簿层级全部沿用现有
+        <code>SidebarView</code>；只在现有分区之后插入三个新模式分区。
+      </p>
+
+      <div class="legend">
+        <div class="legend-item keep">
+          <b>保持不动</b>
+          <span>拾光、系统图库、网络存储、网络资源；现有行高 27、图标 16 / 列宽 20、圆角 8、箭头列 12 + 间隙 3。</span>
+        </div>
+        <div class="legend-item new">
+          <b>只新增</b>
+          <span>网络影院、网络电视、本地磁盘。行结构与网络存储 / 网络资源完全一致，不引入新控件。</span>
+        </div>
+      </div>
+
+      <h2><span class="dot"></span>新增分区的行</h2>
+      <ul>
+        <li><strong>网络影院</strong>：本地影院、家庭 NAS · 影院、在线电影源（待接入）、接入电影源…</li>
+        <li><strong>网络电视</strong>：家庭 IPTV（可展开 央视 / 卫视 / 体育 / 电影）、备用直播源、添加 M3U…</li>
+        <li><strong>本地磁盘</strong>：Macintosh HD、素材盘、备份卷（未挂载）、挂载文件夹…</li>
+        <li>三个分区都排在现有「网络资源」之后，沿用同一套分区头与行样式；<strong>不新增顶部模式胶囊</strong>。</li>
+      </ul>
+
+      <h2><span class="dot"></span>交互逻辑</h2>
+      <ul>
+        <li><strong>点击网络存储 / 网络影院 / 网络资源 / 网络电视 / 本地磁盘</strong>：只切换右侧浏览内容与面包屑，<strong>不改变当前图库</strong>；顶部只更新当前范围的工具项。</li>
+        <li><strong>点击系统图库 / 链接图库</strong>：切换当前图库会话；单库重构后分区文案由「系统图库」改为「链接图库」，行结构不变。</li>
+        <li><strong>悬停行</strong>：显示「…」更多菜单与拖拽手柄；源行可在同一分区内拖动排序。</li>
+        <li><strong>右键行</strong>：打开、刷新、编辑接入、断开；图库行只提供打开 / 固定。</li>
+        <li><strong>分区头</strong>：点击展开 / 收起；悬停出现「…」与收起按钮；电视分组、云盘目录、影院片单沿用现有 14px 层级缩进。</li>
+      </ul>
+
+      <h2><span class="dot"></span>只读语义</h2>
+      <ul>
+        <li>网络存储、影院、资源、电视、本地磁盘是<strong>只读浏览源</strong>；写入动作仍只落在当前图库。</li>
+        <li>本地磁盘的「添加到图库」是唯一显式写入入口，且只在当前图库可写时可用。</li>
+        <li>电视直播没有续播语义；影院在线源与本地 / 网盘影院共用右侧详情与播放链路。</li>
+      </ul>
+
+      <div class="switch-row">
+        <span>显示「新增」虚线标注</span>
+        <button class="switch" id="newToggle" aria-pressed="true" aria-label="显示新增标注"></button>
+      </div>
+
+      <p class="footnote">
+        原型只演示左侧栏的增量设计，不包含顶部栏改版。<br>
+        页面中的数量、状态与影剧/频道均为示例数据。
+      </p>
+    </div>
+  </main>
+</div>
+
+<div class="menu" id="menu" role="menu"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+  const menu = $('#menu');
+  const toast = $('#toast');
+  let toastTimer = null;
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2200);
+  }
+
+  function closeMenu() {
+    menu.classList.remove('is-open');
+    menu.innerHTML = '';
+  }
+
+  function openMenu(x, y, row) {
+    const kind = row.dataset.kind;
+    const title = row.dataset.title || '';
+    const isLibrary = kind === 'library' || kind === 'system';
+    const items = isLibrary
+      ? [
+          ['打开', '已打开「' + title + '」'],
+          ['固定到侧边栏', '已固定「' + title + '」（原型示意）'],
+          ['在访达中显示', '已在访达中显示（原型示意）']
+        ]
+      : [
+          ['打开', '已打开「' + title + '」· 只读浏览，当前图库不变'],
+          ['刷新', '已刷新「' + title + '」（原型示意）'],
+          ['编辑接入…', '打开接入设置（原型示意）'],
+          ['断开', '已断开「' + title + '」（原型示意）', true]
+        ];
+
+    menu.innerHTML = '<div class="menu-note">' + escapeHtml(title) + '</div>' +
+      items.map(([label, feedback, danger]) =>
+        '<button type="button" data-feedback="' + escapeAttr(feedback) + '"' +
+        (danger ? ' class="danger"' : '') + '>' + escapeHtml(label) + '</button>'
+      ).join('') +
+      (isLibrary ? '' : '<div class="sep"></div><div class="menu-note">只读浏览 · 当前图库不变</div>');
+
+    menu.style.left = Math.min(x, window.innerWidth - 200) + 'px';
+    menu.style.top = Math.min(y, window.innerHeight - 220) + 'px';
+    menu.classList.add('is-open');
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (c) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function escapeAttr(value) {
+    return escapeHtml(value).replace(/"/g, '&quot;');
+  }
+
+  function selectRow(row) {
+    if (row.dataset.kind === 'action') {
+      showToast(row.dataset.title || '已打开操作（原型示意）');
+      return;
+    }
+    $$('.row.is-selected').forEach((item) => item.classList.remove('is-selected'));
+    row.classList.add('is-selected');
+
+    const title = row.dataset.title || '';
+    const kind = row.dataset.kind;
+    if (kind === 'library' || kind === 'system') {
+      showToast('当前图库：' + title);
+    } else {
+      showToast('已打开「' + title + '」· 只读浏览，当前图库不变');
+    }
+  }
+
+  /* 分区展开 / 收起 */
+  $$('[data-toggle="section"]').forEach((head) => {
+    head.addEventListener('click', (event) => {
+      if (event.target.closest('button')) return;
+      const section = head.closest('.section');
+      section.classList.toggle('is-collapsed');
+    });
+  });
+
+  /* 行内展开 / 收起（相簿、云盘目录、电视分组） */
+  $$('[data-expand]').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const row = button.closest('.row');
+      const children = row.parentElement.querySelector('[data-children]');
+      if (!children) return;
+      const collapsed = children.classList.toggle('is-collapsed');
+      row.classList.toggle('is-expanded', !collapsed);
+      button.title = collapsed ? '展开' : '收起';
+    });
+  });
+
+  /* 行选中 */
+  $$('.row').forEach((row) => {
+    row.addEventListener('click', (event) => {
+      if (event.target.closest('button, .drag-handle')) return;
+      selectRow(row);
+    });
+    row.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      selectRow(row);
+      openMenu(event.clientX, event.clientY, row);
+    });
+  });
+
+  /* 行尾「…」 */
+  $$('[data-more]').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const row = button.closest('.row');
+      const rect = button.getBoundingClientRect();
+      selectRow(row);
+      openMenu(rect.left - 150, rect.bottom + 6, row);
+    });
+  });
+
+  /* 分区头「…」 */
+  $$('[data-menu="section"]').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const head = button.closest('.section-head');
+      const section = head.closest('.section');
+      const title = $('.section-title', head).textContent;
+      openMenu(button.getBoundingClientRect().left - 140,
+               button.getBoundingClientRect().bottom + 6,
+               { dataset: { kind: section.classList.contains('is-new') ? 'cinema' : 'library', title } });
+    });
+  });
+
+  menu.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-feedback]');
+    if (!button) return;
+    showToast(button.dataset.feedback);
+    closeMenu();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!menu.contains(event.target)) closeMenu();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+  window.addEventListener('resize', closeMenu);
+
+  /* 拖拽排序：仅源行 */
+  let dragged = null;
+  $$('[draggable="true"]').forEach((handle) => {
+    const row = handle.closest('.row');
+    handle.addEventListener('dragstart', (event) => {
+      dragged = row;
+      row.style.opacity = '.55';
+      if (event.dataTransfer) event.dataTransfer.effectAllowed = 'move';
+    });
+    handle.addEventListener('dragend', () => {
+      if (dragged) dragged.style.opacity = '';
+      dragged = null;
+      $$('.row.is-drop-target').forEach((item) => item.classList.remove('is-drop-target'));
+    });
+  });
+
+  $$('.row[data-source="true"]').forEach((row) => {
+    row.addEventListener('dragover', (event) => {
+      if (!dragged || dragged === row) return;
+      event.preventDefault();
+      $$('.row.is-drop-target').forEach((item) => item.classList.remove('is-drop-target'));
+      row.classList.add('is-drop-target');
+    });
+    row.addEventListener('dragleave', () => row.classList.remove('is-drop-target'));
+    row.addEventListener('drop', (event) => {
+      if (!dragged || dragged === row) return;
+      event.preventDefault();
+      const parent = row.parentElement;
+      const children = Array.from(parent.children).filter((item) => item.classList.contains('row'));
+      const from = children.indexOf(dragged);
+      const to = children.indexOf(row);
+      if (from < 0 || to < 0) return;
+      if (from < to) row.after(dragged);
+      else row.before(dragged);
+      row.classList.remove('is-drop-target');
+      showToast('已调整「' + dragged.dataset.title + '」的顺序（原型示意）');
+    });
+  });
+
+  /* 新增标注开关 */
+  $('#newToggle').addEventListener('click', () => {
+    const on = document.body.classList.toggle('show-new');
+    $('#newToggle').setAttribute('aria-pressed', String(on));
+  });
+})();
+</script>
+</body>
+</html>

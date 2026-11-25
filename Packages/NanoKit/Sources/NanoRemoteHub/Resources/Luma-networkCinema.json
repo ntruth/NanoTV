@@ -1,0 +1,1782 @@
+{
+  "exportedAt" : "2026-11-25T06:24:17Z",
+  "format" : "luma.sources",
+  "items" : [
+    {
+      "allowsInsecureTLS" : false,
+      "baseURL" : "https://www.fofo33.com",
+      "categories" : [
+        {
+          "children" : [
+            {
+              "id" : "dianying/1-0-0-0",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "dianying/2-0-0-0",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "dianying/3-0-0-0",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "dianying/4-0-0-0",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "dianying/5-0-0-0",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "dianying/6-0-0-0",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "dianying/7-0-0-0",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "dianying/8-0-0-0",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "dianying/9-0-0-0",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "dianying/10-0-0-0",
+              "isRank" : false,
+              "title" : "同性"
+            },
+            {
+              "id" : "dianying/11-0-0-0",
+              "isRank" : false,
+              "title" : "音乐"
+            },
+            {
+              "id" : "dianying/12-0-0-0",
+              "isRank" : false,
+              "title" : "歌舞"
+            },
+            {
+              "id" : "dianying/13-0-0-0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "dianying/14-0-0-0",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "dianying/15-0-0-0",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "dianying/16-0-0-0",
+              "isRank" : false,
+              "title" : "西部"
+            },
+            {
+              "id" : "dianying/17-0-0-0",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "dianying/18-0-0-0",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "dianying/19-0-0-0",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "dianying/20-0-0-0",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "dianying/21-0-0-0",
+              "isRank" : false,
+              "title" : "伦理"
+            }
+          ],
+          "id" : "dianying",
+          "isRank" : false,
+          "title" : "电影"
+        },
+        {
+          "children" : [
+            {
+              "id" : "dianshiju/1-0-0-0",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "dianshiju/2-0-0-0",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "dianshiju/3-0-0-0",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "dianshiju/4-0-0-0",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "dianshiju/5-0-0-0",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "dianshiju/6-0-0-0",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "dianshiju/7-0-0-0",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "dianshiju/8-0-0-0",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "dianshiju/9-0-0-0",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "dianshiju/10-0-0-0",
+              "isRank" : false,
+              "title" : "同性"
+            },
+            {
+              "id" : "dianshiju/11-0-0-0",
+              "isRank" : false,
+              "title" : "音乐"
+            },
+            {
+              "id" : "dianshiju/12-0-0-0",
+              "isRank" : false,
+              "title" : "歌舞"
+            },
+            {
+              "id" : "dianshiju/13-0-0-0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "dianshiju/14-0-0-0",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "dianshiju/15-0-0-0",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "dianshiju/16-0-0-0",
+              "isRank" : false,
+              "title" : "西部"
+            },
+            {
+              "id" : "dianshiju/17-0-0-0",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "dianshiju/18-0-0-0",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "dianshiju/19-0-0-0",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "dianshiju/20-0-0-0",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "dianshiju/21-0-0-0",
+              "isRank" : false,
+              "title" : "伦理"
+            }
+          ],
+          "id" : "dianshiju",
+          "isRank" : false,
+          "title" : "电视剧"
+        },
+        {
+          "children" : [
+            {
+              "id" : "zongyi/1-0-0-0",
+              "isRank" : false,
+              "title" : "真人秀"
+            },
+            {
+              "id" : "zongyi/2-0-0-0",
+              "isRank" : false,
+              "title" : "脱口秀"
+            },
+            {
+              "id" : "zongyi/3-0-0-0",
+              "isRank" : false,
+              "title" : "纪录片"
+            },
+            {
+              "id" : "zongyi/4-0-0-0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "zongyi/5-0-0-0",
+              "isRank" : false,
+              "title" : "歌舞"
+            }
+          ],
+          "id" : "zongyi",
+          "isRank" : false,
+          "title" : "综艺"
+        },
+        {
+          "children" : [
+            {
+              "id" : "dongman/1-0-0-0",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "dongman/2-0-0-0",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "dongman/3-0-0-0",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "dongman/4-0-0-0",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "dongman/5-0-0-0",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "dongman/6-0-0-0",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "dongman/7-0-0-0",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "dongman/8-0-0-0",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "dongman/9-0-0-0",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "dongman/10-0-0-0",
+              "isRank" : false,
+              "title" : "同性"
+            },
+            {
+              "id" : "dongman/11-0-0-0",
+              "isRank" : false,
+              "title" : "音乐"
+            },
+            {
+              "id" : "dongman/12-0-0-0",
+              "isRank" : false,
+              "title" : "歌舞"
+            },
+            {
+              "id" : "dongman/13-0-0-0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "dongman/14-0-0-0",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "dongman/15-0-0-0",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "dongman/16-0-0-0",
+              "isRank" : false,
+              "title" : "西部"
+            },
+            {
+              "id" : "dongman/17-0-0-0",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "dongman/18-0-0-0",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "dongman/19-0-0-0",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "dongman/20-0-0-0",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "dongman/21-0-0-0",
+              "isRank" : false,
+              "title" : "伦理"
+            }
+          ],
+          "id" : "dongman",
+          "isRank" : false,
+          "title" : "动漫"
+        }
+      ],
+      "configURL" : "https://www.fofo33.com",
+      "createdAt" : "2026-11-24T01:57:55Z",
+      "id" : "E25EC462-66BF-4E48-9B1F-E8EEA49BE588",
+      "isEnabled" : true,
+      "kind" : "fofo",
+      "name" : "FoFo影院",
+      "referer" : "https://www.fofo33.com/",
+      "userAgent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+    },
+    {
+      "allowsInsecureTLS" : false,
+      "baseURL" : "https://www.ikanpp.com",
+      "categories" : [
+        {
+          "children" : [
+            {
+              "id" : "movie?genre=%E5%8A%A8%E4%BD%9C",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "movie?genre=%E5%96%9C%E5%89%A7",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "movie?genre=%E7%88%B1%E6%83%85",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "movie?genre=%E7%A7%91%E5%B9%BB",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "movie?genre=%E6%82%AC%E7%96%91",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "movie?genre=%E7%8A%AF%E7%BD%AA",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "movie?genre=%E8%AD%A6%E5%8C%AA",
+              "isRank" : false,
+              "title" : "警匪"
+            },
+            {
+              "id" : "movie?genre=%E6%9E%AA%E6%88%98",
+              "isRank" : false,
+              "title" : "枪战"
+            },
+            {
+              "id" : "movie?genre=%E8%B0%8D%E6%88%98",
+              "isRank" : false,
+              "title" : "谍战"
+            },
+            {
+              "id" : "movie?genre=%E6%83%8A%E6%82%9A",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "movie?genre=%E6%81%90%E6%80%96",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "movie?genre=%E6%88%98%E4%BA%89",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "movie?genre=%E7%81%BE%E9%9A%BE",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "movie?genre=%E5%86%92%E9%99%A9",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "movie?genre=%E5%A5%87%E5%B9%BB",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "movie?genre=%E9%AD%94%E5%B9%BB",
+              "isRank" : false,
+              "title" : "魔幻"
+            },
+            {
+              "id" : "movie?genre=%E6%AD%A6%E4%BE%A0",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "movie?genre=%E5%8E%86%E5%8F%B2",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "movie?genre=%E5%89%A7%E6%83%85",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "movie?genre=%E4%BC%A0%E8%AE%B0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "movie?genre=%E5%8A%A8%E7%94%BB",
+              "isRank" : false,
+              "title" : "动画"
+            },
+            {
+              "id" : "movie?genre=%E6%AD%8C%E8%88%9E",
+              "isRank" : false,
+              "title" : "歌舞"
+            }
+          ],
+          "id" : "movie",
+          "isRank" : false,
+          "title" : "电影"
+        },
+        {
+          "children" : [
+            {
+              "id" : "tv?genre=%E5%8A%A8%E4%BD%9C",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "tv?genre=%E5%96%9C%E5%89%A7",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "tv?genre=%E7%88%B1%E6%83%85",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "tv?genre=%E7%A7%91%E5%B9%BB",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "tv?genre=%E6%82%AC%E7%96%91",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "tv?genre=%E7%8A%AF%E7%BD%AA",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "tv?genre=%E8%AD%A6%E5%8C%AA",
+              "isRank" : false,
+              "title" : "警匪"
+            },
+            {
+              "id" : "tv?genre=%E6%9E%AA%E6%88%98",
+              "isRank" : false,
+              "title" : "枪战"
+            },
+            {
+              "id" : "tv?genre=%E8%B0%8D%E6%88%98",
+              "isRank" : false,
+              "title" : "谍战"
+            },
+            {
+              "id" : "tv?genre=%E6%83%8A%E6%82%9A",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "tv?genre=%E6%81%90%E6%80%96",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "tv?genre=%E6%88%98%E4%BA%89",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "tv?genre=%E7%81%BE%E9%9A%BE",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "tv?genre=%E5%86%92%E9%99%A9",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "tv?genre=%E5%A5%87%E5%B9%BB",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "tv?genre=%E9%AD%94%E5%B9%BB",
+              "isRank" : false,
+              "title" : "魔幻"
+            },
+            {
+              "id" : "tv?genre=%E6%AD%A6%E4%BE%A0",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "tv?genre=%E5%8E%86%E5%8F%B2",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "tv?genre=%E5%89%A7%E6%83%85",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "tv?genre=%E4%BC%A0%E8%AE%B0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "tv?genre=%E5%8A%A8%E7%94%BB",
+              "isRank" : false,
+              "title" : "动画"
+            },
+            {
+              "id" : "tv?genre=%E6%AD%8C%E8%88%9E",
+              "isRank" : false,
+              "title" : "歌舞"
+            }
+          ],
+          "id" : "tv",
+          "isRank" : false,
+          "title" : "电视剧"
+        },
+        {
+          "children" : [
+            {
+              "id" : "anime?genre=%E5%8A%A8%E4%BD%9C",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "anime?genre=%E5%96%9C%E5%89%A7",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "anime?genre=%E7%88%B1%E6%83%85",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "anime?genre=%E7%A7%91%E5%B9%BB",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "anime?genre=%E6%82%AC%E7%96%91",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "anime?genre=%E7%8A%AF%E7%BD%AA",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "anime?genre=%E8%AD%A6%E5%8C%AA",
+              "isRank" : false,
+              "title" : "警匪"
+            },
+            {
+              "id" : "anime?genre=%E6%9E%AA%E6%88%98",
+              "isRank" : false,
+              "title" : "枪战"
+            },
+            {
+              "id" : "anime?genre=%E8%B0%8D%E6%88%98",
+              "isRank" : false,
+              "title" : "谍战"
+            },
+            {
+              "id" : "anime?genre=%E6%83%8A%E6%82%9A",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "anime?genre=%E6%81%90%E6%80%96",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "anime?genre=%E6%88%98%E4%BA%89",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "anime?genre=%E7%81%BE%E9%9A%BE",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "anime?genre=%E5%86%92%E9%99%A9",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "anime?genre=%E5%A5%87%E5%B9%BB",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "anime?genre=%E9%AD%94%E5%B9%BB",
+              "isRank" : false,
+              "title" : "魔幻"
+            },
+            {
+              "id" : "anime?genre=%E6%AD%A6%E4%BE%A0",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "anime?genre=%E5%8E%86%E5%8F%B2",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "anime?genre=%E5%89%A7%E6%83%85",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "anime?genre=%E4%BC%A0%E8%AE%B0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "anime?genre=%E5%8A%A8%E7%94%BB",
+              "isRank" : false,
+              "title" : "动画"
+            },
+            {
+              "id" : "anime?genre=%E6%AD%8C%E8%88%9E",
+              "isRank" : false,
+              "title" : "歌舞"
+            }
+          ],
+          "id" : "anime",
+          "isRank" : false,
+          "title" : "动漫"
+        },
+        {
+          "children" : [
+            {
+              "id" : "variety?genre=%E5%8A%A8%E4%BD%9C",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "variety?genre=%E5%96%9C%E5%89%A7",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "variety?genre=%E7%88%B1%E6%83%85",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "variety?genre=%E7%A7%91%E5%B9%BB",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "variety?genre=%E6%82%AC%E7%96%91",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "variety?genre=%E7%8A%AF%E7%BD%AA",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "variety?genre=%E8%AD%A6%E5%8C%AA",
+              "isRank" : false,
+              "title" : "警匪"
+            },
+            {
+              "id" : "variety?genre=%E6%9E%AA%E6%88%98",
+              "isRank" : false,
+              "title" : "枪战"
+            },
+            {
+              "id" : "variety?genre=%E8%B0%8D%E6%88%98",
+              "isRank" : false,
+              "title" : "谍战"
+            },
+            {
+              "id" : "variety?genre=%E6%83%8A%E6%82%9A",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "variety?genre=%E6%81%90%E6%80%96",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "variety?genre=%E6%88%98%E4%BA%89",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "variety?genre=%E7%81%BE%E9%9A%BE",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "variety?genre=%E5%86%92%E9%99%A9",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "variety?genre=%E5%A5%87%E5%B9%BB",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "variety?genre=%E9%AD%94%E5%B9%BB",
+              "isRank" : false,
+              "title" : "魔幻"
+            },
+            {
+              "id" : "variety?genre=%E6%AD%A6%E4%BE%A0",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "variety?genre=%E5%8E%86%E5%8F%B2",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "variety?genre=%E5%89%A7%E6%83%85",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "variety?genre=%E4%BC%A0%E8%AE%B0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "variety?genre=%E5%8A%A8%E7%94%BB",
+              "isRank" : false,
+              "title" : "动画"
+            },
+            {
+              "id" : "variety?genre=%E6%AD%8C%E8%88%9E",
+              "isRank" : false,
+              "title" : "歌舞"
+            }
+          ],
+          "id" : "variety",
+          "isRank" : false,
+          "title" : "综艺"
+        },
+        {
+          "children" : [
+            {
+              "id" : "documentary?genre=%E5%8A%A8%E4%BD%9C",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "documentary?genre=%E5%96%9C%E5%89%A7",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "documentary?genre=%E7%88%B1%E6%83%85",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "documentary?genre=%E7%A7%91%E5%B9%BB",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "documentary?genre=%E6%82%AC%E7%96%91",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "documentary?genre=%E7%8A%AF%E7%BD%AA",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "documentary?genre=%E8%AD%A6%E5%8C%AA",
+              "isRank" : false,
+              "title" : "警匪"
+            },
+            {
+              "id" : "documentary?genre=%E6%9E%AA%E6%88%98",
+              "isRank" : false,
+              "title" : "枪战"
+            },
+            {
+              "id" : "documentary?genre=%E8%B0%8D%E6%88%98",
+              "isRank" : false,
+              "title" : "谍战"
+            },
+            {
+              "id" : "documentary?genre=%E6%83%8A%E6%82%9A",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "documentary?genre=%E6%81%90%E6%80%96",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "documentary?genre=%E6%88%98%E4%BA%89",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "documentary?genre=%E7%81%BE%E9%9A%BE",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "documentary?genre=%E5%86%92%E9%99%A9",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "documentary?genre=%E5%A5%87%E5%B9%BB",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "documentary?genre=%E9%AD%94%E5%B9%BB",
+              "isRank" : false,
+              "title" : "魔幻"
+            },
+            {
+              "id" : "documentary?genre=%E6%AD%A6%E4%BE%A0",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "documentary?genre=%E5%8E%86%E5%8F%B2",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "documentary?genre=%E5%89%A7%E6%83%85",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "documentary?genre=%E4%BC%A0%E8%AE%B0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "documentary?genre=%E5%8A%A8%E7%94%BB",
+              "isRank" : false,
+              "title" : "动画"
+            },
+            {
+              "id" : "documentary?genre=%E6%AD%8C%E8%88%9E",
+              "isRank" : false,
+              "title" : "歌舞"
+            }
+          ],
+          "id" : "documentary",
+          "isRank" : false,
+          "title" : "纪录片"
+        },
+        {
+          "children" : [
+            {
+              "id" : "short?genre=%E5%8A%A8%E4%BD%9C",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "short?genre=%E5%96%9C%E5%89%A7",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "short?genre=%E7%88%B1%E6%83%85",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "short?genre=%E7%A7%91%E5%B9%BB",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "short?genre=%E6%82%AC%E7%96%91",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "short?genre=%E7%8A%AF%E7%BD%AA",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "short?genre=%E8%AD%A6%E5%8C%AA",
+              "isRank" : false,
+              "title" : "警匪"
+            },
+            {
+              "id" : "short?genre=%E6%9E%AA%E6%88%98",
+              "isRank" : false,
+              "title" : "枪战"
+            },
+            {
+              "id" : "short?genre=%E8%B0%8D%E6%88%98",
+              "isRank" : false,
+              "title" : "谍战"
+            },
+            {
+              "id" : "short?genre=%E6%83%8A%E6%82%9A",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "short?genre=%E6%81%90%E6%80%96",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "short?genre=%E6%88%98%E4%BA%89",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "short?genre=%E7%81%BE%E9%9A%BE",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "short?genre=%E5%86%92%E9%99%A9",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "short?genre=%E5%A5%87%E5%B9%BB",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "short?genre=%E9%AD%94%E5%B9%BB",
+              "isRank" : false,
+              "title" : "魔幻"
+            },
+            {
+              "id" : "short?genre=%E6%AD%A6%E4%BE%A0",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "short?genre=%E5%8E%86%E5%8F%B2",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "short?genre=%E5%89%A7%E6%83%85",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "short?genre=%E4%BC%A0%E8%AE%B0",
+              "isRank" : false,
+              "title" : "传记"
+            },
+            {
+              "id" : "short?genre=%E5%8A%A8%E7%94%BB",
+              "isRank" : false,
+              "title" : "动画"
+            },
+            {
+              "id" : "short?genre=%E6%AD%8C%E8%88%9E",
+              "isRank" : false,
+              "title" : "歌舞"
+            }
+          ],
+          "id" : "short",
+          "isRank" : false,
+          "title" : "短剧"
+        }
+      ],
+      "configURL" : "https://www.ikanpp.com",
+      "createdAt" : "2026-11-24T01:58:02Z",
+      "id" : "4C6D3115-1E20-454E-9EC5-A7FA56B7C378",
+      "isEnabled" : true,
+      "kind" : "ikanpp",
+      "name" : "爱看片片",
+      "referer" : "https://www.ikanpp.com/",
+      "userAgent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+    },
+    {
+      "allowsInsecureTLS" : true,
+      "baseURL" : "https://www.kubb.tv",
+      "categories" : [
+        {
+          "children" : [
+            {
+              "id" : "0,1,3,19",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "0,1,3,20",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "0,1,3,21",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "0,1,3,22",
+              "isRank" : false,
+              "title" : "犯罪"
+            },
+            {
+              "id" : "0,1,3,23",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "0,1,3,24",
+              "isRank" : false,
+              "title" : "奇幻"
+            },
+            {
+              "id" : "0,1,3,25",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "0,1,3,26",
+              "isRank" : false,
+              "title" : "灾难"
+            },
+            {
+              "id" : "0,1,3,123",
+              "isRank" : false,
+              "title" : "恐怖"
+            },
+            {
+              "id" : "0,1,3,27",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "0,1,3,28",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "0,1,3,29",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "0,1,3,30",
+              "isRank" : false,
+              "title" : "歌舞"
+            },
+            {
+              "id" : "0,1,3,31",
+              "isRank" : false,
+              "title" : "经典"
+            },
+            {
+              "id" : "0,1,3,32",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "0,1,3,113",
+              "isRank" : false,
+              "title" : "动画"
+            },
+            {
+              "id" : "0,1,3,124",
+              "isRank" : false,
+              "title" : "同性"
+            },
+            {
+              "id" : "0,1,3,125",
+              "isRank" : false,
+              "title" : "网络电影"
+            }
+          ],
+          "id" : "0,1,3",
+          "isRank" : false,
+          "title" : "电影"
+        },
+        {
+          "children" : [
+            {
+              "id" : "0,1,4?region=%E5%A4%A7%E9%99%86",
+              "isRank" : false,
+              "title" : "大陆"
+            },
+            {
+              "id" : "0,1,4?region=%E9%A6%99%E6%B8%AF",
+              "isRank" : false,
+              "title" : "香港"
+            },
+            {
+              "id" : "0,1,4?region=%E5%8F%B0%E6%B9%BE",
+              "isRank" : false,
+              "title" : "台湾"
+            },
+            {
+              "id" : "0,1,4?region=%E6%97%A5%E6%9C%AC",
+              "isRank" : false,
+              "title" : "日本"
+            },
+            {
+              "id" : "0,1,4?region=%E9%9F%A9%E5%9B%BD",
+              "isRank" : false,
+              "title" : "韩国"
+            },
+            {
+              "id" : "0,1,4?region=%E6%AC%A7%E7%BE%8E",
+              "isRank" : false,
+              "title" : "欧美"
+            },
+            {
+              "id" : "0,1,4?region=%E8%8B%B1%E5%9B%BD",
+              "isRank" : false,
+              "title" : "英国"
+            },
+            {
+              "id" : "0,1,4?region=%E6%B3%B0%E5%9B%BD",
+              "isRank" : false,
+              "title" : "泰国"
+            },
+            {
+              "id" : "0,1,4?region=%E5%85%B6%E5%AE%83",
+              "isRank" : false,
+              "title" : "其它"
+            },
+            {
+              "id" : "0,1,4,129",
+              "isRank" : false,
+              "title" : "偶像"
+            },
+            {
+              "id" : "0,1,4,127",
+              "isRank" : false,
+              "title" : "言情"
+            },
+            {
+              "id" : "0,1,4,146",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "0,1,4,126",
+              "isRank" : false,
+              "title" : "古装"
+            },
+            {
+              "id" : "0,1,4,141",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "0,1,4,142",
+              "isRank" : false,
+              "title" : "玄幻"
+            },
+            {
+              "id" : "0,1,4,136",
+              "isRank" : false,
+              "title" : "谍战"
+            },
+            {
+              "id" : "0,1,4,132",
+              "isRank" : false,
+              "title" : "都市"
+            },
+            {
+              "id" : "0,1,4,143",
+              "isRank" : false,
+              "title" : "历险"
+            },
+            {
+              "id" : "0,1,4,144",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "0,1,4,135",
+              "isRank" : false,
+              "title" : "军旅"
+            },
+            {
+              "id" : "0,1,4,133",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "0,1,4,128",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "0,1,4,145",
+              "isRank" : false,
+              "title" : "江湖"
+            },
+            {
+              "id" : "0,1,4,138",
+              "isRank" : false,
+              "title" : "罪案"
+            },
+            {
+              "id" : "0,1,4,131",
+              "isRank" : false,
+              "title" : "青春"
+            },
+            {
+              "id" : "0,1,4,130",
+              "isRank" : false,
+              "title" : "家庭"
+            },
+            {
+              "id" : "0,1,4,134",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "0,1,4,137",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "0,1,4,139",
+              "isRank" : false,
+              "title" : "穿越"
+            },
+            {
+              "id" : "0,1,4,140",
+              "isRank" : false,
+              "title" : "宫廷"
+            },
+            {
+              "id" : "0,1,4,147",
+              "isRank" : false,
+              "title" : "神话"
+            },
+            {
+              "id" : "0,1,4,148",
+              "isRank" : false,
+              "title" : "商战"
+            },
+            {
+              "id" : "0,1,4,149",
+              "isRank" : false,
+              "title" : "警匪"
+            },
+            {
+              "id" : "0,1,4,150",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "0,1,4,151",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "0,1,4,152",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "0,1,4,153",
+              "isRank" : false,
+              "title" : "同性"
+            },
+            {
+              "id" : "0,1,4,154",
+              "isRank" : false,
+              "title" : "奇幻"
+            }
+          ],
+          "id" : "0,1,4",
+          "isRank" : false,
+          "title" : "电视剧"
+        },
+        {
+          "children" : [
+            {
+              "id" : "0,1,5,39",
+              "isRank" : false,
+              "title" : "真人秀"
+            },
+            {
+              "id" : "0,1,5,38",
+              "isRank" : false,
+              "title" : "选秀"
+            },
+            {
+              "id" : "0,1,5,94",
+              "isRank" : false,
+              "title" : "网综"
+            },
+            {
+              "id" : "0,1,5,43",
+              "isRank" : false,
+              "title" : "脱口秀"
+            },
+            {
+              "id" : "0,1,5,40",
+              "isRank" : false,
+              "title" : "搞笑"
+            },
+            {
+              "id" : "0,1,5,91",
+              "isRank" : false,
+              "title" : "竞技"
+            },
+            {
+              "id" : "0,1,5,33",
+              "isRank" : false,
+              "title" : "情感"
+            },
+            {
+              "id" : "0,1,5,34",
+              "isRank" : false,
+              "title" : "访谈"
+            },
+            {
+              "id" : "0,1,5,44",
+              "isRank" : false,
+              "title" : "演唱会"
+            },
+            {
+              "id" : "0,1,5,92",
+              "isRank" : false,
+              "title" : "晚会"
+            },
+            {
+              "id" : "0,1,5,45",
+              "isRank" : false,
+              "title" : "其它"
+            }
+          ],
+          "id" : "0,1,5",
+          "isRank" : false,
+          "title" : "综艺"
+        },
+        {
+          "children" : [
+            {
+              "id" : "0,1,6,46",
+              "isRank" : false,
+              "title" : "热血"
+            },
+            {
+              "id" : "0,1,6,47",
+              "isRank" : false,
+              "title" : "格斗"
+            },
+            {
+              "id" : "0,1,6,48",
+              "isRank" : false,
+              "title" : "机战"
+            },
+            {
+              "id" : "0,1,6,49",
+              "isRank" : false,
+              "title" : "少女"
+            },
+            {
+              "id" : "0,1,6,51",
+              "isRank" : false,
+              "title" : "竞技"
+            },
+            {
+              "id" : "0,1,6,52",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "0,1,6,53",
+              "isRank" : false,
+              "title" : "魔幻"
+            },
+            {
+              "id" : "0,1,6,54",
+              "isRank" : false,
+              "title" : "爆笑"
+            },
+            {
+              "id" : "0,1,6,55",
+              "isRank" : false,
+              "title" : "推理"
+            },
+            {
+              "id" : "0,1,6,121",
+              "isRank" : false,
+              "title" : "冒险"
+            },
+            {
+              "id" : "0,1,6,120",
+              "isRank" : false,
+              "title" : "恋爱"
+            },
+            {
+              "id" : "0,1,6,119",
+              "isRank" : false,
+              "title" : "校园"
+            },
+            {
+              "id" : "0,1,6,118",
+              "isRank" : false,
+              "title" : "治愈"
+            },
+            {
+              "id" : "0,1,6,117",
+              "isRank" : false,
+              "title" : "泡面"
+            },
+            {
+              "id" : "0,1,6,116",
+              "isRank" : false,
+              "title" : "穿越"
+            },
+            {
+              "id" : "0,1,6,56",
+              "isRank" : false,
+              "title" : "灵异"
+            },
+            {
+              "id" : "0,1,6,122",
+              "isRank" : false,
+              "title" : "耽美"
+            },
+            {
+              "id" : "0,1,6,57",
+              "isRank" : false,
+              "title" : "剧场版"
+            },
+            {
+              "id" : "0,1,6,58",
+              "isRank" : false,
+              "title" : "其它"
+            }
+          ],
+          "id" : "0,1,6",
+          "isRank" : false,
+          "title" : "动漫"
+        },
+        {
+          "children" : [
+            {
+              "id" : "0,1,7,50",
+              "isRank" : false,
+              "title" : "文化"
+            },
+            {
+              "id" : "0,1,7,59",
+              "isRank" : false,
+              "title" : "探索"
+            },
+            {
+              "id" : "0,1,7,60",
+              "isRank" : false,
+              "title" : "军事"
+            },
+            {
+              "id" : "0,1,7,61",
+              "isRank" : false,
+              "title" : "解密"
+            },
+            {
+              "id" : "0,1,7,62",
+              "isRank" : false,
+              "title" : "科技"
+            },
+            {
+              "id" : "0,1,7,63",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "0,1,7,64",
+              "isRank" : false,
+              "title" : "人物"
+            },
+            {
+              "id" : "0,1,7,66",
+              "isRank" : false,
+              "title" : "自然"
+            },
+            {
+              "id" : "0,1,7,67",
+              "isRank" : false,
+              "title" : "其它"
+            }
+          ],
+          "id" : "0,1,7",
+          "isRank" : false,
+          "title" : "纪录片"
+        },
+        {
+          "children" : [
+            {
+              "id" : "0,1,8,68",
+              "isRank" : false,
+              "title" : "偶像"
+            },
+            {
+              "id" : "0,1,8,69",
+              "isRank" : false,
+              "title" : "爱情"
+            },
+            {
+              "id" : "0,1,8,72",
+              "isRank" : false,
+              "title" : "言情"
+            },
+            {
+              "id" : "0,1,8,70",
+              "isRank" : false,
+              "title" : "古装"
+            },
+            {
+              "id" : "0,1,8,141",
+              "isRank" : false,
+              "title" : "历史"
+            },
+            {
+              "id" : "0,1,8,73",
+              "isRank" : false,
+              "title" : "玄幻"
+            },
+            {
+              "id" : "0,1,8,74",
+              "isRank" : false,
+              "title" : "谍战"
+            },
+            {
+              "id" : "0,1,8,158",
+              "isRank" : false,
+              "title" : "都市"
+            },
+            {
+              "id" : "0,1,8,159",
+              "isRank" : false,
+              "title" : "历险"
+            },
+            {
+              "id" : "0,1,8,160",
+              "isRank" : false,
+              "title" : "科幻"
+            },
+            {
+              "id" : "0,1,8,161",
+              "isRank" : false,
+              "title" : "军旅"
+            },
+            {
+              "id" : "0,1,8,162",
+              "isRank" : false,
+              "title" : "喜剧"
+            },
+            {
+              "id" : "0,1,8,163",
+              "isRank" : false,
+              "title" : "武侠"
+            },
+            {
+              "id" : "0,1,8,164",
+              "isRank" : false,
+              "title" : "江湖"
+            },
+            {
+              "id" : "0,1,8,165",
+              "isRank" : false,
+              "title" : "罪案"
+            },
+            {
+              "id" : "0,1,8,166",
+              "isRank" : false,
+              "title" : "青春"
+            },
+            {
+              "id" : "0,1,8,167",
+              "isRank" : false,
+              "title" : "家庭"
+            },
+            {
+              "id" : "0,1,8,168",
+              "isRank" : false,
+              "title" : "战争"
+            },
+            {
+              "id" : "0,1,8,169",
+              "isRank" : false,
+              "title" : "悬疑"
+            },
+            {
+              "id" : "0,1,8,170",
+              "isRank" : false,
+              "title" : "穿越"
+            },
+            {
+              "id" : "0,1,8,171",
+              "isRank" : false,
+              "title" : "宫廷"
+            },
+            {
+              "id" : "0,1,8,172",
+              "isRank" : false,
+              "title" : "神话"
+            },
+            {
+              "id" : "0,1,8,175",
+              "isRank" : false,
+              "title" : "商战"
+            },
+            {
+              "id" : "0,1,8,176",
+              "isRank" : false,
+              "title" : "警匪"
+            },
+            {
+              "id" : "0,1,8,177",
+              "isRank" : false,
+              "title" : "动作"
+            },
+            {
+              "id" : "0,1,8,178",
+              "isRank" : false,
+              "title" : "惊悚"
+            },
+            {
+              "id" : "0,1,8,179",
+              "isRank" : false,
+              "title" : "剧情"
+            },
+            {
+              "id" : "0,1,8,180",
+              "isRank" : false,
+              "title" : "同性"
+            },
+            {
+              "id" : "0,1,8,181",
+              "isRank" : false,
+              "title" : "奇幻"
+            }
+          ],
+          "id" : "0,1,8",
+          "isRank" : false,
+          "title" : "短剧"
+        }
+      ],
+      "configURL" : "https://www.kubb.tv/",
+      "createdAt" : "2026-11-24T02:00:50Z",
+      "id" : "B807EA4D-1776-43D2-80C1-C9F7E7B10127",
+      "isEnabled" : true,
+      "kind" : "iyf",
+      "name" : "Kubb",
+      "referer" : "https://www.kubb.tv/",
+      "userAgent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+    }
+  ],
+  "scope" : "networkCinema",
+  "version" : 1
+}
